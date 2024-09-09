@@ -1,0 +1,1418 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
+        th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
+        th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+</head>
+
+<body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+        <div class="loader simple-loader">
+            <div class="loader-body">
+            </div>
+        </div>
+    </div>
+    <!-- loader END -->
+
+    <aside id="sidebar" class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all" th:fragment="sidebar">
+        <div class="sidebar-header d-flex align-items-center justify-content-start">
+            <a href="#" class="navbar-brand" th:href="@{/admin/index}">
+
+                <!--Logo start-->
+                <div class="logo-main">
+                    <div class="logo-normal">
+                        <svg class=" icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                            <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                            <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                            <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="logo-mini">
+                        <svg class=" icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                            <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                            <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                            <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                        </svg>
+                    </div>
+                </div>
+                <!--logo End-->
+
+                <h4 class="logo-title">Kino CMS</h4>
+            </a>
+            <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
+                <i class="icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </i>
+            </div>
+        </div>
+        <div class="sidebar-body pt-0 data-scrollbar">
+            <div class="sidebar-list">
+                <!-- Sidebar Menu Start -->
+                <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
+                    <li class="nav-item">
+                        <a class="nav-link"  href="#" aria-current="page" th:href="@{/admin/index}">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M16.0756 2H19.4616C20.8639 2 22.0001 3.14585 22.0001 4.55996V7.97452C22.0001 9.38864 20.8639 10.5345 19.4616 10.5345H16.0756C14.6734 10.5345 13.5371 9.38864 13.5371 7.97452V4.55996C13.5371 3.14585 14.6734 2 16.0756 2Z"
+                                        fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.53852 2H7.92449C9.32676 2 10.463 3.14585 10.463 4.55996V7.97452C10.463 9.38864 9.32676 10.5345 7.92449 10.5345H4.53852C3.13626 10.5345 2 9.38864 2 7.97452V4.55996C2 3.14585 3.13626 2 4.53852 2ZM4.53852 13.4655H7.92449C9.32676 13.4655 10.463 14.6114 10.463 16.0255V19.44C10.463 20.8532 9.32676 22 7.92449 22H4.53852C3.13626 22 2 20.8532 2 19.44V16.0255C2 14.6114 3.13626 13.4655 4.53852 13.4655ZM19.4615 13.4655H16.0755C14.6732 13.4655 13.537 14.6114 13.537 16.0255V19.44C13.537 20.8532 14.6732 22 16.0755 22H19.4615C20.8637 22 22 20.8532 22 19.44V16.0255C22 14.6114 20.8637 13.4655 19.4615 13.4655Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-current="page" th:href="@{/admin/banners}">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M21.9964 8.37513H17.7618C15.7911 8.37859 14.1947 9.93514 14.1911 11.8566C14.1884 13.7823 15.7867 15.3458 17.7618 15.3484H22V15.6543C22 19.0136 19.9636 21 16.5173 21H7.48356C4.03644 21 2 19.0136 2 15.6543V8.33786C2 4.97862 4.03644 3 7.48356 3H16.5138C19.96 3 21.9964 4.97862 21.9964 8.33786V8.37513ZM6.73956 8.36733H12.3796H12.3831H12.3902C12.8124 8.36559 13.1538 8.03019 13.152 7.61765C13.1502 7.20598 12.8053 6.87318 12.3831 6.87491H6.73956C6.32 6.87664 5.97956 7.20858 5.97778 7.61852C5.976 8.03019 6.31733 8.36559 6.73956 8.36733Z"
+                                        fill="currentColor"></path>
+                                    <path opacity="0.4"
+                                        d="M16.0374 12.2966C16.2465 13.2478 17.0805 13.917 18.0326 13.8996H21.2825C21.6787 13.8996 22 13.5715 22 13.166V10.6344C21.9991 10.2297 21.6787 9.90077 21.2825 9.8999H17.9561C16.8731 9.90338 15.9983 10.8024 16 11.9102C16 12.0398 16.0128 12.1695 16.0374 12.2966Z"
+                                        fill="currentColor"></path>
+                                    <circle cx="18" cy="11.8999" r="1" fill="currentColor"></circle>
+                                </svg>
+                            </i>
+                            <span class="item-name">Банери</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-current="page" th:href="@{/admin/movies}">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M16.3328 22H7.66618C4.2769 22 2 19.6229 2 16.0843V7.91672C2 4.37811 4.2769 2 7.66618 2H16.3338C19.7231 2 22 4.37811 22 7.91672V16.0843C22 19.6229 19.7231 22 16.3328 22Z"
+                                        fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M11.2451 8.67496C11.2451 10.045 10.1301 11.16 8.7601 11.16C7.3891 11.16 6.2751 10.045 6.2751 8.67496C6.2751 7.30496 7.3891 6.18896 8.7601 6.18896C10.1301 6.18896 11.2451 7.30496 11.2451 8.67496ZM19.4005 14.0876C19.6335 14.3136 19.8005 14.5716 19.9105 14.8466C20.2435 15.6786 20.0705 16.6786 19.7145 17.5026C19.2925 18.4836 18.4845 19.2246 17.4665 19.5486C17.0145 19.6936 16.5405 19.7556 16.0675 19.7556H7.6865C6.8525 19.7556 6.1145 19.5616 5.5095 19.1976C5.1305 18.9696 5.0635 18.4446 5.3445 18.1026C5.8145 17.5326 6.2785 16.9606 6.7465 16.3836C7.6385 15.2796 8.2395 14.9596 8.9075 15.2406C9.1785 15.3566 9.4505 15.5316 9.7305 15.7156C10.4765 16.2096 11.5135 16.8876 12.8795 16.1516C13.8132 15.641 14.3552 14.7673 14.827 14.0069L14.8365 13.9916C14.8682 13.9407 14.8997 13.8898 14.9311 13.8391C15.0915 13.5799 15.2495 13.3246 15.4285 13.0896C15.6505 12.7986 16.4745 11.8886 17.5395 12.5366C18.2185 12.9446 18.7895 13.4966 19.4005 14.0876Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Фільми</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-current="page" th:href="@{/admin/theaters}">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M21.3309 7.44251C20.9119 7.17855 20.3969 7.1552 19.9579 7.37855L18.4759 8.12677C17.9279 8.40291 17.5879 8.96129 17.5879 9.58261V15.4161C17.5879 16.0374 17.9279 16.5948 18.4759 16.873L19.9569 17.6202C20.1579 17.7237 20.3729 17.7735 20.5879 17.7735C20.8459 17.7735 21.1019 17.7004 21.3309 17.5572C21.7499 17.2943 21.9999 16.8384 21.9999 16.339V8.66179C21.9999 8.1623 21.7499 7.70646 21.3309 7.44251Z"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M11.9051 20H6.11304C3.69102 20 2 18.3299 2 15.9391V9.06091C2 6.66904 3.69102 5 6.11304 5H11.9051C14.3271 5 16.0181 6.66904 16.0181 9.06091V15.9391C16.0181 18.3299 14.3271 20 11.9051 20Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Кінотеатри</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M12.02 2C6.21 2 2 6.74 2 12C2 13.68 2.49 15.41 3.35 16.99C3.51 17.25 3.53 17.58 3.42 17.89L2.75 20.13C2.6 20.67 3.06 21.07 3.57 20.91L5.59 20.31C6.14 20.13 6.57 20.36 7.081 20.67C8.541 21.53 10.36 21.97 12 21.97C16.96 21.97 22 18.14 22 11.97C22 6.65 17.7 2 12.02 2Z"
+                                        fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M11.9807 13.2901C11.2707 13.2801 10.7007 12.7101 10.7007 12.0001C10.7007 11.3001 11.2807 10.7201 11.9807 10.7301C12.6907 10.7301 13.2607 11.3001 13.2607 12.0101C13.2607 12.7101 12.6907 13.2901 11.9807 13.2901ZM7.37033 13.2901C6.67033 13.2901 6.09033 12.7101 6.09033 12.0101C6.09033 11.3001 6.66033 10.7301 7.37033 10.7301C8.08033 10.7301 8.65033 11.3001 8.65033 12.0101C8.65033 12.7101 8.08033 13.2801 7.37033 13.2901ZM15.3105 12.0101C15.3105 12.7101 15.8805 13.2901 16.5905 13.2901C17.3005 13.2901 17.8705 12.7101 17.8705 12.0101C17.8705 11.3001 17.3005 10.7301 16.5905 10.7301C15.8805 10.7301 15.3105 11.3001 15.3105 12.0101Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Новини</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M11.9993 21.9981C11.2303 21.9981 10.4623 21.7061 9.87526 21.1231L9.14526 20.3931C8.86226 20.1111 8.48326 19.9551 8.08126 19.9541H7.05426C5.39426 19.9541 4.04326 18.6031 4.04326 16.9431V15.9151C4.04226 15.5141 3.88626 15.1351 3.60326 14.8501L2.88526 14.1331C1.70926 12.9641 1.70426 11.0531 2.87426 9.87615L3.60426 9.14515C3.88626 8.86215 4.04226 8.48315 4.04326 8.08115V7.05515C4.04326 5.39415 5.39426 4.04315 7.05426 4.04315H8.08226C8.48326 4.04315 8.86126 3.88715 9.14626 3.60215L9.86526 2.88515C11.0343 1.70915 12.9443 1.70315 14.1223 2.87415L14.8523 3.60415C15.1363 3.88715 15.5143 4.04315 15.9153 4.04315H16.9433C18.6033 4.04315 19.9543 5.39415 19.9543 7.05515V8.08215C19.9553 8.48315 20.1113 8.86215 20.3943 9.14715L21.1123 9.86515C21.6813 10.4311 21.9963 11.1851 21.9993 11.9901C22.0013 12.7901 21.6933 13.5431 21.1323 14.1121C21.1223 14.1221 21.1133 14.1331 21.1033 14.1421L20.3933 14.8521C20.1113 15.1351 19.9553 15.5141 19.9543 15.9161V16.9431C19.9543 18.6031 18.6033 19.9541 16.9433 19.9541H15.9153C15.5143 19.9551 15.1353 20.1111 14.8513 20.3941L14.1323 21.1121C13.5463 21.7021 12.7723 21.9981 11.9993 21.9981Z"
+                                        fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M10.0428 10.0508C9.87776 10.2158 9.66376 10.3048 9.42676 10.3048C9.20476 10.3048 8.98676 10.2138 8.81176 10.0498C8.64576 9.88483 8.55176 9.65883 8.55176 9.42983C8.55176 9.21183 8.64376 8.98783 8.80576 8.81483C8.89476 8.72483 9.00076 8.65683 9.10676 8.62083C9.40876 8.48283 9.80976 8.56383 10.0478 8.81383C10.1328 8.89883 10.1978 8.99183 10.2408 9.08883C10.2878 9.19283 10.3118 9.31083 10.3118 9.42983C10.3118 9.66783 10.2168 9.88883 10.0428 10.0508ZM15.1905 8.80973C14.8495 8.46973 14.2945 8.46973 13.9535 8.80973L8.81346 13.9497C8.47246 14.2907 8.47246 14.8457 8.81346 15.1877C8.97946 15.3527 9.19846 15.4437 9.43246 15.4437C9.66646 15.4437 9.88546 15.3527 10.0505 15.1877L15.1905 10.0477C15.5315 9.70573 15.5315 9.15173 15.1905 8.80973ZM14.9058 13.7638C14.5818 13.6278 14.1978 13.7018 13.9418 13.9578C13.8888 14.0198 13.8138 14.1158 13.7628 14.2288C13.7088 14.3508 13.7018 14.4818 13.7018 14.5698C13.7018 14.6578 13.7088 14.7878 13.7628 14.9098C13.8128 15.0218 13.8728 15.1128 13.9518 15.1918C14.1328 15.3598 14.3428 15.4448 14.5768 15.4448C14.7988 15.4448 15.0168 15.3548 15.1958 15.1878C15.3548 15.0288 15.4418 14.8088 15.4418 14.5698C15.4418 14.3298 15.3548 14.1108 15.1948 13.9508C15.1068 13.8638 15.0008 13.7958 14.9058 13.7638Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Акції</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-special" role="button"
+                            aria-expanded="false" aria-controls="sidebar-special">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M13.3051 5.88243V6.06547C12.8144 6.05584 12.3237 6.05584 11.8331 6.05584V5.89206C11.8331 5.22733 11.2737 4.68784 10.6064 4.68784H9.63482C8.52589 4.68784 7.62305 3.80152 7.62305 2.72254C7.62305 2.32755 7.95671 2 8.35906 2C8.77123 2 9.09508 2.32755 9.09508 2.72254C9.09508 3.01155 9.34042 3.24276 9.63482 3.24276H10.6064C12.0882 3.2524 13.2953 4.43736 13.3051 5.88243Z"
+                                        fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M15.164 6.08279C15.4791 6.08712 15.7949 6.09145 16.1119 6.09469C19.5172 6.09469 22 8.52241 22 11.875V16.1813C22 19.5339 19.5172 21.9616 16.1119 21.9616C14.7478 21.9905 13.3837 22.0001 12.0098 22.0001C10.6359 22.0001 9.25221 21.9905 7.88813 21.9616C4.48283 21.9616 2 19.5339 2 16.1813V11.875C2 8.52241 4.48283 6.09469 7.89794 6.09469C9.18351 6.07542 10.4985 6.05615 11.8332 6.05615C12.3238 6.05615 12.8145 6.05615 13.3052 6.06579C13.9238 6.06579 14.5425 6.07427 15.164 6.08279ZM10.8518 14.7459H9.82139V15.767C9.82139 16.162 9.48773 16.4896 9.08538 16.4896C8.67321 16.4896 8.34936 16.162 8.34936 15.767V14.7459H7.30913C6.90677 14.7459 6.57311 14.4279 6.57311 14.0233C6.57311 13.6283 6.90677 13.3008 7.30913 13.3008H8.34936V12.2892C8.34936 11.8942 8.67321 11.5667 9.08538 11.5667C9.48773 11.5667 9.82139 11.8942 9.82139 12.2892V13.3008H10.8518C11.2542 13.3008 11.5878 13.6283 11.5878 14.0233C11.5878 14.4279 11.2542 14.7459 10.8518 14.7459ZM15.0226 13.1177H15.1207C15.5231 13.1177 15.8567 12.7998 15.8567 12.3952C15.8567 12.0002 15.5231 11.6727 15.1207 11.6727H15.0226C14.6104 11.6727 14.2866 12.0002 14.2866 12.3952C14.2866 12.7998 14.6104 13.1177 15.0226 13.1177ZM16.7007 16.4318H16.7988C17.2012 16.4318 17.5348 16.1139 17.5348 15.7092C17.5348 15.3143 17.2012 14.9867 16.7988 14.9867H16.7007C16.2885 14.9867 15.9647 15.3143 15.9647 15.7092C15.9647 16.1139 16.2885 16.4318 16.7007 16.4318Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Сторінки</span>
+                            <i class="right-icon">
+                                <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </i>
+                        </a>
+                        <ul class="sub-nav collapse" id="sidebar-special" data-bs-parent="#sidebar-menu">
+                            <li class="nav-item">
+                                <a class="nav-link " href="../dashboard/special-pages/billing.html">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> B </i>
+                                    <span class="item-name">Головна сторінка</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../dashboard/special-pages/calender.html">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> C </i>
+                                    <span class="item-name">Про компанію</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../dashboard/special-pages/kanban.html">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> K </i>
+                                    <span class="item-name">Реклама</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../dashboard/special-pages/pricing.html">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> P </i>
+                                    <span class="item-name">Контакти</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../dashboard/index.html">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.9488 14.54C8.49884 14.54 5.58789 15.1038 5.58789 17.2795C5.58789 19.4562 8.51765 20.0001 11.9488 20.0001C15.3988 20.0001 18.3098 19.4364 18.3098 17.2606C18.3098 15.084 15.38 14.54 11.9488 14.54Z"
+                                        fill="currentColor"></path>
+                                    <path opacity="0.4"
+                                        d="M11.949 12.467C14.2851 12.467 16.1583 10.5831 16.1583 8.23351C16.1583 5.88306 14.2851 4 11.949 4C9.61293 4 7.73975 5.88306 7.73975 8.23351C7.73975 10.5831 9.61293 12.467 11.949 12.467Z"
+                                        fill="currentColor"></path>
+                                    <path opacity="0.4"
+                                        d="M21.0881 9.21923C21.6925 6.84176 19.9205 4.70654 17.664 4.70654C17.4187 4.70654 17.1841 4.73356 16.9549 4.77949C16.9244 4.78669 16.8904 4.802 16.8725 4.82902C16.8519 4.86324 16.8671 4.90917 16.8895 4.93889C17.5673 5.89528 17.9568 7.0597 17.9568 8.30967C17.9568 9.50741 17.5996 10.6241 16.9728 11.5508C16.9083 11.6462 16.9656 11.775 17.0793 11.7948C17.2369 11.8227 17.3981 11.8371 17.5629 11.8416C19.2059 11.8849 20.6807 10.8213 21.0881 9.21923Z"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M22.8094 14.817C22.5086 14.1722 21.7824 13.73 20.6783 13.513C20.1572 13.3851 18.747 13.205 17.4352 13.2293C17.4155 13.232 17.4048 13.2455 17.403 13.2545C17.4003 13.2671 17.4057 13.2887 17.4316 13.3022C18.0378 13.6039 20.3811 14.916 20.0865 17.6834C20.074 17.8032 20.1698 17.9068 20.2888 17.8888C20.8655 17.8059 22.3492 17.4853 22.8094 16.4866C23.0637 15.9589 23.0637 15.3456 22.8094 14.817Z"
+                                        fill="currentColor"></path>
+                                    <path opacity="0.4"
+                                        d="M7.04459 4.77973C6.81626 4.7329 6.58077 4.70679 6.33543 4.70679C4.07901 4.70679 2.30701 6.84201 2.9123 9.21947C3.31882 10.8216 4.79355 11.8851 6.43661 11.8419C6.60136 11.8374 6.76343 11.8221 6.92013 11.7951C7.03384 11.7753 7.09115 11.6465 7.02668 11.551C6.3999 10.6234 6.04263 9.50765 6.04263 8.30991C6.04263 7.05904 6.43303 5.89462 7.11085 4.93913C7.13234 4.90941 7.14845 4.86348 7.12696 4.82926C7.10906 4.80135 7.07593 4.78694 7.04459 4.77973Z"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M3.32156 13.5127C2.21752 13.7297 1.49225 14.1719 1.19139 14.8167C0.936203 15.3453 0.936203 15.9586 1.19139 16.4872C1.65163 17.4851 3.13531 17.8066 3.71195 17.8885C3.83104 17.9065 3.92595 17.8038 3.91342 17.6832C3.61883 14.9167 5.9621 13.6046 6.56918 13.3029C6.59425 13.2885 6.59962 13.2677 6.59694 13.2542C6.59515 13.2452 6.5853 13.2317 6.5656 13.2299C5.25294 13.2047 3.84358 13.3848 3.32156 13.5127Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Користувачі</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../dashboard/index.html">
+                            <i class="icon">
+                                <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M22 15.94C22 18.73 19.76 20.99 16.97 21H16.96H7.05C4.27 21 2 18.75 2 15.96V15.95C2 15.95 2.006 11.524 2.014 9.298C2.015 8.88 2.495 8.646 2.822 8.906C5.198 10.791 9.447 14.228 9.5 14.273C10.21 14.842 11.11 15.163 12.03 15.163C12.95 15.163 13.85 14.842 14.56 14.262C14.613 14.227 18.767 10.893 21.179 8.977C21.507 8.716 21.989 8.95 21.99 9.367C22 11.576 22 15.94 22 15.94Z"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M21.4759 5.67351C20.6099 4.04151 18.9059 2.99951 17.0299 2.99951H7.04988C5.17388 2.99951 3.46988 4.04151 2.60388 5.67351C2.40988 6.03851 2.50188 6.49351 2.82488 6.75151L10.2499 12.6905C10.7699 13.1105 11.3999 13.3195 12.0299 13.3195C12.0339 13.3195 12.0369 13.3195 12.0399 13.3195C12.0429 13.3195 12.0469 13.3195 12.0499 13.3195C12.6799 13.3195 13.3099 13.1105 13.8299 12.6905L21.2549 6.75151C21.5779 6.49351 21.6699 6.03851 21.4759 5.67351Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name">Розсилка</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- Sidebar Menu End -->
+            </div>
+        </div>
+        <div class="sidebar-footer"></div>
+    </aside>
+    <main class="main-content">
+        <!-- Header Section Start -->
+        <div id="head__nav" class="position-relative iq-banner" th:fragment="head__nav">
+            <!--Nav Start-->
+            <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
+                <div class="container-fluid navbar-inner">
+                    <a href="#" class="navbar-brand">
+                        <!--Logo start-->
+                        <div class="logo-main">
+                            <div class="logo-normal">
+                                <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                        transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                        transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="logo-mini">
+                                <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                        transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                        transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                                </svg>
+                            </div>
+                        </div>
+                        <!--logo End-->
+                    </a>
+                    <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
+                        <i class="icon">
+                            <svg width="20px" class="icon-20" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                            </svg>
+                        </i>
+                    </div>
+                    <div class="input-group search-input">
+                        <span class="input-group-text" id="search-input">
+                            <svg class="icon-18" width="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"></circle>
+                                <path d="M18.0186 18.4851L21.5426 22" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        <input type="search" class="form-control" placeholder="Пошук...">
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <span class="mt-2 navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+                            <li class="me-0 me-xl-2">
+                                <a class="btn btn-primary btn-sm d-flex gap-2 align-items-center" aria-current="page"
+                                    href="http://hopeui.iqonic.design/pro?utm_source=hopeui-free-demo&utm_medium=hopeui-free-demo&utm_campaign=hopeui-pro-launch"
+                                    target="_blank">
+                                    <svg class="icon-16" width="16" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21.4274 2.5783C20.9274 2.0673 20.1874 1.8783 19.4974 2.0783L3.40742 6.7273C2.67942 6.9293 2.16342 7.5063 2.02442 8.2383C1.88242 8.9843 2.37842 9.9323 3.02642 10.3283L8.05742 13.4003C8.57342 13.7163 9.23942 13.6373 9.66642 13.2093L15.4274 7.4483C15.7174 7.1473 16.1974 7.1473 16.4874 7.4483C16.7774 7.7373 16.7774 8.2083 16.4874 8.5083L10.7164 14.2693C10.2884 14.6973 10.2084 15.3613 10.5234 15.8783L13.5974 20.9283C13.9574 21.5273 14.5774 21.8683 15.2574 21.8683C15.3374 21.8683 15.4274 21.8683 15.5074 21.8573C16.2874 21.7583 16.9074 21.2273 17.1374 20.4773L21.9074 4.5083C22.1174 3.8283 21.9274 3.0883 21.4274 2.5783Z"
+                                            fill="currentColor"></path>
+                                        <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M3.01049 16.8079C2.81849 16.8079 2.62649 16.7349 2.48049 16.5879C2.18749 16.2949 2.18749 15.8209 2.48049 15.5279L3.84549 14.1619C4.13849 13.8699 4.61349 13.8699 4.90649 14.1619C5.19849 14.4549 5.19849 14.9299 4.90649 15.2229L3.54049 16.5879C3.39449 16.7349 3.20249 16.8079 3.01049 16.8079ZM6.77169 18.0003C6.57969 18.0003 6.38769 17.9273 6.24169 17.7803C5.94869 17.4873 5.94869 17.0133 6.24169 16.7203L7.60669 15.3543C7.89969 15.0623 8.37469 15.0623 8.66769 15.3543C8.95969 15.6473 8.95969 16.1223 8.66769 16.4153L7.30169 17.7803C7.15569 17.9273 6.96369 18.0003 6.77169 18.0003ZM7.02539 21.5683C7.17139 21.7153 7.36339 21.7883 7.55539 21.7883C7.74739 21.7883 7.93939 21.7153 8.08539 21.5683L9.45139 20.2033C9.74339 19.9103 9.74339 19.4353 9.45139 19.1423C9.15839 18.8503 8.68339 18.8503 8.39039 19.1423L7.02539 20.5083C6.73239 20.8013 6.73239 21.2753 7.02539 21.5683Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                    Go Pro
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../static/assets/images/Flag/flag_ua.png"
+                                        class="img-fluid rounded-circle" alt="user"
+                                        style="height: 30px; min-width: 30px; width: 30px;"
+                                        th:src="@{/assets/images/Flag/flag_ua.png}">
+                                    <span class="bg-primary"></span>
+                                </a>
+                                <div class="p-0 sub-drop dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="dropdownMenuButton2">
+                                    <div class="m-0 border-0 shadow-none card">
+                                        <div class="p-0 ">
+                                            <ul class="p-0 list-group list-group-flush">
+                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                            src="../../static/assets/images/Flag/flag-03.png"
+                                                            alt="img-flaf" class="img-fluid me-2"
+                                                            style="width: 15px;height: 15px;min-width: 15px;"
+                                                            th:src="@{/assets/images/Flag/flag-03.png}" />Spanish</a>
+                                                </li>
+                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                            src="../../static/assets/images/Flag/flag-04.png"
+                                                            alt="img-flaf" class="img-fluid me-2"
+                                                            style="width: 15px;height: 15px;min-width: 15px;"
+                                                            th:src="@{/assets/images/Flag/flag-04.png}" />Italian</a>
+                                                </li>
+                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                            src="../../static/assets/images/Flag/flag-02.png"
+                                                            alt="img-flaf" class="img-fluid me-2"
+                                                            style="width: 15px;height: 15px;min-width: 15px;"
+                                                            th:src="@{/assets/images/Flag/flag-02.png}" />French</a>
+                                                </li>
+                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                            src="../../static/assets/images/Flag/flag-05.png"
+                                                            alt="img-flaf" class="img-fluid me-2"
+                                                            style="width: 15px;height: 15px;min-width: 15px;"
+                                                            th:src="@{/assets/images/Flag/flag-05.png}" />German</a>
+                                                </li>
+                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                            src="../../static/assets/images/Flag/flag-06.png"
+                                                            alt="img-flaf" class="img-fluid me-2"
+                                                            style="width: 15px;height: 15px;min-width: 15px;"
+                                                            th:src="@{/assets/images/Flag/flag-06.png}" />Japanese</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link" id="notification-drop" data-bs-toggle="dropdown">
+                                    <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M19.7695 11.6453C19.039 10.7923 18.7071 10.0531 18.7071 8.79716V8.37013C18.7071 6.73354 18.3304 5.67907 17.5115 4.62459C16.2493 2.98699 14.1244 2 12.0442 2H11.9558C9.91935 2 7.86106 2.94167 6.577 4.5128C5.71333 5.58842 5.29293 6.68822 5.29293 8.37013V8.79716C5.29293 10.0531 4.98284 10.7923 4.23049 11.6453C3.67691 12.2738 3.5 13.0815 3.5 13.9557C3.5 14.8309 3.78723 15.6598 4.36367 16.3336C5.11602 17.1413 6.17846 17.6569 7.26375 17.7466C8.83505 17.9258 10.4063 17.9933 12.0005 17.9933C13.5937 17.9933 15.165 17.8805 16.7372 17.7466C17.8215 17.6569 18.884 17.1413 19.6363 16.3336C20.2118 15.6598 20.5 14.8309 20.5 13.9557C20.5 13.0815 20.3231 12.2738 19.7695 11.6453Z"
+                                            fill="currentColor"></path>
+                                        <path opacity="0.4"
+                                            d="M14.0088 19.2283C13.5088 19.1215 10.4627 19.1215 9.96275 19.2283C9.53539 19.327 9.07324 19.5566 9.07324 20.0602C9.09809 20.5406 9.37935 20.9646 9.76895 21.2335L9.76795 21.2345C10.2718 21.6273 10.8632 21.877 11.4824 21.9667C11.8123 22.012 12.1482 22.01 12.4901 21.9667C13.1083 21.877 13.6997 21.6273 14.2036 21.2345L14.2026 21.2335C14.5922 20.9646 14.8734 20.5406 14.8983 20.0602C14.8983 19.5566 14.4361 19.327 14.0088 19.2283Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                    <span class="bg-danger dots"></span>
+                                </a>
+                                <div class="p-0 sub-drop dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="notification-drop">
+                                    <div class="m-0 shadow-none card">
+                                        <div class="py-3 card-header d-flex justify-content-between bg-primary">
+                                            <div class="header-title">
+                                                <h5 class="mb-0 text-white">All Notifications</h5>
+                                            </div>
+                                        </div>
+                                        <div class="p-0 card-body">
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                        src="../../static/assets/images/shapes/01.png" alt=""
+                                                        th:src="@{/assets/images/shapes/01.png}">
+                                                    <div class="ms-3 w-100">
+                                                        <h6 class="mb-0 ">Emma Watson Bni</h6>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-0">95 MB</p>
+                                                            <small class="float-end font-size-12">Just Now</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                            src="../../static/assets/images/shapes/02.png" alt=""
+                                                            th:src="@{/assets/images/shapes/02.png}">
+                                                    </div>
+                                                    <div class="ms-3 w-100">
+                                                        <h6 class="mb-0 ">New customer is join</h6>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-0">Cyst Bni</p>
+                                                            <small class="float-end font-size-12">5 days ago</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                        src="../../static/assets/images/shapes/03.png" alt=""
+                                                        th:src="@{/assets/images/shapes/03.png}">
+                                                    <div class="ms-3 w-100">
+                                                        <h6 class="mb-0 ">Two customer is left</h6>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-0">Cyst Bni</p>
+                                                            <small class="float-end font-size-12">2 days ago</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                        src="../../static/assets/images/shapes/04.png" alt=""
+                                                        th:src="@{/assets/images/shapes/04.png}">
+                                                    <div class="w-100 ms-3">
+                                                        <h6 class="mb-0 ">New Mail from Fenny</h6>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-0">Cyst Bni</p>
+                                                            <small class="float-end font-size-12">3 days ago</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link" id="mail-drop" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.4"
+                                            d="M22 15.94C22 18.73 19.76 20.99 16.97 21H16.96H7.05C4.27 21 2 18.75 2 15.96V15.95C2 15.95 2.006 11.524 2.014 9.298C2.015 8.88 2.495 8.646 2.822 8.906C5.198 10.791 9.447 14.228 9.5 14.273C10.21 14.842 11.11 15.163 12.03 15.163C12.95 15.163 13.85 14.842 14.56 14.262C14.613 14.227 18.767 10.893 21.179 8.977C21.507 8.716 21.989 8.95 21.99 9.367C22 11.576 22 15.94 22 15.94Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M21.4759 5.67351C20.6099 4.04151 18.9059 2.99951 17.0299 2.99951H7.04988C5.17388 2.99951 3.46988 4.04151 2.60388 5.67351C2.40988 6.03851 2.50188 6.49351 2.82488 6.75151L10.2499 12.6905C10.7699 13.1105 11.3999 13.3195 12.0299 13.3195C12.0339 13.3195 12.0369 13.3195 12.0399 13.3195C12.0429 13.3195 12.0469 13.3195 12.0499 13.3195C12.6799 13.3195 13.3099 13.1105 13.8299 12.6905L21.2549 6.75151C21.5779 6.49351 21.6699 6.03851 21.4759 5.67351Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                    <span class="bg-primary count-mail"></span>
+                                </a>
+                                <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="mail-drop">
+                                    <div class="m-0 shadow-none card">
+                                        <div class="py-3 card-header d-flex justify-content-between bg-primary">
+                                            <div class="header-title">
+                                                <h5 class="mb-0 text-white">All Message</h5>
+                                            </div>
+                                        </div>
+                                        <div class="p-0 card-body ">
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                            src="../../static/assets/images/shapes/01.png" alt=""
+                                                            th:src="@{/assets/images/shapes/01.png}">
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h6 class="mb-0 ">Bni Emma Watson</h6>
+                                                        <small class="float-start font-size-12">13 Jun</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                            src="../../static/assets/images/shapes/02.png" alt=""
+                                                            th:src="@{/assets/images/shapes/02.png}">
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
+                                                        <small class="float-start font-size-12">20 Apr</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                            src="../../static/assets/images/shapes/03.png" alt=""
+                                                            th:src="@{/assets/images/shapes/03.png}">
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h6 class="mb-0 ">Why do we use it?</h6>
+                                                        <small class="float-start font-size-12">30 Jun</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                            src="../../static/assets/images/shapes/04.png" alt=""
+                                                            th:src="@{/assets/images/shapes/04.png}">
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h6 class="mb-0 ">Variations Passages</h6>
+                                                        <small class="float-start font-size-12">12 Sep</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
+                                                            src="../../static/assets/images/shapes/05.png" alt=""
+                                                            th:src="@{/assets/images/shapes/05.png}">
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h6 class="mb-0 ">Lorem Ipsum generators</h6>
+                                                        <small class="float-start font-size-12">5 Dec</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../../static/assets/images/avatars/01.png" alt="User-Profile"
+                                        class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded"
+                                        th:src="@{/assets/images/avatars/01.png}">
+                                    <img src="../../static/assets/images/avatars/avtar_1.png" alt="User-Profile"
+                                        class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded"
+                                        th:src="@{/assets/images/avatars/avtar_1.png}">
+                                    <img src="../../static/assets/images/avatars/avtar_2.png" alt="User-Profile"
+                                        class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded"
+                                        th:src="@{/assets/images/avatars/avtar_2.png}">
+                                    <img src="../../static/assets/images/avatars/avtar_4.png" alt="User-Profile"
+                                        class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded"
+                                        th:src="@{/assets/images/avatars/avtar_4.png}">
+                                    <img src="../../static/assets/images/avatars/avtar_5.png" alt="User-Profile"
+                                        class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded"
+                                        th:src="@{/assets/images/avatars/avtar_5.png}">
+                                    <img src="../../static/assets/images/avatars/avtar_3.png" alt="User-Profile"
+                                        class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded"
+                                        th:src="@{/assets/images/avatars/avtar_3.png}">
+                                    <div class="caption ms-3 d-none d-md-block ">
+                                        <h6 class="mb-0 caption-title">Austin Robertson</h6>
+                                        <p class="mb-0 caption-sub-title">Marketing Administrator</p>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item"
+                                            href="/templates/admin/app/user-profile.html">Profile</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                            href="/templates/admin/app/user-privacy-setting.html">Privacy Setting</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="/templates/admin/auth/sign-in.html">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Nav Header Component Start -->
+            <div class="iq-navbar-header" style="height: 215px;">
+                <div class="container-fluid iq-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="flex-wrap d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h1 id="header__title">Статистика компанії</h1>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                                </div>
+                                <div>
+                                    <a href="#" class="btn btn-link btn-soft-light">
+                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M11.8251 15.2171H12.1748C14.0987 15.2171 15.731 13.985 16.3054 12.2764C16.3887 12.0276 16.1979 11.7713 15.9334 11.7713H14.8562C14.5133 11.7713 14.2362 11.4977 14.2362 11.16C14.2362 10.8213 14.5133 10.5467 14.8562 10.5467H15.9005C16.2463 10.5467 16.5263 10.2703 16.5263 9.92875C16.5263 9.58722 16.2463 9.31075 15.9005 9.31075H14.8562C14.5133 9.31075 14.2362 9.03619 14.2362 8.69849C14.2362 8.35984 14.5133 8.08528 14.8562 8.08528H15.9005C16.2463 8.08528 16.5263 7.8088 16.5263 7.46728C16.5263 7.12575 16.2463 6.84928 15.9005 6.84928H14.8562C14.5133 6.84928 14.2362 6.57472 14.2362 6.23606C14.2362 5.89837 14.5133 5.62381 14.8562 5.62381H15.9886C16.2483 5.62381 16.4343 5.3789 16.3645 5.13113C15.8501 3.32401 14.1694 2 12.1748 2H11.8251C9.42172 2 7.47363 3.92287 7.47363 6.29729V10.9198C7.47363 13.2933 9.42172 15.2171 11.8251 15.2171Z"
+                                                fill="currentColor"></path>
+                                            <path opacity="0.4"
+                                                d="M19.5313 9.82568C18.9966 9.82568 18.5626 10.2533 18.5626 10.7823C18.5626 14.3554 15.6186 17.2627 12.0005 17.2627C8.38136 17.2627 5.43743 14.3554 5.43743 10.7823C5.43743 10.2533 5.00345 9.82568 4.46872 9.82568C3.93398 9.82568 3.5 10.2533 3.5 10.7823C3.5 15.0873 6.79945 18.6413 11.0318 19.1186V21.0434C11.0318 21.5715 11.4648 22.0001 12.0005 22.0001C12.5352 22.0001 12.9692 21.5715 12.9692 21.0434V19.1186C17.2006 18.6413 20.5 15.0873 20.5 10.7823C20.5 10.2533 20.066 9.82568 19.5313 9.82568Z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                        Announcements
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iq-header-img">
+                    <img src="../../static/assets/images/dashboard/top-header.png" alt="header"
+                        class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"
+                        th:src="@{/assets/images/dashboard/top-header.png}">
+                    <img src="../../static/assets/images/dashboard/top-header1.png" alt="header"
+                        class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"
+                        th:src="@{/assets/images/dashboard/top-header1.png}">
+                    <img src="../../static/assets/images/dashboard/top-header2.png" alt="header"
+                        class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"
+                        th:src="@{/assets/images/dashboard/top-header2.png}">
+                    <img src="../../static/assets/images/dashboard/top-header3.png" alt="header"
+                        class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"
+                        th:src="@{/assets/images/dashboard/top-header3.png}">
+                    <img src="../../static/assets/images/dashboard/top-header4.png" alt="header"
+                        class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"
+                        th:src="@{/assets/images/dashboard/top-header4.png}">
+                    <img src="../../static/assets/images/dashboard/top-header5.png" alt="header"
+                        class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"
+                        th:src="@{/assets/images/dashboard/top-header5.png}">
+                </div>
+            </div>
+            <!-- Nav Header Component End -->
+            <!--Nav End-->
+        </div>
+        <!-- Header Section End -->
+
+        <!-- Main Section Start -->
+        <div class="conatiner-fluid content-inner mt-n5 py-0">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="row row-cols-1">
+                        <div class="overflow-hidden d-slider1 ">
+                            <ul class="p-0 m-0 mb-2 swiper-wrapper list-inline">
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-01"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-primary"
+                                                data-min-value="0" data-max-value="100" data-value="90"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Total Sales</p>
+                                                <h4 class="counter">$560K</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-02"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-info"
+                                                data-min-value="0" data-max-value="100" data-value="80"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Total Profit</p>
+                                                <h4 class="counter">$185K</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-03"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-primary"
+                                                data-min-value="0" data-max-value="100" data-value="70"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Total Cost</p>
+                                                <h4 class="counter">$375K</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-04"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-info"
+                                                data-min-value="0" data-max-value="100" data-value="60"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24" width="24px" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Revenue</p>
+                                                <h4 class="counter">$742K</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1100">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-05"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-primary"
+                                                data-min-value="0" data-max-value="100" data-value="50"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24" width="24px" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Net Income</p>
+                                                <h4 class="counter">$150K</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-06"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-info"
+                                                data-min-value="0" data-max-value="100" data-value="40"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Today</p>
+                                                <h4 class="counter">$4600</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1300">
+                                    <div class="card-body">
+                                        <div class="progress-widget">
+                                            <div id="circle-progress-07"
+                                                class="text-center circle-progress-01 circle-progress circle-progress-primary"
+                                                data-min-value="0" data-max-value="100" data-value="30"
+                                                data-type="percent">
+                                                <svg class="card-slie-arrow icon-24 " width="24" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
+                                                </svg>
+                                            </div>
+                                            <div class="progress-detail">
+                                                <p class="mb-2">Members</p>
+                                                <h4 class="counter">11.2M</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="swiper-button swiper-button-next"></div>
+                            <div class="swiper-button swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card" data-aos="fade-up" data-aos-delay="800">
+                                <div class="flex-wrap card-header d-flex justify-content-between align-items-center">
+                                    <div class="header-title">
+                                        <h4 class="card-title">$855.8K</h4>
+                                        <p class="mb-0">Gross Sales</p>
+                                    </div>
+                                    <div class="d-flex align-items-center align-self-center">
+                                        <div class="d-flex align-items-center text-primary">
+                                            <svg class="icon-12" xmlns="http://www.w3.org/2000/svg" width="12"
+                                                viewBox="0 0 24 24" fill="currentColor">
+                                                <g>
+                                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                                </g>
+                                            </svg>
+                                            <div class="ms-2">
+                                                <span class="text-gray">Sales</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center ms-3 text-info">
+                                            <svg class="icon-12" xmlns="http://www.w3.org/2000/svg" width="12"
+                                                viewBox="0 0 24 24" fill="currentColor">
+                                                <g>
+                                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                                </g>
+                                            </svg>
+                                            <div class="ms-2">
+                                                <span class="text-gray">Cost</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton22"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            This Week
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="dropdownMenuButton22">
+                                            <li><a class="dropdown-item" href="#">This Week</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="d-main" class="d-main"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-6">
+                            <div class="card" data-aos="fade-up" data-aos-delay="900">
+                                <div class="flex-wrap card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Earnings</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            This Week
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">This Week</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="flex-wrap d-flex align-items-center justify-content-between">
+                                        <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
+                                        <div class="d-grid gap col-md-4 col-lg-4">
+                                            <div class="d-flex align-items-start">
+                                                <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14"
+                                                    viewBox="0 0 24 24" fill="#3a57e8">
+                                                    <g>
+                                                        <circle cx="12" cy="12" r="8" fill="#3a57e8"></circle>
+                                                    </g>
+                                                </svg>
+                                                <div class="ms-3">
+                                                    <span class="text-gray">Fashion</span>
+                                                    <h6>251K</h6>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-start">
+                                                <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14"
+                                                    viewBox="0 0 24 24" fill="#4bc7d2">
+                                                    <g>
+                                                        <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
+                                                    </g>
+                                                </svg>
+                                                <div class="ms-3">
+                                                    <span class="text-gray">Accessories</span>
+                                                    <h6>176K</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-6">
+                            <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                                <div class="flex-wrap card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Conversions</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton3"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            This Week
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="dropdownMenuButton3">
+                                            <li><a class="dropdown-item" href="#">This Week</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="d-activity" class="d-activity"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12">
+                            <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="600">
+                                <div class="flex-wrap card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="mb-2 card-title">Enterprise Clients</h4>
+                                        <p class="mb-0">
+                                            <svg class="me-2 text-primary icon-24" width="24" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+                                            </svg>
+                                            15 new acquired this month
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="p-0 card-body">
+                                    <div class="mt-4 table-responsive">
+                                        <table id="basic-table" class="table mb-0 table-striped" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>COMPANIES</th>
+                                                    <th>CONTACTS</th>
+                                                    <th>ORDER</th>
+                                                    <th>COMPLETION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
+                                                                src="../../static/assets/images/shapes/01.png"
+                                                                alt="profile" th:src="@{/assets/images/shapes/01.png}">
+                                                            <h6>Addidis Sportwear</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="iq-media-group iq-media-group-1">
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">SP</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">PP</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">MM</div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>$14,000</td>
+                                                    <td>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <h6>60%</h6>
+                                                        </div>
+                                                        <div class="shadow-none progress bg-soft-primary w-100"
+                                                            style="height: 4px">
+                                                            <div class="progress-bar bg-primary"
+                                                                data-toggle="progress-bar" role="progressbar"
+                                                                aria-valuenow="60" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
+                                                                src="../../static/assets/images/shapes/05.png"
+                                                                alt="profile" th:src="@{/assets/images/shapes/05.png}">
+                                                            <h6>Netflixer Platforms</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="iq-media-group iq-media-group-1">
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">SP</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">PP</div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>$30,000</td>
+                                                    <td>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <h6>25%</h6>
+                                                        </div>
+                                                        <div class="shadow-none progress bg-soft-primary w-100"
+                                                            style="height: 4px">
+                                                            <div class="progress-bar bg-primary"
+                                                                data-toggle="progress-bar" role="progressbar"
+                                                                aria-valuenow="25" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
+                                                                src="../../static/assets/images/shapes/02.png"
+                                                                alt="profile" th:src="@{/assets/images/shapes/02.png}">
+                                                            <h6>Shopifi Stores</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="iq-media-group iq-media-group-1">
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">PP</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">TP</div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>$8,500</td>
+                                                    <td>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <h6>100%</h6>
+                                                        </div>
+                                                        <div class="shadow-none progress bg-soft-success w-100"
+                                                            style="height: 4px">
+                                                            <div class="progress-bar bg-success"
+                                                                data-toggle="progress-bar" role="progressbar"
+                                                                aria-valuenow="100" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
+                                                                src="../../static/assets/images/shapes/03.png"
+                                                                alt="profile" th:src="@{/assets/images/shapes/03.png}">
+                                                            <h6>Bootstrap Technologies</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="iq-media-group iq-media-group-1">
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">SP</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">PP</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">MM</div>
+                                                            </a>
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">TP</div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>$20,500</td>
+                                                    <td>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <h6>100%</h6>
+                                                        </div>
+                                                        <div class="shadow-none progress bg-soft-success w-100"
+                                                            style="height: 4px">
+                                                            <div class="progress-bar bg-success"
+                                                                data-toggle="progress-bar" role="progressbar"
+                                                                aria-valuenow="100" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
+                                                                src="../../static/assets/images/shapes/04.png"
+                                                                alt="profile" th:src="@{/assets/images/shapes/04.png}">
+                                                            <h6>Community First</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="iq-media-group iq-media-group-1">
+                                                            <a href="#" class="iq-media-1">
+                                                                <div class="icon iq-icon-box-3 rounded-pill">MM</div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>$9,800</td>
+                                                    <td>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <h6>75%</h6>
+                                                        </div>
+                                                        <div class="shadow-none progress bg-soft-primary w-100"
+                                                            style="height: 4px">
+                                                            <div class="progress-bar bg-primary"
+                                                                data-toggle="progress-bar" role="progressbar"
+                                                                aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card credit-card-widget" data-aos="fade-up" data-aos-delay="900">
+                                <div class="pb-4 border-0 card-header">
+                                    <div class="p-4 border border-white rounded primary-gradient-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="font-weight-bold">VISA </h5>
+                                                <P class="mb-0">PREMIUM ACCOUNT</P>
+                                            </div>
+                                            <div class="master-card-content">
+                                                <svg class="master-card-1 icon-60" width="60" viewBox="0 0 24 24">
+                                                    <path fill="#ffffff"
+                                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                                </svg>
+                                                <svg class="master-card-2 icon-60" width="60" viewBox="0 0 24 24">
+                                                    <path fill="#ffffff"
+                                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="my-4">
+                                            <div class="card-number">
+                                                <span class="fs-5 me-2">5789</span>
+                                                <span class="fs-5 me-2">****</span>
+                                                <span class="fs-5 me-2">****</span>
+                                                <span class="fs-5">2847</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 d-flex align-items-center justify-content-between">
+                                            <p class="mb-0">Card holder</p>
+                                            <p class="mb-0">Expire Date</p>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6>Mike Smith</h6>
+                                            <h6 class="ms-5">06/11</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="flex-wrap mb-4 d-flex align-itmes-center justify-content-between">
+                                        <div class="d-flex align-itmes-center me-0 me-md-4">
+                                            <div>
+                                                <div class="p-3 mb-2 rounded bg-soft-primary">
+                                                    <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M16.9303 7C16.9621 6.92913 16.977 6.85189 16.9739 6.77432H17C16.8882 4.10591 14.6849 2 12.0049 2C9.325 2 7.12172 4.10591 7.00989 6.77432C6.9967 6.84898 6.9967 6.92535 7.00989 7H6.93171C5.65022 7 4.28034 7.84597 3.88264 10.1201L3.1049 16.3147C2.46858 20.8629 4.81062 22 7.86853 22H16.1585C19.2075 22 21.4789 20.3535 20.9133 16.3147L20.1444 10.1201C19.676 7.90964 18.3503 7 17.0865 7H16.9303ZM15.4932 7C15.4654 6.92794 15.4506 6.85153 15.4497 6.77432C15.4497 4.85682 13.8899 3.30238 11.9657 3.30238C10.0416 3.30238 8.48184 4.85682 8.48184 6.77432C8.49502 6.84898 8.49502 6.92535 8.48184 7H15.4932ZM9.097 12.1486C8.60889 12.1486 8.21321 11.7413 8.21321 11.2389C8.21321 10.7366 8.60889 10.3293 9.097 10.3293C9.5851 10.3293 9.98079 10.7366 9.98079 11.2389C9.98079 11.7413 9.5851 12.1486 9.097 12.1486ZM14.002 11.2389C14.002 11.7413 14.3977 12.1486 14.8858 12.1486C15.3739 12.1486 15.7696 11.7413 15.7696 11.2389C15.7696 10.7366 15.3739 10.3293 14.8858 10.3293C14.3977 10.3293 14.002 10.7366 14.002 11.2389Z"
+                                                            fill="currentColor"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h5>1153</h5>
+                                                <small class="mb-0">Products</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-itmes-center">
+                                            <div>
+                                                <div class="p-3 mb-2 rounded bg-soft-info">
+                                                    <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M14.1213 11.2331H16.8891C17.3088 11.2331 17.6386 10.8861 17.6386 10.4677C17.6386 10.0391 17.3088 9.70236 16.8891 9.70236H14.1213C13.7016 9.70236 13.3719 10.0391 13.3719 10.4677C13.3719 10.8861 13.7016 11.2331 14.1213 11.2331ZM20.1766 5.92749C20.7861 5.92749 21.1858 6.1418 21.5855 6.61123C21.9852 7.08067 22.0551 7.7542 21.9652 8.36549L21.0159 15.06C20.8361 16.3469 19.7569 17.2949 18.4879 17.2949H7.58639C6.25742 17.2949 5.15828 16.255 5.04837 14.908L4.12908 3.7834L2.62026 3.51807C2.22057 3.44664 1.94079 3.04864 2.01073 2.64043C2.08068 2.22305 2.47038 1.94649 2.88006 2.00874L5.2632 2.3751C5.60293 2.43735 5.85274 2.72207 5.88272 3.06905L6.07257 5.35499C6.10254 5.68257 6.36234 5.92749 6.68209 5.92749H20.1766ZM7.42631 18.9079C6.58697 18.9079 5.9075 19.6018 5.9075 20.459C5.9075 21.3061 6.58697 22 7.42631 22C8.25567 22 8.93514 21.3061 8.93514 20.459C8.93514 19.6018 8.25567 18.9079 7.42631 18.9079ZM18.6676 18.9079C17.8282 18.9079 17.1487 19.6018 17.1487 20.459C17.1487 21.3061 17.8282 22 18.6676 22C19.4969 22 20.1764 21.3061 20.1764 20.459C20.1764 19.6018 19.4969 18.9079 18.6676 18.9079Z"
+                                                            fill="currentColor"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h5>81K</h5>
+                                                <small class="mb-0">Order Served</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="flex-wrap d-flex justify-content-between">
+                                            <h2 class="mb-2">$405,012,300</h2>
+                                            <div>
+                                                <span class="badge bg-success rounded-pill">YoY 24%</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-info">Life time sales</p>
+                                    </div>
+                                    <div class="grid-cols-2 d-grid gap-card">
+                                        <button class="p-2 btn btn-primary text-uppercase">SUMMARY</button>
+                                        <button class="p-2 btn btn-info text-uppercase">ANALYTICS</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" data-aos="fade-up" data-aos-delay="500">
+                                <div class="text-center card-body d-flex justify-content-around">
+                                    <div>
+                                        <h2 class="mb-2">750<small>K</small></h2>
+                                        <p class="mb-0 text-gray">Website Visitors</p>
+                                    </div>
+                                    <hr class="hr-vertial">
+                                    <div>
+                                        <h2 class="mb-2">7,500</h2>
+                                        <p class="mb-0 text-gray">New Customers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card" data-aos="fade-up" data-aos-delay="600">
+                                <div class="flex-wrap card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="mb-2 card-title">Activity overview</h4>
+                                        <p class="mb-0">
+                                            <svg class="me-2 icon-24" width="24" height="24" viewBox="0 0 24 24">
+                                                <path fill="#17904b"
+                                                    d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
+                                            </svg>
+                                            16% this month
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-2  d-flex profile-media align-items-top">
+                                        <div class="mt-1 profile-dots-pills border-primary"></div>
+                                        <div class="ms-4">
+                                            <h6 class="mb-1 ">$2400, Purchase</h6>
+                                            <span class="mb-0">11 JUL 8:10 PM</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2  d-flex profile-media align-items-top">
+                                        <div class="mt-1 profile-dots-pills border-primary"></div>
+                                        <div class="ms-4">
+                                            <h6 class="mb-1 ">New order #8744152</h6>
+                                            <span class="mb-0">11 JUL 11 PM</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2  d-flex profile-media align-items-top">
+                                        <div class="mt-1 profile-dots-pills border-primary"></div>
+                                        <div class="ms-4">
+                                            <h6 class="mb-1 ">Affiliate Payout</h6>
+                                            <span class="mb-0">11 JUL 7:64 PM</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2  d-flex profile-media align-items-top">
+                                        <div class="mt-1 profile-dots-pills border-primary"></div>
+                                        <div class="ms-4">
+                                            <h6 class="mb-1 ">New user added</h6>
+                                            <span class="mb-0">11 JUL 1:21 AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-1  d-flex profile-media align-items-top">
+                                        <div class="mt-1 profile-dots-pills border-primary"></div>
+                                        <div class="ms-4">
+                                            <h6 class="mb-1 ">Product added</h6>
+                                            <span class="mb-0">11 JUL 4:50 AM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Section End -->
+
+        <!-- Footer Section Start -->
+        <footer id="footer" class="footer" th:fragment="footer">
+            <div class="footer-body">
+                <ul class="left-panel list-inline mb-0 p-0">
+                    <li class="list-inline-item"><a href="extra/privacy-policy.html">Privacy Policy</a>
+                    </li>
+                    <li class="list-inline-item"><a href="extra/terms-of-service.html">Terms of Use</a>
+                    </li>
+                </ul>
+                <div class="right-panel">
+                    ©
+                    <script>document.write(new Date().getFullYear())</script> Hope UI, Made with
+                    <span class="">
+                        <svg class="icon-15" width="15" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z"
+                                fill="currentColor"></path>
+                        </svg>
+                    </span> by <a href="https://iqonic.design/">IQONIC Design</a>.
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Section End -->
+    </main>
+
+    <!-- Library Bundle Script -->
+    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+    <!-- External Library Bundle Script -->
+    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+    <!-- Widgetchart Script -->
+    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+    <!-- mapchart Script -->
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+    <!-- fslightbox Script -->
+    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+    <!-- Settings Script -->
+    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+    <!-- Slider-tab Script -->
+    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+    <!-- Form Wizard Script -->
+    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+    <!-- AOS Animation Plugin-->
+    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+    <!-- App Script -->
+    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+</body>
+
+</html>
