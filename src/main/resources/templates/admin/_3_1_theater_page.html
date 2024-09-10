@@ -29,7 +29,7 @@
     <aside th:replace="~{admin/index::sidebar}"></aside>
         <main class="main-content">
             <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
-            <div class="container-fluid text-end">
+            <div class="container-fluid text-end mb-5">
                 <form action="#">
                     <div class="d-flex flex-column text-dark">
                         <div class="row mt-3 align-items-baseline">
@@ -50,6 +50,84 @@
                                 <textarea class="form-control" name="conditions" id="theater__conditions" rows="8"></textarea>
                             </div>
                         </div> 
+                        <div class="row mt-3 align-items-start text-dark">
+                            <span class="col-2">Логотип</span>
+                            <div class="col-10 row">
+                                <div class="col-6 text-start">
+                                    <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""
+                                        style="width: 800px; height: 450px;">
+                                </div>
+                                <div class="col-6 align-content-center">
+                                    <div class="d-grid gap-3">
+                                        <button class="btn btn-primary" type="button">Завантажити</button>
+                                        <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-start text-dark">
+                            <span class="col-2">Фото верхнього баннера</span>
+                            <div class="col-10 row">
+                                <div class="col-6 text-start">
+                                    <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""
+                                        style="width: 800px; height: 450px;">
+                                </div>
+                                <div class="col-6 align-content-center">
+                                    <div class="d-grid gap-3">
+                                        <button class="btn btn-primary" type="button">Завантажити</button>
+                                        <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-start">
+                            <span class="col-2">Галерея картинок</span>
+                            <div class="col-10">
+                                <div class="row row-cols-4 g-3">
+                                    <div th:each="i : ${#numbers.sequence(1, 6)}">
+                                        <img class="img-fluid img-thumbnail mb-2"
+                                            src="https://picsum.photos/id/839/400/225" alt=""
+                                            style="width: 400;height: 225;">
+                                        <input class="form-control" type="file" name="picture" id="film__input__picture"
+                                            accept="image/*">
+                                    </div>
+                                    <i class="bi bi-plus-circle-fill fs-1 text-dark text-center align-self-center"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-baseline">
+                            <p class="col-2 mt-3">Seo block</p>
+                            <div class="col-10">
+                                <div class="border border-1 border-dark rounded-3">
+                                    <div class="d-flex flex-column py-3">
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">URL</span>
+                                            <div class="col-9">
+                                                <input class="form-control" type="text" name="url" id="seo__url">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">Заголовок</span>
+                                            <div class="col-9">
+                                                <input class="form-control" type="text" name="tilte" id="seo__title">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">Ключові слова</span>
+                                            <div class="col-9">
+                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">Опис</span>
+                                            <div class="col-9">
+                                                <textarea class="form-control" name="description" id="seo__description" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -71,14 +71,15 @@
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Галерея картинок</span>
                             <div class="col-10">
-                                <div class="row row-cols-4 g-3">
+                                <div class="row row-cols-4 g-3 align-items-center">
                                     <div th:each="i : ${#numbers.sequence(1, 6)}">
                                         <img class="img-fluid img-thumbnail mb-2"
-                                            src="https://picsum.photos/id/839/600/400" alt=""
-                                            style="width: 600;height: 400;">
+                                            src="https://picsum.photos/id/548/400/225" alt=""
+                                            style="width: 400;height: 225;">
                                         <input class="form-control" type="file" name="picture" id="film__input__picture"
                                             accept="image/*">
                                     </div>
+                                    <i class="bi bi-plus-circle-fill fs-1 text-dark text-center align-self-center"></i>
                                 </div>
                             </div>
                         </div>

@@ -36,8 +36,8 @@
             <h4 class="text-center p-3">На головній сторінці вгорі</h4>
             <section id="main__top" class="col-11 border border-dark rounded-3 mx-auto">
                 <p class="ms-4 mt-4 text-dark">Відношення 16 х 9</p>
-                <section id="cards__container" class="row row-cols-5 m-0 p-0 g-5">
-                    <div class="card col py-4 mt-0" th:each="i : ${#numbers.sequence(1, 9)}" th:id="|main__banner__card_${i}|">
+                <section id="banners__cards" class="row row-cols-5 m-0 p-0 g-5">
+                    <div class="card col py-4 mt-0" th:each="i : ${#numbers.sequence(1, 8)}" th:id="|main__banner__card_${i}|">
                         <div class="mb-2 position-relative">
                             <img class="img-fluid" src="https://picsum.photos/id/1020/1600/900" alt="photo">
                             <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"></i>
@@ -45,6 +45,9 @@
                         <input class="mb-2" type="file" name="" id="input__main__banner" th:id="|input__main__banner_${i}|">
                         <label for="main__banner__text" th:for="|main__banner__text_${i}|">Текст</label>
                         <input id="main__banner__text" type="text" th:id="|main__banner__text_${i}|">
+                    </div>
+                    <div class="card col py-4 mt-0 justify-content-center">
+                        <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                     </div>
                 </section>
                 <div class="col-2 mb-4 mx-auto">
@@ -70,7 +73,7 @@
             <h4 class="text-center p-3 mt-4">На головній сторінці Новини та Акції</h4>
             <section id="main__news" class="col-11 border border-dark rounded-1 mx-auto">
                 <p class="ms-4 mt-4 text-dark">Відношення 16 х 9</p>
-                <div id="cards__container" class="row row-cols-5 m-0 p-0 g-5">
+                <div id="news__cards" class="row row-cols-5 m-0 p-0 g-5">
                     <div class="card col py-4 mt-0" th:each="i : ${#numbers.sequence(1, 4)}">
                         <div class="mb-2 position-relative">
                             <img class="img-fluid" src="https://picsum.photos/id/1020/1600/900" alt="">
