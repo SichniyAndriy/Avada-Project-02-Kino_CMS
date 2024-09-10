@@ -1,6 +1,6 @@
 package avada.spacelab.kino_cms.controller.admin;
 
-import avada.spacelab.kino_cms.model.entity.Movie;
+import avada.spacelab.kino_cms.model.dto.MovieDto;
 import avada.spacelab.kino_cms.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +30,8 @@ public class MovieController {
             @PathVariable int id,
             Model model
     ) {
-        Movie movie = (id == 0) ? new Movie() : movieService.getMovieById(id);
-        model.addAttribute("movie", movie);
+        MovieDto movieDto = (id == 0) ? new MovieDto() : movieService.getMovieById(id);
+        model.addAttribute("movie", movieDto);
         return "admin/_2_1_movie_page";
     }
 }

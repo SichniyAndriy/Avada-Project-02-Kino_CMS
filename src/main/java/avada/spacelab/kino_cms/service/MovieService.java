@@ -1,6 +1,7 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.entity.Movie;
+import avada.spacelab.kino_cms.model.dto.MovieDto;
+import avada.spacelab.kino_cms.model.mapper.MovieMapper;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,7 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-
-    public Movie getMovieById(int id) {
-        return movieRepository.findMovieById(id);
+    public MovieDto getMovieById(int id) {
+        return MovieMapper.INSTANCE.fromEntityToDto(movieRepository.findMovieById(id));
     }
 }

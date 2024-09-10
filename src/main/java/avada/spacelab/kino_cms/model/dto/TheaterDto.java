@@ -16,4 +16,36 @@ public record TheaterDto(
         List<AuditoriumDto> auditoriums,
         SeoBlockDto seoBlock
 ) implements Serializable {
+    public TheaterDto(
+            Long id,
+            String title,
+            String description,
+            String facilities,
+            String logoUrl,
+            String mainBannerUrl,
+            List<AuditoriumDto> auditoriums,
+            SeoBlockDto seoBlock
+    ) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.facilities = facilities;
+        this.logoUrl = logoUrl;
+        this.mainBannerUrl = mainBannerUrl;
+        this.auditoriums = auditoriums;
+        this.seoBlock = seoBlock;
+    }
+
+    public TheaterDto() {
+        this(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
 }
