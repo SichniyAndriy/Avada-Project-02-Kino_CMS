@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -46,10 +47,10 @@ public class Auditorium {
     @PrimaryKeyJoinColumn(name = "theater_id", referencedColumnName = "id")
     private Theater theater;
 
-    @OneToOne(targetEntity = SeoBlock.class)
-    @PrimaryKeyJoinColumn(name = "seo_block_id",referencedColumnName = "id")
-    private SeoBlock seoBlock;
-
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Schedule.class, mappedBy = "key.auditorium")
     private List<Schedule> schedules = new ArrayList<>();
+
+    @OneToOne(targetEntity = SeoBlock.class)
+    @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
+    private SeoBlock seoBlock;
 }

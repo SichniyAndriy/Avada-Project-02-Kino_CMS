@@ -14,7 +14,6 @@ public record MovieDto(
         String description,
         String posterUrl,
         String trailerUrl,
-        String detailsUrl,
         Boolean has2D,
         Boolean has3D,
         Boolean hasImax,
@@ -31,7 +30,6 @@ public record MovieDto(
             String description,
             String posterUrl,
             String trailerUrl,
-            String detailsUrl,
             Boolean has2D,
             Boolean has3D,
             Boolean hasImax,
@@ -47,7 +45,6 @@ public record MovieDto(
         this.description = description;
         this.posterUrl = posterUrl;
         this.trailerUrl = trailerUrl;
-        this.detailsUrl = detailsUrl;
         this.has2D = has2D;
         this.has3D = has3D;
         this.hasImax = hasImax;
@@ -60,7 +57,6 @@ public record MovieDto(
 
     public MovieDto() {
         this(
-                null,
                 null,
                 null,
                 null,

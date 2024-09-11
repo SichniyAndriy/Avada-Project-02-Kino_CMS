@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
@@ -44,9 +45,6 @@ public class Movie {
     @Column(name = "trailer_url")
     private String trailerUrl;
 
-    @Column(name = "details_url")
-    private String detailsUrl;
-
     @Column(name = "has_2D", nullable = false)
     private Boolean has2D = false;
 
@@ -62,12 +60,13 @@ public class Movie {
     @Embedded
     private MovieDetails details;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
-    private SeoBlock seoBlock;
-
     @OneToMany(cascade = CascadeType.ALL, targetEntity = MoviePicture.class, orphanRemoval = true, mappedBy = "movie")
     private List<MoviePicture> pictures = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Schedule.class, mappedBy = "key.movie")
     private List<Schedule> schedules = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
+    @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
+    private SeoBlock seoBlock;
 }
