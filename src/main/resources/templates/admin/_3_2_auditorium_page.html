@@ -32,30 +32,23 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="container-fluid text-end mb-5">
-            <form action="#">
+            <form action="#" method="post" th:object="${auditorium}">
                 <div class="d-flex flex-column text-dark pe-5">
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Назва кінотеатра</span>
                         <div class="col-10">
-                            <input class="form-control" type="text" name="title" id="theater__title">
+                            <input class="form-control" type="text" name="title" id="auditorium__title">
                         </div>
                     </div>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Опис</span>
                         <div class="col-10">
-                            <textarea class="form-control" name="description" id="theater__description"
-                                rows="8"></textarea>
-                        </div>
-                    </div>
-                    <div class="row mt-5 align-items-baseline">
-                        <span class="col-2">Умови</span>
-                        <div class="col-10">
-                            <textarea class="form-control" name="conditions" id="theater__conditions"
+                            <textarea class="form-control" name="description" id="auditorium__description"
                                 rows="8"></textarea>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-start text-dark">
-                        <span class="col-2">Логотип</span>
+                        <span class="col-2">Схема зала</span>
                         <div class="col-10 row">
                             <div class="col-6 text-start">
                                 <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""

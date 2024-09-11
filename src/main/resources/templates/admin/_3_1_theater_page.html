@@ -32,7 +32,7 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="container-fluid text-end mb-5">
-            <form action="#">
+            <form action="#" method="post" th:object="${theater}">
                 <div class="d-flex flex-column text-dark pe-5">
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Назва кінотеатра</span>
