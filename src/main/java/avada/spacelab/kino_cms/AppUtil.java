@@ -1,7 +1,10 @@
 package avada.spacelab.kino_cms;
 
 import avada.spacelab.kino_cms.model.entity.Movie;
+import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.repository.MovieRepository;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +43,18 @@ public class AppUtil implements CommandLineRunner {
             movie.setHasImax(localFaker.random().nextBoolean());
             movie.setTrailerUrl(faker.internet().url());
             movie.setAgeCenz(localFaker.random().nextInt(12, 18));
+            MovieDetails movieDetails = new MovieDetails();
+            movieDetails.setYear(faker.random().nextInt(2020, LocalDate.now().getYear()).toString());
+            movieDetails.setCountry(localFaker.country().name());
+            movieDetails.setActors(faker.name().firstName() + " " + faker.name().lastName());
+            movieDetails.setDirectors(faker.name().firstName() + " " + faker.name().lastName());
+            movieDetails.setScreenwriters(faker.name().firstName() + " " + faker.name().lastName());
+            movieDetails.setCompositors(faker.name().firstName() + " " + faker.name().lastName());
+            movieDetails.setProducers(faker.name().firstName() + " " + faker.name().lastName());
+            movieDetails.setGenres(faker.book().genre());
+            movieDetails.setBudget("$ " + faker.random().nextInt(1_000_000, 250_000_000));
+            movieDetails.setTime(faker.time().past(7200, ChronoUnit.SECONDS, "HH:mm:ss"));
+            movie.setDetails(movieDetails);
             movies.add(movie);
         }
         movieRepository.saveAllAndFlush(movies);
