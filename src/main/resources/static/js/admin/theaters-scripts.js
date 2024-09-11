@@ -6,6 +6,6 @@ $(event => {
     $("#theaters__link").addClass("active");
 });
 
-function showTheater(id) {
+function showTheater(id = 0) {
     window.location.href = `${THEATER_PATH}/show/${id}`;
 }

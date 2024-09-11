@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сторінка зала</title>
+    <title>Сторінка кінотеатра</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
@@ -25,16 +26,120 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
+
 <body>
     <aside th:replace="~{admin/index::sidebar}"></aside>
-        <main class="main-content">
-            <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
-            <div>
-                
-            </div>
-
-            <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
-        </main>
+    <main class="main-content">
+        <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
+        <div class="container-fluid text-end mb-5">
+            <form action="#">
+                <div class="d-flex flex-column text-dark pe-5">
+                    <div class="row mt-5 align-items-baseline">
+                        <span class="col-2">Назва кінотеатра</span>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="title" id="theater__title">
+                        </div>
+                    </div>
+                    <div class="row mt-5 align-items-baseline">
+                        <span class="col-2">Опис</span>
+                        <div class="col-10">
+                            <textarea class="form-control" name="description" id="theater__description"
+                                rows="8"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-5 align-items-baseline">
+                        <span class="col-2">Умови</span>
+                        <div class="col-10">
+                            <textarea class="form-control" name="conditions" id="theater__conditions"
+                                rows="8"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-5 align-items-start text-dark">
+                        <span class="col-2">Логотип</span>
+                        <div class="col-10 row">
+                            <div class="col-6 text-start">
+                                <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""
+                                    style="width: 800px; height: 450px;">
+                            </div>
+                            <div class="col-6 align-content-center">
+                                <div class="d-grid gap-3">
+                                    <button class="btn btn-primary" type="button">Завантажити</button>
+                                    <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 align-items-start text-dark">
+                        <span class="col-2">Фото верхнього баннера</span>
+                        <div class="col-10 row">
+                            <div class="col-6 text-start">
+                                <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""
+                                    style="width: 800px; height: 450px;">
+                            </div>
+                            <div class="col-6 align-content-center">
+                                <div class="d-grid gap-3">
+                                    <button class="btn btn-primary" type="button">Завантажити</button>
+                                    <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 align-items-start">
+                        <span class="col-2">Галерея картинок</span>
+                        <div class="col-10">
+                            <div class="row row-cols-4 g-3">
+                                <div th:each="i : ${#numbers.sequence(1, 6)}">
+                                    <img class="img-fluid img-thumbnail mb-2" src="https://picsum.photos/id/839/400/225"
+                                        alt="" style="width: 400;height: 225;">
+                                    <input class="form-control" type="file" name="picture" id="film__input__picture"
+                                        accept="image/*">
+                                </div>
+                                <i class="bi bi-plus-circle-fill fs-1 text-dark text-center align-self-center"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 align-items-baseline">
+                        <p class="col-2 mt-3">Seo block</p>
+                        <div class="col-10">
+                            <div class="border border-1 border-dark rounded-3">
+                                <div class="d-flex flex-column py-3">
+                                    <div class="row align-items-baseline">
+                                        <span class="col-2">URL</span>
+                                        <div class="col-9">
+                                            <input class="form-control" type="text" name="url" id="seo__url">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-baseline">
+                                        <span class="col-2">Заголовок</span>
+                                        <div class="col-9">
+                                            <input class="form-control" type="text" name="tilte" id="seo__title">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-baseline">
+                                        <span class="col-2">Ключові слова</span>
+                                        <div class="col-9">
+                                            <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-baseline">
+                                        <span class="col-2">Опис</span>
+                                        <div class="col-9">
+                                            <textarea class="form-control" name="description" id="seo__description"
+                                                rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center w-25 mt-5 mx-auto">
+                        <button type="button" class="btn btn-success w-100">Зберегти</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
+    </main>
 
     <!-- Library Bundle Script -->
     <script src="../assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
@@ -60,7 +165,8 @@
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Theaters Scripts -->
-    <script src="../../static/js/admin/theaters-scripts.js" th:src="@{/js/admin/theaters-scripts.js}"></script>
+    <!-- Theater Auditorium Scripts -->
+    <script src="../../static/js/admin/theater-auditorium-page-scripts.js" th:src="@{/js/admin/theater-auditorium-page-scripts.js}"></script>
 </body>
+
 </html>
