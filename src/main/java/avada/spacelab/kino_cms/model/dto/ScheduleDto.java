@@ -28,7 +28,7 @@ public record ScheduleDto(
                schedule.getKey().getDate(),
                schedule.getKey().getTime(),
                MovieMapper.INSTANCE.fromEntityToDto(schedule.getKey().getMovie()),
-               AuditoriumMapper.ISTANCE.fromEntityToDto(schedule.getKey().getAuditorium())
+               AuditoriumMapper.INSTANCE.fromEntityToDto(schedule.getKey().getAuditorium())
        );
     }
 }

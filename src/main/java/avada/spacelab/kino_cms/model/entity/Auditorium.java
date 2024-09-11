@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -43,14 +42,19 @@ public class Auditorium {
     @Column(name = "main_banner_url", nullable = false)
     private String mainBannerUrl;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+            targetEntity = AuditoriumPicture.class, mappedBy = "auditorium")
+    private List<AuditoriumPicture> pictures = new ArrayList<>();
+
     @ManyToOne(targetEntity = Theater.class)
-    @PrimaryKeyJoinColumn(name = "theater_id", referencedColumnName = "id")
+    @JoinColumn(name = "theater_id", referencedColumnName = "id")
     private Theater theater;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Schedule.class, mappedBy = "key.auditorium")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+            targetEntity = Schedule.class, mappedBy = "key.auditorium")
     private List<Schedule> schedules = new ArrayList<>();
 
-    @OneToOne(targetEntity = SeoBlock.class)
+    @OneToOne(targetEntity = SeoBlock.class, orphanRemoval = true)
     @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
     private SeoBlock seoBlock;
 }

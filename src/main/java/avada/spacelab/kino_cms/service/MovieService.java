@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieService {
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
     public MovieService(
             @Autowired MovieRepository movieRepository
@@ -16,7 +16,7 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public MovieDto getMovieById(int id) {
+    public MovieDto getMovieById(long id) {
         return MovieMapper.INSTANCE.fromEntityToDto(movieRepository.findMovieById(id));
     }
 }

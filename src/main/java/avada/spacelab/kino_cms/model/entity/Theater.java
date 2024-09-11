@@ -29,6 +29,7 @@ public class Theater {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description", length = 2048, nullable = false)
@@ -44,7 +45,7 @@ public class Theater {
     private String mainBannerUrl;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = TheaterPicture.class, mappedBy = "theater")
-    private List<TheaterPicture> pictures;
+    private List<TheaterPicture> pictures = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Auditorium.class, mappedBy = "theater")
     private List<Auditorium> auditoriums = new ArrayList<>();
