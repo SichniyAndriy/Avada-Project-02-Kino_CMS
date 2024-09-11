@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin/banners")
 public class BannerController {
     @GetMapping(path = {"/", ""})
+
     public String banners() {
         return "admin/_1_banners";
     }
