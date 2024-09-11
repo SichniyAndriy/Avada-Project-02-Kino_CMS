@@ -25,7 +25,7 @@ public class MoviePicture {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
-    @Column(name = "path", length = 1048)
+    @Column(name = "path", nullable = false, length = 1024, unique = true)
     private String path;
 
     @ManyToOne(targetEntity = Movie.class)
