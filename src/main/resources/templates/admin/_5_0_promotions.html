@@ -35,7 +35,7 @@
             <section id="current__theaters">
                 <div class="col-10 mx-auto">
                     <section class="text-end py-5">
-                        <button type="button" class="btn btn-outline-primary" th:onclick="showTheater()">
+                        <button type="button" class="btn btn-outline-primary" th:onclick="showPromotion()">
                             Додати акцію
                         </button>
                     </section>
@@ -50,13 +50,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="i : ${#numbers.sequence(1, 3)}">
-                                    <td>Lorem ipsum dolor sit amet.</td>
-                                    <td>21.12.2112</td>
-                                    <td>ВКЛ</td>
+                                <tr th:each="promotion : ${promotions}">
+                                    <td th:text="${promotion.title}">Lorem ipsum dolor sit amet.</td>
+                                    <td th:text="${promotion.date}">21.12.2112</td>
+                                    <td th:text="${promotion.status}">ВКЛ</td>
                                     <td style="width: 10%;">
                                         <button type="button" class="btn btn-success"><i
-                                                class="bi bi-pen-fill"></i></button>
+                                                class="bi bi-pen-fill" th:onclick="showPromotion([[${promotion.id}]])"></i></button>
                                         <button type="button" class="btn btn-danger"><i
                                                 class="bi bi-trash3-fill"></i></button>
                                     </td>

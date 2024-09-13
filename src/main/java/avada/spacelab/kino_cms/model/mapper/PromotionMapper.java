@@ -1,7 +1,7 @@
 package avada.spacelab.kino_cms.model.mapper;
 
-import avada.spacelab.kino_cms.model.dto.PromotionsDto;
-import avada.spacelab.kino_cms.model.entity.Promotions;
+import avada.spacelab.kino_cms.model.dto.PromotionDto;
+import avada.spacelab.kino_cms.model.entity.Promotion;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -9,6 +9,6 @@ import org.mapstruct.factory.Mappers;
 public interface PromotionMapper {
     PromotionMapper INSTANCE = Mappers.getMapper(PromotionMapper.class);
 
-    PromotionsDto fromEntityToDto(Promotions promotions);
-    Promotions fromDtoToEntity(PromotionsDto promotionsDto);
+    PromotionDto fromEntityToDto(Promotion promotions);
+    Promotion fromDtoToEntity(PromotionDto promotionsDto);
 }

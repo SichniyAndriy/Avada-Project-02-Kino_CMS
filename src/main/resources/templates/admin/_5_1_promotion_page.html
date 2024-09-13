@@ -33,29 +33,29 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
             <div class="container-fluid text-end pe-5">
-                <form action="#" th:object="${news}">
+                <form action="#" th:object="${promotion}">
                     <div class="d-flex flex-column text-dark">
                         <div class="form-check form-switch fs-3 align-self-end">
-                            <input id="news__status" class="form-check-input" type="checkbox" role="switch"
+                            <input id="promotion__status" class="form-check-input" type="checkbox" role="switch"
                                 th:checked="*{#strings.equals(status, 'ON')} ? true : false">
-                            <label class="form-check-label" for="news__status">[[*{status}]]</label>
+                            <label class="form-check-label" for="promotion__status">[[*{status}]]</label>
                         </div>
                         <div class="row mt-3 align-items-baseline">
-                            <span class="col-2">Заголовок новини</span>
+                            <span class="col-2">Заголовок акції</span>
                             <div class="col-10">
-                                <input id="news__title" class="form-control" type="text" name="title"
+                                <input id="promotion__title" class="form-control" type="text" name="title"
                                     th:field="*{title}">
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
-                            <span class="col-2">Зміст новини</span>
+                            <span class="col-2">Зміст акції</span>
                             <div class="col-10">
-                                <textarea id="news__content" class="form-control" name="content" rows="8"
+                                <textarea id="promotion__content" class="form-control" name="content" rows="8"
                                     th:field="*{content}"></textarea>
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
-                            <span class="col-2">Головна картинка</span>
+                            <span class="col-2">Головна картинка акції</span>
                             <div class="col-10 row">
                                 <div class="col-6 text-start">
                                     <img class="text-bg-info" src="https://picsum.photos/id/174/480/270" alt=""
@@ -149,7 +149,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Film Page Scripts -->
-    <script src="../../static/js/admin/news-page-scripts.js" th:src="@{/js/admin/news-page-scripts.js}" defer></script>
+    <script src="../../static/js/admin/promotion-page-scripts.js" th:src="@{/js/admin/promotion-page-scripts.js}" defer></script>
 </body>
 
 </html>

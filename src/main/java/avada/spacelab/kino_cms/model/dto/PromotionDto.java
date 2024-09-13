@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * DTO for {@link avada.spacelab.kino_cms.model.entity.Promotions}
+ * DTO for {@link avada.spacelab.kino_cms.model.entity.Promotion}
  */
 public record PromotionDto(
         Long id,
@@ -16,4 +16,15 @@ public record PromotionDto(
         SeoBlockDto seoBlock,
         Status status
 ) implements Serializable {
+    public static PromotionDto EMPTY() {
+        return new PromotionDto(
+                null,
+                null,
+                null,
+                null,
+                null,
+                SeoBlockDto.EMPTY(),
+                null
+                );
+    }
 }

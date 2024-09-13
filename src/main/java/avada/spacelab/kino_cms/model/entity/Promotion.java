@@ -23,7 +23,7 @@ import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "promotions")
-public class Promotions {
+public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "promotions_gen")
     @SequenceGenerator(name = "promotions_gen", sequenceName = "promotions_seq", allocationSize = 1)
@@ -34,14 +34,14 @@ public class Promotions {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, length = 2048)
     private String content;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "main_picture", nullable = false)
+    @Column(name = "main_picture")
     private String mainPicture;
 
     @Enumerated(EnumType.STRING)
