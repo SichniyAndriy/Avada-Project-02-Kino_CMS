@@ -6,7 +6,6 @@ $(() => {
     $("#news__link").addClass("active");
 })
 
-
 function showNews(id=0) {
     location.href = `${NEWS_PATH}/show/${id}`;
 }

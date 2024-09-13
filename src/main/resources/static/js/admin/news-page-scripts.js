@@ -5,7 +5,5 @@ $(() => {
 })
 
 $("#news__status").on("change", (event) => {
-    const label = $('label[for="news__status"]');
-    console.log(event.target.checked);
-    label.text(event.target.checked ? "ON" : "OFF");
+    $('label[for="news__status"]').text(event.target.checked ? "ON" : "OFF");
 });

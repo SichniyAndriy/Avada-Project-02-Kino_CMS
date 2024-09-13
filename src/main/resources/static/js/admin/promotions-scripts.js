@@ -1,7 +1,7 @@
 const PROMOTIONS_PATH = "/admin/promotions";
 
 $(() => {
-    $("#header__title").text("Список новин");
+    $("#header__title").text("Список акцій");
     $("#sidebar-menu .nav-link.active").removeClass("active");
     $("#promotions__link").addClass("active");
 })
