@@ -16,7 +16,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
-@Entity  @Table(name = "auditorium_pictures")
+@Entity @Table(name = "auditorium_pictures")
 public class AuditoriumPicture {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "auditorium_picture_gen")

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuditoriumService {
-    private AuditoriumRepository auditoriumRepository;
+    private final AuditoriumRepository auditoriumRepository;
 
     public AuditoriumService(
             @Autowired AuditoriumRepository auditoriumRepository

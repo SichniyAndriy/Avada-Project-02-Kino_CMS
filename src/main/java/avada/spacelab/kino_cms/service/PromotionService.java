@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PromotionService {
-    private PromotionsRepository promotionsRepository;
+    private final PromotionsRepository promotionsRepository;
     public PromotionService(
             @Autowired PromotionsRepository promotionsRepository
     ) {

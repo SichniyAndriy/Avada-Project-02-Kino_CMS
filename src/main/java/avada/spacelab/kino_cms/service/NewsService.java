@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NewsService {
-    private NewsRepository newsRepository;
+    private final NewsRepository newsRepository;
 
     public NewsService(
             @Autowired NewsRepository newsRepository

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin/promotions")
 public class PromotionController {
     private final PromotionService promotionService;
+
     public PromotionController(
             @Autowired PromotionService promotionService
     ) {

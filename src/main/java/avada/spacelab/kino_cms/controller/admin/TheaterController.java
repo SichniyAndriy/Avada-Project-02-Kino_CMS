@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("admin/theaters")
 public class TheaterController {
-    private TheaterService theaterService;
-    private AuditoriumService auditoriumService;
+    private final TheaterService theaterService;
+    private final AuditoriumService auditoriumService;
 
     public TheaterController(
             @Autowired TheaterService theaterService,

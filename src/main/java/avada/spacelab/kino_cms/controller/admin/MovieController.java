@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("admin/movies")
 public class MovieController {
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public MovieController(
             @Autowired MovieService movieService
