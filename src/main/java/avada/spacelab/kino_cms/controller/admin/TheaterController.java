@@ -35,7 +35,8 @@ public class TheaterController {
             @PathVariable long id,
             Model model
     ) {
-        TheaterDto theaterDto = id == 0 ? new TheaterDto() : theaterService.findTheaterById(id);
+        TheaterDto theaterDto = (id == 0) ?
+                TheaterDto.EMPTY() : theaterService.findTheaterById(id);
         model.addAttribute("theater", theaterDto);
         return "admin/_3_1_theater_page";
     }
@@ -45,7 +46,8 @@ public class TheaterController {
             @PathVariable long id,
             Model model
     ) {
-        AuditoriumDto auditoriumDto =  id == 0 ? new AuditoriumDto() : auditoriumService.findAuditoriumById(id);
+        AuditoriumDto auditoriumDto = (id == 0) ?
+                AuditoriumDto.EMPTY() : auditoriumService.findAuditoriumById(id);
         model.addAttribute("auditorium", auditoriumDto);
         return "admin/_3_2_auditorium_page";
     }

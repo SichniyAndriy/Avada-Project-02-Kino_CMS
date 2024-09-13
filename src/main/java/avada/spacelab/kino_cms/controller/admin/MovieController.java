@@ -30,7 +30,7 @@ public class MovieController {
             @PathVariable int id,
             Model model
     ) {
-        MovieDto movies = (id == 0) ? new MovieDto() : movieService.getMovieById(id);
+        MovieDto movies = (id == 0) ? MovieDto.EMPTY() : movieService.getMovieById(id);
         model.addAttribute("movie", movies);
         return "admin/_2_1_movie_page";
     }
