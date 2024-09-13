@@ -22,4 +22,21 @@ public record UserDto(
         Gender sex,
         LocalDate birthDate
 ) implements Serializable {
+
+    public static UserDto EMPTY() {
+        return new UserDto(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
 }

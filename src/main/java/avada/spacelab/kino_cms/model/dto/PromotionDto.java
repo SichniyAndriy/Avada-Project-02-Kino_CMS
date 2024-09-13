@@ -7,7 +7,7 @@ import java.time.LocalDate;
 /**
  * DTO for {@link avada.spacelab.kino_cms.model.entity.Promotions}
  */
-public record PromotionsDto(
+public record PromotionDto(
         Long id,
         String title,
         String content,

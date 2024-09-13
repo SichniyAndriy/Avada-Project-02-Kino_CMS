@@ -2,6 +2,7 @@ package avada.spacelab.kino_cms.model.dto;
 
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,8 +56,8 @@ public record MovieDto(
         this.schedules = schedules;
     }
 
-    public MovieDto() {
-        this(
+    public static MovieDto EMPTY() {
+        return new MovieDto(
                 null,
                 null,
                 null,
@@ -68,9 +69,9 @@ public record MovieDto(
                 null,
                 null,
                 null,
-                null,
-                null,
-                null
+                SeoBlockDto.EMPTY(),
+                Collections.emptyList(),
+                Collections.emptyList()
         );
     }
 }

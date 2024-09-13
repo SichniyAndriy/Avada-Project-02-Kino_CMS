@@ -12,4 +12,8 @@ public record AddressDto(
         String houseNumber,
         String flatNumber
 ) implements Serializable {
+
+    public static AddressDto EMPTY() {
+        return new AddressDto(null,null,null,null,null);
+    }
 }

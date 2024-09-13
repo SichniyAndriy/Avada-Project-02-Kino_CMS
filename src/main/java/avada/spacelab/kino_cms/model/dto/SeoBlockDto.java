@@ -12,4 +12,8 @@ public record SeoBlockDto(
         String keywords,
         String description
 ) implements Serializable {
+
+    public static SeoBlockDto EMPTY() {
+        return new SeoBlockDto(null, null, null, null, null);
+    }
 }

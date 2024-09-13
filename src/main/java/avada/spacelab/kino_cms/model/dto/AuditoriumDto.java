@@ -29,14 +29,14 @@ public record AuditoriumDto(
         this.seoBlock = seoBlock;
     }
 
-    public AuditoriumDto() {
-        this(
+    public static AuditoriumDto EMPTY() {
+        return new AuditoriumDto(
                 null,
                 null,
                 null,
                 null,
                 null,
-                null
+                SeoBlockDto.EMPTY()
         );
     }
 }
