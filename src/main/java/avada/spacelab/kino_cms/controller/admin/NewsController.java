@@ -22,8 +22,8 @@ public class NewsController {
 
     @GetMapping(path = {"", "/"})
     public String getNews(Model model) {
-        List<NewsDto> newsDtoList = newsService.getAllNews();
-        model.addAttribute("news", newsDtoList);
+        List<NewsDto> news = newsService.getAllNews();
+        model.addAttribute("news", news);
         return "admin/_4_news";
     }
 }
