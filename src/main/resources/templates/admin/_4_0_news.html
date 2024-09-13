@@ -55,10 +55,12 @@
                                     <td th:text="${news.date}">21.12.2112</td>
                                     <td th:text="${news.status}">ВКЛ</td>
                                     <td style="width: 10%;">
-                                        <button type="button" class="btn btn-success" th:onclick="showNews([[${news.id}]])"><i
-                                                class="bi bi-pen-fill"></i></button>
-                                        <button type="button" class="btn btn-danger"><i
-                                                class="bi bi-trash3-fill"></i></button>
+                                        <button type="button" class="btn btn-success" th:onclick="showNews([[${news.id}]])">
+                                            <i class="bi bi-pen-fill"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
