@@ -1,6 +1,8 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.NewsDto;
+import avada.spacelab.kino_cms.model.entity.News;
+import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import java.util.ArrayList;
@@ -27,5 +29,13 @@ public class NewsService {
 
     public NewsDto findById(long id) {
         return NewsMapper.INSTANCE.fromEntityToDto(newsRepository.findNewsById(id));
+    }
+
+    public NewsDto getNewsById(int id) {
+        News newsById = newsRepository.findNewsById(id);
+        if (newsById.getSeoBlock() == null) {
+            newsById.setSeoBlock(new SeoBlock());
+        }
+        return NewsMapper.INSTANCE.fromEntityToDto(newsById);
     }
 }

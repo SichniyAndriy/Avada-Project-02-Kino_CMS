@@ -34,14 +34,14 @@ public class News {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, length = 2048)
     private String content;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "main_picture", nullable = false)
+    @Column(name = "main_picture")
     private String mainPicture;
 
     @Enumerated(EnumType.STRING)
