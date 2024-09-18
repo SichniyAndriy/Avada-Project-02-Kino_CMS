@@ -1,13 +1,18 @@
 package avada.spacelab.kino_cms;
 
+import avada.spacelab.kino_cms.model.entity.Address;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.Status;
+import avada.spacelab.kino_cms.model.entity.User;
+import avada.spacelab.kino_cms.model.entity.User.Gender;
+import avada.spacelab.kino_cms.model.entity.User.Language;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import avada.spacelab.kino_cms.repository.NewsRepository;
-import avada.spacelab.kino_cms.repository.PromotionsRepository;
+import avada.spacelab.kino_cms.repository.PromotionRepository;
+import avada.spacelab.kino_cms.repository.UserRepository;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -25,16 +30,18 @@ public class AppUtil implements CommandLineRunner {
     private final Faker localFaker = new Faker(Locale.getDefault());
     private final MovieRepository movieRepository;
     private final NewsRepository newsRepository;
-    private final PromotionsRepository promotionsRepository;
+    private final PromotionRepository promotionRepository;
+    private final UserRepository userRepository;
 
     public AppUtil(
             @Autowired MovieRepository movieRepository,
             @Autowired NewsRepository newsRepository,
-            @Autowired PromotionsRepository promotionsRepository
-    ) {
+            @Autowired PromotionRepository promotionRepository,
+            UserRepository userRepository) {
         this.movieRepository = movieRepository;
         this.newsRepository = newsRepository;
-        this.promotionsRepository = promotionsRepository;
+        this.promotionRepository = promotionRepository;
+        this.userRepository = userRepository;
     }
     
     @Override
@@ -43,6 +50,7 @@ public class AppUtil implements CommandLineRunner {
         initMovies(n * 5);
         initNews(n * 3);
         initPromotions(n * 3);
+        initUsers(n * 10);
     }
 
     private void initMovies(int n) {
@@ -97,6 +105,35 @@ public class AppUtil implements CommandLineRunner {
             promotion.setStatus(faker.random().nextBoolean() ? Status.ON : Status.OFF);
             promotions.add(promotion);
         }
-        promotionsRepository.saveAllAndFlush(promotions);
+        promotionRepository.saveAllAndFlush(promotions);
+    }
+
+    public void initUsers(int n) {
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            User user = new User();
+            user.setFirstName(localFaker.name().firstName());
+            user.setLastName(localFaker.name().lastName());
+            user.setNickName(faker.internet().username());
+            user.setPhone(faker.phoneNumber().phoneNumber());
+            user.setEmail(faker.internet().emailAddress());
+            user.setCardNumber(faker.finance().creditCard());
+            user.setLanguage(Language.UKRAINIAN);
+            user.setGender(faker.random().nextBoolean() ? Gender.MALE : Gender.FEMALE);
+            user.setRegistrationDate(localFaker.date().past(1800, TimeUnit.DAYS).toLocalDateTime().toLocalDate());
+            user.setBirthDate(localFaker.date().birthdayLocalDate(15, 55));
+
+            Address address = new Address();
+            address.setCity(localFaker.address().city());
+            address.setZipCode(localFaker.address().zipCode());
+            address.setStreet(localFaker.address().streetName());
+            address.setHouseNumber(faker.address().buildingNumber());
+            address.setFlatNumber(
+                    faker.random().nextBoolean() ? faker.random().nextInt(1, 100).toString() : null
+            );
+            user.setAddress(address);
+            users.add(user);
+        }
+        userRepository.saveAllAndFlush(users);
     }
 }

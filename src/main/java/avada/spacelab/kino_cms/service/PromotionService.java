@@ -4,33 +4,39 @@ import avada.spacelab.kino_cms.model.dto.PromotionDto;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.PromotionMapper;
-import avada.spacelab.kino_cms.repository.PromotionsRepository;
+import avada.spacelab.kino_cms.repository.PromotionRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PromotionService {
-    private final PromotionsRepository promotionsRepository;
+    private final PromotionRepository promotionRepository;
+
     public PromotionService(
-            @Autowired PromotionsRepository promotionsRepository
+            @Autowired PromotionRepository promotionRepository
     ) {
-        this.promotionsRepository = promotionsRepository;
+        this.promotionRepository = promotionRepository;
     }
 
     public List<PromotionDto> getAllPromotions() {
-        return promotionsRepository.findAll().stream()
+        return promotionRepository.findAll().stream()
                 .map(PromotionMapper.INSTANCE::fromEntityToDto)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public PromotionDto getPromotionById(int id) {
-        Promotion promotionById = promotionsRepository.findById(id);
-        if (promotionById.getSeoBlock() == null) {
-            promotionById.setSeoBlock(new SeoBlock());
+        Optional<Promotion> promotionById = promotionRepository.findById(id);
+        if (promotionById.isPresent()) {
+            Promotion promotion = promotionById.get();
+            if (promotion.getSeoBlock() == null) {
+                promotion.setSeoBlock(new SeoBlock());
+            }
+            return PromotionMapper.INSTANCE.fromEntityToDto(promotion);
         }
-        return PromotionMapper.INSTANCE.fromEntityToDto(promotionById);
+        return null;
     }
 }
