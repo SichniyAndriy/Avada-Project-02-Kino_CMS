@@ -2,176 +2,165 @@
 <html lang="ua" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сторінка користувача</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сторінка користувача</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
-    <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
-    <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
-        th:href="@{/assets/vendor/aos/dist/aos.css}">
-    <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
-    <!-- Dark Css -->
-    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
-    <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
-        th:href="@{/assets/css/customizer.min.css}">
-    <!-- RTL Css -->
-    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+  <!-- Library / Plugin Css Build -->
+  <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+  <!-- Aos Animation Css -->
+  <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+    th:href="@{/assets/vendor/aos/dist/aos.css}">
+  <!-- Hope Ui Design System Css -->
+  <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+  <!-- Custom Css -->
+  <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+  <!-- Dark Css -->
+  <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+  <!-- Customizer Css -->
+  <link rel="stylesheet" href="../../static/assets/css/customizer.min.css" th:href="@{/assets/css/customizer.min.css}">
+  <!-- RTL Css -->
+  <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
-    <script th:inline="javascript">
-        sessionStorage.setItem("userId", /*[[${user.id}]]*/ null);
-        sessionStorage.setItem("registrationDate", /*[[${user.registrationDate}]]*/ null);
-        sessionStorage.setItem("addressId", /*[[${user.address.id}]]*/ null);
-        sessionStorage.setItem("zipCode", /*[[${user.address.zipCode}]]*/ null);
-    </script>
-    <aside th:replace="~{admin/index::sidebar}"></aside>
-    <main class="main-content">
-        <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
-        <div>
-            <section id="user_form__container" th:object="${user}">
-                <form id="user_form" action="/admin/users/save" method="post">
-                    <div class="container mt-5 text-dark">
-                        <div class="row row-cols-2 g-4">
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="first_name__input">Ім'я</label>
-                                <input class="form-control" type="text" name="firstName" id="first_name__input"
-                                    th:field="*{firstName}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <p class="w-25 text-end me-3">Мова</p>
-                                <div class="w-75 d-flex">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="language_ua__input">
-                                            Українська
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="language"
-                                            id="language_ua__input" value="UKRAINIAN" th:field="*{language}">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="language_en__input">
-                                            Англійська
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="language"
-                                            id="language_en__input" value="ENGLISH" th:field="*{language}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="last_name__input">Прізвище</label>
-                                <input class="form-control" type="text" name="lastName" id="last_name__input"
-                                    th:field="*{lastName}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <p class="w-25 text-end me-3">Cтать</p>
-                                <div class="w-75 d-flex">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="gender_male__input">
-                                            Чоловіча
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="gender"
-                                            id="gender_male__input" value="MALE" th:field="*{gender}">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="gender_female__input">
-                                            Жіноча
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="gender"
-                                            id="gender_female__input" value="FEMALE" th:field="*{gender}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="nick_name__input">Псевдоним</label>
-                                <input class="form-control" type="text" name="nickName" id="nick_name__input"
-                                    th:field="*{nickName}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="phone__input">Телефон</label>
-                                <input class="form-control" type="tel" name="phone" id="phone__input"
-                                    th:field="*{phone}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="email__input">Електрона пошта</label>
-                                <input class="form-control" type="email" name="email" id="email__input"
-                                    th:field="*{email}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="birth_date__input">Дата народження</label>
-                                <input class="form-control" type="date" name="birthDate" id="birth_date__input"
-                                    th:field="*{birthDate}">
-                            </div>
-                            <div class="col-6 d-flex">
+  <script th:inline="javascript">
+    sessionStorage.setItem("userId", /*[[${user.id}]]*/ null);
+    sessionStorage.setItem("registrationDate", /*[[${user.registrationDate}]]*/ null);
+    sessionStorage.setItem("addressId", /*[[${user.address.id}]]*/ null);
+    sessionStorage.setItem("zipCode", /*[[${user.address.zipCode}]]*/ null);
+  </script>
+  <aside th:replace="~{admin/index::sidebar}"></aside>
+  <main class="main-content">
+    <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
+    <div>
+      <section id="user_form__container" th:object="${user}">
+        <form id="user_form" action="/admin/users/save" method="post">
+          <div class="container mt-5 text-dark">
+            <div class="row row-cols-2 g-4">
+              <div class="col-6 d-flex">
+                <label class="form-label" for="first_name__input">Ім'я</label>
+                <input class="form-control" type="text" name="firstName" id="first_name__input" th:field="*{firstName}">
+              </div>
+              <div class="col-6 d-flex">
+                <p class="w-25 text-end me-3">Мова</p>
+                <div class="w-75 d-flex">
+                  <div class="form-check">
+                    <label class="form-check-label" for="language_ua__input">
+                      Українська
+                    </label>
+                    <input class="form-check-input" type="radio" name="language" id="language_ua__input"
+                      value="UKRAINIAN" th:field="*{language}">
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label" for="language_en__input">
+                      Англійська
+                    </label>
+                    <input class="form-check-input" type="radio" name="language" id="language_en__input" value="ENGLISH"
+                      th:field="*{language}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="last_name__input">Прізвище</label>
+                <input class="form-control" type="text" name="lastName" id="last_name__input" th:field="*{lastName}">
+              </div>
+              <div class="col-6 d-flex">
+                <p class="w-25 text-end me-3">Cтать</p>
+                <div class="w-75 d-flex">
+                  <div class="form-check">
+                    <label class="form-check-label" for="gender_male__input">
+                      Чоловіча
+                    </label>
+                    <input class="form-check-input" type="radio" name="gender" id="gender_male__input" value="MALE"
+                      th:field="*{gender}">
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label" for="gender_female__input">
+                      Жіноча
+                    </label>
+                    <input class="form-check-input" type="radio" name="gender" id="gender_female__input" value="FEMALE"
+                      th:field="*{gender}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="nick_name__input">Псевдоним</label>
+                <input class="form-control" type="text" name="nickName" id="nick_name__input" th:field="*{nickName}">
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="phone__input">Телефон</label>
+                <input class="form-control" type="tel" name="phone" id="phone__input" th:field="*{phone}">
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="email__input">Електрона пошта</label>
+                <input class="form-control" type="email" name="email" id="email__input" th:field="*{email}">
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="birth_date__input">Дата народження</label>
+                <input class="form-control" type="date" name="birthDate" id="birth_date__input" th:field="*{birthDate}">
+              </div>
+              <div class="col-6 d-flex">
 
-                                <label class="form-label" for="address__input">Адреса</label>
-                                <input class="form-control" type="text" name="address" id="address__input"
-                                    th:field="*{address}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="password__input">Пароль</label>
-                                <input class="form-control" type="password" name="passHash" id="password__input"
-                                    th:field="*{passHash}">
-                            </div>
-                            <div class="col-6 d-flex">
-                                <label class="form-label" for="card_number__input">Номер картки</label>
-                                <input class="form-control" type="text" name="cardNumber" id="card_number__input"
-                                    th:field="*{cardNumber}">
-                            </div>
-                            <div class="col-8 mt-5 mx-auto">
-                                <div class="vstack gap-3">
-                                    <input type="submit" class="btn btn-success w-25 mx-auto" value="Зберегти">
-                                    <button class="btn btn-outline-danger w-25 mx-auto" type="button"
-                                        th:onclick="goToUsers()">
-                                        Скасувати
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </div>
+                <label class="form-label" for="address__input">Адреса</label>
+                <input class="form-control" type="text" name="address" id="address__input" th:field="*{address}">
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="password__input">Пароль</label>
+                <input class="form-control" type="password" name="passHash" id="password__input" th:field="*{passHash}">
+              </div>
+              <div class="col-6 d-flex">
+                <label class="form-label" for="card_number__input">Номер картки</label>
+                <input class="form-control" type="text" name="cardNumber" id="card_number__input"
+                  th:field="*{cardNumber}">
+              </div>
+              <div class="col-8 mt-5 mx-auto">
+                <div class="vstack gap-3">
+                  <input type="submit" class="btn btn-success w-25 mx-auto" value="Зберегти">
+                  <button class="btn btn-outline-danger w-25 mx-auto" type="button" th:onclick="goToUsers()">
+                    Скасувати
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
 
-        <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
-    </main>
+    <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
+  </main>
 
-    <!-- Library Bundle Script -->
-    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
-    <!-- External Library Bundle Script -->
-    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
-    <!-- Widgetchart Script -->
-    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
-    <!-- Mapchart Script -->
-    <script src="../../static/assets/js/charts/vectore-chart.js"
-        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
-    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
-    <!-- fslightbox Script -->
-    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
-    <!-- Settings Script -->
-    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
-    <!-- Slider-tab Script -->
-    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
-    <!-- Form Wizard Script -->
-    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
-    <!-- AOS Animation Plugin-->
-    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
-    <!-- App Script -->
-    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- User Page Scripts -->
-    <script src="../../static/js/admin/user-page-scripts.js" th:src="@{/js/admin/user-page-scripts.js}" defer></script>
+  <!-- Library Bundle Script -->
+  <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+  <!-- External Library Bundle Script -->
+  <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+  <!-- Widgetchart Script -->
+  <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+  <!-- Mapchart Script -->
+  <script src="../../static/assets/js/charts/vectore-chart.js" th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+  <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+  <!-- fslightbox Script -->
+  <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+  <!-- Settings Script -->
+  <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+  <!-- Slider-tab Script -->
+  <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+  <!-- Form Wizard Script -->
+  <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+  <!-- AOS Animation Plugin-->
+  <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+  <!-- App Script -->
+  <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- User Page Scripts -->
+  <script src="../../static/js/admin/user-page-scripts.js" th:src="@{/js/admin/user-page-scripts.js}" defer></script>
 
 </body>
 

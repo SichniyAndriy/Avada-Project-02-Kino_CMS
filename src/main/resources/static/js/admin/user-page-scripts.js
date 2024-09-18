@@ -1,6 +1,6 @@
 const USERS_PATH = "/admin/users";
 
-$( () => {
+$(() => {
     $("#header__title").text("Сторінка користувача");
     $("#sidebar-menu .nav-link.active").removeClass("active");
     $("#users__link").addClass("active");
@@ -18,7 +18,7 @@ $("form").on("submit", (event) => {
     event.preventDefault();
 
     const gender = $("#gender_male__input").attr("checked") ? "MALE" : "FEMALE";
-    const language = $("#language_ua__input").attr("checked") ? "UKRAINIAN": "ENGLISH";
+    const language = $("#language_ua__input").attr("checked") ? "UKRAINIAN" : "ENGLISH";
     const firstName = $("#first_name__input").val();
     const lastName = $("#last_name__input").val();
     const nickName = $("#nick_name__input").val();
@@ -29,7 +29,7 @@ $("form").on("submit", (event) => {
     const cardNumber = $("#card_number__input").val();
     const addressInput = $("#address__input").val();
     const arr = addressInput.split(',');
-    arr.forEach( (item, i) => arr[i] = item.trim() );
+    arr.forEach((item, i) => arr[i] = item.trim());
 
     const user = {
         id: sessionStorage.getItem("userId"),
@@ -39,25 +39,25 @@ $("form").on("submit", (event) => {
         phone,
         email,
         birthDate,
-        registrationDate : sessionStorage.getItem("registrationDate"),
+        registrationDate: sessionStorage.getItem("registrationDate"),
         password,
         cardNumber,
         gender,
         language,
         address: {
-                id: sessionStorage.getItem("addressId"),
-                city: arr[0] || null,
-                zipCode: sessionStorage.getItem("zipCode"),
-                street: arr[1] || null,
-                houseNumber: arr[2] || null,
-                flatNumber: arr[4] || null
-            }
+            id: sessionStorage.getItem("addressId"),
+            city: arr[0] || null,
+            zipCode: sessionStorage.getItem("zipCode"),
+            street: arr[1] || null,
+            houseNumber: arr[2] || null,
+            flatNumber: arr[4] || null
         }
+    }
 
     fetch("/admin/users/save", {
         method: "POST",
         headers: {
-            "Content-Type" : "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(user)
     }).then(response => {
