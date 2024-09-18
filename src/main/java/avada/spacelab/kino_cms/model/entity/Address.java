@@ -23,10 +23,13 @@ public class Address {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
-    @Column(name = "city")
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "street")
+    @Column(name = "zip_code", nullable = false)
+    private String zipCode;
+
+    @Column(name = "street", nullable = false)
     private String street;
 
     @Column(name = "house_number")

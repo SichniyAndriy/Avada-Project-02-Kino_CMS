@@ -37,11 +37,11 @@ public class User {
     @Column(name = "second_name", nullable = false)
     private String lastName;
 
-    @Column(name = "login", unique = true, nullable = false)
-    private String login;
+    @Column(name = "nick_name", unique = true, nullable = false)
+    private String nickName;
 
-    @Column(name = "phone_number",nullable = false)
-    private String phoneNumber;
+    @Column(name = "phone",nullable = false)
+    private String phone;
 
     @Column(name="email", nullable = false)
     private String email;
@@ -53,14 +53,18 @@ public class User {
     @Column(name = "pass_hash")
     private String passHash;
 
-    @Column(name = "payment_card_number", nullable = false)
-    private String paymentCardNumber;
+    @Column(name = "card_number", nullable = false)
+    private String cardNumber;
 
     @Enumerated(EnumType.STRING)
     private Language language;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "registration_date")
+    private LocalDate registrationDate;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birth_date")

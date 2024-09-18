@@ -4,6 +4,7 @@ import avada.spacelab.kino_cms.model.entity.User.Gender;
 import avada.spacelab.kino_cms.model.entity.User.Language;
 import java.io.Serializable;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * DTO for {@link avada.spacelab.kino_cms.model.entity.User}
@@ -12,14 +13,17 @@ public record UserDto(
         Long id,
         String firstName,
         String lastName,
-        String login,
-        String phoneNumber,
+        String nickName,
+        String phone,
         String email,
         AddressDto address,
         String passHash,
-        String paymentCardNumber,
+        String cardNumber,
         Language language,
-        Gender sex,
+        Gender gender,
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        LocalDate registrationDate,
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         LocalDate birthDate
 ) implements Serializable {
 
@@ -31,6 +35,7 @@ public record UserDto(
                 null,
                 null,
                 null,
+                AddressDto.EMPTY(),
                 null,
                 null,
                 null,
