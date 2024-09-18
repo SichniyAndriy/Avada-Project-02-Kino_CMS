@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ua" dir="ltr">
+<html lang="ua" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+    <title>Admin Dashboard</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
@@ -89,7 +89,7 @@
                 <!-- Sidebar Menu Start -->
                 <ul class="navbar-nav iq-main-menu text-dark" id="sidebar-menu">
                     <li class="nav-item">
-                        <a class="nav-link active"  href="#" aria-current="page" th:href="@{/admin/index}">
+                        <a class="nav-link" id="dashboard__link" href="#" aria-current="page" th:href="@{/admin/index}">
                             <i class="icon">
                                 <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +210,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="sidebar-special" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link " href="/admin/main">
+                                <a class="nav-link" href="/admin/main">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                             viewBox="0 0 24 24" fill="currentColor">
@@ -224,7 +224,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/admin/about-company">
+                                <a class="nav-link" href="/admin/about-company">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                             viewBox="0 0 24 24" fill="currentColor">
@@ -238,7 +238,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/admin/advertising">
+                                <a class="nav-link" href="/admin/advertising">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                             viewBox="0 0 24 24" fill="currentColor">
@@ -252,7 +252,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/admin/contacts">
+                                <a class="nav-link" href="/admin/contacts">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                             viewBox="0 0 24 24" fill="currentColor">
@@ -268,7 +268,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/admin/users">
+                        <a class="nav-link" id="users__link" aria-current="page" href="/admin/users">
                             <i class="icon">
                                 <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -296,7 +296,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/admin/delivering">
+                        <a class="nav-link" id="delivering__link" aria-current="page" href="/admin/delivering">
                             <i class="icon">
                                 <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -646,7 +646,7 @@
         <!-- Header Section End -->
 
         <!-- Main Section Start -->
-        <div class="conatiner-fluid content-inner mt-n5 py-0">
+        <div class="container-fluid content-inner mt-n5 py-0">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div class="row row-cols-1">
@@ -1287,7 +1287,7 @@
         <!-- Main Section End -->
 
         <!-- Footer Section Start -->
-        <footer id="footer" class="footer" th:fragment="footer">
+        <footer id="footer" class="footer mt-5" th:fragment="footer">
             <div class="footer-body">
                 <ul class="left-panel list-inline mb-0 p-0">
                     <li class="list-inline-item"><a href="extra/privacy-policy.html">Privacy Policy</a>
@@ -1297,7 +1297,7 @@
                 </ul>
                 <div class="right-panel">
                     ©
-                    <script>document.write(new Date().getFullYear())</script> Hope UI, Made with
+                    <script>document.write(new Date().getFullYear().toString())</script> Hope UI, Made with
                     <span class="">
                         <svg class="icon-15" width="15" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -1334,6 +1334,11 @@
     <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
     <!-- App Script -->
     <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+    <!-- Dashboard scripts-->
+    <script th:inline="javascript">
+        $("#sidebar-menu .nav-link.active").removeClass("active");
+        $("#dashboard__link").addClass("active");
+    </script>
 </body>
 
 </html>
