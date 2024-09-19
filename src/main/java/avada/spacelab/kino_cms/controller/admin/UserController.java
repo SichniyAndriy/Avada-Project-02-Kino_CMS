@@ -1,18 +1,20 @@
 package avada.spacelab.kino_cms.controller.admin;
 
+import avada.spacelab.kino_cms.controller.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.UserDto;
 import avada.spacelab.kino_cms.service.UserService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("admin/users")
@@ -25,9 +27,19 @@ public class UserController {
     }
 
     @GetMapping(path = {"", "/"})
-    public String getUsers(Model model) {
-        List<UserDto> users = userService.getAllUsers();
-        model.addAttribute("users", users);
+    public String getUserPage(
+            @RequestParam(required = false) Integer number,
+            @RequestParam(required = false) Integer size,
+            Model model
+    ) {
+        if (number == null) {
+            number = 0;
+        }
+        if (size == null) {
+            size = 10;
+        }
+        PagedResponse<UserDto> page = userService.getUserDtoPage(number, size);
+        model.addAttribute("page", page);
         return "admin/_7_0_users";
     }
 
@@ -40,12 +52,12 @@ public class UserController {
         return "admin/_7_1_user_page";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(
             @PathVariable long id
     ) {
         userService.deleteUser(id);
-        return "redirect:/admin/users";
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PostMapping(path ={"/save", "/save/"})

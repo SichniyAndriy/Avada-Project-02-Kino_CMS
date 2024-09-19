@@ -11,16 +11,19 @@
     <!-- Library / Plugin Css Build -->
     <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css" th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
     <!-- Hope Ui Design System Css -->
     <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
         th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0" th:href="@{/assets/css/custom.min.css?v=4.0.0}">
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
+        th:href="@{/assets/css/custom.min.css?v=4.0.0}">
     <!-- Dark Css -->
     <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css" th:href="@{/assets/css/customizer.min.css}">
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
     <!-- RTL Css -->
     <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
     <!-- Icons -->
@@ -33,14 +36,28 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div>
             <section id="users">
-                <div class="container-fluid">
-                    <section class="text-end py-5">
-                        <button type="button" class="btn btn-outline-primary pe-4" th:onclick="showUser()">
-                            Додати користувача
-                        </button>
-                    </section>
-                    <div class="container-fluid mb-5">
-                        <table id="user__table" class="table table-sm table-dark table-hover text-center table-striped caption-top">
+                <div>
+                    <script th:inline="javascript">
+                        let pageNumber = /*[[${page.pageNumber()}]]*/ 0;
+                        let pageSize = /*[[${page.pageSize()}]]*/ 10;
+                    </script>
+                    <div class="d-flex align-items-baseline py-4 px-2 text-dark">
+                        <p>Кількість елементів на сторінці</p>
+                        <select name="page__size" id="page__size" class="form-select ms-2" style="width: 96px;"
+                            th:with="size=${page.pageSize()}" th:value="*{size}">
+                            <option value="10" th:selected="*{size} == 10">10</option>
+                            <option value="20" th:selected="*{size} == 20">20</option>
+                            <option value="50" th:selected="*{size} == 50">50</option>
+                        </select>
+                        <div class="ms-auto">
+                            <button type="button" class="btn btn-outline-primary pe-4" th:onclick="showUser()">
+                                Додати користувача
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container-fluid mb-5 table-responsive">
+                        <table id="user__table"
+                            class="table table-sm table-dark table-hover text-center table-striped caption-top">
                             <thead>
                                 <tr scope="row" class="fs-6">
                                     <th class="px-2" scope="col">Id</th>
@@ -54,10 +71,11 @@
                                     <th class="ps-2" scope="col" style="width: 10%;">Операції</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr th:each="user : ${users}">
-                                    <td th:text="${user.id}" >111</td>
-                                    <td th:text="${#temporals.format(user.registrationDate, 'dd.MM.yyyy')}">21.12.2112</td>
+                            <tbody th:with="users=${page.content}">
+                                <tr th:each="user : *{users}">
+                                    <td th:text="${user.id}">111</td>
+                                    <td th:text="${#temporals.format(user.registrationDate, 'dd.MM.yyyy')}">21.12.2112
+                                    </td>
                                     <td th:text="${#temporals.format(user.birthDate, 'dd.MM.yyyy')}">21.12.2112</td>
                                     <td th:text="${user.email}">aaa@bbb.com</td>
                                     <td th:text="${user.phone}">aaa@bbb.com</td>
@@ -65,16 +83,41 @@
                                     <td th:text="${user.nickName}">aaasss bbb</td>
                                     <td th:text="${user.address.city}">aaasss bbb</td>
                                     <td style="width: 10%;">
-                                        <button type="button" class="btn btn-success" th:onclick="showUser([[${user.id}]])">
+                                        <button type="button" class="btn btn-success"
+                                            th:onclick="showUser([[${user.id}]])">
                                             <i class="bi bi-pen-fill"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger" th:onclick="deleteUser([[${user.id}]])">
+                                        <button type="button" class="btn btn-danger"
+                                            th:onclick="deleteUser([[${user.id}]])">
                                             <i class="bi bi-trash3-fill"></i>
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <nav aria-label="...">
+                            <ul class="pagination pagination-lg justify-content-center">
+                                <li class="page-item" th:if="${page.hasPrevious()}" 
+                                    th:onclick="goToUsers([[${page.pageNumber()} - 1]], [[${page.pageSize()}]])">
+                                    <a class="page-link" href="#"> Previous </a>
+                                </li>
+                                <li class="page-item" th:each="i : ${#numbers.sequence(0, page.pageAmount() - 1)}"
+                                    th:with="flag= ${i} == ${page.pageNumber()}"
+                                    th:switch="*{flag}" th:classappend="*{flag} ? 'active'">
+                                    <span class="page-link" th:case="true">
+                                        [[${i} + 1]]
+                                    </span>
+                                    <a class="page-link" href="#" th:case="false" th:onclick="goToUsers([[${i}]], [[${page.pageSize()}]])">
+                                        [[${i} + 1]]
+                                    </a>
+                                </li>
+                                <li class="page-item" th:if="${page.hasNext()}" 
+                                    th:onclick="goToUsers([[${page.pageNumber()} + 1]], [[${page.pageSize()}]])">
+                                    <a class="page-link" href="#"> Next </a>
+                                </li>
+                            </ul>
+                        </nav>
+
                     </div>
                 </div>
             </section>
@@ -90,7 +133,8 @@
     <!-- Widgetchart Script -->
     <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
     <!-- Mapchart Script -->
-    <script src="../../static/assets/js/charts/vectore-chart.js" th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
     <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
     <!-- fslightbox Script -->
     <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
