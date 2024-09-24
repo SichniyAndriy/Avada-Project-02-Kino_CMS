@@ -31,99 +31,98 @@
 </head>
 
 <body>
+
     <aside th:replace="~{admin/index::sidebar}"></aside>
+
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
-        <div>
-            <section id="users">
-                <div>
-                    <script th:inline="javascript">
-                        let pageNumber = /*[[${page.pageNumber()}]]*/ 0;
-                        let pageSize = /*[[${page.pageSize()}]]*/ 10;
-                    </script>
-                    <div class="d-flex align-items-baseline py-4 px-2 text-dark">
-                        <p>Кількість елементів на сторінці</p>
-                        <select name="page__size" id="page__size" class="form-select ms-2" style="width: 96px;"
-                            th:with="size=${page.pageSize()}" th:value="*{size}">
-                            <option value="10" th:selected="*{size} == 10">10</option>
-                            <option value="20" th:selected="*{size} == 20">20</option>
-                            <option value="50" th:selected="*{size} == 50">50</option>
-                        </select>
-                        <div class="ms-auto">
-                            <button type="button" class="btn btn-outline-primary pe-4" th:onclick="showUser()">
-                                Додати користувача
-                            </button>
-                        </div>
-                    </div>
-                    <div class="container-fluid mb-5 table-responsive">
-                        <table id="user__table"
-                            class="table table-sm table-dark table-hover text-center table-striped caption-top">
-                            <thead>
-                                <tr scope="row" class="fs-6">
-                                    <th class="px-2" scope="col">Id</th>
-                                    <th class="ps-2" scope="col">Дата реєстрації</th>
-                                    <th class="ps-2" scope="col">Дата народження</th>
-                                    <th class="ps-2" scope="col">Email</th>
-                                    <th class="ps-2" scope="col">Телефон</th>
-                                    <th class="ps-2" scope="col">ПІБ</th>
-                                    <th class="ps-2" scope="col">Псевдонім</th>
-                                    <th class="ps-2" scope="col">Місто</th>
-                                    <th class="ps-2" scope="col" style="width: 10%;">Операції</th>
-                                </tr>
-                            </thead>
-                            <tbody th:with="users=${page.content}">
-                                <tr th:each="user : *{users}">
-                                    <td th:text="${user.id}">111</td>
-                                    <td th:text="${#temporals.format(user.registrationDate, 'dd.MM.yyyy')}">21.12.2112
-                                    </td>
-                                    <td th:text="${#temporals.format(user.birthDate, 'dd.MM.yyyy')}">21.12.2112</td>
-                                    <td th:text="${user.email}">aaa@bbb.com</td>
-                                    <td th:text="${user.phone}">aaa@bbb.com</td>
-                                    <td th:text="|${user.firstName} ${user.lastName}|">aaasss bbb</td>
-                                    <td th:text="${user.nickName}">aaasss bbb</td>
-                                    <td th:text="${user.address.city}">aaasss bbb</td>
-                                    <td style="width: 10%;">
-                                        <button type="button" class="btn btn-success"
-                                            th:onclick="showUser([[${user.id}]])">
-                                            <i class="bi bi-pen-fill"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger"
-                                            th:onclick="deleteUser([[${user.id}]])">
-                                            <i class="bi bi-trash3-fill"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <nav aria-label="...">
-                            <ul class="pagination pagination-lg justify-content-center">
-                                <li class="page-item" th:if="${page.hasPrevious()}" 
-                                    th:onclick="goToUsers([[${page.pageNumber()} - 1]], [[${page.pageSize()}]])">
-                                    <a class="page-link" href="#"> Previous </a>
-                                </li>
-                                <li class="page-item" th:each="i : ${#numbers.sequence(0, page.pageAmount() - 1)}"
-                                    th:with="flag= ${i} == ${page.pageNumber()}"
-                                    th:switch="*{flag}" th:classappend="*{flag} ? 'active'">
-                                    <span class="page-link" th:case="true">
-                                        [[${i} + 1]]
-                                    </span>
-                                    <a class="page-link" href="#" th:case="false" th:onclick="goToUsers([[${i}]], [[${page.pageSize()}]])">
-                                        [[${i} + 1]]
-                                    </a>
-                                </li>
-                                <li class="page-item" th:if="${page.hasNext()}" 
-                                    th:onclick="goToUsers([[${page.pageNumber()} + 1]], [[${page.pageSize()}]])">
-                                    <a class="page-link" href="#"> Next </a>
-                                </li>
-                            </ul>
-                        </nav>
 
-                    </div>
+        <script th:inline="javascript">
+            let pageNumber = /*[[${page.pageNumber()}]]*/ 0;
+            let pageSize = /*[[${page.pageSize()}]]*/ 10;
+        </script>
+
+        <section id="users" class="p-4">
+            <div class="d-flex align-items-baseline py-4 text-dark">
+                <p>Кількість елементів на сторінці</p>
+                <select name="page__size" id="page__size" class="form-select ms-2" style="width: 96px;"
+                    th:with="size=${page.pageSize()}" th:value="*{size}">
+                    <option value="10" th:selected="*{size} == 10">10</option>
+                    <option value="20" th:selected="*{size} == 20">20</option>
+                    <option value="50" th:selected="*{size} == 50">50</option>
+                </select>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-outline-primary" th:onclick="showUser()">
+                        Додати користувача
+                    </button>
                 </div>
-            </section>
-        </div>
+            </div>
+            <div class="table-responsive">
+                <table id="users__table" class="table table-sm table-hover">
+                    <thead class="table-primary">
+                        <tr scope="row">
+                            <th scope="col">Id</th>
+                            <th scope="col">Дата реєстрації</th>
+                            <th scope="col">Дата народження</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Телефон</th>
+                            <th scope="col">ПІБ</th>
+                            <th scope="col">Псевдонім</th>
+                            <th scope="col">Місто</th>
+                            <th scope="col" style="width: 10%;">Операції</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider" th:with="users=${page.content}">
+                        <tr th:each="user : *{users}">
+                            <td th:text="${user.id}">111</td>
+                            <td th:text="${#temporals.format(user.registrationDate, 'dd.MM.yyyy')}">21.12.2112
+                            </td>
+                            <td th:text="${#temporals.format(user.birthDate, 'dd.MM.yyyy')}">21.12.2112</td>
+                            <td th:text="${user.email}">aaa@bbb.com</td>
+                            <td th:text="${user.phone}">aaa@bbb.com</td>
+                            <td th:text="|${user.firstName} ${user.lastName}|">aaasss bbb</td>
+                            <td th:text="${user.nickName}">aaasss bbb</td>
+                            <td th:text="${user.address.city}">aaasss bbb</td>
+                            <td style="width: 10%;">
+                                <button type="button" class="btn btn-success" th:onclick="showUser([[${user.id}]])">
+                                    <i class="bi bi-pen-fill"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger" th:onclick="deleteUser([[${user.id}]])">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="..." th:object="${page}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:if="*{hasPrevious}"
+                            th:onclick="goToUsers([[*{pageNumber} - 1]], [[*{pageSize}]])">
+                            <a class="page-link" href="#"> Previous </a>
+                        </li>
+                        <li class="page-item" th:each="i : *{#numbers.sequence(0, pageAmount - 1)}"
+                            th:with="flag= ${i} == *{pageNumber}" th:switch="${flag}"
+                            th:classappend="${flag} ? 'active'">
+                            <span class="page-link" th:case="true">
+                                [[${i} + 1]]
+                            </span>
+                            <a class="page-link" href="#" th:case="false"
+                                th:onclick="goToUsers([[${i}]], [[*{pageSize}]])">
+                                [[${i} + 1]]
+                            </a>
+                        </li>
+                        <li class="page-item" th:if="*{hasNext}"
+                            th:onclick="goToUsers([[*{pageNumber} + 1]], [[*{pageSize}]])">
+                            <a class="page-link" href="#"> Next </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </section>
 
         <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
+
     </main>
 
     <!-- Library Bundle Script -->
