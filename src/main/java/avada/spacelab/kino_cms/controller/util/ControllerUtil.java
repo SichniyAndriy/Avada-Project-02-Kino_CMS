@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ControllerUtil {
@@ -18,7 +19,7 @@ public class ControllerUtil {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        for (File fileEntry : dir.listFiles()) {
+        for (File fileEntry : Objects.requireNonNull(dir.listFiles())) {
             if (fileEntry.getName().contains(fileName)) {
                 fileEntry.delete();
             }
@@ -41,7 +42,7 @@ public class ControllerUtil {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        for (File fileEntry : dir.listFiles()) {
+        for (File fileEntry : Objects.requireNonNull(dir.listFiles())) {
             if (fileEntry.getName().contains(fileName)) {
                 fileEntry.delete();
             }

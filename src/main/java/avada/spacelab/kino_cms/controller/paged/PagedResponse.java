@@ -14,7 +14,7 @@ public record PagedResponse<T>(
         boolean isLast
 ) {
     public static <T> PagedResponse<T> Of(
-            List<T> items,
+            List<T> content,
             int pageSize,
             int pageNumber,
             int pageAmount,
@@ -25,7 +25,7 @@ public record PagedResponse<T>(
             boolean isLast
     ) {
         return new PagedResponse<>(
-                items,
+                content,
                 pageSize,
                 pageNumber,
                 pageAmount,

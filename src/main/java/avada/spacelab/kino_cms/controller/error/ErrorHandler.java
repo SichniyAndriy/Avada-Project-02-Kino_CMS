@@ -1,4 +1,4 @@
-package avada.spacelab.kino_cms.controller;
+package avada.spacelab.kino_cms.controller.error;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
