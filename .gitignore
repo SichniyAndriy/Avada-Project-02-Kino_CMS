@@ -36,3 +36,6 @@ build/
 *.bkp
 *.ods*
 *.xlsx*
+src/main/resources/service_files/*
+src/main/resources/static/pictures/*
+src/main/resources/static/banners/*
