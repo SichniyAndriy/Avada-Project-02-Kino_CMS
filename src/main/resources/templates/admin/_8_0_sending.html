@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ua" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Користувачі</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
+        th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
+        th:href="@{/assets/css/custom.min.css?v=4.0.0}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <aside th:replace="~{admin/index::sidebar}"></aside>
+    <main class="main-content">
+        <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
+        <script th:inline="javascript">
+            const usersAmount = /*[[${usersAmount}]]*/ 0;
+        </script>
+        <div>
+            <section id="delivering">
+                <div id="sms__block" class="container">
+                    <h3 class="text-center">SMS</h3>
+                    <div class="d-flex gap-4 align-items-baseline mt-4 text-dark">
+                        <span class="fs-5 me-auto">Обрати користувачів</span>
+                        <div class="form-check">
+                            <label for="sms_to_all_users" class="form-check-label">Всі користувачі</label>
+                            <input type="radio" id="sms_to_all_users" class="form-check-input" checked
+                                name="sms_radio" value="sms_to_all_users">
+                        </div>
+                        <div class="form-check">
+                            <label for="sms_to_custom_users" class="form-check-label">Обрані користувачі</label>
+                            <input type="radio" id="sms_to_custom_users" class="form-check-input"
+                                name="sms_radio" value="sms_to_custom_users">
+                        </div>
+                        <div>
+                            <button id="pick_users_sms__btn" type="button" class="btn btn-soft-primary" disabled
+                                th:onclick="pickUsersForSmsSending()">
+                                Обрати користувачів
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="col d-flex flex-column">
+                            <div class="d-flex justify-content-between">
+                                <span>Текст SMS</span>
+                                <span>Символів: <span id="sms_symbols_counter">0</span></span>
+                            </div>
+                            <div class="form-floating">
+                                <textarea id="sms_text" class="form-control" placeholder="Enter text of SMS here..."
+                                    style="height: 200px" th:oninput="updateSymbolCounter()"></textarea>
+                                <label for="sms_text">Введіть текст</label>
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-column text-info">
+                            <p>Кількість SMS: <span id="sms_amount">0</span></p>
+                            <p>Розсилка виконана на <span id="sms_delivering_percent">0</span> %</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary" th:onclick="sendSms()">Почати розсилку</button>
+                    </div>
+                </div>
+                <div id="email__block" class="container">
+                    <h3 class="text-center">EMail</h3>
+                    <div class="d-flex gap-4 align-items-baseline mt-4 text-dark">
+                        <span class="fs-5 me-auto">Обрати користувачів</span>
+                        <div class="form-check">
+                            <label for="email_to_all_users" class="form-check-label">Всі користувачі</label>
+                            <input type="radio" id="email_to_all_users" class="form-check-input" checked
+                                name="email_radio" value="email_to_all_users">
+                        </div>
+                        <div class="form-check">
+                            <label for="email_to_custom_users" class="form-check-label">Обрані користувачі</label>
+                            <input type="radio" id="email_to_custom_users"class="form-check-input"
+                                name="email_radio" value="email_to_custom_users">
+                        </div>
+                        <div>
+                            <button id="pick_users_email__btn" type="button" class="btn btn-soft-primary" disabled
+                                th:onclick="pickUsersForEmailSending()">
+                                Обрати користувачів
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="col-6 pe-5 me-auto">
+                            <div class="d-flex flex-column gap-3 text-info">
+                                <div class="d-flex justify-content-between">
+                                    <p>Завантажити новий HTML-лист</p>
+                                    <button id="upload_html__btn" type="button"
+                                        class="btn btn-soft-primary" th:onclick="uploadHtmlFile()">
+                                        Завантажити
+                                    </button>
+                                    <input type="file" id="email_file__input" accept="text/html, text/plain" hidden>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p>Завантажно файл</p>
+                                    <p id="email_file_name"></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p>Використаний шаблон</p>
+                                    <p id="email_template_name"></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p>Кількість Email: <span id="email_amount">0</span></p>
+                                    <p>Розсилка виконана на <span id="email_delivering_percent">0</span> %</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="w-100 h-100 border border-1 border-dark rounded-3 p-3">
+                                <p class="fw-semibold">Список останніх використаних шаблонів</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" th:each="i : ${fileNames}">
+                                        <div class="form-check">
+                                            <input type="radio" name="template_list_item" id="template_title_list_item"
+                                                class="form-check-input" th:id="|template_title_list_item_${i}|"
+                                                th:onchange="writeFileName(this)">
+                                            <label for="template_title_list_item" class="form-check-label ms-3"
+                                                th:for="|template_title_list_item_${i}|">
+                                                Template file: <strong>[[${i}]]</strong>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary" th:onclick="sendEmail()">Почати розсилку</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
+    </main>
+
+    <!-- Library Bundle Script -->
+    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+    <!-- External Library Bundle Script -->
+    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+    <!-- Widgetchart Script -->
+    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+    <!-- Mapchart Script -->
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+    <!-- fslightbox Script -->
+    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+    <!-- Settings Script -->
+    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+    <!-- Slider-tab Script -->
+    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+    <!-- Form Wizard Script -->
+    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+    <!-- AOS Animation Plugin-->
+    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+    <!-- App Script -->
+    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Users Scripts -->
+    <script src="../../static/js/admin/sending-scripts.js" th:src="@{/js/admin/sending-scripts.js}"
+        defer></script>
+
+</body>
+
+</html>

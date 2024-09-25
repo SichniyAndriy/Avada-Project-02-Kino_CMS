@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ua" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Користувачі</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
+        th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
+        th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <aside th:replace="~{admin/index::sidebar}"></aside>
+    <main class="main-content">
+        <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
+
+        <section id="pick_users" class="p-4">
+
+            <div class="table-responsive">
+                <table id="users__table" class="table table-sm table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">Вибір</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Дата реєстрації</th>
+                            <th scope="col">Дата народження</th>
+                            <th scope="col">Emal</th>
+                            <th scope="col">Телефон</th>
+                            <th scope="col">Ім'я та прізвище</th>
+                            <th scope="col">Псевдонім</th>
+                            <th scope="col">Місто</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr th:each="user : ${page.content}">
+                            <td class="text-center">
+                                <input type="checkbox" name="check" id="check" class="form-check-input"
+                                    th:name="|check_${user.id}|" th:id="|check_${user.id}|"
+                                    th:onchange="toogleCheck(this)">
+                            </td>
+                            <td th:text="${user.id}">666</td>
+                            <td th:text="${user.registrationDate}">21/12/2112</td>
+                            <td th:text="${user.birthDate}">21/12/2112</td>
+                            <td th:text="${user.email}">aaa@bbb.com</td>
+                            <td th:text="${user.phone}">(090) 1234567</td>
+                            <td th:text="|${user.firstName} ${user.lastName}|">Lorem ipsum</td>
+                            <td th:text="${user.nickName}">Consectetur</td>
+                            <td th:text="${user.address.city}">Item [[${i}]]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav th:object="${page}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:if="*{hasPrevious}" th:onclick="pickUsers([[*{pageNumber} - 1]])">
+                        <a href="#" class="page-link">Prev</a>
+                    </li>
+                    <li class="page-item" th:each="i : *{#numbers.sequence(0, pageAmount - 1)}"
+                        th:with="flag = ${i} == *{pageNumber}" th:classappend="${flag} ? 'active'" th:switch="${flag}">
+                        <span class="page-link" th:case="true">
+                            [[${i} + 1]]
+                        </span>
+                        <a href="#" class="page-link" th:case="false" th:onclick="pickUsers([[${i}]])">
+                            [[${i} + 1]]
+                        </a>
+                    </li>
+                    <li class="page-item" th:if="*{hasNext}" th:onclick="pickUsers([[*{pageNumber} + 1]])">
+                        <a href="#" class="page-link">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-primary mb-4" th:onclick="goToSending()">Відправити</button>
+            </div>
+
+        </section>
+
+        <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
+    </main>
+
+    <!-- Library Bundle Script -->
+    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+    <!-- External Library Bundle Script -->
+    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+    <!-- Widgetchart Script -->
+    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+    <!-- Mapchart Script -->
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+    <!-- fslightbox Script -->
+    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+    <!-- Settings Script -->
+    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+    <!-- Slider-tab Script -->
+    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+    <!-- Form Wizard Script -->
+    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+    <!-- AOS Animation Plugin-->
+    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+    <!-- App Script -->
+    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Sending Scripts -->
+    <script src="../../static/js/admin/sending-scripts.js" th:src="@{/js/admin/sending-scripts.js}" defer></script>
+
+</body>
+
+</html>
