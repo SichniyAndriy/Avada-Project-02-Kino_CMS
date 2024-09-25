@@ -4,8 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -37,12 +37,12 @@ public class Schedule {
         @Column(name = "time", nullable = false, updatable = false)
         private LocalTime time;
 
-        @ManyToOne(optional = false, targetEntity = Movie.class)
-        @PrimaryKeyJoinColumn(name = "movie_id", referencedColumnName = "id")
+        @ManyToOne(targetEntity = Movie.class,optional = false)
+        @JoinColumn(name = "movie_id", referencedColumnName = "id")
         private Movie movie;
 
-        @ManyToOne(optional = false, targetEntity = Auditorium.class)
-        @PrimaryKeyJoinColumn(name = "auditorium_id", referencedColumnName = "id")
+        @ManyToOne(targetEntity = Auditorium.class, optional = false)
+        @JoinColumn(name = "auditorium_id", referencedColumnName = "id")
         private Auditorium auditorium;
 
         public ScheduleCompositeKey(LocalDate date, LocalTime time, Movie movie, Auditorium auditorium) {

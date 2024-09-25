@@ -25,10 +25,10 @@ public class AuditoriumPicture {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
-    @Column(name = "path", nullable = false, length = 512, unique = true)
+    @Column(name = "path",length = 512, nullable = false, unique = true)
     private String path;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Auditorium.class)
     @JoinColumn(name = "auditorium_id", referencedColumnName = "id", nullable = false)
     private Auditorium auditorium;
 }

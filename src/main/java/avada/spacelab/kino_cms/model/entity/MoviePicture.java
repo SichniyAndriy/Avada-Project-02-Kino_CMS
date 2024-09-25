@@ -5,8 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -25,10 +25,10 @@ public class MoviePicture {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
-    @Column(name = "path", nullable = false, length = 1024, unique = true)
+    @Column(name = "path", length = 512, nullable = false, unique = true)
     private String path;
 
     @ManyToOne(targetEntity = Movie.class)
-    @PrimaryKeyJoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
     private Movie movie;
 }

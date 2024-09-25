@@ -7,25 +7,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Override
+    @Override @NonNull
     List<User> findAll();
 
-    @Override
-    Page<User> findAll(Pageable pageable);
+    @Override @NonNull
+    Page<User> findAll(@NonNull Pageable pageable);
+
+    @Override @NonNull
+    Optional<User> findById(@NonNull Long id);
+
+    @Override @NonNull
+    User save(@NonNull User user);
 
     @Override
-    Optional<User> findById(Long id);
-
-    @Override
-    User save(User user);
-
-    @Override
-    void deleteById(Long id);
+    void deleteById(@NonNull Long id);
 
     @Query("SELECT u.phone FROM User u")
     List<String>findAllPhones();

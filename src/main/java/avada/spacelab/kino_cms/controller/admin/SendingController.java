@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,8 +41,8 @@ public class SendingController {
         model.addAttribute("usersAmount", usersAmount);
 
         ArrayList<String> fileNames =
-                Arrays.stream(new File(ControllerUtil.PATH_TO_SENT_EMAIL).listFiles())
-                .map(file -> file.getName())
+                Arrays.stream(Objects.requireNonNull(new File(ControllerUtil.PATH_TO_SENT_EMAIL).listFiles()))
+                .map(File::getName)
                 .collect(Collectors.toCollection(ArrayList::new));
         model.addAttribute("fileNames", fileNames);
         logger.info("go to sending page");
