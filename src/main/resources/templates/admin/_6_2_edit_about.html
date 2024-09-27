@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагування інформаціїї про компанію</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <aside th:replace="~{admin/index::sidebar}"></aside>
+    <main class="main-content">
+        <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
+        <section class="mb-5">
+            <div class="container-fluid text-end pe-5">
+                <form action="#">
+                    <div class="d-flex flex-column text-dark">
+                        <div class="form-check form-switch fs-3 align-self-end">
+                            <input id="promotion__status" class="form-check-input" type="checkbox" role="switch" checked>
+                            <label class="form-check-label" for="promotion__status">ON</label>
+                        </div>
+                        <div class="row mt-3 align-items-baseline">
+                            <span class="col-2">Назва</span>
+                            <div class="col-10">
+                                <input id="promotion__title" class="form-control" type="text" name="title">
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-baseline text-dark">
+                            <span class="col-2">Опис</span>
+                            <div class="col-10">
+                                <textarea id="promotion__content" class="form-control" name="content"
+                                    rows="8"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-baseline text-dark">
+                            <span class="col-2">Головна картинка</span>
+                            <div class="col-10 row">
+                                <div class="col-6 text-start">
+                                    <img class="text-bg-info" src="https://picsum.photos/id/174/480/270" alt=""
+                                        style="width: 320px; height: 180px;">
+                                </div>
+                                <div class="col-6 align-content-center">
+                                    <div class="d-grid gap-3">
+                                        <button class="btn btn-primary" type="button">Завантажити</button>
+                                        <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5 align-items-start">
+                            <span class="col-2">Галерея картинок</span>
+                            <div class="col-10">
+                                <div class="row row-cols-4 g-3">
+                                    <div th:each="i : ${#numbers.sequence(1, 6)}">
+                                        <img class="img-fluid img-thumbnail mb-2"
+                                            src="https://picsum.photos/id/839/400/225" alt=""
+                                            style="width: 400;height: 225;">
+                                        <input class="form-control" type="file" name="picture" id="film__input__picture"
+                                            accept="image/*">
+                                    </div>
+                                    <i class="bi bi-plus-circle-fill fs-1 text-dark text-center align-self-center"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-baseline">
+                            <span class="col-2">Посилання на відео</span>
+                            <div class="col-10">
+                                <input class="form-control" type="text" name="trailerUrl" id="trailer__url">
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-baseline">
+                            <p class="col-2 mt-3">Seo block</p>
+                            <div class="col-10">
+                                <div class="border border-1 border-dark rounded-3">
+                                    <div class="d-flex flex-column py-3">
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">URL</span>
+                                            <div class="col-9">
+                                                <input id="seo__url" class="form-control" type="text" name="url">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">Заголовок</span>
+                                            <div class="col-9">
+                                                <input id="seo__title" class="form-control" type="text" name="title">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">Ключові слова</span>
+                                            <div class="col-9">
+                                                <input id="seo__keywords" class="form-control" type="text"
+                                                    name="keywords">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-baseline">
+                                            <span class="col-2">Опис</span>
+                                            <div class="col-9">
+                                                <textarea id="seo__description" class="form-control" name="description"
+                                                    rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btn-success">Зберегти</button>
+                        <button type="reset" class="btn btn-outline-danger">Відміна</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="placeholder__footer" th:replace="~{admin/index::footer}"></div>
+    </main>
+
+    <!-- Library Bundle Script -->
+    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+    <!-- External Library Bundle Script -->
+    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+    <!-- Widgetchart Script -->
+    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+    <!-- Mapchart Script -->
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+    <!-- fslightbox Script -->
+    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+    <!-- Settings Script -->
+    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+    <!-- Slider-tab Script -->
+    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+    <!-- Form Wizard Script -->
+    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+    <!-- AOS Animation Plugin-->
+    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+    <!-- App Script -->
+    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Edit about scripts -->
+    <script src="../../static/js/admin/edit-about.js" th:src="@{/js/admin/edit-about.js}"></script>
+
+</body>
+
+</html>
