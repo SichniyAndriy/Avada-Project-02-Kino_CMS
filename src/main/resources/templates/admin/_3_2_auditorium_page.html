@@ -36,18 +36,21 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="container-fluid text-end mb-5">
             <form action="#" method="post" th:object="${auditorium}">
+                <input type="number" name="id" id="id" th:field="*{id}">
                 <div class="d-flex flex-column text-dark pe-5">
                     <div class="row mt-5 align-items-baseline">
-                        <span class="col-2">Назва кінотеатра</span>
+                        <span class="col-2">Номер зала</span>
                         <div class="col-10">
-                            <input class="form-control" type="text" name="title" id="auditorium__title">
+                            <input class="form-control" type="number" name="number" id="number"
+                                th:field="*{number}">
                         </div>
                     </div>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Опис</span>
                         <div class="col-10">
-                            <textarea class="form-control" name="description" id="auditorium__description"
-                                rows="8"></textarea>
+                            <textarea class="form-control" name="description" id="auditorium__description" rows="8"
+                                th:field="*{description}">
+                            </textarea>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-start text-dark">
@@ -84,7 +87,7 @@
                         <span class="col-2">Галерея картинок</span>
                         <div class="col-10">
                             <div class="row row-cols-4 g-3">
-                                <div th:each="i : ${#numbers.sequence(1, 6)}">
+                                <div th:each="i : ${#numbers.sequence(1, 5)}">
                                     <img class="img-fluid img-thumbnail mb-2" src="https://picsum.photos/id/839/400/225"
                                         alt="" style="width: 400;height: 225;">
                                     <input class="form-control" type="file" name="picture" id="film__input__picture"

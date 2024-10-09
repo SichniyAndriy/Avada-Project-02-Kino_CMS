@@ -2,14 +2,21 @@ package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.model.dto.AuditoriumDto;
 import avada.spacelab.kino_cms.model.dto.TheaterDto;
+import avada.spacelab.kino_cms.model.entity.Theater;
+import avada.spacelab.kino_cms.model.mapper.TheaterMapper;
 import avada.spacelab.kino_cms.service.AuditoriumService;
 import avada.spacelab.kino_cms.service.TheaterService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -38,9 +45,9 @@ public class TheaterController {
             @PathVariable long id,
             Model model
     ) {
-        TheaterDto theater = (id == 0) ?
+        TheaterDto theaterDto = (id == 0) ?
                 TheaterDto.EMPTY() : theaterService.findTheaterById(id);
-        model.addAttribute("theater", theater);
+        model.addAttribute("theaterDto", theaterDto);
         return "admin/_3_1_theater_page";
     }
 
@@ -53,5 +60,26 @@ public class TheaterController {
                 AuditoriumDto.EMPTY() : auditoriumService.findAuditoriumById(id);
         model.addAttribute("auditorium", auditoriumDto);
         return "admin/_3_2_auditorium_page";
+    }
+
+    @DeleteMapping("/delete/auditorium/{audId}")
+    public ResponseEntity<HttpStatus> deleteAuditorium(
+            @PathVariable long audId
+    ) {
+        auditoriumService.deleteAuditoriumById(audId);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
+    public String saveTheater(
+            @ModelAttribute TheaterDto theaterDto
+    ) {
+        Theater theater = TheaterMapper.INSTANCE.fromDtoToEntity(theaterDto);
+        if (theater.getId() == 0) {
+            theater.setId(null);
+        }
+
+        theaterService.save(theater);
+        return "redirect:/admin/theaters";
     }
 }

@@ -12,6 +12,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -33,13 +36,17 @@ public class Auditorium {
     @Column(name = "number", nullable = false)
     private Integer number;
 
-    @Column(name = "scheme_url", nullable = false)
-    private String schemeUrl;
-
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", length = 2048, nullable = false)
     private String description;
 
-    @Column(name = "main_banner_url", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
+
+    @Column(name = "scheme_url",length = 512)
+    private String schemeUrl;
+
+    @Column(name = "main_banner_url", length = 512)
     private String mainBannerUrl;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,

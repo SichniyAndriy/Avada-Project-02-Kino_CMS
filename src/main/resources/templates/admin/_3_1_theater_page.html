@@ -36,25 +36,26 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="container-fluid text-end mb-5">
             <form action="#" method="post" th:object="${theater}">
-                <div class="d-flex flex-column text-dark pe-5">
+                <div class="d-flex flex-column text-dark pe-5" th:object="${theaterDto}">
+                    <input type="number" name="id" id="id" th:field="*{id}" hidden>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Назва кінотеатра</span>
                         <div class="col-10">
-                            <input class="form-control" type="text" name="title" id="theater__title">
+                            <input class="form-control" type="text" name="title" id="title" th:field="*{title}">
                         </div>
                     </div>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Опис</span>
                         <div class="col-10">
-                            <textarea class="form-control" name="description" id="theater__description"
-                                rows="8"></textarea>
+                            <textarea class="form-control" name="description" id="description" rows="8"
+                                th:field="*{description}"></textarea>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Умови</span>
                         <div class="col-10">
-                            <textarea class="form-control" name="conditions" id="theater__conditions"
-                                rows="8"></textarea>
+                            <textarea class="form-control" name="conditions" id="conditions" rows="8"
+                                th:field="*{conditions}"></textarea>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-start text-dark">
@@ -91,7 +92,7 @@
                         <span class="col-2">Галерея картинок</span>
                         <div class="col-10">
                             <div class="row row-cols-4 g-3">
-                                <div th:each="i : ${#numbers.sequence(1, 6)}">
+                                <div th:each="i : ${#numbers.sequence(1, 5)}">
                                     <img class="img-fluid img-thumbnail mb-2" src="https://picsum.photos/id/839/400/225"
                                         alt="" style="width: 400;height: 225;">
                                     <input class="form-control" type="file" name="picture" id="film__input__picture"
@@ -104,30 +105,34 @@
                     <div class="row mt-5 align-items-start">
                         <span class="col-2">Список залів</span>
                         <div class="col-10">
-                            <table class="table table-hover table-bordered border-light table-dark text-light">
+                            <table class="table table-sm table-hover table-bordered border-light table-dark text-light">
                                 <thead class="text-center">
                                     <tr>
-                                        <th class="col w-auto">Назва</th>
-                                        <th class="col w-50">Дата створення</th>
-                                        <th class="col w-auto">Операції</th>
+                                        <th class="col w-50">Номер</th>
+                                        <th class="col w-25">Дата створення</th>
+                                        <th class="col w-25">Операції</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-start">
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
+                                <tbody class="text-center">
+                                    <tr th:each="auditorium : *{auditoriums}">
+                                        <td th:text="${auditorium.number}">Номер</td>
+                                        <td th:text="${auditorium.date}">Дата</td>
                                         <td style="width: 10%;">
-                                            <button type="button" class="btn btn-success"><i
-                                                    class="bi bi-pen-fill"></i></button>
-                                            <button type="button" class="btn btn-danger"><i
-                                                    class="bi bi-trash3-fill"></i></button>
+                                            <button type="button" class="btn btn-success" th:onclick="showAuditorium([[${auditorium.id}]])">
+                                                <i class="bi bi-pen-fill"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger" th:id="|delete__btn_${auditorium.id}|"
+                                                th:onclick="deleteAuditorium([[${auditorium.id}]])">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary" th:onclick="showAuditorium()">Додати новий
-                                    зал</button>
+                                <button type="button" class="btn btn-primary" th:onclick="showAuditorium()">
+                                    Додати новий зал
+                                </button>
                             </div>
                         </div>
                     </div>

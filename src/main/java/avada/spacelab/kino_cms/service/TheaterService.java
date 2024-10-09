@@ -1,6 +1,7 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.TheaterDto;
+import avada.spacelab.kino_cms.model.entity.Theater;
 import avada.spacelab.kino_cms.model.mapper.TheaterMapper;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import java.util.ArrayList;
@@ -27,5 +28,9 @@ public class TheaterService {
 
     public TheaterDto findTheaterById(long id) {
         return TheaterMapper.INSTANCE.fromEntityToDto(theaterRepository.findTheaterById(id));
+    }
+
+    public void save(Theater theater) {
+        theaterRepository.save(theater);
     }
 }

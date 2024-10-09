@@ -1,17 +1,23 @@
 package avada.spacelab.kino_cms;
 
 import avada.spacelab.kino_cms.model.entity.Address;
+import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.Promotion;
+import avada.spacelab.kino_cms.model.entity.Schedule;
+import avada.spacelab.kino_cms.model.entity.Schedule.ScheduleCompositeKey;
 import avada.spacelab.kino_cms.model.entity.Status;
+import avada.spacelab.kino_cms.model.entity.Theater;
 import avada.spacelab.kino_cms.model.entity.User;
 import avada.spacelab.kino_cms.model.entity.User.Gender;
 import avada.spacelab.kino_cms.model.entity.User.Language;
+import avada.spacelab.kino_cms.repository.AuditoriumRepository;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
+import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.repository.UserRepository;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -28,16 +34,24 @@ import org.springframework.stereotype.Component;
 public class AppUtil implements CommandLineRunner {
     private final Faker faker = new Faker();
     private final Faker localFaker = new Faker(Locale.getDefault());
+
+    private final TheaterRepository theaterRepository;
+    private final AuditoriumRepository auditoriumRepository;
     private final MovieRepository movieRepository;
     private final NewsRepository newsRepository;
     private final PromotionRepository promotionRepository;
     private final UserRepository userRepository;
 
     public AppUtil(
+            @Autowired TheaterRepository theaterRepository,
+            @Autowired AuditoriumRepository auditoriumRepository,
             @Autowired MovieRepository movieRepository,
             @Autowired NewsRepository newsRepository,
             @Autowired PromotionRepository promotionRepository,
-            UserRepository userRepository) {
+            @Autowired UserRepository userRepository
+    ) {
+        this.theaterRepository = theaterRepository;
+        this.auditoriumRepository = auditoriumRepository;
         this.movieRepository = movieRepository;
         this.newsRepository = newsRepository;
         this.promotionRepository = promotionRepository;
@@ -47,10 +61,39 @@ public class AppUtil implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         int n = 5;
+        initTheatres(n);
         initMovies(n * 5);
         initNews(n * 3);
         initPromotions(n * 3);
-        initUsers(n * 10);
+        initUsers(n * 15);
+        initSchedule(n, 20);
+    }
+
+    private void initTheatres(int n) {
+        List<Theater> theaters = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            Theater theater = new Theater();
+            theater.setTitle(faker.book().title());
+            theater.setDescription(faker.lorem().paragraph(faker.random().nextInt(3, 5)));
+            theater.setConditions(faker.lorem().paragraph(faker.random().nextInt(4, 8)));
+            int amount = faker.number().numberBetween(2, 8);
+            List<Auditorium> auditoriums = new ArrayList<>();
+            for (int j = 0; j < amount; ++j) {
+                Auditorium auditorium = new Auditorium();
+                auditorium.setDescription(
+                        faker.lorem().paragraph(faker.random().nextInt(3, 5))
+                );
+                auditorium.setNumber(j + 1);
+                auditorium.setDate(
+                        faker.date().past(2000, TimeUnit.DAYS).toLocalDateTime().toLocalDate()
+                );
+                auditorium.setTheater(theater);
+                auditoriums.add(auditorium);
+            }
+            theater.setAuditoriums(auditoriums);
+            theaters.add(theater);
+        }
+        theaterRepository.saveAllAndFlush(theaters);
     }
 
     private void initMovies(int n) {
@@ -82,7 +125,22 @@ public class AppUtil implements CommandLineRunner {
         movieRepository.saveAllAndFlush(movies);
     }
 
-    public void initNews(int n) {
+    private void initSchedule(int n, int m) {
+        List<Schedule> schedules = new ArrayList<>();
+        long len = movieRepository.countById();
+        for (int i = 0; i < n; ++i) {
+            Movie movie = movieRepository.findMovieById(faker.random().nextLong(1, len));
+            for (int j = 0; j < m; ++j) {
+                Schedule schedule = new Schedule();
+                LocalDate lowestDate = LocalDate.now().minusDays(faker.random().nextInt(5));
+                LocalDate upperDate = LocalDate.now().plusDays(faker.random().nextInt(5));
+
+                schedule.setKey(new ScheduleCompositeKey());
+            }
+        }
+    }
+
+    private void initNews(int n) {
         List<News> news = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             News oneNews = new News();
@@ -95,7 +153,7 @@ public class AppUtil implements CommandLineRunner {
         newsRepository.saveAllAndFlush(news);
     }
 
-    public void initPromotions(int n) {
+    private void initPromotions(int n) {
         List<Promotion> promotions = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Promotion promotion = new Promotion();
@@ -108,7 +166,7 @@ public class AppUtil implements CommandLineRunner {
         promotionRepository.saveAllAndFlush(promotions);
     }
 
-    public void initUsers(int n) {
+    private void initUsers(int n) {
         List<User> users = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             User user = new User();

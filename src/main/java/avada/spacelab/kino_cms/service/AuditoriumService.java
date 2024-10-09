@@ -24,4 +24,8 @@ public class AuditoriumService {
                 AuditoriumMapper.INSTANCE.fromEntityToDto(auditoriumRepository.findById(id).get()) :
                 AuditoriumDto.EMPTY();
     }
+
+    public void deleteAuditoriumById(long audId) {
+        auditoriumRepository.deleteById(audId);
+    }
 }

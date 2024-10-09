@@ -11,6 +11,7 @@ public record TheaterDto(
         Long id,
         String title,
         String description,
+        String conditions,
         String facilities,
         String logoUrl,
         String mainBannerUrl,
@@ -20,6 +21,7 @@ public record TheaterDto(
 
     public static TheaterDto EMPTY() {
         return new TheaterDto(
+                null,
                 null,
                 null,
                 null,

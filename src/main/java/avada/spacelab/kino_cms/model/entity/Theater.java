@@ -35,7 +35,7 @@ public class Theater {
     @Column(name = "description", length = 2048, nullable = false)
     private String description;
 
-    @Column(name = "conditions")
+    @Column(name = "conditions", length = 2048, nullable = false)
     private String conditions;
 
     @Column(name = "logo_url", length = 512)
