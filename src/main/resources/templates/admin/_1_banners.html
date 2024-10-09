@@ -34,25 +34,32 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="conatiner-fluid my-4">
             <h4 class="text-center py-2">На головній сторінці вгорі</h4>
-            <section id="main__top" class="col-11 border border-dark rounded-3 mx-auto">
+            <section id="main_top" class="col-11 border border-dark rounded-3 mx-auto">
                 <p class="ms-4 mt-4 text-dark">Відношення 16 х 9</p>
-                <div id="banners__cards" class="row row-cols-5 m-0 p-0 g-5 text-dark">
-                    <div class="card col py-4 mt-0" th:each="i : ${#numbers.sequence(1, 8)}" th:id="|main__banner__card_${i}|">
-                        <div class="mb-2 position-relative">
-                            <img class="img-fluid" src="https://picsum.photos/id/1020/1600/900" alt="photo">
-                            <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"></i>
+                <div id="banners_cards" class="row row-cols-5 m-0 p-0 g-5 text-dark">
+                    <div class="col card py-4 mt-0" 
+                        th:each="banner : ${banners}" 
+                        th:id="|banner_card_${bannerStat.count}|">
+                        <div id="img_block" class="mb-2 position-relative" th:id="|img_block_${bannerStat.count}">
+                            <img class="img-fluid" th:src="${banner.path}" alt="photo">
+                            <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle" 
+                                th:onclick="deleteCard(this)"></i>
                         </div>
-                        <input class="mb-2 form-control" type="file" name="|banner${i}|" id="main__banner__input"
-                            th:id="|main__banner__input_${i}|">
-                        <label for="main__banner__text" th:for="|main__banner__text_${i}|">Текст</label>
-                        <input id="main__banner__text" type="text" class="form-control" th:id="|main__banner__text_${i}|">
+                        <input type="file" accept="image/*" name="banner" id="banner__input" class="mb-2 form-control" 
+                            th:name="|banner_${bannerStat.count}|" th:id="|banner__input_${bannerStat.count}|">
+                        <label for="banner__text" th:for="|banner__text_${bannerStat.count}|">
+                            Текст
+                        </label>
+                        <input id="banner__text" type="text" class="form-control" 
+                            th:id="|banner__text_${bannerStat.count}|" th:value="${banner.text}">
                     </div>
-                    <div class="card col py-4 mt-0 justify-content-center">
+                    <div id="add_banner_card" class="card col py-4 mt-0 justify-content-center" 
+                        th:onclick="addBannerCard()">
                         <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                     </div>
                 </div>
                 <div class="col-2 mb-4 mx-auto">
-                    <button class="btn btn-success">Зберегти</button>
+                    <button class="btn btn-success" th:onclick="updateUpBanners()">Зберегти</button>
                 </div>
             </section>
 
@@ -60,37 +67,43 @@
             <section id="main__background" class="col-11 border border-dark rounded-1 mx-auto">
                 <div class="row m-0 p-0 pb-4 g-4">
                     <div class="col-12 col-sm-6">
-                        <img class="img-fluid" src="https://picsum.photos/id/684/2000/3000?blur=5" alt="">
+                        <img class="img-fluid" src="${background}" alt="">
                     </div>
+                    <input type="file" accept="image/*" name="background" id="background__input"
+                        th:onchange="showPicture(this)" hidden>
                     <div class="col-12 col-sm-6 text-center align-content-center">
                         <div class="d-grid gap-4">
-                            <button type="button" class="btn btn-primary">Вибрати</button>
-                            <button type="button" class="btn btn-success">Зберегти</button>
+                            <button type="button" class="btn btn-primary" th:onclick="showBackground()">Вибрати</button>
+                            <button type="button" class="btn btn-success" th:onclick="saveBackground()">Зберегти</button>
                         </div>
                     </div>
                 </div>
             </section>
 
             <h4 class="text-center py-2 mt-4">На головній сторінці Новини та Акції</h4>
-            <section id="main__news" class="col-11 border border-dark rounded-1 mx-auto">
+            <section id="main_promotions" class="col-11 border border-dark rounded-1 mx-auto">
                 <p class="ms-4 mt-4 text-dark">Відношення 16 х 9</p>
-                <div id="news__cards" class="row row-cols-5 m-0 p-0 g-5 text-dark">
-                    <div class="card col py-4 mt-0" th:each="i : ${#numbers.sequence(1, 4)}">
+                <div id="promotions_cards" class="row row-cols-5 m-0 p-0 g-5 text-dark">
+                    <div class="card col py-4 mt-0" 
+                        th:each="promotion : ${promotions}"
+                        th:id="|promotion_card_${promotionStat.count}|">
                         <div class="mb-2 position-relative">
-                            <img class="img-fluid" src="https://picsum.photos/id/1020/1600/900" alt="">
+                            <img class="img-fluid" th:src="${promotion.path}" alt="">
                             <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"></i>
                         </div>
-                        <input type="file" class="form-control mb-2" name="" id="news__picture__input" 
-                            th:id="|news__picture__input_${i}|">
-                        <label for="banner__news" th:for="|banner__news_${i}|">Текст</label>
-                        <input id="banner__news" type="text" class="form-control" th:id="|banner__news_${i}|">
+                        <input type="file" class="form-control mb-2" name="" id="promotion_picture__input" 
+                            th:id="|promotion_picture__input_${promotionStat.count}|">
+                        <label for="promotion" th:for="|promotion_${promotionStat.count}|">Текст</label>
+                        <input id="promotion" type="text" class="form-control" 
+                            th:id="|promotion_${promotionStat.count}|" th:value="${promotion.text}">
                     </div>
-                    <div class="card col py-4 mt-0 justify-content-center">
+                    <div id="add_promotion_card" class="card col py-4 mt-0 justify-content-center" 
+                        th:onclick="addPromotionCard()">
                         <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                     </div>
                 </div>
                 <div class="col-2 mb-4 mx-auto">
-                    <button class="btn btn-success">Зберегти</button>
+                    <button class="btn btn-success" th:onclick="updateBottomPromotions()">Зберегти</button>
                 </div>
             </section>
         </div>

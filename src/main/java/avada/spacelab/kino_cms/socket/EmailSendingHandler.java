@@ -49,6 +49,5 @@ public class EmailSendingHandler extends TextWebSocketHandler {
     public static class EmailRequest {
         public String fileName;
         public List<Long> ids;
-}
-
+    }
 }

@@ -5,7 +5,9 @@ $( () => {
     $("#sidebar-menu .nav-link.active").removeClass("active");
     $("#users__link").addClass("active");
     $("#page__size").on("change", (event) => {
+        // @ts-ignore
         pageSize = parseInt(event.target.value);
+        // @ts-ignore
         goToUsers(pageNumber, pageSize);
     });
 });
@@ -19,6 +21,7 @@ function deleteUser(id) {
         method: "DELETE"
     }).then(responce => {
         if(responce.ok) {
+            // @ts-ignore
             goToUsers(pageNumber, pageSize);
         } else {
             alert("Помилка видалення");
@@ -26,6 +29,7 @@ function deleteUser(id) {
     })
 }
 
+// @ts-ignore
 function goToUsers(number = pageNumber, size = pageSize) {
     location.href = `${USERS_PATH}?number=${number}&size=${size}`;
 }

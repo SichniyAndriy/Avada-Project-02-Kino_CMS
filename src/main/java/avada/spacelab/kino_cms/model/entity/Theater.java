@@ -38,10 +38,10 @@ public class Theater {
     @Column(name = "conditions")
     private String conditions;
 
-    @Column(name = "logo_url", nullable = false)
+    @Column(name = "logo_url", length = 512)
     private String logoUrl;
 
-    @Column(name= "main_banner_url", nullable = false)
+    @Column(name= "main_banner_url", length = 512)
     private String mainBannerUrl;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = TheaterPicture.class, mappedBy = "theater")

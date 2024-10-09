@@ -9,16 +9,18 @@ import java.util.Objects;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ControllerUtil {
-    public static final String PATH_TO_SENT_EMAIL = "src/main/resources/service_files/sent_emails";
+    private final static String SERVER_RES_PATH = "src/main/resources";
+    public final static String PATH_TO_SENT_EMAIL = SERVER_RES_PATH + "/" + "service_files/sent_emails";
+    public final static String PATH_TO_STATIC = SERVER_RES_PATH + "/" + "static";
 
     public static String savePictureOnServer(
-            String serverPath,
+            String path,
             String fileName,
             String timestamp,
-            String type,
+            String ext,
             MultipartFile file
     ) throws IOException {
-        File dir = new File(serverPath);
+        File dir = new File(PATH_TO_STATIC + "/" + path);
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -27,11 +29,8 @@ public class ControllerUtil {
                 fileEntry.delete();
             }
         }
-        String filePath = File.separator +
-                serverPath + File.separator +
-                fileName + File.separator +
-                timestamp + "." + type;
-        Files.write(Path.of(filePath), file.getBytes());
+        String filePath = "/" + path + "/" + fileName + "-" + timestamp + "." + ext;
+        Files.write(Path.of(PATH_TO_STATIC + filePath), file.getBytes());
         return filePath;
     }
 

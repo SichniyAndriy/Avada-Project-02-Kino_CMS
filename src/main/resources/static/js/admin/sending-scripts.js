@@ -151,6 +151,7 @@ function sendSms() {
     };
 
     sessionStorage.clear();
+    
 }
 /*------------------------- EMAIL SOCCKET -------------------------*/
 function sendEmail() {

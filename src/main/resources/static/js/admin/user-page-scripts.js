@@ -1,5 +1,4 @@
-const USERS_PATH = "/admin/users";
-
+// @ts-nocheck
 $(() => {
     $("#header__title").text("Сторінка користувача");
     $("#sidebar-menu .nav-link.active").removeClass("active");

@@ -1,3 +1,4 @@
+// @ts-nocheck
 $(() => {
     $("#header__title").text("Сторінка акції");
     $("#sidebar-menu .nav-link.active").removeClass("active");

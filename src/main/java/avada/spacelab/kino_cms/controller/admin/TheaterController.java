@@ -4,6 +4,7 @@ import avada.spacelab.kino_cms.model.dto.AuditoriumDto;
 import avada.spacelab.kino_cms.model.dto.TheaterDto;
 import avada.spacelab.kino_cms.service.AuditoriumService;
 import avada.spacelab.kino_cms.service.TheaterService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,8 @@ public class TheaterController {
 
     @GetMapping(path = {"", "/"})
     public String theaters(Model model) {
+        List<TheaterDto> theaters = theaterService.getAllTheaters();
+        model.addAttribute("theaters", theaters);
         return "admin/_3_0_theaters";
     }
 
@@ -35,9 +38,9 @@ public class TheaterController {
             @PathVariable long id,
             Model model
     ) {
-        TheaterDto theaterDto = (id == 0) ?
+        TheaterDto theater = (id == 0) ?
                 TheaterDto.EMPTY() : theaterService.findTheaterById(id);
-        model.addAttribute("theater", theaterDto);
+        model.addAttribute("theater", theater);
         return "admin/_3_1_theater_page";
     }
 
