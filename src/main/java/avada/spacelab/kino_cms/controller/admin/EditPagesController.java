@@ -5,8 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller@
-RequestMapping("admin/edit")
+@Controller
+@RequestMapping("admin/edit")
 public class EditPagesController {
     @GetMapping("/main")
     public String editMain(Model model) {
