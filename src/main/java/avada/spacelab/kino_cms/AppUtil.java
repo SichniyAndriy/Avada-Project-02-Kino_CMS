@@ -20,6 +20,7 @@ import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.repository.UserRepository;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +85,10 @@ public class AppUtil implements CommandLineRunner {
                         faker.lorem().paragraph(faker.random().nextInt(3, 5))
                 );
                 auditorium.setNumber(j + 1);
-                auditorium.setDate(
-                        faker.date().past(2000, TimeUnit.DAYS).toLocalDateTime().toLocalDate()
+                auditorium.setDate(faker.timeAndDate()
+                        .past(2000, TimeUnit.DAYS)
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
                 );
                 auditorium.setTheater(theater);
                 auditoriums.add(auditorium);
@@ -146,7 +149,10 @@ public class AppUtil implements CommandLineRunner {
             News oneNews = new News();
             oneNews.setTitle(faker.book().title());
             oneNews.setContent(localFaker.lorem().paragraph());
-            oneNews.setDate(faker.date().past(30, TimeUnit.DAYS).toLocalDateTime().toLocalDate());
+            oneNews.setDate(faker.timeAndDate()
+                    .past(2000, TimeUnit.DAYS)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
             oneNews.setStatus(faker.random().nextBoolean() ? Status.ON : Status.OFF);
             news.add(oneNews);
         }
@@ -159,7 +165,10 @@ public class AppUtil implements CommandLineRunner {
             Promotion promotion = new Promotion();
             promotion.setTitle(faker.book().title());
             promotion.setContent(localFaker.lorem().paragraph());
-            promotion.setDate(faker.date().past(30, TimeUnit.DAYS).toLocalDateTime().toLocalDate());
+            promotion.setDate(faker.timeAndDate()
+                    .past(2000, TimeUnit.DAYS)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
             promotion.setStatus(faker.random().nextBoolean() ? Status.ON : Status.OFF);
             promotions.add(promotion);
         }
@@ -178,8 +187,11 @@ public class AppUtil implements CommandLineRunner {
             user.setCardNumber(faker.finance().creditCard());
             user.setLanguage(Language.UKRAINIAN);
             user.setGender(faker.random().nextBoolean() ? Gender.MALE : Gender.FEMALE);
-            user.setRegistrationDate(localFaker.date().past(1800, TimeUnit.DAYS).toLocalDateTime().toLocalDate());
-            user.setBirthDate(localFaker.date().birthdayLocalDate(15, 55));
+            user.setRegistrationDate(localFaker.timeAndDate()
+                    .past(1800, TimeUnit.DAYS)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
+            user.setBirthDate(localFaker.timeAndDate().birthday(15, 65));
 
             Address address = new Address();
             address.setCity(localFaker.address().city());
