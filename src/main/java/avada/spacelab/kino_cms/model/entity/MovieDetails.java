@@ -18,4 +18,8 @@ public class MovieDetails {
     private String genres;
     private String budget;
     private String time;
+
+    public static MovieDetails EMPTY() {
+        return new MovieDetails();
+    }
 }

@@ -36,9 +36,9 @@
                 <button type="button" class="btn btn-outline-primary" th:onclick="showFilm(0)" >Створити новий запис</button>
             </section>
             <section id="current__films">
-                <h4 class="text-center mt-4">Список поточних фільмів</h4>
-                <div class="row p-5">
-                    <div class="col-3" th:each="currentMovie : ${currentMovies}" th:onclick="showFilm([[${currentMovie.id}]])">
+                <h4 class="text-center mt-4 p-5">Список поточних фільмів</h4>
+                <div class="row row-cols-5">
+                    <div class="col" th:each="currentMovie : ${currentMovies}" th:onclick="showFilm([[${currentMovie.id}]])">
                         <div class="card">
                             <img class="card-img-top" src="https://picsum.photos/id/684/600/400"
                                 alt="Current film picture">
@@ -51,8 +51,8 @@
             </section>
             <section id="future__films">
                 <h4 class="text-center mt-4">Список майбутніх фільмів</h4>
-                <div class="row p-5">
-                    <div class="col-3" th:each="futureMovie : ${futureMovies}" th:onclick="showFilm([[${futureMovie.id}]])">
+                <div class="row row-cols-5 p-5">
+                    <div class="col" th:each="futureMovie : ${futureMovies}" th:onclick="showFilm([[${futureMovie.id}]])">
                         <div class="card">
                             <img class="card-img-top" src="https://picsum.photos/id/684/600/400"
                                 alt="Future film picture">

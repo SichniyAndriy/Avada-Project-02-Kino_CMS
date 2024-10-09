@@ -1,6 +1,7 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.MovieDto;
+import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.mapper.MovieMapper;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import java.util.ArrayList;
@@ -27,5 +28,9 @@ public class MovieService {
 
     public MovieDto getMovieById(long id) {
         return MovieMapper.INSTANCE.fromEntityToDto(movieRepository.findMovieById(id));
+    }
+
+    public void save(Movie movie) {
+        movieRepository.save(movie);
     }
 }

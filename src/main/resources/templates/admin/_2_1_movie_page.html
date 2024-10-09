@@ -32,25 +32,36 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5" id="current__film">
-            <div class="container-fluid text-end pe-5">
-                <form action="#">
+            <div class="container-fluid text-end pe-5" th:object="${movieDto}">
+                <form action="/admin/movies/save/" method="post" enctype="multipart/form-data">
+                    <input type="number" name="id" id="id" th:field="*{id}" hidden>
                     <div class="d-flex flex-column text-dark">
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Оригінальна назва фільма</span>
                             <div class="col-10">
-                                <input class="form-control" type="text" name="nativeTitle" id="native__title">
+                                <input class="form-control" type="text" name="nativeTitle" id="native__title"
+                                    th:field="*{nativeTitle}">
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Назва фільма</span>
                             <div class="col-10">
-                                <input class="form-control" type="text" name="uaTitle" id="ua__title">
+                                <input class="form-control" type="text" name="uaTitle" id="ua__title"
+                                    th:field="*{uaTitle}">
+                            </div>
+                        </div>
+                        <div class="row mt-3 align-items-baseline">
+                            <span class="col-2">Вікові обмеження</span>
+                            <div class="col-10">
+                                <input class="form-control" type="number" name="ageCenz" id="ageCenz"
+                                    th:field="*{ageCenz}">
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
                             <span class="col-2">Опис</span>
                             <div class="col-10">
-                                <textarea class="form-control" name="description" id="description" rows="8"></textarea>
+                                <textarea class="form-control" name="description" id="description" rows="8"
+                                    th:field="*{description}"></textarea>
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
@@ -93,15 +104,18 @@
                             <span class="col-2">Tип фільма</span>
                             <div class="col-10 text-start">
                                 <div class="form-check form-check-inline">
-                                    <input type="checkbox" class="form-check-input" name="has2D" id="check__input2d">
+                                    <input type="checkbox" class="form-check-input" name="has2D" id="check__input2d"
+                                        th:field="*{has2D}">
                                     <label for="check__input2d" class="form-check-label">2D</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input type="checkbox" class="form-check-input" name="has3D" id="check__input3d"></input>
+                                    <input type="checkbox" class="form-check-input" name="has3D" id="check__input3d"
+                                        th:field="*{has3D}">
                                     <label for="check__input3d" class="form-check-label">3D</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input type="checkbox" class="form-check-input" name="hasImax" id="check__inputImax">
+                                    <input type="checkbox" class="form-check-input" name="hasImax" id="check__inputImax"
+                                        th:field="*{hasImax}">
                                     <label for="check__inputImax" class="form-check-label">IMAX</label>
                                 </div>
                             </div>
@@ -110,65 +124,75 @@
                             <p class="col-2 mt-3">Деталі фільма</p>
                             <div class="col-10">
                                 <div class="border border-1 border-dark rounded-3">
-                                    <div class="d-flex flex-column py-3">
+                                    <div class="d-flex flex-column py-3" th:object="${movieDto.details}">
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Рік</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="url" id="seo__url">
+                                                <input class="form-control" type="text" name="year" id="year"
+                                                    th:field="*{year}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Країна</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="tilte" id="seo__title">
+                                                <input class="form-control" type="text" name="country" id="country"
+                                                    th:field="*{country}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Актор</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="actors" id="actors"
+                                                th:field="*{actors}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Режисер</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="directors" id="directors"
+                                                th:field="*{directors}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Сценарист</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="screenwriters" id="screenwriters"
+                                                    th:field="*{screenwriters}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Композитор</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="compositors" id="compositors"
+                                                    th:field="*{compositors}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Продюсер</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="producers" id="producers"
+                                                    th:field="*{producers}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Жанр</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="genres" id="genres"
+                                                th:field="*{genres}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Бюджет</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="budget" id="budget"
+                                                    th:field="*{budget}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Тривалість</span>
                                             <div class="col-9">
-                                                <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                                <input class="form-control" type="text" name="time" id="seo__keywords"
+                                                th:field="*{time}">
                                             </div>
                                         </div>
                                     </div>

@@ -19,7 +19,7 @@ public record MovieDto(
         Boolean has3D,
         Boolean hasImax,
         Integer ageCenz,
-        MovieDetails movieDetails,
+        MovieDetails details,
         SeoBlockDto seoBlock,
         List<MoviePictureDto> images,
         List<ScheduleDto> schedules
@@ -37,7 +37,7 @@ public record MovieDto(
                 null,
                 null,
                 null,
-                null,
+                MovieDetails.EMPTY(),
                 SeoBlockDto.EMPTY(),
                 Collections.emptyList(),
                 Collections.emptyList()
