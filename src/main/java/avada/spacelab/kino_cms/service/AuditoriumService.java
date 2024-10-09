@@ -21,7 +21,7 @@ public class AuditoriumService {
     public AuditoriumDto findAuditoriumById(long id) {
         Optional<Auditorium> auditorium = auditoriumRepository.findById(id);
         return  auditorium.isPresent() ?
-                AuditoriumMapper.INSTANCE.fromEntityToDto(auditoriumRepository.findById(id).get()) :
+                AuditoriumMapper.INSTANCE.fromEntityToDto(auditorium.get()) :
                 AuditoriumDto.EMPTY();
     }
 

@@ -17,7 +17,7 @@ import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
 @Entity
-@Table(name = "main_page")
+@Table(name = "main_page_banners")
 public class MainPageBanners {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "main_page_gen")
