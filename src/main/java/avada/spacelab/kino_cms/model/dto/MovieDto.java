@@ -21,7 +21,7 @@ public record MovieDto(
         Integer ageCenz,
         MovieDetails details,
         SeoBlockDto seoBlock,
-        List<MoviePictureDto> images,
+        List<MoviePictureDto> pictures,
         List<ScheduleDto> schedules
 ) implements Serializable {
 

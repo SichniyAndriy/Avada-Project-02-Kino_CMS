@@ -45,13 +45,13 @@ public class Movie {
     @Column(name = "trailer_url")
     private String trailerUrl;
 
-    @Column(name = "has_2D", nullable = false)
+    @Column(name = "has_2D")
     private Boolean has2D = false;
 
-    @Column(name = "has_3D", nullable = false)
+    @Column(name = "has_3D")
     private Boolean has3D = false;
 
-    @Column(name = "has_imax", nullable = false)
+    @Column(name = "has_imax")
     private Boolean hasImax = false;
 
     @Column(name = "age_cenz", nullable = false)

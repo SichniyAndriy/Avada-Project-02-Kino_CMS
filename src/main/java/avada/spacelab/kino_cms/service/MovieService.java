@@ -2,6 +2,8 @@ package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.MovieDto;
 import avada.spacelab.kino_cms.model.entity.Movie;
+import avada.spacelab.kino_cms.model.entity.MoviePicture;
+import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.MovieMapper;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import java.util.ArrayList;
@@ -27,10 +29,25 @@ public class MovieService {
     }
 
     public MovieDto getMovieById(long id) {
-        return MovieMapper.INSTANCE.fromEntityToDto(movieRepository.findMovieById(id));
+        Movie movie = movieRepository.findMovieById(id);
+        if (movie.getSeoBlock() == null) {
+            movie.setSeoBlock(new SeoBlock());
+        }
+        return MovieMapper.INSTANCE.fromEntityToDto(movie);
     }
 
-    public void save(Movie movie) {
+    public void save(MovieDto movieDto) {
+        Movie movie = MovieMapper.INSTANCE.fromDtoToEntity(movieDto);
+        if (movie.getId() == 0) {
+            movie.setId(null);
+        }
+
+        List<MoviePicture> pictures = movie.getPictures();
+        if (pictures == null) {
+            movie.setPictures(new ArrayList<>());
+        } else {
+            pictures.forEach(moviePicture -> moviePicture.setMovie(movie));
+        }
         movieRepository.save(movie);
     }
 }

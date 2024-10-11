@@ -33,14 +33,14 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="text-dark">
             <section class="text-end p-5">
-                <button type="button" class="btn btn-outline-primary" th:onclick="showFilm(0)" >Створити новий запис</button>
+                <button type="button" class="btn btn-outline-primary" th:onclick="showMovie(0)" >Створити новий запис</button>
             </section>
             <section id="current__films">
                 <h4 class="text-center mt-4 p-5">Список поточних фільмів</h4>
                 <div class="row row-cols-5">
-                    <div class="col" th:each="currentMovie : ${currentMovies}" th:onclick="showFilm([[${currentMovie.id}]])">
+                    <div class="col" th:each="currentMovie, stat : ${currentMovies}" th:onclick="showFilm([[${currentMovie.id}]])">
                         <div class="card">
-                            <img class="card-img-top" src="https://picsum.photos/id/684/600/400"
+                            <img class="card-img-top lazy" th:data-src="|https://picsum.photos/id/${stat.count + 600}/600/400|"
                                 alt="Current film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${currentMovie.uaTitle}">Some quick example text...</p>
@@ -52,9 +52,9 @@
             <section id="future__films">
                 <h4 class="text-center mt-4">Список майбутніх фільмів</h4>
                 <div class="row row-cols-5 p-5">
-                    <div class="col" th:each="futureMovie : ${futureMovies}" th:onclick="showFilm([[${futureMovie.id}]])">
+                    <div class="col" th:each="futureMovie, stat : ${futureMovies}" th:onclick="showFilm([[${futureMovie.id}]])">
                         <div class="card">
-                            <img class="card-img-top" src="https://picsum.photos/id/684/600/400"
+                            <img class="card-img-top lazy" th:data-src="|https://picsum.photos/id/${stat.count + 500}/600/400|"
                                 alt="Future film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${futureMovie.uaTitle}">Some quick example text...</p>
