@@ -35,8 +35,8 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="container-fluid text-end mb-5">
-            <form action="#" method="post" th:object="${theater}">
-                <div class="d-flex flex-column text-dark pe-5" th:object="${theaterDto}">
+            <form action="/admin/theaters/save" method="post" enctype="multipart/form-data" th:object="${theater}">
+                <div class="d-flex flex-column text-dark pe-5">
                     <input type="number" name="id" id="id" th:field="*{id}" hidden>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Назва кінотеатра</span>
@@ -88,17 +88,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-5 align-items-start">
+                    <div class="row mt-3 align-items-baseline text-dark">
                         <span class="col-2">Галерея картинок</span>
-                        <div class="col-10">
-                            <div class="row row-cols-4 g-3">
-                                <div th:each="i : ${#numbers.sequence(1, 5)}">
-                                    <img class="img-fluid img-thumbnail mb-2" src="https://picsum.photos/id/839/400/225"
-                                        alt="" style="width: 400;height: 225;">
-                                    <input class="form-control" type="file" name="picture" id="film__input__picture"
-                                        accept="image/*">
+                        <div id="pictures_cards" class="col-10 row row-cols-4 g-5 text-dark">
+                            <div class="col card py-4 mt-0" th:each="picture, stat : *{pictures}"
+                                th:id="|picture_card_${stat.count}|">
+                                <div id="img_block" class="mb-2 position-relative" th:id="|img_block_${stat.count}">
+                                    <img class="img-fluid" th:src="${picture.path}" alt="photo">
+                                    <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"
+                                        th:onclick="deleteCard(this)"></i>
                                 </div>
-                                <i class="bi bi-plus-circle-fill fs-1 text-dark text-center align-self-center"></i>
+                                <input type="file" accept="image/*" name="picture" id="picture__input"
+                                    class="mb-2 form-control" th:name="|picture_${stat.count}|"
+                                    th:id="|picture__input_${stat.count}|">
+                            </div>
+                            <div id="add_picture_card" class="card col py-4 mt-0 justify-content-center"
+                                th:onclick="addPictureCard()">
+                                <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                             </div>
                         </div>
                     </div>
@@ -118,10 +124,12 @@
                                         <td th:text="${auditorium.number}">Номер</td>
                                         <td th:text="${auditorium.date}">Дата</td>
                                         <td style="width: 10%;">
-                                            <button type="button" class="btn btn-success" th:onclick="showAuditorium([[${auditorium.id}]])">
+                                            <button type="button" class="btn btn-success"
+                                                th:onclick="showAuditorium([[${auditorium.id}]])">
                                                 <i class="bi bi-pen-fill"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger" th:id="|delete__btn_${auditorium.id}|"
+                                            <button type="button" class="btn btn-danger"
+                                                th:id="|delete__btn_${auditorium.id}|"
                                                 th:onclick="deleteAuditorium([[${auditorium.id}]])">
                                                 <i class="bi bi-trash3-fill"></i>
                                             </button>

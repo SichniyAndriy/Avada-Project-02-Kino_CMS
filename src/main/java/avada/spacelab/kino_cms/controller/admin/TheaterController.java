@@ -2,8 +2,6 @@ package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.model.dto.AuditoriumDto;
 import avada.spacelab.kino_cms.model.dto.TheaterDto;
-import avada.spacelab.kino_cms.model.entity.Theater;
-import avada.spacelab.kino_cms.model.mapper.TheaterMapper;
 import avada.spacelab.kino_cms.service.AuditoriumService;
 import avada.spacelab.kino_cms.service.TheaterService;
 import java.util.List;
@@ -45,9 +43,9 @@ public class TheaterController {
             @PathVariable long id,
             Model model
     ) {
-        TheaterDto theaterDto = (id == 0) ?
+        TheaterDto theater = (id == 0) ?
                 TheaterDto.EMPTY() : theaterService.findTheaterById(id);
-        model.addAttribute("theaterDto", theaterDto);
+        model.addAttribute("theater", theater);
         return "admin/_3_1_theater_page";
     }
 
@@ -72,13 +70,8 @@ public class TheaterController {
 
     @PostMapping("/save")
     public String saveTheater(
-            @ModelAttribute TheaterDto theaterDto
+            @ModelAttribute TheaterDto theater
     ) {
-        Theater theater = TheaterMapper.INSTANCE.fromDtoToEntity(theaterDto);
-        if (theater.getId() == 0) {
-            theater.setId(null);
-        }
-
         theaterService.save(theater);
         return "redirect:/admin/theaters";
     }

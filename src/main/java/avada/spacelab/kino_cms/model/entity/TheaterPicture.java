@@ -31,5 +31,4 @@ public class TheaterPicture {
     @ManyToOne(targetEntity = Theater.class)
     @JoinColumn(name = "theater_id", referencedColumnName = "id", nullable = false)
     private Theater theater;
-
 }

@@ -15,6 +15,7 @@ public record TheaterDto(
         String facilities,
         String logoUrl,
         String mainBannerUrl,
+        List<TheaterPictureDto> pictures,
         List<AuditoriumDto> auditoriums,
         SeoBlockDto seoBlock
 ) implements Serializable {
@@ -28,6 +29,7 @@ public record TheaterDto(
                 null,
                 null,
                 null,
+                Collections.emptyList(),
                 Collections.emptyList(),
                 SeoBlockDto.EMPTY());
     }

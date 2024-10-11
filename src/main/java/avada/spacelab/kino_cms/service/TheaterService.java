@@ -1,7 +1,9 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.TheaterDto;
+import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.Theater;
+import avada.spacelab.kino_cms.model.entity.TheaterPicture;
 import avada.spacelab.kino_cms.model.mapper.TheaterMapper;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import java.util.ArrayList;
@@ -30,7 +32,24 @@ public class TheaterService {
         return TheaterMapper.INSTANCE.fromEntityToDto(theaterRepository.findTheaterById(id));
     }
 
-    public void save(Theater theater) {
+    public void save(TheaterDto theaterDto) {
+        Theater theater = TheaterMapper.INSTANCE.fromDtoToEntity(theaterDto);
+        if (theater.getId() == 0) {
+            theater.setId(null);
+        }
+
+        List<Auditorium> auditoriums = theater.getAuditoriums();
+        if (auditoriums == null) {
+            theater.setAuditoriums(new ArrayList<>());
+        } else {
+            auditoriums.forEach(auditorium -> auditorium.setTheater(theater));
+        }
+        List<TheaterPicture> pictures = theater.getPictures();
+        if (pictures == null) {
+            theater.setPictures(new ArrayList<>());
+        } else {
+            pictures.forEach(picture -> picture.setTheater(theater));
+        }
         theaterRepository.save(theater);
     }
 }
