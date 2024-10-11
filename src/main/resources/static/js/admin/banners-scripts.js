@@ -47,7 +47,7 @@ function showPicture(el) {
         const fileReader = new FileReader();
         fileReader.onload = ev => {
             const $prevDiv = $(el).prev();
-            const img = $prevDiv.children("img").attr("src", ev.target.result);
+            $prevDiv.children("img").attr("src", ev.target.result);
         }
         fileReader.readAsDataURL(file);
     }
