@@ -28,7 +28,7 @@ public class PromotionService {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public PromotionDto getPromotionById(int id) {
+    public PromotionDto getPromotionById(long id) {
         Optional<Promotion> promotionById = promotionRepository.findById(id);
         if (promotionById.isPresent()) {
             Promotion promotion = promotionById.get();
@@ -38,5 +38,9 @@ public class PromotionService {
             return PromotionMapper.INSTANCE.fromEntityToDto(promotion);
         }
         return null;
+    }
+
+    public void deleteById(long id) {
+        promotionRepository.deleteById(id);
     }
 }
