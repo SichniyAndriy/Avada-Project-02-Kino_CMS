@@ -94,7 +94,7 @@ async function update(collection, target, endPoint) {
             path = img.src.replace("http://localhost:8080/", "/");
         }
 
-        banners.push({path, text});
+        banners.push({ path, text });
     }
 
     const res = JSON.stringify(banners);

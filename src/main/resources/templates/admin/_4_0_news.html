@@ -44,7 +44,7 @@
                     </section>
                     <div class="table-responsive mb-5">
                         <table id="datatable"
-                            class="table table-bordered table-striped table-dark table-hover text-center"
+                            class="table table-sm table-bordered table-striped table-dark table-hover text-center"
                             data-toggle="data-table">
                             <thead>
                                 <tr>
@@ -55,16 +55,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="news : ${newsList}">
-                                    <td th:text="${news.title}">Lorem ipsum dolor sit amet.</td>
-                                    <td th:text="${news.date}">21.12.2112</td>
-                                    <td th:text="${news.status}">ВКЛ</td>
+                                <tr th:each="news : ${newsList}" th:object="${news}">
+                                    <td th:text="*{title}">Lorem ipsum dolor sit amet.</td>
+                                    <td th:text="*{date}">21.12.2112</td>
+                                    <td th:text="*{status}">ВКЛ</td>
                                     <td style="width: 10%;">
-                                        <button type="button" class="btn btn-success"
-                                            th:onclick="showNews([[${news.id}]])">
+                                        <button type="button" class="btn btn-success" id="edit__btn"
+                                            th:onclick="showNews([[*{id}]])">
                                             <i class="bi bi-pen-fill"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger">
+                                        <button type="button" class="btn btn-danger" id="delete__btn"
+                                            th:onclick="deleteNews([[*{id}]], this)">
                                             <i class="bi bi-trash3-fill"></i>
                                         </button>
                                     </td>

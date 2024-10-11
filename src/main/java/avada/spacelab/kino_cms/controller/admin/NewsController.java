@@ -4,6 +4,8 @@ import avada.spacelab.kino_cms.model.dto.NewsDto;
 import avada.spacelab.kino_cms.service.NewsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +32,19 @@ public class NewsController {
 
     @GetMapping("/show/{id}")
     public String showNews(
-            @PathVariable int id,
+            @PathVariable long id,
             Model model
     ) {
-        NewsDto newsById = id == 0 ? NewsDto.EMPTY() : newsService.getNewsById(id);
+        NewsDto newsById = id == 0 ? NewsDto.EMPTY() : newsService.getById(id);
         model.addAttribute("news", newsById);
         return "admin/_4_1_news_page";
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteNews(
+            @PathVariable long id
+    ) {
+        newsService.deleteById(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

@@ -7,6 +7,7 @@ import avada.spacelab.kino_cms.model.mapper.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,15 +28,19 @@ public class NewsService {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public NewsDto findById(long id) {
-        return NewsMapper.INSTANCE.fromEntityToDto(newsRepository.findNewsById(id));
+    public NewsDto getById(long id) {
+        Optional<News> newsById = newsRepository.findById(id);
+        if (newsById.isPresent()) {
+            News news = newsById.get();
+            if (news.getSeoBlock() == null) {
+                news.setSeoBlock(new SeoBlock());
+            }
+            return NewsMapper.INSTANCE.fromEntityToDto(news);
+        }
+        return null;
     }
 
-    public NewsDto getNewsById(int id) {
-        News newsById = newsRepository.findNewsById(id);
-        if (newsById.getSeoBlock() == null) {
-            newsById.setSeoBlock(new SeoBlock());
-        }
-        return NewsMapper.INSTANCE.fromEntityToDto(newsById);
+    public void deleteById(long id) {
+        newsRepository.deleteById(id);
     }
 }
