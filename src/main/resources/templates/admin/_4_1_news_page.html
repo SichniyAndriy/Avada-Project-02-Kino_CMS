@@ -36,38 +36,42 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
             <div class="container-fluid text-end pe-5">
-                <form action="#" th:object="${news}">
-                    <div class="d-flex flex-column text-dark">
+                <form action="#" id="news__form" th:object="${news}" enctype="multipart/form-data">
+                    <input type="text" id="news_id" hidden th:field="*{id}" >
+                    <input type="text" hidden th:field="*{date}">
+                    <div class="d-flex flex-column text-dark mt-4">
                         <div class="form-check form-switch fs-3 align-self-end">
-                            <input id="news__status" class="form-check-input" type="checkbox" role="switch"
-                                th:checked="*{#strings.equals(status, 'ON')} ? true : false">
-                            <label class="form-check-label" for="news__status">[[*{status}]]</label>
+                            <label class="form-check-label" for="news_status" th:text="*{status}"></label>
+                            <input type="checkbox" role="switch" id="news_status" class="form-check-input" 
+                                th:checked="*{#strings.equals(status, 'ON')}">
                         </div>
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Заголовок новини</span>
                             <div class="col-10">
-                                <input id="news__title" class="form-control" type="text" name="title"
-                                    th:field="*{title}">
+                                <input class="form-control" type="text" th:field="*{title}">
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
                             <span class="col-2">Зміст новини</span>
                             <div class="col-10">
-                                <textarea id="news__content" class="form-control" name="content" rows="8"
-                                    th:field="*{content}"></textarea>
+                                <textarea class="form-control" rows="8" th:field="*{content}"></textarea>
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
                             <span class="col-2">Головна картинка</span>
                             <div class="col-10 row">
                                 <div class="col-6 text-start">
-                                    <img class="text-bg-info" src="https://picsum.photos/id/174/480/270" alt=""
-                                        style="width: 320px; height: 180px;">
+                                    <img class="text-bg-info" id="news_picture" th:src="*{pictureUrl}" alt="Picture" style="width: 640px; height: 360px;">
                                 </div>
+                                <input type="file" id="picture__input" hidden>
                                 <div class="col-6 align-content-center">
                                     <div class="d-grid gap-3">
-                                        <button class="btn btn-primary" type="button">Завантажити</button>
-                                        <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                        <button type="button" class="btn btn-primary" id="download_picture__btn">
+                                            Завантажити
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger" id="clear_picture__btn">
+                                            Видалити
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -75,40 +79,37 @@
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Посилання на відео</span>
                             <div class="col-10">
-                                <input class="form-control" type="text" name="trailerUrl" id="trailer__url">
+                                <input class="form-control" type="text" th:field="*{trailerUrl}">
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline">
                             <p class="col-2 mt-3">Seo block</p>
                             <div class="col-10">
-                                <div class="border border-1 border-dark rounded-3">
+                                <div class="border border-1 border-dark rounded-3" th:object="${news.seoBlock}">
                                     <div class="d-flex flex-column py-3">
                                         <div class="row align-items-baseline">
                                             <span class="col-2">URL</span>
                                             <div class="col-9">
-                                                <input id="seo__url" class="form-control" type="text" name="url"
-                                                    th:field="*{seoBlock.url}">
+                                                <input class="form-control" type="text" th:field="*{url}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Заголовок</span>
                                             <div class="col-9">
-                                                <input id="seo__title" class="form-control" type="text" name="title"
-                                                    th:field="*{seoBlock.title}">
+                                                <input class="form-control" type="text" th:field="*{title}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Ключові слова</span>
                                             <div class="col-9">
-                                                <input id="seo__keywords" class="form-control" type="text"
-                                                    name="keywords" th:field="*{seoBlock.keywords}">
+                                                <input class="form-control" type="text" th:field="*{keywords}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Опис</span>
                                             <div class="col-9">
-                                                <textarea id="seo__description" class="form-control" name="description"
-                                                    rows="4" th:field="*{seoBlock.description}"></textarea>
+                                                <textarea class="form-control" rows="4"
+                                                    th:field="*{description}"></textarea>
                                             </div>
                                         </div>
                                     </div>

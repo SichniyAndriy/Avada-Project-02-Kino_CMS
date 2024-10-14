@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MainPageBannersController {
     private final MainPageBannersService mainPageBannersService;
 
-    private final String MAIN_PAGE_BANNERS = "pictures/main-page/";
+    private final String MAIN_PAGE_BANNERS = "pictures/main-page";
 
     public MainPageBannersController(
             @Autowired MainPageBannersService mainPageBannersService

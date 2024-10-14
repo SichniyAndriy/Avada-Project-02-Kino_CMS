@@ -1,10 +1,12 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.MovieDto;
+import avada.spacelab.kino_cms.model.dto.MoviePictureDto;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MoviePicture;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.MovieMapper;
+import avada.spacelab.kino_cms.model.mapper.MoviePictureMapper;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,18 +38,17 @@ public class MovieService {
         return MovieMapper.INSTANCE.fromEntityToDto(movie);
     }
 
-    public void save(MovieDto movieDto) {
+    public void save(MovieDto movieDto, List<MoviePictureDto> pictureDtos) {
         Movie movie = MovieMapper.INSTANCE.fromDtoToEntity(movieDto);
         if (movie.getId() == 0) {
             movie.setId(null);
         }
 
-        List<MoviePicture> pictures = movie.getPictures();
-        if (pictures == null) {
-            movie.setPictures(new ArrayList<>());
-        } else {
-            pictures.forEach(moviePicture -> moviePicture.setMovie(movie));
-        }
+        List<MoviePicture> pictures = pictureDtos.stream()
+                .map(MoviePictureMapper.INSTANCE::fromDtoToEntity)
+                .toList();
+        movie.setPictures(pictures);
+        pictures.forEach(moviePicture -> moviePicture.setMovie(movie));
         movieRepository.save(movie);
     }
 }

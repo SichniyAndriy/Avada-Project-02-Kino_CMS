@@ -6,6 +6,7 @@ import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class NewsService {
 
     public List<NewsDto> getAllNews() {
         return newsRepository.findAll().stream()
+                .sorted(Comparator.comparingLong(News::getId))
                 .map(NewsMapper.INSTANCE::fromEntityToDto)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -42,5 +44,10 @@ public class NewsService {
 
     public void deleteById(long id) {
         newsRepository.deleteById(id);
+    }
+
+    public void save(NewsDto newsDto) {
+        News news = NewsMapper.INSTANCE.fromDtoToEntity(newsDto);
+        newsRepository.save(news);
     }
 }

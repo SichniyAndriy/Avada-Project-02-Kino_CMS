@@ -1,8 +1,19 @@
 // @ts-nocheck
+const PATH_TO_MOVIES = "/admin/movies";
+
 $(() => {
     $("#header__title").text("Редагування даних фільма");
     $("#sidebar-menu .nav-link.active").removeClass("active");
     $("#movies__link").addClass("active");
+    $("#movie__form").on("submit", (event) => {
+        event.preventDefault();
+        saveMovieInfo(event.target);
+    })
+    $(".form-check-input").on("change", event => {
+        const $elem = $(event.target);
+        const flag = $elem.attr("checked");
+        $elem.attr("checked", !flag).val(!flag);
+    });
 });
 
 function addPictureCard(elem) {
@@ -47,63 +58,64 @@ function showPicture(elem) {
 function deletePicture(el) {
     $("#poster_block > img").attr("src", "");
 }
-
-async function saveMovieInfo() {
-    const elements = $("#movie__form").serializeArray();
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+async function saveMovieInfo(form) {
     const formData = new FormData();
-    for (const element of elements) {
-        const name = element.name;
-        if (name.startsWith("_") || name.length === 0) continue;
-        formData.append(name, element.value);
-    }
-     
-    //@ts-ignore
-    const posterFile = $("#poster__input")[0].files[0];
-    if (posterFile) {
-        posterUrl = await saveFileOnServer(posterFile, "poster");
-        //@ts-ignore
-        formData.append("posterUrl", posterUrl);
-    }
     
+    for (const entry of form) {
+        const name = new String(entry.name);
+        if (name.length === 0 || name.includes("pic") || name.startsWith("_")) continue;
+        formData.append(name, entry.value);
+    }
+
+    const picturesPromise = getPictures();
+    const posterUrlPromise = getPosterUrl();
+    
+    const picturesJson = JSON.stringify(await picturesPromise);
+    formData.append("picturesJson", picturesJson);
+    formData.append("posterUrl", await posterUrlPromise);
+
+    for (const entry of formData.entries()) {
+        console.log(entry);
+    }
+    fetch("/admin/movies/save", {
+        method: "POST",
+        body: formData
+    }).then(responce => {
+        if(responce.ok) {
+            location.href = PATH_TO_MOVIES;
+        } else {
+            alert("Дані про фільм не збережено");
+        }
+    })
+}
+
+async function getPosterUrl() {
+    const posterFile = $("#poster__input")[0].files[0];
+    const posterUrl  = posterFile ? 
+        await saveFileOnServer(posterFile, "poster") : 
+        $("#poster_picture").attr("src");
+    return posterUrl;
+}
+
+async function getPictures() {
     const pictures = [];
-    const pictureCards = $("#add_picture_card").siblings().get();
+    const cards = $("#add_picture_card").siblings().get();
     let i = 0;
-    for (const card of pictureCards) {
+    for (const card of cards) {
         const last = card.lastElementChild;
-        //@ts-ignore
         const pictureFile = last.files[0];
         ++i;
         if (pictureFile) {
             const pictureName = await saveFileOnServer(pictureFile, `picture_${i}`);
-            pictures.push({ 
-                id: null,
-                path: pictureName 
-            });
+            pictures.push({ path: pictureName });
         } else {
-            //@ts-ignore
-            pictures.push({ 
-                id: null,
-                path: card.firstElementChild.firstElementChild.src 
-            });
+            pictures.push({ path: card.firstElementChild.firstElementChild.src });
         }
     }
-
-    const object = formDataToObject(formData);
-    object["pictures"] = pictures;
-    const jsoned = JSON.stringify(object);
-    fetch("/admin/movies/save", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: jsoned
-    }).then(responce => {
-        console.log(responce.status);
-        return responce.text();
-    }
-    ).then(data => console.log(data));
+    return pictures;
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 async function saveFileOnServer(file, filename) {
     const ext = file.name.split(".")[1];
 
@@ -119,23 +131,4 @@ async function saveFileOnServer(file, filename) {
     });
 
     return responce.ok ? responce.text() : "";
-}
-
-function formDataToObject(formData) {
-    const obj = {};
-    const entries = formData.entries();
-
-    for (const [key, value] of entries) {
-        if(key.includes(".")) {
-            const arr = key.split(".");
-            if (!obj[arr[0]]) {
-                obj[arr[0]] = {};
-            }
-            obj[arr[0]][arr[1]] = value; 
-        } else {
-            obj[key] = value;
-        }
-    }
-
-    return obj;
 }

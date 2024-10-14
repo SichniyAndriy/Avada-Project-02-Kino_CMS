@@ -2,7 +2,11 @@ package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.model.dto.MovieDto;
+import avada.spacelab.kino_cms.model.dto.MoviePictureDto;
 import avada.spacelab.kino_cms.service.MovieService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -11,13 +15,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("admin/movies")
 public class MovieController {
     private final MovieService movieService;
-    private final String PATH_TO_MOVIES = "pictures/movies";
 
     public MovieController(
             @Autowired MovieService movieService
@@ -60,11 +64,19 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public String saveMovie(
-            @RequestBody MovieDto movie
+    public ResponseEntity<HttpStatus> saveMovie(
+            @ModelAttribute MovieDto movie,
+            @RequestParam String picturesJson
     ) {
-        movieService.save(movie);
-        return "redirect:/admin/movies";
+        List<MoviePictureDto> pictures;
+        try {
+            pictures = new ObjectMapper()
+                    .readValue(picturesJson, new TypeReference<>() {});
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        movieService.save(movie, pictures);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @PostMapping("/save/file")
@@ -73,7 +85,8 @@ public class MovieController {
         @RequestParam String timestamp,
         @RequestParam String ext
     ) throws IOException {
-        String fileName = ControllerUtil.savePictureOnServer(
+        final String PATH_TO_MOVIES = "pictures/movies";
+        final String fileName = ControllerUtil.savePictureOnServer(
                 PATH_TO_MOVIES, file.getOriginalFilename(), timestamp, ext, file
         );
         return ResponseEntity.ok(fileName);

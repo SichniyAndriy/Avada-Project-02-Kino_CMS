@@ -12,12 +12,14 @@ public record PromotionDto(
         String title,
         String content,
         LocalDate date,
-        String mainPicture,
+        String pictureUrl,
+        String trailerUrl,
         SeoBlockDto seoBlock,
         Status status
 ) implements Serializable {
     public static PromotionDto EMPTY() {
         return new PromotionDto(
+                null,
                 null,
                 null,
                 null,

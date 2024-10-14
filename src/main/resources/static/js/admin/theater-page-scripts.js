@@ -15,8 +15,9 @@ function deleteAuditorium(audId) {
         method: "DELETE"
     }).then( responce => {
         if (responce.ok) {
-            $(`#delete__btn_${audId}`).closest("tr").remove();
-            alert("Аудиторію видалено");
+            $(`#delete__btn_${audId}`)
+            .closest("tr")
+            .fadeOut("fast");
         }
     });
 }

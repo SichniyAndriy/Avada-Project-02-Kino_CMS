@@ -11,16 +11,19 @@
     <!-- Library / Plugin Css Build -->
     <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css" th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
     <!-- Hope Ui Design System Css -->
     <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
         th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0" th:href="@{/assets/css/custom.min.css?v=4.0.0}">
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
+        th:href="@{/assets/css/custom.min.css?v=4.0.0}">
     <!-- Dark Css -->
     <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css" th:href="@{/assets/css/customizer.min.css}">
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
     <!-- RTL Css -->
     <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
     <!-- Icons -->
@@ -33,14 +36,18 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="text-dark">
             <section class="text-end p-5">
-                <button type="button" class="btn btn-outline-primary" th:onclick="showMovie(0)" >Створити новий запис</button>
+                <button type="button" class="btn btn-outline-primary" th:onclick="showMovie(0)">
+                    Створити новий запис
+                </button>
             </section>
             <section id="current__films">
                 <h4 class="text-center mt-4 p-5">Список поточних фільмів</h4>
                 <div class="row row-cols-5">
-                    <div class="col" th:each="currentMovie, stat : ${currentMovies}" th:onclick="showFilm([[${currentMovie.id}]])">
+                    <div class="col" th:each="currentMovie, stat : ${currentMovies}"
+                        th:onclick="showMovie([[${currentMovie.id}]])">
                         <div class="card">
-                            <img class="card-img-top lazy" th:data-src="|https://picsum.photos/id/${stat.count + 600}/600/400|"
+                            <img class="card-img-top lazy"
+                                th:data-src="|https://picsum.photos/id/${stat.count + 600}/600/400|"
                                 alt="Current film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${currentMovie.uaTitle}">Some quick example text...</p>
@@ -52,9 +59,11 @@
             <section id="future__films">
                 <h4 class="text-center mt-4">Список майбутніх фільмів</h4>
                 <div class="row row-cols-5 p-5">
-                    <div class="col" th:each="futureMovie, stat : ${futureMovies}" th:onclick="showFilm([[${futureMovie.id}]])">
+                    <div class="col" th:each="futureMovie, stat : ${futureMovies}"
+                        th:onclick="showMovie([[${futureMovie.id}]])">
                         <div class="card">
-                            <img class="card-img-top lazy" th:data-src="|https://picsum.photos/id/${stat.count + 500}/600/400|"
+                            <img class="card-img-top lazy"
+                                th:data-src="|https://picsum.photos/id/${stat.count + 500}/600/400|"
                                 alt="Future film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${futureMovie.uaTitle}">Some quick example text...</p>
@@ -74,7 +83,8 @@
     <!-- Widgetchart Script -->
     <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
     <!-- mapchart Script -->
-    <script src="../../static/assets/js/charts/vectore-chart.js" th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
     <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
     <!-- fslightbox Script -->
     <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
@@ -92,7 +102,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Movies Scripts -->
-    <script src="../../static/js/admin/movie-scripts.js" th:src="@{/js/admin/movies-scripts.js}" defer></script>
+    <script src="../../static/js/admin/movies-scripts.js" th:src="@{/js/admin/movies-scripts.js}" defer></script>
 </body>
 
 </html>

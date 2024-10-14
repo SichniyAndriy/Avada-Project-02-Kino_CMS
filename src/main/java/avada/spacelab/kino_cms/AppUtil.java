@@ -153,6 +153,7 @@ public class AppUtil implements CommandLineRunner {
                     .past(2000, TimeUnit.DAYS)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
+            oneNews.setTrailerUrl(faker.internet().url());
             oneNews.setStatus(faker.random().nextBoolean() ? Status.ON : Status.OFF);
             news.add(oneNews);
         }
@@ -169,6 +170,7 @@ public class AppUtil implements CommandLineRunner {
                     .past(2000, TimeUnit.DAYS)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
+            promotion.setTrailerUrl(faker.internet().url());
             promotion.setStatus(faker.random().nextBoolean() ? Status.ON : Status.OFF);
             promotions.add(promotion);
         }

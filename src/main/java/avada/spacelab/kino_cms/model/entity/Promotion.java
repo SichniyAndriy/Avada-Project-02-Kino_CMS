@@ -41,8 +41,11 @@ public class Promotion {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "main_picture")
-    private String mainPicture;
+    @Column(name = "picture_url")
+    private String pictureUrl;
+
+    @Column(name = "trailer_url")
+    private String trailerUrl;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

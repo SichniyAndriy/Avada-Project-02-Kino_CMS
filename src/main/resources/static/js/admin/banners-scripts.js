@@ -1,5 +1,5 @@
 // @ts-nocheck
-const BANNERS_PATH = "/admin/banners";
+const PATH_TO_BANNERS = "/admin/banners";
 
 $(() => {
     $("#header__title").text("Банери головної сторінки");
@@ -7,7 +7,7 @@ $(() => {
     $("#banners__link").addClass("active");
 });
 
-function addBannerCard() {
+function addBannerCard () {
     addCard("banners_cards", "banner");
 }
 
@@ -15,7 +15,7 @@ function addPromotionCard () {
     addCard("promotions_cards", "promotion");
 }
 
-function addCard(collection, elem) {
+function addCard (collection, elem) {
     const $bannersCard = $(`#${collection}`);
     const amount = $bannersCard.children().length;
     const $addCard = $(`#add_${elem}_card`);
@@ -30,44 +30,44 @@ function addCard(collection, elem) {
                 <label for="${elem}__text_${amount}|">Текст</label>
                 <input id="${elem}__text_${amount}|" type="text" class="form-control">
         </div>`);
-    $newCard.on("click", `#img_block_${amount} > i`, 
+    $newCard.on("click", `#img_block_${amount} > i`,
         (event) => deleteCard(event.target));
-    $newCard.on("change", `#${elem}__input_${amount}`, 
+    $newCard.on("change", `#${elem}__input_${amount}`,
         (event) => showPicture(event.target));
     $newCard.insertBefore($addCard);
 }
 
-function deleteCard(el) {
+function deleteCard (el) {
     $(el).closest(".card").remove();
 }
 
-function showPicture(el) {
+function showPicture (el) {
     const file = el.files[0];
     if (file) {
         const fileReader = new FileReader();
         fileReader.onload = ev => {
             const $prevDiv = $(el).prev();
             $prevDiv.children("img").attr("src", ev.target.result);
-        }
+        };
         fileReader.readAsDataURL(file);
     }
 }
 
-function showBackground() {
+function showBackground () {
     $("#background__input").trigger("click");
 }
 
-function updateUpBanners() {
+function updateUpBanners () {
     update("banners_cards", "banner", "up-banners");
 }
 
-function updateBottomPromotions() {
+function updateBottomPromotions () {
     update("promotions_cards", "promotion", "down-promotions");
 }
 
 async function update(collection, target, endPoint) {
-    const banners = [];
     let i = 0;
+    const banners = [];
     const elements = $(`#${collection}`).find(`input[type="file"]`).get();
     for (const element of elements) {
         ++i;
@@ -75,30 +75,14 @@ async function update(collection, target, endPoint) {
         const img = element.previousElementSibling.children[0];
         const text = element.nextElementSibling.nextElementSibling.value;
 
-        let path;
-        if (file) {
-            const formData = new FormData();
-            const ext = file.name.split(".")[1];
-
-            formData.append("file", file, `${target}_${i}`);
-            formData.append("timestamp", new Date().getTime());
-            formData.append("ext", ext);
-            
-            const responce = await fetch("/admin/banners/add", {
-                method: "POST",
-                body: formData
-            });
-
-            path = responce.ok ? await responce.text(): "";
-        } else {
-            path = img.src.replace("http://localhost:8080/", "/");
-        }
+        const path = file ? 
+            await uploadFileOnServer(file, `${target}_${i}`):
+            img.src.replace("http://localhost:8080/", "/");
 
         banners.push({ path, text });
     }
 
     const res = JSON.stringify(banners);
-    console.log(res);
     fetch(`/admin/banners/update/${endPoint}`, {
         method: "PUT",
         headers: {
@@ -106,40 +90,43 @@ async function update(collection, target, endPoint) {
         },
         body: res
     }).then(responce => {
-        console.log(responce.status);
-    })
+        alert(`${target} saved`.toUpperCase());
+    });
 }
 
-async function saveBackground() {
-    const elem = document.getElementById("background__input");
-    const file = elem.files[0];
-    if (file) {
-        const formData = new FormData();
-        const ext = file.name.split(".")[1];
+async function saveBackground () {
+    const file = $("#background__input")[0].files[0];
+    const path = file ? 
+        await uploadFileOnServer(file, "background") : 
+        $("#background__img").attr("src");
+    const obj = {
+        path
+    };
 
-        formData.append("file", file, "background");
-        formData.append("timestamp", new Date().getTime());
-        formData.append("ext", ext);
-        
-        const responce = await fetch("/admin/banners/add", {
-            method: "POST",
-            body: formData
-        })
-        const path = await responce.text();
-        const obj = {
-            path
-        };
+    fetch("/admin/banners/update/background", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then(responce => {
+        if (responce.ok) {
+            alert("background saved".toUpperCase());
+        }
+    });
+}
 
-        fetch("/admin/banners/update/background", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(obj)
-        }).then(responce => {
-            if (responce.ok) {
-                alert("Фонове зображення збережено");
-            }
-        })
-    }
+async function uploadFileOnServer (file, name) {
+    const formData = new FormData();
+    const ext = file.name.split(".")[1];
+
+    formData.append("file", file, name);
+    formData.append("timestamp", new Date().getTime());
+    formData.append("ext", ext);
+
+    const responce = await fetch(`${PATH_TO_BANNERS}/add`, {
+        method: "POST",
+        body: formData
+    });
+    return responce.ok ? await responce.text() : "";
 }

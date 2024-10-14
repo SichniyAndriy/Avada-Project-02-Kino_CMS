@@ -67,7 +67,7 @@
             <section id="main__background" class="col-11 border border-dark rounded-1 mx-auto">
                 <div class="row m-0 p-0 pb-4 g-4">
                     <div class="col-12 col-sm-6">
-                        <img class="img-fluid" src="${background}" alt="">
+                        <img class="img-fluid" id="background__img" th:src="${background}" alt="">
                     </div>
                     <input type="file" accept="image/*" name="background" id="background__input"
                         th:onchange="showPicture(this)" hidden>
