@@ -43,4 +43,9 @@ public class PromotionService {
     public void deleteById(long id) {
         promotionRepository.deleteById(id);
     }
+
+    public void save(PromotionDto promotionDto) {
+        Promotion promotion = PromotionMapper.INSTANCE.fromDtoToEntity(promotionDto);
+        promotionRepository.save(promotion);
+    }
 }
