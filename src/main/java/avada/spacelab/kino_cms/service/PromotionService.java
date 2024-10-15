@@ -29,15 +29,15 @@ public class PromotionService {
     }
 
     public PromotionDto getPromotionById(long id) {
-        Optional<Promotion> promotionById = promotionRepository.findById(id);
-        if (promotionById.isPresent()) {
-            Promotion promotion = promotionById.get();
-            if (promotion.getSeoBlock() == null) {
+        Optional<Promotion> promotionOptional = promotionRepository.findById(id);
+        promotionOptional.ifPresent(promotion -> {
+            if(promotion.getSeoBlock() != null) {
                 promotion.setSeoBlock(new SeoBlock());
             }
-            return PromotionMapper.INSTANCE.fromEntityToDto(promotion);
-        }
-        return PromotionDto.EMPTY();
+        });
+        return promotionOptional
+                .map(PromotionMapper.INSTANCE::fromEntityToDto)
+                .orElse(PromotionDto.EMPTY());
     }
 
     public void deleteById(long id) {

@@ -31,15 +31,12 @@ public class NewsService {
     }
 
     public NewsDto getById(long id) {
-        Optional<News> newsById = newsRepository.findById(id);
-        if (newsById.isPresent()) {
-            News news = newsById.get();
+        Optional<News> newsOptional = newsRepository.findById(id);
+        newsOptional.ifPresent(news -> {
             if (news.getSeoBlock() == null) {
                 news.setSeoBlock(new SeoBlock());
-            }
-            return NewsMapper.INSTANCE.fromEntityToDto(news);
-        }
-        return NewsDto.EMPTY();
+            }});
+        return newsOptional.map(NewsMapper.INSTANCE::fromEntityToDto).orElse(NewsDto.EMPTY());
     }
 
     public void deleteById(long id) {
