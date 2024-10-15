@@ -46,22 +46,22 @@ public class Auditorium {
     @Column(name = "scheme_url",length = 512)
     private String schemeUrl;
 
-    @Column(name = "main_banner_url", length = 512)
-    private String mainBannerUrl;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
-            targetEntity = AuditoriumPicture.class, mappedBy = "auditorium")
-    private List<AuditoriumPicture> pictures = new ArrayList<>();
+    @Column(name = "banner_url", length = 512)
+    private String bannerUrl;
 
     @ManyToOne(targetEntity = Theater.class)
     @JoinColumn(name = "theater_id", referencedColumnName = "id")
     private Theater theater;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+            targetEntity = AuditoriumPicture.class, mappedBy = "auditorium")
+    private List<AuditoriumPicture> pictures = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
             targetEntity = Schedule.class, mappedBy = "key.auditorium")
     private List<Schedule> schedules = new ArrayList<>();
 
-    @OneToOne(targetEntity = SeoBlock.class, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
     @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
     private SeoBlock seoBlock;
 }

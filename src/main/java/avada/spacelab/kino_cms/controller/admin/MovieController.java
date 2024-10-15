@@ -68,14 +68,7 @@ public class MovieController {
             @ModelAttribute MovieDto movie,
             @RequestParam String picturesJson
     ) {
-        List<MoviePictureDto> pictures;
-        try {
-            pictures = new ObjectMapper()
-                    .readValue(picturesJson, new TypeReference<>() {});
-        } catch (JsonProcessingException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        movieService.save(movie, pictures);
+        movieService.save(movie, picturesJson);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 

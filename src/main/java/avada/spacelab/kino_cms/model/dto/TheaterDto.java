@@ -12,9 +12,8 @@ public record TheaterDto(
         String title,
         String description,
         String conditions,
-        String facilities,
         String logoUrl,
-        String mainBannerUrl,
+        String bannerUrl,
         List<TheaterPictureDto> pictures,
         List<AuditoriumDto> auditoriums,
         SeoBlockDto seoBlock
@@ -22,7 +21,6 @@ public record TheaterDto(
 
     public static TheaterDto EMPTY() {
         return new TheaterDto(
-                null,
                 null,
                 null,
                 null,

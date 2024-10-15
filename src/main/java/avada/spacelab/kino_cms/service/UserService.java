@@ -58,7 +58,7 @@ public class UserService {
             user.setPassHash("");
             return UserMapper.INSTANCE.fromEntityToDto(user);
         }
-        return null;
+        return UserDto.EMPTY();
     }
 
     public void save(UserDto userDto) {

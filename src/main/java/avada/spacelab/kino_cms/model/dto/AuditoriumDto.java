@@ -2,6 +2,8 @@ package avada.spacelab.kino_cms.model.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * DTO for {@link avada.spacelab.kino_cms.model.entity.Auditorium}
@@ -12,7 +14,8 @@ public record AuditoriumDto(
         String description,
         LocalDate date,
         String schemeUrl,
-        String mainBannerUrl,
+        String bannerUrl,
+        List<AuditoriumPictureDto> pictures,
         SeoBlockDto seoBlock
 ) implements Serializable {
 
@@ -24,6 +27,7 @@ public record AuditoriumDto(
                 null,
                 null,
                 null,
+                Collections.EMPTY_LIST,
                 SeoBlockDto.EMPTY()
         );
     }

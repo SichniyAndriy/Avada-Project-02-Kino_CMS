@@ -25,7 +25,7 @@ public class AuditoriumPicture {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
-    @Column(name = "path",length = 512, nullable = false, unique = true)
+    @Column(name = "path",length = 512, nullable = false)
     private String path;
 
     @ManyToOne(targetEntity = Auditorium.class)

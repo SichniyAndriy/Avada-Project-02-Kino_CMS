@@ -41,8 +41,8 @@ public class Theater {
     @Column(name = "logo_url", length = 512)
     private String logoUrl;
 
-    @Column(name= "main_banner_url", length = 512)
-    private String mainBannerUrl;
+    @Column(name= "banner_url", length = 512)
+    private String bannerUrl;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = TheaterPicture.class, mappedBy = "theater")
     private List<TheaterPicture> pictures = new ArrayList<>();

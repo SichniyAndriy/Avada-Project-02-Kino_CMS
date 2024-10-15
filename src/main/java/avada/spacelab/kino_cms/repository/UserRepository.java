@@ -32,11 +32,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<String>findAllPhones();
 
     @Query("SELECT u.phone FROM User u WHERE u.id = :id")
-    String findPhoneById(Long id);
+    Optional<String> findPhoneById(Long id);
 
     @Query("SELECT u.email FROM User u")
     List<String> findAllEmails();
 
     @Query("SELECT u.email FROM User u WHERE u.id = :id")
-    String findEmailById(Long id);
+    Optional<String> findEmailById(Long id);
 }

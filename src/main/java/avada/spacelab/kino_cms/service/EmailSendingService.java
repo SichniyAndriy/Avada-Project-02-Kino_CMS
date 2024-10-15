@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,16 @@ public class EmailSendingService {
         } else {
             emailList = new ArrayList<>();
             for (Long id : ids) {
-                String emailById = userRepository.findEmailById(id);
-                emailList.add(emailById);
+                Optional<String> optionalEmail = userRepository.findEmailById(id);
+                optionalEmail.ifPresent(emailList::add);
             }
         }
         String emailContent = getEmailContent(fileName);
         int emailCount = emailList.size();
         int sentEmails = 0;
         for (String email : emailList) {
-            String res = String.valueOf(++sentEmails * 100 / emailCount);
             logger.info("Sending email to address: {} for session: {}", email, session.getId());
+            String res = String.valueOf(++sentEmails * 100 / emailCount);
             session.sendMessage(new TextMessage(res));
             try {
                 Thread.sleep(50);

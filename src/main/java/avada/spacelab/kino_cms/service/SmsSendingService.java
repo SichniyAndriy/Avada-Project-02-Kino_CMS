@@ -4,6 +4,7 @@ import avada.spacelab.kino_cms.repository.UserRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +33,15 @@ public class SmsSendingService {
         } else {
             phoneList = new ArrayList<>();
             for (Long id : ids) {
-                String phoneNumberById = userRepository.findPhoneById(id);
-                phoneList.add(phoneNumberById);
+                Optional<String> optionalPhone = userRepository.findPhoneById(id);
+                optionalPhone.ifPresent(phone -> phoneList.add(phone));
             }
         }
         int amountUsers = phoneList.size();
         int sentSms = 0;
         for (String phone : phoneList) {
-            String res = String.valueOf((++sentSms * 100) / amountUsers);
             logger.info("Sending SMS to phone number: {} for session: {}", phone, session.getId());
+            String res = String.valueOf((++sentSms * 100) / amountUsers);
             session.sendMessage(new TextMessage(res));
             try {
                 Thread.sleep(50);

@@ -37,7 +37,7 @@ public class PromotionService {
             }
             return PromotionMapper.INSTANCE.fromEntityToDto(promotion);
         }
-        return null;
+        return PromotionDto.EMPTY();
     }
 
     public void deleteById(long id) {

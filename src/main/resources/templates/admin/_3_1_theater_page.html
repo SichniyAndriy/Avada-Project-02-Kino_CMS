@@ -35,75 +35,83 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div class="container-fluid text-end mb-5">
-            <form action="/admin/theaters/save" method="post" enctype="multipart/form-data" th:object="${theater}">
-                <div class="d-flex flex-column text-dark pe-5">
-                    <input type="number" name="id" id="id" th:field="*{id}" hidden>
+            <form action="#" method="post" enctype="multipart/form-data" id="theater__form">
+                <div class="d-flex flex-column text-dark pe-5" th:object="${theater}">
+                    <input type="number" name="id" id="theater_id" th:field="*{id}" hidden>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Назва кінотеатра</span>
                         <div class="col-10">
-                            <input class="form-control" type="text" name="title" id="title" th:field="*{title}">
+                            <input class="form-control" type="text" id="title" th:field="*{title}">
                         </div>
                     </div>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Опис</span>
                         <div class="col-10">
-                            <textarea class="form-control" name="description" id="description" rows="8"
+                            <textarea class="form-control" id="description" rows="8"
                                 th:field="*{description}"></textarea>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Умови</span>
                         <div class="col-10">
-                            <textarea class="form-control" name="conditions" id="conditions" rows="8"
-                                th:field="*{conditions}"></textarea>
+                            <textarea class="form-control" id="conditions" rows="8" th:field="*{conditions}"></textarea>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-start text-dark">
                         <span class="col-2">Логотип</span>
-                        <div class="col-10 row">
+                        <div class="col-10 row" id="logo_block">
                             <div class="col-6 text-start">
-                                <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""
+                                <img class="text-bg-info img-fluid" th:src="*{logoUrl}" alt="logo"
                                     style="width: 800px; height: 450px;">
                             </div>
+                            <input type="file" accept="image/*" id="logo__input" hidden>
                             <div class="col-6 align-content-center">
                                 <div class="d-grid gap-3">
-                                    <button class="btn btn-primary" type="button">Завантажити</button>
-                                    <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                    <button type="button" class="btn btn-primary" id="download_logo__btn">
+                                        Завантажити
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="delete_logo__btn">
+                                        Видалити
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-5 align-items-start text-dark">
-                        <span class="col-2">Фото верхнього баннера</span>
-                        <div class="col-10 row">
+                        <span class="col-2">Фото баннера</span>
+                        <div class="col-10 row" id="banner_block">
                             <div class="col-6 text-start">
-                                <img class="text-bg-info img-fluid" src="https://picsum.photos/id/174/800/450" alt=""
+                                <img class="text-bg-info img-fluid" th:src="*{bannerUrl}" alt="banner"
                                     style="width: 800px; height: 450px;">
                             </div>
+                            <input type="file" accept="image/*" id="banner__input" hidden>
                             <div class="col-6 align-content-center">
                                 <div class="d-grid gap-3">
-                                    <button class="btn btn-primary" type="button">Завантажити</button>
-                                    <button class="btn btn-outline-danger " type="button">Видалити</button>
+                                    <button type="button" class="btn btn-primary" id="download_banner__btn">
+                                        Завантажити
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="delete_banner__btn">
+                                        Видалити
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-3 align-items-baseline text-dark">
                         <span class="col-2">Галерея картинок</span>
-                        <div id="pictures_cards" class="col-10 row row-cols-4 g-5 text-dark">
+                        <div id="pictures_cards" class="col-10 row row-cols-5 g-5 text-dark">
                             <div class="col card py-4 mt-0" th:each="picture, stat : *{pictures}"
                                 th:id="|picture_card_${stat.count}|">
-                                <div id="img_block" class="mb-2 position-relative" th:id="|img_block_${stat.count}">
+                                <div class="mb-2 position-relative" th:id="|img_block_${stat.count}">
                                     <img class="img-fluid" th:src="${picture.path}" alt="photo">
                                     <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"
-                                        th:onclick="deleteCard(this)"></i>
+                                        onclick="deleteCard(this)"></i>
                                 </div>
-                                <input type="file" accept="image/*" name="picture" id="picture__input"
-                                    class="mb-2 form-control" th:name="|picture_${stat.count}|"
-                                    th:id="|picture__input_${stat.count}|">
+                                <input type="file" accept="image/*" class="mb-2 form-control"
+                                    onchange="showPicture(this)">
                             </div>
                             <div id="add_picture_card" class="card col py-4 mt-0 justify-content-center"
-                                th:onclick="addPictureCard()">
+                                onclick="addPictureCard(this)">
                                 <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                             </div>
                         </div>
@@ -149,28 +157,29 @@
                         <div class="col-10">
                             <div class="border border-1 border-dark rounded-3">
                                 <div class="d-flex flex-column py-3">
+                                    <input type="number" th:field="*{seoBlock.id}" hidden>
                                     <div class="row align-items-baseline">
                                         <span class="col-2">URL</span>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" name="url" id="seo__url">
+                                            <input class="form-control" type="text" th:field="*{seoBlock.url}">
                                         </div>
                                     </div>
                                     <div class="row align-items-baseline">
                                         <span class="col-2">Заголовок</span>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" name="tilte" id="seo__title">
+                                            <input class="form-control" type="text" th:field="*{seoBlock.title}">
                                         </div>
                                     </div>
                                     <div class="row align-items-baseline">
                                         <span class="col-2">Ключові слова</span>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" name="keywords" id="seo__keywords">
+                                            <input class="form-control" type="text" th:field="*{seoBlock.keywords}">
                                         </div>
                                     </div>
                                     <div class="row align-items-baseline">
                                         <span class="col-2">Опис</span>
                                         <div class="col-9">
-                                            <textarea class="form-control" name="description" id="seo__description"
+                                            <textarea class="form-control" th:field="*{seoBlock.description}"
                                                 rows="4"></textarea>
                                         </div>
                                     </div>
@@ -178,8 +187,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center w-25 mt-5 mx-auto">
-                        <button type="button" class="btn btn-success w-100">Зберегти</button>
+                    <div class="d-flex gap-3 text-center w-25 mt-5 mx-auto">
+                        <input type="submit" class="btn btn-success w-50" value="Зберегти">
+                        <input type="reset" class="btn btn-outline-danger w-50" value="Скасувати">
                     </div>
                 </div>
             </form>

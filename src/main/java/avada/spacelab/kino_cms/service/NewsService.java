@@ -39,7 +39,7 @@ public class NewsService {
             }
             return NewsMapper.INSTANCE.fromEntityToDto(news);
         }
-        return null;
+        return NewsDto.EMPTY();
     }
 
     public void deleteById(long id) {
