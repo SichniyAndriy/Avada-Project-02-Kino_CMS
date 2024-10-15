@@ -25,6 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,7 +133,7 @@ public class AppUtil implements CommandLineRunner {
         List<Schedule> schedules = new ArrayList<>();
         long len = movieRepository.countById();
         for (int i = 0; i < n; ++i) {
-            Movie movie = movieRepository.findMovieById(faker.random().nextLong(1, len));
+            Optional<Movie> optionalMovie = movieRepository.findById(faker.random().nextLong(1, len));
             for (int j = 0; j < m; ++j) {
                 Schedule schedule = new Schedule();
                 LocalDate lowestDate = LocalDate.now().minusDays(faker.random().nextInt(5));
