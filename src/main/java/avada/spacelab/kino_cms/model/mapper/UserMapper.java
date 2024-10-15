@@ -3,9 +3,10 @@ package avada.spacelab.kino_cms.model.mapper;
 import avada.spacelab.kino_cms.model.dto.UserDto;
 import avada.spacelab.kino_cms.model.entity.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants.ComponentModel;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = ComponentModel.SPRING)
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
