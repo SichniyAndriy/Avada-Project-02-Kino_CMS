@@ -3,7 +3,7 @@ package avada.spacelab.kino_cms.controller.admin;
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.model.entity.MainPageBanners;
 import avada.spacelab.kino_cms.model.entity.MainPageBanners.Replacement;
-import avada.spacelab.kino_cms.service.MainPageBannersService;
+import avada.spacelab.kino_cms.service.MainPageService;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,26 +21,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("admin/banners")
-public class MainPageBannersController {
-    private final MainPageBannersService mainPageBannersService;
+public class MainPageController {
+    private final MainPageService mainPageService;
 
     private final String MAIN_PAGE_BANNERS = "pictures/main-page";
 
-    public MainPageBannersController(
-            @Autowired MainPageBannersService mainPageBannersService
+    public MainPageController(
+            @Autowired MainPageService mainPageService
     ) {
-        this.mainPageBannersService = mainPageBannersService;
+        this.mainPageService = mainPageService;
     }
 
     @GetMapping(path = {"/", ""})
     public String banners(Model model) {
         List<MainPageBanners> middle =
-                mainPageBannersService.getAllByReplacement(MainPageBanners.Replacement.SLASH_BANNER);
+                mainPageService.getAllByReplacement(MainPageBanners.Replacement.SLASH_BANNER);
         String background = !middle.isEmpty() ? middle.getFirst().getPath() : null;
         List<MainPageBanners> banners =
-                mainPageBannersService.getAllByReplacement(Replacement.UP_BANNER);
+                mainPageService.getAllByReplacement(Replacement.UP_BANNER);
         List<MainPageBanners> promotions =
-                mainPageBannersService.getAllByReplacement(Replacement.BOTTOM_PROMOTION);
+                mainPageService.getAllByReplacement(Replacement.BOTTOM_PROMOTION);
 
         model.addAttribute("banners", banners);
         model.addAttribute("background", background);
@@ -64,9 +64,9 @@ public class MainPageBannersController {
     public ResponseEntity<HttpStatus> updateBanners(
             @RequestBody List<MainPageBanners> banners
     ) {
-        mainPageBannersService.deleteAllByReplacement(Replacement.UP_BANNER);
+        mainPageService.deleteAllByReplacement(Replacement.UP_BANNER);
         banners.forEach(item -> item.setPlace(Replacement.UP_BANNER));
-        mainPageBannersService.saveAll(banners);
+        mainPageService.saveAll(banners);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -74,9 +74,9 @@ public class MainPageBannersController {
     public ResponseEntity<HttpStatus> updatePromotions(
             @RequestBody List<MainPageBanners> promotions
     ) {
-        mainPageBannersService.deleteAllByReplacement(Replacement.BOTTOM_PROMOTION);
+        mainPageService.deleteAllByReplacement(Replacement.BOTTOM_PROMOTION);
         promotions.forEach(item -> item.setPlace(Replacement.BOTTOM_PROMOTION));
-        mainPageBannersService.saveAll(promotions);
+        mainPageService.saveAll(promotions);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -84,9 +84,9 @@ public class MainPageBannersController {
     public ResponseEntity<HttpStatus> updatePromotions(
             @RequestBody MainPageBanners background
     ) {
-        mainPageBannersService.deleteAllByReplacement(Replacement.SLASH_BANNER);
+        mainPageService.deleteAllByReplacement(Replacement.SLASH_BANNER);
         background.setPlace(Replacement.SLASH_BANNER);
-        mainPageBannersService.save(background);
+        mainPageService.save(background);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

@@ -1,21 +1,29 @@
 package avada.spacelab.kino_cms.service;
 
+import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
 import avada.spacelab.kino_cms.model.entity.MainPageBanners;
 import avada.spacelab.kino_cms.model.entity.MainPageBanners.Replacement;
+import avada.spacelab.kino_cms.model.entity.MainPageInfo;
+import avada.spacelab.kino_cms.model.mapper.MainPageInfoMapper;
 import avada.spacelab.kino_cms.repository.MainPageBannersRepository;
+import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MainPageBannersService {
+public class MainPageService {
     private MainPageBannersRepository  mainPageBannersRepository;
+    private MainPageInfoRepository mainPageInfoRepository;
 
-    public MainPageBannersService(
-            @Autowired MainPageBannersRepository mainPageBannersRepository
-            ) {
+    public MainPageService(
+            @Autowired MainPageBannersRepository mainPageBannersRepository,
+            @Autowired MainPageInfoRepository mainPageInfoRepository
+    ) {
         this.mainPageBannersRepository = mainPageBannersRepository;
+        this.mainPageInfoRepository = mainPageInfoRepository;
     }
 
     @Transactional
@@ -33,5 +41,13 @@ public class MainPageBannersService {
 
     public List<MainPageBanners> saveAll(List<MainPageBanners> mainPages) {
         return mainPageBannersRepository.saveAllAndFlush(mainPages);
+    }
+
+    public void saveInfo(MainPageInfo mainPageInfo) {
+        mainPageInfoRepository.save(mainPageInfo);
+    }
+    public MainPageInfoDto getInfo() {
+        Optional<MainPageInfo> infoOptional = mainPageInfoRepository.findById(1L);
+        return infoOptional.map(MainPageInfoMapper.INSTANCE::fromEntityToDto).get();
     }
 }
