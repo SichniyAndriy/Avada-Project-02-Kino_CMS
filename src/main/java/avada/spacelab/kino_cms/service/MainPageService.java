@@ -4,6 +4,7 @@ import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
 import avada.spacelab.kino_cms.model.entity.MainPageBanners;
 import avada.spacelab.kino_cms.model.entity.MainPageBanners.Replacement;
 import avada.spacelab.kino_cms.model.entity.MainPageInfo;
+import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.MainPageInfoMapper;
 import avada.spacelab.kino_cms.repository.MainPageBannersRepository;
 import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
@@ -15,8 +16,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MainPageService {
-    private MainPageBannersRepository  mainPageBannersRepository;
-    private MainPageInfoRepository mainPageInfoRepository;
+    private final MainPageBannersRepository  mainPageBannersRepository;
+    private final MainPageInfoRepository mainPageInfoRepository;
 
     public MainPageService(
             @Autowired MainPageBannersRepository mainPageBannersRepository,
@@ -46,8 +47,16 @@ public class MainPageService {
     public void saveInfo(MainPageInfo mainPageInfo) {
         mainPageInfoRepository.save(mainPageInfo);
     }
+
     public MainPageInfoDto getInfo() {
         Optional<MainPageInfo> infoOptional = mainPageInfoRepository.findById(1L);
-        return infoOptional.map(MainPageInfoMapper.INSTANCE::fromEntityToDto).get();
+        infoOptional.ifPresent(mainPageInfo -> {
+            if(mainPageInfo.getSeoBlock() == null) {
+                mainPageInfo.setSeoBlock(new SeoBlock());
+            }
+        });
+        return infoOptional
+                .map(MainPageInfoMapper.INSTANCE::fromEntityToDto)
+                .orElse(MainPageInfoDto.EMPTY());
     }
 }

@@ -2,6 +2,7 @@ package avada.spacelab.kino_cms;
 
 import avada.spacelab.kino_cms.model.entity.Address;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
+import avada.spacelab.kino_cms.model.entity.MainPageInfo;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.model.entity.News;
@@ -19,6 +20,7 @@ import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.repository.UserRepository;
+import avada.spacelab.kino_cms.service.MainPageService;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -43,6 +45,7 @@ public class AppUtil implements CommandLineRunner {
     private final NewsRepository newsRepository;
     private final PromotionRepository promotionRepository;
     private final UserRepository userRepository;
+    private final MainPageService mainPageService;
 
     public AppUtil(
             @Autowired TheaterRepository theaterRepository,
@@ -50,7 +53,8 @@ public class AppUtil implements CommandLineRunner {
             @Autowired MovieRepository movieRepository,
             @Autowired NewsRepository newsRepository,
             @Autowired PromotionRepository promotionRepository,
-            @Autowired UserRepository userRepository
+            @Autowired UserRepository userRepository,
+            @Autowired MainPageService mainPageService
     ) {
         this.theaterRepository = theaterRepository;
         this.auditoriumRepository = auditoriumRepository;
@@ -58,6 +62,7 @@ public class AppUtil implements CommandLineRunner {
         this.newsRepository = newsRepository;
         this.promotionRepository = promotionRepository;
         this.userRepository = userRepository;
+        this.mainPageService = mainPageService;
     }
     
     @Override
@@ -69,6 +74,7 @@ public class AppUtil implements CommandLineRunner {
         initPromotions(n * 3);
         initUsers(n * 15);
         initSchedule(n, 20);
+        initMainPageInfo();
     }
 
     private void initTheatres(int n) {
@@ -208,5 +214,13 @@ public class AppUtil implements CommandLineRunner {
             users.add(user);
         }
         userRepository.saveAllAndFlush(users);
+    }
+
+    private void initMainPageInfo() {
+        MainPageInfo mainPageInfo = new MainPageInfo();
+        mainPageInfo.setPhoneNumber1(faker.phoneNumber().phoneNumber());
+        mainPageInfo.setPhoneNumber2(faker.phoneNumber().phoneNumber());
+        mainPageInfo.setSeoText(faker.lorem().paragraph());
+        mainPageService.saveInfo(mainPageInfo);
     }
 }

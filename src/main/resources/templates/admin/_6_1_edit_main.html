@@ -34,8 +34,8 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
             <div class="container-fluid text-end pe-5">
-                <form action="#">
-                    <div class="d-flex flex-column text-dark">
+                <form action="/admin/edit/main" method="post" enctype="multipart/form-data" id="info__from">
+                    <div class="d-flex flex-column text-dark" th:object="${info}">
                         <div class="form-check form-switch fs-3 align-self-end">
                             <input id="main_page_status" class="form-check-input" type="checkbox" role="switch" checked>
                             <label class="form-check-label" for="main_page_status">ON</label>
@@ -43,14 +43,14 @@
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Телефон</span>
                             <div class="col-3 d-flex flex-column">
-                                <input id="phone_1" class="form-control" type="text" name="title1" required>
-                                <input id="phone_2" class="form-control" type="text" name="title2">
+                                <input type="tel" class="form-control" th:field="*{phoneNumber1}">
+                                <input type="tel" class="form-control" th:field="*{phoneNumber2}">
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline text-dark">
                             <span class="col-2">SEO-текст</span>
                             <div class="col-10">
-                                <textarea id="seo_text" class="form-control" name="content" rows="8"></textarea>
+                                <textarea class="form-control" rows="8" th:field="*{seoText}"></textarea>
                             </div>
                         </div>
                         <div class="row mt-3 align-items-baseline">
@@ -58,30 +58,31 @@
                             <div class="col-10">
                                 <div class="border border-1 border-dark rounded-3">
                                     <div class="d-flex flex-column py-3">
+                                        <input type="number" th:field="*{seoBlock.id}" hidden>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">URL</span>
                                             <div class="col-9">
-                                                <input id="seo_url" class="form-control" type="text" name="url">
+                                                <input type="text" class="form-control" th:field="*{seoBlock.url}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Заголовок</span>
                                             <div class="col-9">
-                                                <input id="seo_title" class="form-control" type="text" name="title">
+                                                <input type="text" class="form-control" th:field="*{seoBlock.title}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Ключові слова</span>
                                             <div class="col-9">
-                                                <input id="seo_keywords" class="form-control" type="text"
-                                                    name="keywords">
+                                                <input type="text" class="form-control" th:field="*{seoBlock.keywords}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Опис</span>
                                             <div class="col-9">
-                                                <textarea id="seo_description" class="form-control" name="description"
-                                                    rows="4"></textarea>
+                                                <textarea class="form-control" rows="4"
+                                                    th:field="*{seoBlock.description}">
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
