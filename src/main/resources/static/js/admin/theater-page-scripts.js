@@ -29,8 +29,8 @@ $(() => {
     })
 });
 
-function showAuditorium(id = 0) {
-    location.href = `${THEATERS_PATH}/show/auditorium/${id}`
+function showAuditorium(audId=0, thId=0) {
+    location.href = `${THEATERS_PATH}/show/auditorium/${audId}/${thId}`;
 }
 
 function deleteAuditorium(audId) {

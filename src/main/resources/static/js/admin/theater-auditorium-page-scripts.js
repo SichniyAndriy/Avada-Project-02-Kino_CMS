@@ -1,4 +1,6 @@
 // @ts-nocheck
+const PATH_TO_THEATERS = "/admin/theaters";
+
 $(() => {
     $("#header__title").text("Сторінка зала");
     $("#sidebar-menu .nav-link.active").removeClass("active");
@@ -97,7 +99,9 @@ async function saveAuditorium(form) {
         method: "POST",
         body: formData
     }).then(responce => {
-        alert("Auditorium saved");
+        const elem = document.getElementById("theater_id");
+        const thId = parseInt(elem.value);
+        location.href = `${PATH_TO_THEATERS}/show/${thId}`;
     })
 }
 

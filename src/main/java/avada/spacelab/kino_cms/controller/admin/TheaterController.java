@@ -63,14 +63,16 @@ public class TheaterController {
         return "redirect:/admin/theaters";
     }
 
-    @GetMapping(path = { "/show/auditorium/{id}"})
+    @GetMapping(path = { "/show/auditorium/{id}/{theaterId}"})
     public String showAuditorium(
             @PathVariable long id,
+            @PathVariable long theaterId,
             Model model
     ) {
         AuditoriumDto auditoriumDto = (id == 0) ?
                 AuditoriumDto.EMPTY() : auditoriumService.getById(id);
         model.addAttribute("auditorium", auditoriumDto);
+        model.addAttribute("theaterId", theaterId);
         return "admin/_3_2_auditorium_page";
     }
 
