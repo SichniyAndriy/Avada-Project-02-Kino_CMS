@@ -2,6 +2,7 @@ package avada.spacelab.kino_cms;
 
 import avada.spacelab.kino_cms.model.entity.Address;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
+import avada.spacelab.kino_cms.model.entity.Contact;
 import avada.spacelab.kino_cms.model.entity.MainPageInfo;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
@@ -15,6 +16,7 @@ import avada.spacelab.kino_cms.model.entity.User;
 import avada.spacelab.kino_cms.model.entity.User.Gender;
 import avada.spacelab.kino_cms.model.entity.User.Language;
 import avada.spacelab.kino_cms.repository.AuditoriumRepository;
+import avada.spacelab.kino_cms.repository.ContactRepository;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
@@ -46,6 +48,7 @@ public class AppUtil implements CommandLineRunner {
     private final PromotionRepository promotionRepository;
     private final UserRepository userRepository;
     private final MainPageService mainPageService;
+    private final ContactRepository contactRepository;
 
     public AppUtil(
             @Autowired TheaterRepository theaterRepository,
@@ -54,7 +57,8 @@ public class AppUtil implements CommandLineRunner {
             @Autowired NewsRepository newsRepository,
             @Autowired PromotionRepository promotionRepository,
             @Autowired UserRepository userRepository,
-            @Autowired MainPageService mainPageService
+            @Autowired MainPageService mainPageService,
+            @Autowired ContactRepository contactRepository
     ) {
         this.theaterRepository = theaterRepository;
         this.auditoriumRepository = auditoriumRepository;
@@ -63,6 +67,7 @@ public class AppUtil implements CommandLineRunner {
         this.promotionRepository = promotionRepository;
         this.userRepository = userRepository;
         this.mainPageService = mainPageService;
+        this.contactRepository = contactRepository;
     }
     
     @Override
@@ -75,6 +80,7 @@ public class AppUtil implements CommandLineRunner {
         initUsers(n * 15);
         initSchedule(n, 20);
         initMainPageInfo();
+        initContacts(5);
     }
 
     private void initTheatres(int n) {
@@ -222,5 +228,21 @@ public class AppUtil implements CommandLineRunner {
         mainPageInfo.setPhoneNumber2(faker.phoneNumber().phoneNumber());
         mainPageInfo.setSeoText(faker.lorem().paragraph());
         mainPageService.saveInfo(mainPageInfo);
+    }
+
+    private void initContacts(int n) {
+        List<Contact> contacts = new ArrayList<>();
+        List<Theater> theaters = theaterRepository.findAll();
+        for (final Theater theater : theaters) {
+            Contact contact = new Contact();
+            contact.setId(theater.getId());
+            contact.setTitle(theater.getTitle());
+            contact.setAddress(localFaker.address().fullAddress());
+            contact.setCoordinates(
+                    localFaker.address().longitude() + " ; " + localFaker.address().latitude()
+            );
+            contacts.add(contact);
+        }
+        contactRepository.saveAllAndFlush(contacts);
     }
 }
