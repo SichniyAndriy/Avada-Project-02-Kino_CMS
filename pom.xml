@@ -11,7 +11,7 @@
 
 	<groupId>avada.spacelab</groupId>
 	<artifactId>Project-02-Kino_CMS</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.58.1</version>
 	<name>kino-cms</name>
 	<description>Pet project for Spring Boot</description>
 
@@ -52,6 +52,11 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.datafaker</groupId>
 			<artifactId>datafaker</artifactId>
 			<version>${datafaker.version}</version>
@@ -87,11 +92,6 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.23.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<scope>annotationProcessor</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
