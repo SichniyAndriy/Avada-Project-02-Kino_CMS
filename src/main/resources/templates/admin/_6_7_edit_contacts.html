@@ -33,80 +33,51 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
-            <div class="container-fluid text-end pe-5">
-                <form action="#">
-                    <div class="text-dark mt-4" th:each="i : ${#numbers.sequence(1, 3)}">
-                        <div class="d-flex flex-column border border-1 border-dark rounded-3 py-4 gap-3">
-                            <div class="row">
-                                <label for="theater_title_${i}" class="col-2">Назва кінотеатру</label>
-                                <div class="col-9">
-                                    <input type="text" name="title" id="theater_title_${i}" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="theater_address_${i}" class="col-2">Адреса</label>
-                                <div class="col-9">
-                                    <textarea name="address" id="theater_address_${i}" class="form-control" rows="4"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="theater_coordinates_${i}" class="col-2">Координати для мапи</label>
-                                <div class="col-9">
-                                    <input type="text" name="coordinates" id="theater_coordinates_${i}" class="form-control" rows="4">
-                                </div>
-                            </div>
-                            <div class="row align-items-center">
-                                <span class="col-2">Лого</span>
-                                <img src="https://picsum.photos/id/945/600/400" alt="Theater logo" 
-                                    style="width: 400; height: 225px;" class="col img-fluid">
-                                <div class="col text-start">
-                                    <button class="col btn btn-success" >Завантажити</button>
-                                    <button class="col btn btn-danger">Видалити</button>
-                                </div>
-                                <input type="file" name="" id="theter_logo_input_${i}" hidden>s
-                            </div>
-                        </div>
+            <div class="container-fluid pe-5">
+                <div class="container py-4">
+                    <div class="form-check form-switch d-flex justify-content-end fs-3 mb-4 ms-auto">
+                        <input class="form-check-input" id="contacts_status" type="checkbox" role="switch">
+                        <label class="form-check-label ms-3" for="contacts_status">OFF</label>
                     </div>
-                    <div class="row mt-4 align-items-baseline text-dark">
-                        <p class="col-2 mt-3">Seo block</p>
-                        <div class="col-10">
-                            <div class="border border-1 border-dark rounded-3">
-                                <div class="d-flex flex-column py-3">
-                                    <div class="row align-items-baseline">
-                                        <span class="col-2">URL</span>
-                                        <div class="col-9">
-                                            <input id="seo__url" class="form-control" type="text" name="url">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-baseline">
-                                        <span class="col-2">Заголовок</span>
-                                        <div class="col-9">
-                                            <input id="seo__title" class="form-control" type="text" name="title">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-baseline">
-                                        <span class="col-2">Ключові слова</span>
-                                        <div class="col-9">
-                                            <input id="seo__keywords" class="form-control" type="text"
-                                                name="keywords">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-baseline">
-                                        <span class="col-2">Опис</span>
-                                        <div class="col-9">
-                                            <textarea id="seo__description" class="form-control" name="description"
-                                                rows="4"></textarea>
-                                        </div>
-                                    </div>
+                    <div class="border border-1 border-dark rounded-3 p-4 mb-4" th:each="contact, stat : ${contacts}">
+                        <form action="#" method="post" enctype="multipart/form-data">
+
+                            <input type="number" name="id" th:value="*{contact.id}" hidden>
+                            <div class="row gap-1 align-items-baseline mb-3">
+                                <label class="col-2 form-label text-end">
+                                    Назва кінотеатра
+                                </label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control w-100" name="title"
+                                        th:value="${contact.title}">
                                 </div>
                             </div>
-                        </div>
+                            <div class="row gap-1 align-items-baseline mb-3">
+                                <label class="col-2 form-label text-end">
+                                    Адреса
+                                </label>
+                                <div class="col-9">
+                                    <textarea class="form-control" rows="4" name="address" 
+                                        th:text="${contact.address}">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="row gap-1 align-items-baseline mb-3">
+                                <label class="col-2 form-label text-end">
+                                    Координати для мапи
+                                </label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control" name="coordinates"
+                                        th:value="${contact.coordinates}">
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
-                    <div class="mt-5 text-center">
-                        <button type="submit" class="btn btn-success">Зберегти</button>
-                        <button type="reset" class="btn btn-outline-danger">Відміна</button>
-                    </div>
-                </form>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success" id="save__btn">Зберегти</button>
+                </div>
             </div>
         </section>
 
@@ -139,7 +110,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Edit about scripts -->
-    <script src="../../static/js/admin/edit-contacts-script.js" th:src="@{/js/admin/edit-contacts-script.js}"></script>s
+    <script src="../../static/js/admin/edit-contacts-script.js" th:src="@{/js/admin/edit-contacts-script.js}"></script>
 
 </body>
 

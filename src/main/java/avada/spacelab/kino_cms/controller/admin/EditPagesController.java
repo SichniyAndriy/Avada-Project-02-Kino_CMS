@@ -1,9 +1,12 @@
 package avada.spacelab.kino_cms.controller.admin;
 
+import avada.spacelab.kino_cms.model.dto.ContactDto;
 import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
 import avada.spacelab.kino_cms.model.entity.MainPageInfo;
 import avada.spacelab.kino_cms.model.mapper.MainPageInfoMapper;
+import avada.spacelab.kino_cms.service.ContactService;
 import avada.spacelab.kino_cms.service.MainPageService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +15,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("admin/edit")
 public class EditPagesController {
     private final MainPageService mainPageService;
+    private final ContactService contactService;
 
     public EditPagesController(
-            @Autowired MainPageService mainPageService
+            @Autowired MainPageService mainPageService,
+            @Autowired ContactService contactService
     ) {
         this.mainPageService = mainPageService;
+        this.contactService = contactService;
     }
 
     @GetMapping("/main")
@@ -68,6 +75,16 @@ public class EditPagesController {
 
     @GetMapping("/contacts")
     public String editContacts(Model model) {
+        List<ContactDto> contactDtos = contactService.getAll();
+        model.addAttribute("contacts", contactDtos);
         return "admin/_6_7_edit_contacts";
+    }
+
+    @PostMapping("/contacts")
+    public ResponseEntity<HttpStatus> updateContacts(
+            @RequestBody List<ContactDto> contacts
+    ) {
+        contactService.saveList(contacts);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
