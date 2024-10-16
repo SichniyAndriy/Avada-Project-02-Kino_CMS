@@ -6,6 +6,15 @@ $( () => {
         event.preventDefault();
         updateInfo(event.target);
     });
+    $("#main_page_status").on("change", (event) => {
+        const $Switcher = $(event.target);
+        const status = $Switcher.prop("checked");
+        $Switcher.next().text( status ? "ON": "OFF");
+
+        const $Forms = $("form");
+        const $Elems = $Forms.find("input").add($Forms.find("textarea"));
+        $Elems.prop("disabled", !status);
+    }).trigger("change");
 })
 
 function updateInfo(form) {

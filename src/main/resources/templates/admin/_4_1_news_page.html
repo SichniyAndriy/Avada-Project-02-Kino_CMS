@@ -35,16 +35,16 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
-            <div class="container-fluid text-end pe-5">
+            <div class="container text-end pe-5">
+                <div class="form-check form-switch fs-3 mb-4 d-flex justify-content-end">
+                    <input class="form-check-input" id="news_status" type="checkbox" role="switch">
+                    <label class="form-check-label ms-3" for="news_status">OFF</label>
+                </div>
                 <form action="#" id="news__form" th:object="${news}" enctype="multipart/form-data">
+
                     <input type="text" id="news_id" hidden th:field="*{id}" >
                     <input type="text" hidden th:field="*{date}">
                     <div class="d-flex flex-column text-dark mt-4">
-                        <div class="form-check form-switch fs-3 align-self-end">
-                            <label class="form-check-label" for="news_status" th:text="*{status}"></label>
-                            <input type="checkbox" role="switch" id="news_status" class="form-check-input" 
-                                th:checked="*{#strings.equals(status, 'ON')}">
-                        </div>
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Заголовок новини</span>
                             <div class="col-10">

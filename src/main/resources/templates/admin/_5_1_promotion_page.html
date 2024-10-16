@@ -33,16 +33,16 @@
     <main class="main-content">
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
-            <div class="container-fluid text-end pe-5">
+            <div class="container text-end pe-5">
+                <div class="form-check form-switch fs-3 mb-4 d-flex justify-content-end">
+                    <input class="form-check-input" id="promotion_status" type="checkbox" role="switch">
+                    <label class="form-check-label ms-3" for="promotion_status">OFF</label>
+                </div>
                 <form action="#" id="promotion__form" method="post" enctype="multipart/form-data">
                     <div class="d-flex flex-column text-dark" th:object="${promotion}">
+                        
                         <input type="number" id="promotion_id" th:field="*{id}" hidden>
                         <input type="text" id="promotion_date" th:field="*{date}" hidden>
-                        <div class="form-check form-switch fs-3 align-self-end">
-                            <input id="promotion__status" class="form-check-input" type="checkbox" role="switch"
-                                th:checked="*{#strings.equals(status, 'ON')} ? true : false">
-                            <label class="form-check-label" for="promotion__status">[[*{status}]]</label>
-                        </div>
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Заголовок акції</span>
                             <div class="col-10">
@@ -91,29 +91,26 @@
                                         <div class="row align-items-baseline">
                                             <span class="col-2">URL</span>
                                             <div class="col-9">
-                                                <input id="seo__url" class="form-control" type="text" name="url"
-                                                    th:field="*{seoBlock.url}">
+                                                <input class="form-control" type="text" th:field="*{seoBlock.url}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Заголовок</span>
                                             <div class="col-9">
-                                                <input id="seo__title" class="form-control" type="text" name="title"
-                                                    th:field="*{seoBlock.title}">
+                                                <input class="form-control" type="text" th:field="*{seoBlock.title}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Ключові слова</span>
                                             <div class="col-9">
-                                                <input id="seo__keywords" class="form-control" type="text"
-                                                    name="keywords" th:field="*{seoBlock.keywords}">
+                                                <input class="form-control" type="text" th:field="*{seoBlock.keywords}">
                                             </div>
                                         </div>
                                         <div class="row align-items-baseline">
                                             <span class="col-2">Опис</span>
                                             <div class="col-9">
-                                                <textarea id="seo__description" class="form-control" name="description"
-                                                    rows="4" th:field="*{seoBlock.description}"></textarea>
+                                                <textarea class="form-control" rows="4" th:field="*{seoBlock.description}">
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>

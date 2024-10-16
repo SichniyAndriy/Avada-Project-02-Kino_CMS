@@ -62,7 +62,8 @@ public class UserService {
     }
 
     public void save(UserDto userDto) {
-        userRepository.save(UserMapper.INSTANCE.fromDtoToEntity(userDto));
+        User user = UserMapper.INSTANCE.fromDtoToEntity(userDto);
+        userRepository.save(user);
     }
 
     public void deleteUser(long id) {

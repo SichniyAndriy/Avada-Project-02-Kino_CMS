@@ -31,7 +31,7 @@ public class PromotionService {
     public PromotionDto getPromotionById(long id) {
         Optional<Promotion> promotionOptional = promotionRepository.findById(id);
         promotionOptional.ifPresent(promotion -> {
-            if(promotion.getSeoBlock() != null) {
+            if(promotion.getSeoBlock() == null) {
                 promotion.setSeoBlock(new SeoBlock());
             }
         });
