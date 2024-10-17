@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.model.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -57,7 +58,7 @@ public class Auditorium {
             targetEntity = AuditoriumPicture.class, mappedBy = "auditorium")
     private List<AuditoriumPicture> pictures = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,
             targetEntity = Schedule.class, mappedBy = "key.auditorium")
     private List<Schedule> schedules = new ArrayList<>();
 

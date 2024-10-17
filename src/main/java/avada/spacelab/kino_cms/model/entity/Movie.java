@@ -4,6 +4,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -63,7 +64,7 @@ public class Movie {
     @OneToMany(cascade = CascadeType.ALL, targetEntity = MoviePicture.class, orphanRemoval = true, mappedBy = "movie")
     private List<MoviePicture> pictures = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Schedule.class, mappedBy = "key.movie")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Schedule.class, mappedBy = "key.movie")
     private List<Schedule> schedules = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)

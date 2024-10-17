@@ -23,15 +23,15 @@ public class SeoBlock {
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
 
-    @Column(name = "url", length = 1024, nullable = false)
+    @Column(name = "url", length = 1024)
     private String url;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "keywords", nullable = false)
+    @Column(name = "keywords")
     private String keywords;
 
-    @Column(name = "description", length = 2048, nullable = false)
+    @Column(name = "description", length = 2048)
     private String description;
 }

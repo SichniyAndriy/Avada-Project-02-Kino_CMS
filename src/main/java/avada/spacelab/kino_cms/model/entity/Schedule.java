@@ -17,39 +17,49 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "schedule")
+@Entity @Table(name = "schedules")
 public class Schedule {
     @EmbeddedId
     private ScheduleCompositeKey key;
 
-    public Schedule(LocalDate date, LocalTime time, Movie movie, Auditorium auditorium) {
-        this.key = new ScheduleCompositeKey(date, time, movie, auditorium);
+    public Schedule(
+            Auditorium auditorium,
+            Movie movie,
+            LocalDate date,
+            LocalTime time
+    ) {
+        this.key = new ScheduleCompositeKey(auditorium, movie, date, time);
     }
 
     @Getter @Setter @NoArgsConstructor
     @Embeddable
     public static class ScheduleCompositeKey implements Serializable {
+        @ManyToOne(targetEntity = Auditorium.class)
+        @JoinColumn(name = "auditorium_id")
+        private Auditorium auditorium;
+
+        @ManyToOne(targetEntity = Movie.class)
+        @JoinColumn(name = "movie_id")
+        private Movie movie;
+
         @Temporal(TemporalType.DATE)
-        @Column(name = "date", nullable = false, updatable = false)
+        @Column(name = "date", nullable = false)
         private LocalDate date;
 
         @Temporal(TemporalType.TIME)
-        @Column(name = "time", nullable = false, updatable = false)
+        @Column(name = "time", nullable = false)
         private LocalTime time;
 
-        @ManyToOne(targetEntity = Movie.class,optional = false)
-        @JoinColumn(name = "movie_id", referencedColumnName = "id")
-        private Movie movie;
-
-        @ManyToOne(targetEntity = Auditorium.class, optional = false)
-        @JoinColumn(name = "auditorium_id", referencedColumnName = "id")
-        private Auditorium auditorium;
-
-        public ScheduleCompositeKey(LocalDate date, LocalTime time, Movie movie, Auditorium auditorium) {
+        public ScheduleCompositeKey(
+                Auditorium auditorium,
+                Movie movie,
+                LocalDate date,
+                LocalTime time
+        ) {
+            this.auditorium = auditorium;
+            this.movie = movie;
             this.date = date;
             this.time = time;
-            this.movie = movie;
-            this.auditorium = auditorium;
         }
     }
 }
