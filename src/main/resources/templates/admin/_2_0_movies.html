@@ -40,14 +40,14 @@
                     Створити новий запис
                 </button>
             </section>
-            <section id="current__films">
+            <section class="container-fluid px-5" id="current__films">
                 <h4 class="text-center mt-4 p-5">Список поточних фільмів</h4>
                 <div class="row row-cols-5">
                     <div class="col" th:each="currentMovie, stat : ${currentMovies}"
                         th:onclick="showMovie([[${currentMovie.id}]])">
                         <div class="card">
                             <img class="card-img-top lazy"
-                                th:data-src="|https://picsum.photos/id/${stat.count + 600}/600/400|"
+                                th:data-src="${currentMovie.posterUrl} ?: '/pictures/movies/blank.jpg'"
                                 alt="Current film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${currentMovie.uaTitle}">Some quick example text...</p>
@@ -63,7 +63,7 @@
                         th:onclick="showMovie([[${futureMovie.id}]])">
                         <div class="card">
                             <img class="card-img-top lazy"
-                                th:data-src="|https://picsum.photos/id/${stat.count + 500}/600/400|"
+                                th:data-src="${futureMovie.posterUrl} ?: '/pictures/movies/blank.jpg'"
                                 alt="Future film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${futureMovie.uaTitle}">Some quick example text...</p>

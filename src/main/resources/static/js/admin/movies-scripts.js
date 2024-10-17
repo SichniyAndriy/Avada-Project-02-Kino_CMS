@@ -7,7 +7,7 @@ $(event => {
     loadPictures();
 });
 
-function showMovie(id) {
+function showMovie(id=0) {
     window.location.href = `${FILMS_PATH}/show/${id}`;
 }
 

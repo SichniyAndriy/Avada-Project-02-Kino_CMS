@@ -38,7 +38,8 @@
         <section class="mb-5" id="current__film">
             <div class="container-fluid text-end pe-5" th:object="${movie}">
                 <form action="#" id="movie__form" method="post" enctype="multipart/form-data">
-                    <input type="number" id="id" th:field="*{id}" hidden>
+                    <input type="number" id="movie_id" th:if="*{id}" th:field="*{id}" hidden>
+                    <input type="number" name="id" value="0" id="movie_id" th:unless="*{id}" hidden>
                     <div class="d-flex flex-column text-dark">
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Оригінальна назва фільма</span>
@@ -70,7 +71,7 @@
                             <div class="col-10 row">
                                 <div class="col-6 text-start" id="poster_block">
                                     <img class="text-bg-info" id="poster_picture" alt="Movie poster"
-                                        style="width: 400px; height: 600px;" th:src="*{posterUrl}">
+                                        style="width: 400px; height: 600px;" th:src="*{posterUrl} ?: '/pictures/movies/blank.jpg'">
                                 </div>
                                 <input type="file" accept="image/*" id="poster__input" hidden
                                     onchange="showPicture(this)">
@@ -113,17 +114,17 @@
                             <div class="col-10 text-start">
                                 <div class="form-check form-check-inline">
                                     <input type="checkbox" class="form-check-input" id="check_input2d"
-                                        th:field="*{has2D}" th:value="${has2D}">
+                                        th:field="*{has2D}">
                                     <label for="check_input2d" class="form-check-label">2D</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input type="checkbox" class="form-check-input" id="check_input3d"
-                                        th:field="*{has3D}" th:value="*{has3D}">
+                                        th:field="*{has3D}">
                                     <label for="check_input3d" class="form-check-label">3D</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input type="checkbox" class="form-check-input" id="check_inputImax"
-                                        th:field="*{hasImax}" th:value="${hasImax}">
+                                        th:field="*{hasImax}">
                                     <label for="check_inputImax" class="form-check-label">IMAX</label>
                                 </div>
                             </div>
@@ -246,7 +247,7 @@
                     </div>
                     <div class="d-flex gap-3 text-center w-25 mt-5 mx-auto">
                         <input type="submit" class="btn btn-success w-50" value="Зберегти">
-                        <input type="reset" class="btn btn-outline-danger w-50" value="Відміна">
+                        <input type="reset" class="btn btn-outline-danger w-50" onclick="goToMovies()" value="Відміна">
                     </div>
                 </form>
             </div>

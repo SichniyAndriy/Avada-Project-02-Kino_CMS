@@ -11,8 +11,8 @@ $(() => {
     })
     $(".form-check-input").on("change", event => {
         const $elem = $(event.target);
-        const flag = $elem.attr("checked");
-        $elem.attr("checked", !flag).val(!flag);
+        const flag = $elem.prop("checked");
+        $elem.val(flag);
     });
 });
 
@@ -59,6 +59,10 @@ function deletePicture(el) {
     $("#poster_block > img").attr("src", "");
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+function goToMovies () {
+    location.href = PATH_TO_MOVIES;
+}
+
 async function saveMovieInfo(form) {
     const formData = new FormData();
     
@@ -68,12 +72,15 @@ async function saveMovieInfo(form) {
         formData.append(name, entry.value);
     }
 
-    const picturesPromise = getPictures();
-    const posterUrlPromise = getPosterUrl();
+    const val = $("#movie_id").val();
+    const id = parseInt(val);
+    const picturesPromise = getPictures(id);
+    const posterUrlPromise = getPosterUrl(id);
     
     const picturesJson = JSON.stringify(await picturesPromise);
     formData.append("picturesJson", picturesJson);
-    formData.append("posterUrl", await posterUrlPromise);
+    const posterUrl = await posterUrlPromise;
+    formData.append("posterUrl", posterUrl);
 
     for (const entry of formData.entries()) {
         console.log(entry);
@@ -83,35 +90,33 @@ async function saveMovieInfo(form) {
         body: formData
     }).then(responce => {
         if(responce.ok) {
-            location.href = PATH_TO_MOVIES;
+            goToMovies();
         } else {
-            alert("Дані про фільм не збережено");
+            alert("Дані про фільм не збережено\nПеревірте поля");
         }
     })
 }
 
-async function getPosterUrl() {
+async function getPosterUrl(id) {
     const posterFile = $("#poster__input")[0].files[0];
-    const posterUrl  = posterFile ? 
-        await saveFileOnServer(posterFile, "poster") : 
+    const posterUrl = posterFile ? 
+        await saveFileOnServer(posterFile, `poster_${id}`):
         $("#poster_picture").attr("src");
     return posterUrl;
 }
 
-async function getPictures() {
+async function getPictures(id) {
     const pictures = [];
     const cards = $("#add_picture_card").siblings().get();
     let i = 0;
     for (const card of cards) {
+        ++i;
         const last = card.lastElementChild;
         const pictureFile = last.files[0];
-        ++i;
-        if (pictureFile) {
-            const pictureName = await saveFileOnServer(pictureFile, `picture_${i}`);
-            pictures.push({ path: pictureName });
-        } else {
-            pictures.push({ path: card.firstElementChild.firstElementChild.src });
-        }
+        const pictureName = pictureFile ?
+            await saveFileOnServer(pictureFile, `picture_${id}_${i}`) :
+            $(card).find("img").attr("src");
+        pictures.push({path: pictureName });
     }
     return pictures;
 }
