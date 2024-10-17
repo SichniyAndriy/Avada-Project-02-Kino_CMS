@@ -82,7 +82,7 @@ public class AppUtil implements CommandLineRunner {
         initUsers(n * 15);
         initSchedules();
         initMainPageInfo();
-        initContacts(5);
+        initContacts();
     }
 
     private void initTheatres(int n) {
@@ -240,18 +240,6 @@ public class AppUtil implements CommandLineRunner {
         scheduleRepository.saveAllAndFlush(schedules);
     }
 
-    private void place(
-            LocalDate date,
-            Auditorium auditorium,
-            Movie movie,
-            List<Schedule> schedules
-    ) {
-        for (int hours = 8; hours < 20; hours += 2) {
-            LocalTime time = LocalTime.of(hours, 0);
-            schedules.add(new Schedule(auditorium, movie, date, time));
-        }
-    }
-
     private void initMainPageInfo() {
         MainPageInfo mainPageInfo = new MainPageInfo();
         mainPageInfo.setPhoneNumber1(faker.phoneNumber().phoneNumber());
@@ -260,7 +248,7 @@ public class AppUtil implements CommandLineRunner {
         mainPageService.saveInfo(mainPageInfo);
     }
 
-    private void initContacts(int n) {
+    private void initContacts() {
         List<Contact> contacts = new ArrayList<>();
         List<Theater> theaters = theaterRepository.findAll();
         for (final Theater theater : theaters) {
@@ -274,5 +262,17 @@ public class AppUtil implements CommandLineRunner {
             contacts.add(contact);
         }
         contactRepository.saveAllAndFlush(contacts);
+    }
+
+    private void place(
+            LocalDate date,
+            Auditorium auditorium,
+            Movie movie,
+            List<Schedule> schedules
+    ) {
+        for (int hours = 8; hours < 20; hours += 2) {
+            LocalTime time = LocalTime.of(hours, 0);
+            schedules.add(new Schedule(auditorium, movie, date, time));
+        }
     }
 }

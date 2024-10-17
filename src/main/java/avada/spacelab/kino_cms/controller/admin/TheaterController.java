@@ -63,6 +63,14 @@ public class TheaterController {
         return "redirect:/admin/theaters";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteTheaterById(
+            @PathVariable long id
+    ) {
+        theaterService.deleteById(id);
+        return "redirect:/admin/theaters";
+    }
+
     @GetMapping(path = { "/show/auditorium/{id}/{theaterId}"})
     public String showAuditorium(
             @PathVariable long id,
