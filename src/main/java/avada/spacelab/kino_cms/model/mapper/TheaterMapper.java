@@ -11,5 +11,6 @@ public interface TheaterMapper {
     TheaterMapper INSTANCE = Mappers.getMapper(TheaterMapper.class);
 
     TheaterDto fromEntityToDto(Theater theater);
+
     Theater fromDtoToEntity(TheaterDto theaterDto);
 }
