@@ -9,7 +9,6 @@ import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.Schedule;
-import avada.spacelab.kino_cms.model.entity.Schedule.ScheduleCompositeKey;
 import avada.spacelab.kino_cms.model.entity.Status;
 import avada.spacelab.kino_cms.model.entity.Theater;
 import avada.spacelab.kino_cms.model.entity.User;
@@ -20,16 +19,17 @@ import avada.spacelab.kino_cms.repository.ContactRepository;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
+import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.MainPageService;
+import avada.spacelab.kino_cms.service.impl.MainPageServiceImpl;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +47,9 @@ public class AppUtil implements CommandLineRunner {
     private final NewsRepository newsRepository;
     private final PromotionRepository promotionRepository;
     private final UserRepository userRepository;
-    private final MainPageService mainPageService;
+    private final MainPageServiceImpl mainPageService;
     private final ContactRepository contactRepository;
+    private final ScheduleRepository scheduleRepository;
 
     public AppUtil(
             @Autowired TheaterRepository theaterRepository,
@@ -57,9 +58,9 @@ public class AppUtil implements CommandLineRunner {
             @Autowired NewsRepository newsRepository,
             @Autowired PromotionRepository promotionRepository,
             @Autowired UserRepository userRepository,
-            @Autowired MainPageService mainPageService,
-            @Autowired ContactRepository contactRepository
-    ) {
+            @Autowired MainPageServiceImpl mainPageService,
+            @Autowired ContactRepository contactRepository,
+            @Autowired ScheduleRepository scheduleRepository) {
         this.theaterRepository = theaterRepository;
         this.auditoriumRepository = auditoriumRepository;
         this.movieRepository = movieRepository;
@@ -68,17 +69,18 @@ public class AppUtil implements CommandLineRunner {
         this.userRepository = userRepository;
         this.mainPageService = mainPageService;
         this.contactRepository = contactRepository;
+        this.scheduleRepository = scheduleRepository;
     }
     
     @Override
     public void run(String... args) throws Exception {
         int n = 5;
         initTheatres(n);
-        initMovies(n * 5);
+        initMovies(n * 15);
         initNews(n * 3);
         initPromotions(n * 3);
         initUsers(n * 15);
-        initSchedule(n, 20);
+        initSchedules();
         initMainPageInfo();
         initContacts(5);
     }
@@ -139,21 +141,6 @@ public class AppUtil implements CommandLineRunner {
             movies.add(movie);
         }
         movieRepository.saveAllAndFlush(movies);
-    }
-
-    private void initSchedule(int n, int m) {
-        List<Schedule> schedules = new ArrayList<>();
-        long len = movieRepository.countById();
-        for (int i = 0; i < n; ++i) {
-            Optional<Movie> optionalMovie = movieRepository.findById(faker.random().nextLong(1, len));
-            for (int j = 0; j < m; ++j) {
-                Schedule schedule = new Schedule();
-                LocalDate lowestDate = LocalDate.now().minusDays(faker.random().nextInt(5));
-                LocalDate upperDate = LocalDate.now().plusDays(faker.random().nextInt(5));
-
-                schedule.setKey(new ScheduleCompositeKey());
-            }
-        }
     }
 
     private void initNews(int n) {
@@ -220,6 +207,49 @@ public class AppUtil implements CommandLineRunner {
             users.add(user);
         }
         userRepository.saveAllAndFlush(users);
+    }
+
+    private void initSchedules() {
+        List<Schedule> schedules = new ArrayList<>();
+        List<Movie> movies = movieRepository.findAll();
+        List<Auditorium> auditoriums = auditoriumRepository.findAll();
+        int moviesAmount = movies.size();
+        int n;
+
+        for(Auditorium auditorium : auditoriums) {
+            n = faker.random().nextInt(0, --moviesAmount);
+            Movie movie = movies.get(n);
+            for (int day = 3; day > 0 ; --day) {
+                LocalDate date = LocalDate.now().minusDays(day);
+                place(date, auditorium, movie, schedules);
+            }
+            for (int day = 0; day < 5; ++day) {
+                LocalDate date = LocalDate.now().plusDays(day);
+                place(date, auditorium, movie, schedules);
+            }
+            movies.remove(movie);
+
+            n = faker.random().nextInt(0, --moviesAmount);
+            movie = movies.get(n);
+            for (int day = 6; day < 16; ++day) {
+                LocalDate date = LocalDate.now().plusDays(day);
+                place(date, auditorium, movie, schedules);
+            }
+            movies.remove(movie);
+        }
+        scheduleRepository.saveAllAndFlush(schedules);
+    }
+
+    private void place(
+            LocalDate date,
+            Auditorium auditorium,
+            Movie movie,
+            List<Schedule> schedules
+    ) {
+        for (int hours = 8; hours < 20; hours += 2) {
+            LocalTime time = LocalTime.of(hours, 0);
+            schedules.add(new Schedule(auditorium, movie, date, time));
+        }
     }
 
     private void initMainPageInfo() {
