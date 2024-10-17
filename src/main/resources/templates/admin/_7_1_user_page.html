@@ -28,102 +28,94 @@
 </head>
 
 <body>
-  <script th:inline="javascript">
-    sessionStorage.setItem("userId", /*[[${user.id}]]*/ null);
-    sessionStorage.setItem("registrationDate", /*[[${user.registrationDate}]]*/ null);
-    sessionStorage.setItem("addressId", /*[[${user.address.id}]]*/ null);
-    sessionStorage.setItem("zipCode", /*[[${user.address.zipCode}]]*/ null);
-  </script>
   <aside th:replace="~{admin/index::sidebar}"></aside>
   <main class="main-content">
     <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
     <div>
-      <section id="user_form__container" th:object="${user}">
-        <form id="user_form" action="/admin/users/save" method="post">
+      <section class="container">
+        <form action="/admin/users/save" method="post" enctype="multipart/form-data" id="user__form"
+          th:object="${user}">
+          <input type="number" th:field="*{id}" hidden>
+          <input type="text" th:field="*{registrationDate}" hidden>
+          <input type="number" th:field="*{address.id}" hidden>
+          <input type="text" th:field="*{address.city}" hidden>
+          <input type="text" th:field="*{address.zipCode}" hidden>
+          <input type="text" th:field="*{address.street}" hidden>
+          <input type="text" th:field="*{address.houseNumber}" hidden>
+          <input type="text" th:field="*{address.flatNumber}" hidden>
           <div class="container mt-5 text-dark">
-            <div class="row row-cols-2 g-4">
-              <div class="col-6 d-flex">
-                <label class="form-label" for="first_name__input">Ім'я</label>
-                <input class="form-control" type="text" name="firstName" id="first_name__input" th:field="*{firstName}">
+            <div class="row row-cols-2 g-3">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="col-form-label w-25" th:for="first_name__input">Ім'я</label>
+                <input class="form-control w-75" type="text" th:id="first_name__input" th:field="*{firstName}">
               </div>
               <div class="col-6 d-flex">
-                <p class="w-25 text-end me-3">Мова</p>
-                <div class="w-75 d-flex">
+                <p class="w-25">Мова</p>
+                <div class="w-75 d-flex gap-4">
                   <div class="form-check">
-                    <label class="form-check-label" for="language_ua__input">
-                      Українська
-                    </label>
-                    <input class="form-check-input" type="radio" name="language" id="language_ua__input"
-                      value="UKRAINIAN" th:field="*{language}">
+                    <label class="form-check-label" for="language_ua__input">Українська</label>
+                    <input class="form-check-input" type="radio" id="language_ua__input" th:field="*{language}"
+                      value="UKRAINIAN">
                   </div>
                   <div class="form-check">
-                    <label class="form-check-label" for="language_en__input">
-                      Англійська
-                    </label>
-                    <input class="form-check-input" type="radio" name="language" id="language_en__input" value="ENGLISH"
-                      th:field="*{language}">
+                    <label class="form-check-label" for="language_en__input">Англійська</label>
+                    <input class="form-check-input" type="radio" id="language_en__input" th:field="*{language}"
+                      value="ENGLISH">
                   </div>
                 </div>
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="last_name__input">Прізвище</label>
-                <input class="form-control" type="text" name="lastName" id="last_name__input" th:field="*{lastName}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="last_name__input">Прізвище</label>
+                <input class="form-control w-75" type="text" id="last_name__input" th:field="*{lastName}">
               </div>
-              <div class="col-6 d-flex">
-                <p class="w-25 text-end me-3">Cтать</p>
-                <div class="w-75 d-flex">
+              <div class="col-6 d-flex align-items-baseline">
+                <p class="w-25">Cтать</p>
+                <div class="w-75 d-flex gap-4">
                   <div class="form-check">
-                    <label class="form-check-label" for="gender_male__input">
-                      Чоловіча
-                    </label>
-                    <input class="form-check-input" type="radio" name="gender" id="gender_male__input" value="MALE"
+                    <label class="form-check-label" for="gender_male__input">Чоловіча</label>
+                    <input class="form-check-input" type="radio" id="gender_male__input" value="MALE"
                       th:field="*{gender}">
                   </div>
-                  <div class="form-check">
-                    <label class="form-check-label" for="gender_female__input">
-                      Жіноча
-                    </label>
-                    <input class="form-check-input" type="radio" name="gender" id="gender_female__input" value="FEMALE"
+                  <div class="form-check ms-3">
+                    <label class="form-check-label" for="gender_female__input">Жіноча</label>
+                    <input class="form-check-input" type="radio" id="gender_female__input" value="FEMALE"
                       th:field="*{gender}">
                   </div>
                 </div>
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="nick_name__input">Псевдоним</label>
-                <input class="form-control" type="text" name="nickName" id="nick_name__input" th:field="*{nickName}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="nick_name__input">Псевдоним</label>
+                <input class="form-control w-75" type="text" id="nick_name__input" th:field="*{nickName}">
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="phone__input">Телефон</label>
-                <input class="form-control" type="tel" name="phone" id="phone__input" th:field="*{phone}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="phone__input">Телефон</label>
+                <input class="form-control w-75" type="tel" id="phone__input" th:field="*{phone}">
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="email__input">Електрона пошта</label>
-                <input class="form-control" type="email" name="email" id="email__input" th:field="*{email}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="email__input">Електрона пошта</label>
+                <input class="form-control w-75" type="email" id="email__input" th:field="*{email}">
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="birth_date__input">Дата народження</label>
-                <input class="form-control" type="date" name="birthDate" id="birth_date__input" th:field="*{birthDate}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="birth_date__input">Дата народження</label>
+                <input class="form-control w-75" type="date" id="birth_date__input" th:field="*{birthDate}">
               </div>
-              <div class="col-6 d-flex">
-
-                <label class="form-label" for="address__input">Адреса</label>
-                <input class="form-control" type="text" name="address" id="address__input" th:field="*{address}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="address__input">Адреса</label>
+                <input class="form-control w-75" type="text" id="address__input" th:value="*{address}">
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="password__input">Пароль</label>
-                <input class="form-control" type="password" name="passHash" id="password__input" th:field="*{passHash}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="password__input">Пароль</label>
+                <input class="form-control w-75" type="password" id="password__input" th:field="*{passHash}">
               </div>
-              <div class="col-6 d-flex">
-                <label class="form-label" for="card_number__input">Номер картки</label>
-                <input class="form-control" type="text" name="cardNumber" id="card_number__input"
-                  th:field="*{cardNumber}">
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="card_number__input">Номер картки</label>
+                <input class="form-control w-75" type="text" id="card_number__input" th:field="*{cardNumber}">
               </div>
               <div class="col-8 mt-5 mx-auto">
                 <div class="vstack gap-3">
                   <input type="submit" class="btn btn-success w-25 mx-auto" value="Зберегти">
-                  <button class="btn btn-outline-danger w-25 mx-auto" type="button" th:onclick="goToUsers()">
-                    Скасувати
-                  </button>
+                  <input type="reset" class="btn btn-outline-danger w-25 mx-auto" th:onclick="goToUsers()"
+                    value="Скасувати">
                 </div>
               </div>
             </div>
