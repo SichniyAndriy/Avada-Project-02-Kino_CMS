@@ -1,51 +1,14 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.PromotionDto;
-import avada.spacelab.kino_cms.model.entity.Promotion;
-import avada.spacelab.kino_cms.model.entity.SeoBlock;
-import avada.spacelab.kino_cms.model.mapper.PromotionMapper;
-import avada.spacelab.kino_cms.repository.PromotionRepository;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class PromotionService {
-    private final PromotionRepository promotionRepository;
+public interface PromotionService {
+    List<PromotionDto> getAllPromotions();
 
-    public PromotionService(
-            @Autowired PromotionRepository promotionRepository
-    ) {
-        this.promotionRepository = promotionRepository;
-    }
+    PromotionDto getPromotionById(long id);
 
-    public List<PromotionDto> getAllPromotions() {
-        return promotionRepository.findAll().stream()
-                .map(PromotionMapper.INSTANCE::fromEntityToDto)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
+    void deleteById(long id);
 
-    public PromotionDto getPromotionById(long id) {
-        Optional<Promotion> promotionOptional = promotionRepository.findById(id);
-        promotionOptional.ifPresent(promotion -> {
-            if(promotion.getSeoBlock() == null) {
-                promotion.setSeoBlock(new SeoBlock());
-            }
-        });
-        return promotionOptional
-                .map(PromotionMapper.INSTANCE::fromEntityToDto)
-                .orElse(PromotionDto.EMPTY());
-    }
-
-    public void deleteById(long id) {
-        promotionRepository.deleteById(id);
-    }
-
-    public void save(PromotionDto promotionDto) {
-        Promotion promotion = PromotionMapper.INSTANCE.fromDtoToEntity(promotionDto);
-        promotionRepository.save(promotion);
-    }
+    void save(PromotionDto promotionDto);
 }

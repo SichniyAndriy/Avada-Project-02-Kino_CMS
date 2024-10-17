@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("admin/banners")
 public class MainPageController {
     private final MainPageService mainPageService;
-
     private final String MAIN_PAGE_BANNERS = "pictures/main-page";
 
     public MainPageController(

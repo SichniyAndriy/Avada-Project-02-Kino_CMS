@@ -1,50 +1,14 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.NewsDto;
-import avada.spacelab.kino_cms.model.entity.News;
-import avada.spacelab.kino_cms.model.entity.SeoBlock;
-import avada.spacelab.kino_cms.model.mapper.NewsMapper;
-import avada.spacelab.kino_cms.repository.NewsRepository;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class NewsService {
-    private final NewsRepository newsRepository;
+public interface NewsService {
+    List<NewsDto> getAllNews();
 
-    public NewsService(
-            @Autowired NewsRepository newsRepository
-    ) {
-        this.newsRepository = newsRepository;
-    }
+    NewsDto getById(long id);
 
-    public List<NewsDto> getAllNews() {
-        return newsRepository.findAll().stream()
-                .sorted(Comparator.comparingLong(News::getId))
-                .map(NewsMapper.INSTANCE::fromEntityToDto)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
+    void deleteById(long id);
 
-    public NewsDto getById(long id) {
-        Optional<News> newsOptional = newsRepository.findById(id);
-        newsOptional.ifPresent(news -> {
-            if (news.getSeoBlock() == null) {
-                news.setSeoBlock(new SeoBlock());
-            }});
-        return newsOptional.map(NewsMapper.INSTANCE::fromEntityToDto).orElse(NewsDto.EMPTY());
-    }
-
-    public void deleteById(long id) {
-        newsRepository.deleteById(id);
-    }
-
-    public void save(NewsDto newsDto) {
-        News news = NewsMapper.INSTANCE.fromDtoToEntity(newsDto);
-        newsRepository.save(news);
-    }
+    void save(NewsDto newsDto);
 }
