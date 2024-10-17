@@ -29,7 +29,11 @@ $(() => {
     })
 });
 
-function showAuditorium(audId=0, thId=0) {
+function gotoTheaters(){
+    location.href = THEATERS_PATH;
+}
+
+function showAuditorium(audId=0, thId) {
     location.href = `${THEATERS_PATH}/show/auditorium/${audId}/${thId}`;
 }
 
@@ -117,8 +121,10 @@ async function saveTheater(form) {
         method: "POST",
         body: formData
     }).then(responce => {
-        alert("Theater saved");
-    })
+        gotoTheaters();
+    }).catch(error => {
+        alert(`Дані не збережено\nПеревірте поля\n${error}`);
+    });
 }
 
 async function uploadFileToServer(file, name, id) {

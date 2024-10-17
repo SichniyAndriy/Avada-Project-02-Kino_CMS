@@ -10,6 +10,10 @@ function showTheater(id = 0) {
     window.location.href = `${THEATER_PATH}/show/${id}`;
 }
 
-function deleteCard(el) {
-    $(el).parent().remove();
+function addNew() {
+    window.location.href = `${THEATER_PATH}/add-new`;
+}
+
+function deleteTheater(id) {
+    window.location.href = `${THEATER_PATH}/delete/${id}`;
 }

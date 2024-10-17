@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +18,8 @@ public interface TheaterRepository extends JpaRepository<Theater, Long> {
     Optional<Theater> findById(Long aLong);
 
     @Query("SELECT t from Theater t JOIN FETCH Auditorium a ON t=a.theater WHERE a.id=:id")
-    Theater findTheaterByIdAuditorium(Long id);
+    Theater findTheaterByIdAuditorium(@Param("id") Long id);
+
+    @Override
+    void deleteById(Long id);
 }

@@ -36,22 +36,22 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <div>
             <section class="text-end p-5">
-                <button type="button" class="btn btn-outline-primary" th:onclick="showTheater()">Додати новий
-                    кінотеатр</button>
+                <button type="button" class="btn btn-outline-primary" th:onclick="addNew()">
+                    Додати новий кінотеатр
+                </button>
             </section>
             <section id="current__theaters">
                 <div class="row row-cols-5 p-5 text-dark">
                     <div class="col" th:each="theater : ${theaters}">
                         <div class="card" th:onclick="showTheater([[${theater.id}]])">
-                            <img class="card-img-top"
-                                th:src="|https://picsum.photos/id/${theaterStat.count + 42}/600/400|"
+                            <img class="card-img-top" th:src="${theater.logoUrl} ?: '/pictures/theaters/blank.png'" 
                                 alt="Current theater picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${theater.title}">Some quick example text.</p>
                             </div>
                         </div>
                         <button type="button" class="btn btn-outline-danger d-block mx-auto"
-                            th:onclick="deleteCard(this)">Видалити</button>
+                            th:onclick="deleteTheater([[${theater.id}]])">Видалити</button>
                     </div>
                 </div>
             </section>
