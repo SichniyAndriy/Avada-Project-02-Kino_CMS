@@ -11,8 +11,9 @@ import org.mapstruct.factory.Mappers;
 public interface MoviePictureMapper {
     MoviePictureMapper INSTANCE = Mappers.getMapper(MoviePictureMapper.class);
 
+
     MoviePictureDto fromEntityToDto(MoviePicture moviePicture);
 
-    @Mapping(target = "movie", ignore = true)
+    @Mapping(target = "movie" ,ignore = true)
     MoviePicture fromDtoToEntity(MoviePictureDto moviePictureDto);
 }
