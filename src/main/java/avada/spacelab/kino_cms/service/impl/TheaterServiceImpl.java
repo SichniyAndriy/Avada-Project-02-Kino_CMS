@@ -37,6 +37,7 @@ public class TheaterServiceImpl implements TheaterService {
         this.auditoriumRepository = auditoriumRepository;
         this.scheduleRepository = scheduleRepository;
     }
+    /*----------------------------- PUBLIC PART -----------------------------*/
 
     public List<TheaterDto> getAllTheaters() {
         return theaterRepository.findAll().stream()
@@ -58,31 +59,15 @@ public class TheaterServiceImpl implements TheaterService {
     }
 
     public TheaterDto save(TheaterDto theaterDto, String picturesJson) {
-        List<TheaterPictureDto> theaterPictureDtos;
-        try {
-            theaterPictureDtos = new ObjectMapper()
-                    .readValue(picturesJson, new TypeReference<>() {});
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        List<TheaterPicture> pictures = theaterPictureDtos.stream()
-                .map(TheaterPictureMapper.INSTANCE::fromDtoToEntity)
-                .toList();
-
         Theater theater = TheaterMapper.INSTANCE.fromDtoToEntity(theaterDto);
         if (theater.getSeoBlock() == null) {
             theater.setSeoBlock(new SeoBlock());
         }
+        setPictures(theater, picturesJson);
+        setAuditoriums(theater);
 
-        theater.setPictures(pictures);
-        pictures.forEach(picture -> picture.setTheater(theater));
-
-        List<Auditorium> auditoriums = auditoriumRepository.findAuditoriumsByTheaterId(theater.getId());
-        theater.setAuditoriums(auditoriums);
-        auditoriums.forEach(auditorium -> auditorium.setTheater(theater));
-
-        Theater saved = theaterRepository.save(theater);
-        return TheaterMapper.INSTANCE.fromEntityToDto(saved);
+        Theater savedTheater = theaterRepository.save(theater);
+        return TheaterMapper.INSTANCE.fromEntityToDto(savedTheater);
     }
 
     public void deleteById(long id) {
@@ -91,5 +76,34 @@ public class TheaterServiceImpl implements TheaterService {
                 auditorium -> scheduleRepository.deleteAllByAuditoriumId(auditorium.getId())
         );
         theaterRepository.deleteById(id);
+    }
+
+    /*----------------------------- PRIVATE PART -----------------------------*/
+
+    private void setPictures(Theater theater, String picturesJson) {
+        List<TheaterPicture> pictures =
+                parseJsonToTheaterPictures(picturesJson);
+        theater.setPictures(pictures);
+        pictures.forEach(picture -> picture.setTheater(theater));
+    }
+
+    private void setAuditoriums(Theater theater) {
+        List<Auditorium> auditoriums =
+                auditoriumRepository.findAuditoriumsByTheaterId(theater.getId());
+        theater.setAuditoriums(auditoriums);
+        auditoriums.forEach(auditorium -> auditorium.setTheater(theater));
+    }
+
+    private List<TheaterPicture> parseJsonToTheaterPictures(String picturesJson) {
+        List<TheaterPictureDto> theaterPictureDtos;
+        try {
+            theaterPictureDtos = new ObjectMapper()
+                    .readValue(picturesJson, new TypeReference<>() {});
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return theaterPictureDtos.stream()
+                .map(TheaterPictureMapper.INSTANCE::fromDtoToEntity)
+                .toList();
     }
 }

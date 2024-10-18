@@ -32,7 +32,6 @@ public interface MovieMapper {
         return res;
     }
 
-
     @Mapping(target = "schedules", source = "schedules", qualifiedByName = "schedulesToScheduleDtos")
     MovieDto fromEntityToDto(Movie movie);
 
