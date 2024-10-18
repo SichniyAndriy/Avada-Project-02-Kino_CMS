@@ -9,7 +9,6 @@ import avada.spacelab.kino_cms.model.mapper.MainPageInfoMapper;
 import avada.spacelab.kino_cms.repository.MainPageBannersRepository;
 import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
 import avada.spacelab.kino_cms.service.MainPageService;
-import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ public class MainPageServiceImpl implements MainPageService {
         this.mainPageInfoRepository = mainPageInfoRepository;
     }
 
-    @Transactional
     public void deleteAllByReplacement(Replacement place) {
         mainPageBannersRepository.removeAllByPlaceEquals(place);
     }
