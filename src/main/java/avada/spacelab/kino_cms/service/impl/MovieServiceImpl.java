@@ -39,6 +39,7 @@ public class MovieServiceImpl implements MovieService {
         this.scheduleRepository = scheduleRepository;
     }
 
+    /*------------------------------ Public part ------------------------------*/
     public Map<Boolean, List<MovieDto>> getPartitionedMovies() {
         List<Movie> movies = movieRepository.findAll();
 
@@ -82,10 +83,18 @@ public class MovieServiceImpl implements MovieService {
 
     public void save(MovieDto movieDto, String picturesJson) {
         Movie movie = MovieMapper.INSTANCE.fromDtoToEntity(movieDto);
+
+        setPictures(movie, picturesJson);
+
+        movieRepository.save(movie);
+    }
+
+    /*------------------------------ Private part ------------------------------*/
+
+    private void setPictures(Movie movie, String picturesJson) {
         List<MoviePicture> pictures = parsePicturesJson(picturesJson);
         movie.setPictures(pictures);
         pictures.forEach(picture -> picture.setMovie(movie));
-        movieRepository.save(movie);
     }
 
     private List<MoviePicture> parsePicturesJson(String picturesJson) {
@@ -96,9 +105,8 @@ public class MovieServiceImpl implements MovieService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        List<MoviePicture> pictures = pictureDtos.stream()
+        return pictureDtos.stream()
                 .map(MoviePictureMapper.INSTANCE::fromDtoToEntity)
                 .toList();
-        return pictures;
     }
 }

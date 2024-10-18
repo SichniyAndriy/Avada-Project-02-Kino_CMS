@@ -31,6 +31,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         this.theaterRepository = theaterRepository;
     }
 
+    /*---------------------------- Public part ----------------------------*/
+
     public AuditoriumDto getById(long id) {
         Optional<Auditorium> auditoriumOptional = auditoriumRepository.findById(id);
         if (auditoriumOptional.isPresent()) {
@@ -48,6 +50,30 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     }
 
     public void save(AuditoriumDto auditoriumDto, String picturesJson) {
+        Auditorium auditorium = AuditoriumMapper.INSTANCE.fromDtoToEntity(auditoriumDto);
+
+        setPictures(auditorium, picturesJson);
+        setTheater(auditorium);
+
+        auditoriumRepository.save(auditorium);
+    }
+
+    /*---------------------------- Private part ----------------------------*/
+
+    private void setPictures(Auditorium auditorium, String picturesJson) {
+        List<AuditoriumPicture> pictures = parseJsonToPicturesDto(picturesJson);
+        auditorium.setPictures(pictures);
+        auditorium.getPictures().forEach(picture -> picture.setAuditorium(auditorium));
+    }
+
+    private void setTheater(Auditorium auditorium) {
+        Optional<Theater> theaterOptional = Optional.ofNullable(
+                theaterRepository.findTheaterByIdAuditorium(auditorium.getId())
+        );
+        theaterOptional.ifPresent(auditorium::setTheater);
+    }
+
+    private List<AuditoriumPicture> parseJsonToPicturesDto(String picturesJson) {
         List<AuditoriumPictureDto> pictureDtos;
         try {
             pictureDtos =  new ObjectMapper().
@@ -55,23 +81,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        List<AuditoriumPicture> pictures = pictureDtos.stream()
+        return pictureDtos.stream()
                 .map(AuditoriumPictureMapper.INSTANCE::fromDtoToEntity)
                 .toList();
-
-        Auditorium auditorium = AuditoriumMapper.INSTANCE.fromDtoToEntity(auditoriumDto);
-
-        auditorium.setPictures(pictures);
-        auditorium.getPictures().forEach(picture -> picture.setAuditorium(auditorium));
-
-        Optional<Theater> theaterOptional = Optional.ofNullable(
-                theaterRepository.findTheaterByIdAuditorium(auditorium.getId())
-        );
-        if (!theaterOptional.isPresent()){
-
-        }
-        theaterOptional.ifPresent(auditorium::setTheater);
-
-        auditoriumRepository.save(auditorium);
     }
 }
