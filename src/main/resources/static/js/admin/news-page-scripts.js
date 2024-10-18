@@ -18,6 +18,10 @@ $(() => {
         const $Elems = $Forms.find("input").add($Forms.find("textarea"));
         $Elems.prop("disabled", !status);
     }).trigger("change");
+    $("#clear_picture__btn").on("click", evemt => {
+        $("#news_picture").attr("src", "");
+        $("picture__input")[0].files[0] = null;
+    })
 })
 
 $("#news_status").on("change", (event) => {

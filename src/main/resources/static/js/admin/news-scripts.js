@@ -1,3 +1,4 @@
+// @ts-nocheck
 const NEWS_PATH = "/admin/news"
 
 $(() => {
