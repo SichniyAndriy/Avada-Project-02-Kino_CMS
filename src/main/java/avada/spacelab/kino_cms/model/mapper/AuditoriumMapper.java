@@ -14,5 +14,7 @@ public interface AuditoriumMapper {
     AuditoriumDto fromEntityToDto(Auditorium auditorium);
 
     @Mapping(target = "theater", ignore = true)
+    @Mapping(target = "pictures", ignore = true)
+    @Mapping(target = "schedules", ignore = true)
     Auditorium fromDtoToEntity(AuditoriumDto auditoriumDto);
 }
