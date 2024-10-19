@@ -2,9 +2,10 @@ package avada.spacelab.kino_cms.service.impl;
 
 import avada.spacelab.kino_cms.model.dto.MovieDto;
 import avada.spacelab.kino_cms.model.dto.MoviePictureDto;
-import avada.spacelab.kino_cms.model.dto.ScheduleDto;
+import avada.spacelab.kino_cms.model.dto.MoviesResponceDto;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MoviePicture;
+import avada.spacelab.kino_cms.model.entity.Schedule;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.MovieMapper;
 import avada.spacelab.kino_cms.model.mapper.MoviePictureMapper;
@@ -15,12 +16,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -40,25 +39,21 @@ public class MovieServiceImpl implements MovieService {
     }
 
     /*------------------------------ Public part ------------------------------*/
-    public Map<Boolean, List<MovieDto>> getPartitionedMovies() {
+
+    public Map<Boolean, List<MoviesResponceDto>> getPartitionedMovies() {
         List<Movie> movies = movieRepository.findAll();
 
-        List<MovieDto> movieDtos = movies.stream()
-                .filter(Objects::nonNull)
-                .map(movie -> {
-                    if (movie.getSeoBlock() == null) {
-                        movie.setSeoBlock(new SeoBlock());
-                    }
-                    return MovieMapper.INSTANCE.fromEntityToDto(movie);
-                })
-                .toList();
-
-        Predicate<ScheduleDto> predicate = item -> item.date().isEqual((ChronoLocalDate) LocalDate.now());
-        Map<Boolean, List<MovieDto>> partitioned = movieDtos.stream()
-                .collect(Collectors.partitioningBy(movie ->
-                        movie.schedules().stream().anyMatch(predicate)
+        Predicate<Schedule> predicate = item -> item.getKey().getDate().isEqual(LocalDate.now());
+        Map<Boolean, List<MoviesResponceDto>> partitioned = movies.stream()
+                .collect(Collectors.partitioningBy(
+                        movie ->  movie.getSchedules().stream().anyMatch(predicate),
+                        Collectors.mapping(
+                                MovieMapper.INSTANCE::fromEntityToResponceDto,
+                                Collectors.toList()
+                        )
                 ));
-
+        partitioned.get(true).sort(Comparator.comparingLong(MoviesResponceDto::id));
+        partitioned.get(false).sort(Comparator.comparingLong(MoviesResponceDto::id));
         return partitioned;
     }
 

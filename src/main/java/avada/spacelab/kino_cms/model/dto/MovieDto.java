@@ -21,8 +21,7 @@ public record MovieDto(
         Integer ageCenz,
         MovieDetails details,
         SeoBlockDto seoBlock,
-        List<MoviePictureDto> pictures,
-        List<ScheduleDto> schedules
+        List<MoviePictureDto> pictures
 ) implements Serializable {
 
     public static MovieDto EMPTY() {
@@ -39,7 +38,6 @@ public record MovieDto(
                 null,
                 MovieDetails.EMPTY(),
                 SeoBlockDto.EMPTY(),
-                Collections.emptyList(),
                 Collections.emptyList()
         );
     }

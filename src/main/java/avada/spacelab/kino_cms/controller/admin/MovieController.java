@@ -2,18 +2,11 @@ package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.model.dto.MovieDto;
-import avada.spacelab.kino_cms.model.dto.MoviePictureDto;
+import avada.spacelab.kino_cms.model.dto.MoviesResponceDto;
 import avada.spacelab.kino_cms.service.MovieService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,16 +33,9 @@ public class MovieController {
 
     @GetMapping(path = {"","/"})
     public String films(Model model) {
-        List<MovieDto> allMovies = movieService.getAllMovies();
-        Map<Boolean, List<MovieDto>> collected = allMovies.stream()
-                .collect(Collectors.partitioningBy(item ->
-                        item.schedules().stream().anyMatch(ch ->
-                Objects.equals(ch.date(), LocalDate.now()) ) )
-        );
-        collected.get(true).sort(Comparator.comparingLong(MovieDto::id));
-        collected.get(false).sort(Comparator.comparingLong(MovieDto::id));
-        model.addAttribute("currentMovies", collected.get(true));
-        model.addAttribute("futureMovies", collected.get(false));
+        Map<Boolean, List<MoviesResponceDto>> partitioned = movieService.getPartitionedMovies();
+        model.addAttribute("currentMovies", partitioned.get(true));
+        model.addAttribute("futureMovies", partitioned.get(false));
         return "admin/_2_0_movies";
     }
 
