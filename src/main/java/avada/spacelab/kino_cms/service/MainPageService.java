@@ -17,5 +17,7 @@ public interface MainPageService {
 
     void saveInfo(MainPageInfo mainPageInfo);
 
+    void saveInfoDto(MainPageInfoDto mainPageInfoDto);
+
     MainPageInfoDto getInfo();
 }

@@ -42,10 +42,19 @@ public class MainPageServiceImpl implements MainPageService {
         return mainPageBannersRepository.saveAllAndFlush(mainPages);
     }
 
+    @Override
     public void saveInfo(MainPageInfo mainPageInfo) {
         mainPageInfoRepository.save(mainPageInfo);
     }
 
+    @Override
+    public void saveInfoDto(MainPageInfoDto mainPageInfoDto) {
+        MainPageInfo mainPageInfo =
+                MainPageInfoMapper.INSTANCE.fromDtoToEntity(mainPageInfoDto);
+        mainPageInfoRepository.save(mainPageInfo);
+    }
+
+    @Override
     public MainPageInfoDto getInfo() {
         Optional<MainPageInfo> infoOptional = mainPageInfoRepository.findById(1L);
         infoOptional.ifPresent(mainPageInfo -> {
