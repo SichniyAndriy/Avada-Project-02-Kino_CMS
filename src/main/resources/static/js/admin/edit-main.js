@@ -2,7 +2,7 @@
 $( () => {
     $("#header__title").text("Редагування головної сторінки");
     $("#sidebar-special").addClass("show");
-    $("#info__from").on("submit", (event) => {
+    $("#info__form").on("submit", (event) => {
         event.preventDefault();
         updateInfo(event.target);
     });
@@ -19,6 +19,13 @@ $( () => {
 
 function updateInfo(form) {
     const formData = new FormData(form);
+
+    for (const entry of formData.entries()) {
+        console.log(entry);
+        const [key, value] = entry;
+        console.log(`${key} : ${value}`);
+    }
+
     fetch("/admin/edit/main", {
         method: "POST",
         body: formData

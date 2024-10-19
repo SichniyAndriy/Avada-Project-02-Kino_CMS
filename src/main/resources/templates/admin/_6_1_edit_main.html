@@ -38,8 +38,10 @@
                     <input class="form-check-input" id="main_page_status" type="checkbox" role="switch">
                     <label class="form-check-label ms-3" for="main_page_status">OFF</label>
                 </div>
-                <form action="/admin/edit/main" method="post" enctype="multipart/form-data" id="info__from">
-                    <div class="d-flex flex-column text-dark" th:object="${info}">
+                <form action="/admin/edit/main" method="post" enctype="multipart/form-data" id="info__form"
+                    th:object="${info}">
+                    <div class="d-flex flex-column text-dark">
+                        <input type="number" th:field="*{id}" hidden>
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Телефон</span>
                             <div class="col-3 d-flex flex-column">

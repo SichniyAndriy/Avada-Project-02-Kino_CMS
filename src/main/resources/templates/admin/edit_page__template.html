@@ -1,0 +1,112 @@
+<section class="mb-5" th:fragment="edit_page__form">
+    <script th:inline="javascript">
+      const PAGE_NAME = /*[[${page_name}]]*/ "";
+    </script>
+    <div class="container-fluid text-end pe-5">
+      <div class="form-check form-switch d-flex justify-content-end fs-3 my-4 ms-auto">
+        <input class="form-check-input" th:id="|${page_name}_status|" type="checkbox" role="switch">
+        <label class="form-check-label ms-3" th:for="|${page_name}_status|">OFF</label>
+      </div>
+      <form th:action="|/admin/edit/${page_name}|" method="post" enctype="multipart/form-data" th:object="${page}">
+        <input type="text" id="page_id" th:field="*{id}" hidden>
+        <div class="d-flex flex-column gap-4 text-dark">
+          <div class="row align-items-baseline">
+            <span class="col-2">Назва</span>
+            <div class="col-10">
+              <input type="text" class="form-control" id="title" th:field="*{title}">
+            </div>
+          </div>
+          <div class="row align-items-baseline">
+            <span class="col-2">Опис</span>
+            <div class="col-10">
+              <textarea class="form-control" id="description" rows="8" th:field="*{description}">
+              </textarea>
+            </div>
+          </div>
+          <div class="row align-items-baseline">
+            <span class="col-2">Головна картинка</span>
+            <div class="col-10 row">
+              <div class="col-9 text-start" id="banner_block">
+                <img class="text-bg-info" alt="banner" style="width: 640px; height: 360px;"
+                  th:src="*{bannerUrl} ?: '/pictures/stumb.webp'">
+                <input type="file" accept="image/*" hidden>
+              </div>
+              <div class="col-3 align-content-center">
+                <div class="d-grid gap-3">
+                  <button type="button" class="btn btn-primary" id="load_banner__btn">
+                    Завантажити
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" id="clear__btn">
+                    Видалити
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-start">
+            <span class="col-2 p-3">Галерея картинок</span>
+            <div class="col-10 row row-cols-5 align-items-baseline" id="cards_block">
+              <div class="col ps-0" th:each="picture, stat : *{pictures}">
+                <div class="mt-3 position-relative">
+                  <img class="img-fluid img-thumbnail" th:src="${picture.path}" alt="picture">
+                  <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"
+                    onclick="deleteCard(this)"></i>
+                  </div>
+                  <input type="file" accept="image/*" class="form-control mb-2" onchange="showPicture(this)">
+              </div>
+              <div class="col text-center align-content-center" >
+                <button type="button" class="btn w-100 h-100" id="add_picture_btn">
+                  <i class="bi bi-plus-circle-fill fs-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-baseline">
+            <span class="col-2">Посилання на відео</span>
+            <div class="col-10">
+              <input type="text" class="form-control" id="video_url" th:field="*{videoUrl}">
+            </div>
+          </div>
+          <div class="row align-items-baseline">
+            <p class="col-2">Seo block</p>
+            <div class="col-10">
+              <div class="border border-1 border-dark rounded-3">
+                <div class="d-flex flex-column py-3">
+                  <input type="text" id="seo_id" th:field="*{seoBlock.id}" hidden>
+                  <div class="row align-items-baseline">
+                    <span class="col-2">URL</span>
+                    <div class="col-9">
+                      <input type="text" class="form-control" th:field="*{seoBlock.url}">
+                    </div>
+                  </div>
+                  <div class="row align-items-baseline">
+                    <span class="col-2">Заголовок</span>
+                    <div class="col-9">
+                      <input type="text" class="form-control" th:field="*{seoBlock.title}">
+                    </div>
+                  </div>
+                  <div class="row align-items-baseline">
+                    <span class="col-2">Ключові слова</span>
+                    <div class="col-9">
+                      <input type="text" class="form-control" th:field="*{seoBlock.keywords}">
+                    </div>
+                  </div>
+                  <div class="row align-items-baseline">
+                    <span class="col-2">Опис</span>
+                    <div class="col-9">
+                      <textarea class="form-control" rows="4" th:field="*{seoBlock.description}">
+                                              </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <button type="submit" class="btn btn-success" id="saveForm__btn">Зберегти</button>
+          <button type="reset" class="btn btn-outline-danger">Відміна</button>
+        </div>
+      </form>
+    </div>
+  </section>
