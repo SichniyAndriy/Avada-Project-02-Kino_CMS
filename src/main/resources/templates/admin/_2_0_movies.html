@@ -40,7 +40,7 @@
                     Створити новий запис
                 </button>
             </section>
-            <section class="container-fluid px-5" id="current__films">
+            <section class="container" id="current__films">
                 <h4 class="text-center mt-4 p-5">Список поточних фільмів</h4>
                 <div class="row row-cols-5">
                     <div class="col" th:each="currentMovie, stat : ${currentMovies}"
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </section>
-            <section id="future__films">
+            <section class="container" id="future__films">
                 <h4 class="text-center mt-4">Список майбутніх фільмів</h4>
                 <div class="row row-cols-5 p-5">
                     <div class="col" th:each="futureMovie, stat : ${futureMovies}"
