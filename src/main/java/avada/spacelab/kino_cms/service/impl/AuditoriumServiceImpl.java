@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,8 +25,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     private final TheaterRepository theaterRepository;
 
     public AuditoriumServiceImpl(
-            AuditoriumRepository auditoriumRepository,
-            TheaterRepository theaterRepository
+            @Autowired AuditoriumRepository auditoriumRepository,
+            @Autowired TheaterRepository theaterRepository
     ) {
         this.auditoriumRepository = auditoriumRepository;
         this.theaterRepository = theaterRepository;
@@ -51,10 +52,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     public void save(AuditoriumDto auditoriumDto, String picturesJson) {
         Auditorium auditorium = AuditoriumMapper.INSTANCE.fromDtoToEntity(auditoriumDto);
-
         setPictures(auditorium, picturesJson);
         setTheater(auditorium);
-
         auditoriumRepository.save(auditorium);
     }
 
