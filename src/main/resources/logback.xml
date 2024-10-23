@@ -1,0 +1,46 @@
+<configuration>
+
+    <property name="status" value="warn"/>
+    <property name="SERVICE_LOG" value="logs/service.log"/>
+    <property name="APP_LOG" value="logs/app.log"/>
+
+    <appender name="toConsole" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %yellow(%d) %green([%20thread]) %highlight([%5level]) %magenta([%15logger{0}]): %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="toAppLog" class="ch.qos.logback.core.FileAppender">
+        <file>${APP_LOG}</file>
+        <encoder>
+            <pattern>
+                %d [%-15thread] [%-5level] %-15logger{0}: %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="toServiceLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${SERVICE_LOG}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/service-%d{yyyy-MM-dd}/service-%d{yyyy-MM-dd hh}.log.zip</fileNamePattern>
+            <maxHistory>120</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d [%-15thread] [%-5level] %-15logger{0}: %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="toAppLog"/>
+        <appender-ref ref="toConsole"/>
+    </root>
+    <logger name="avada.spacelab.kino_cms.aspect.ServiceLogger" level="info" additivity="false">
+        <appender-ref ref="toServiceLog"/>
+        <appender-ref ref="toConsole"/>
+    </logger>
+
+</configuration>
