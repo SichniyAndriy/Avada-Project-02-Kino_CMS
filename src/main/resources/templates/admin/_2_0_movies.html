@@ -41,7 +41,7 @@
                 </button>
             </section>
             <section class="container" id="current__films">
-                <h4 class="text-center mt-4 p-5">Список поточних фільмів</h4>
+                <h4 class="text-center my-4">Список поточних фільмів</h4>
                 <div class="row row-cols-5">
                     <div class="col" th:each="currentMovie, stat : ${currentMovies}"
                         th:onclick="showMovie([[${currentMovie.id}]])">
@@ -57,8 +57,8 @@
                 </div>
             </section>
             <section class="container" id="future__films">
-                <h4 class="text-center mt-4">Список майбутніх фільмів</h4>
-                <div class="row row-cols-5 p-5">
+                <h4 class="text-center my-4">Список майбутніх фільмів</h4>
+                <div class="row row-cols-5">
                     <div class="col" th:each="futureMovie, stat : ${futureMovies}"
                         th:onclick="showMovie([[${futureMovie.id}]])">
                         <div class="card">
