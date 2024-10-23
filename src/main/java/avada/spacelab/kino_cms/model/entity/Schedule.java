@@ -12,6 +12,8 @@ import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +33,7 @@ public class Schedule {
         this.key = new ScheduleCompositeKey(auditorium, movie, date, time);
     }
 
-    @Getter @Setter @NoArgsConstructor
+    @Data @NoArgsConstructor @AllArgsConstructor
     @Embeddable
     public static class ScheduleCompositeKey implements Serializable {
         @ManyToOne(targetEntity = Auditorium.class)
@@ -49,17 +51,5 @@ public class Schedule {
         @Temporal(TemporalType.TIME)
         @Column(name = "time", nullable = false)
         private LocalTime time;
-
-        public ScheduleCompositeKey(
-                Auditorium auditorium,
-                Movie movie,
-                LocalDate date,
-                LocalTime time
-        ) {
-            this.auditorium = auditorium;
-            this.movie = movie;
-            this.date = date;
-            this.time = time;
-        }
     }
 }
