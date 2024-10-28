@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NewsServiceImpl implements NewsService {
+
     private final NewsRepository newsRepository;
+
 
     public NewsServiceImpl(
             @Autowired NewsRepository newsRepository
@@ -48,4 +50,5 @@ public class NewsServiceImpl implements NewsService {
         News news = NewsMapper.INSTANCE.fromDtoToEntity(newsDto);
         newsRepository.save(news);
     }
+
 }

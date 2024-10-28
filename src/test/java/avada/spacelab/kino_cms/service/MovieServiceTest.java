@@ -36,6 +36,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class MovieServiceTest {
+
     private AutoCloseable openedMocks;
     @Mock
     private MovieRepository movieRepository;
@@ -48,6 +49,7 @@ class MovieServiceTest {
     private final int SCHEDULES_IN_MOVIE = 4;
     private final int ZERO_SIZE = 0;
     private final long FIRST_ID = 1;
+
 
     @BeforeEach
     void setUp() {
