@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.web.socket.WebSocketSession;
 
 public interface SmsSendingService {
+
     void sendSms(
             List<Long> ids, String message, WebSocketSession session
     ) throws IOException;
+
 }

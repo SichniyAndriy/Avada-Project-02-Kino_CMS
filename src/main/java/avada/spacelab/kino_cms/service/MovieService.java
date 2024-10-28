@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface MovieService {
+
     Map<Boolean, List<MoviesResponceDto>> getPartitionedMovies();
 
     List<MovieDto> getAllMovies();
@@ -13,4 +14,5 @@ public interface MovieService {
     MovieDto getMovieById(long id);
 
     void save(MovieDto movieDto, String picturesJson);
+
 }

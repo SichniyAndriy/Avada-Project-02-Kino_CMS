@@ -5,6 +5,7 @@ import avada.spacelab.kino_cms.model.dto.UserDto;
 import java.util.List;
 
 public interface UserService {
+
     List<UserDto> getAllUsers();
 
     PagedResponse<UserDto> getUserDtoPage(int page, int size);
@@ -16,4 +17,5 @@ public interface UserService {
     void deleteUser(long id);
 
     long getAllUsersAmount();
+
 }

@@ -7,6 +7,7 @@ import avada.spacelab.kino_cms.model.entity.MainPageInfo;
 import java.util.List;
 
 public interface MainPageService {
+
     void deleteAllByReplacement(Replacement place);
 
     List<MainPageBanner> getAllByReplacement(Replacement place);
@@ -20,4 +21,5 @@ public interface MainPageService {
     void saveInfoDto(MainPageInfoDto mainPageInfoDto);
 
     MainPageInfoDto getInfo();
+
 }

@@ -18,4 +18,5 @@ public interface EditPageService {
 
     EditPageDto getChildRoom();
     void saveChildRoom(EditPageDto childDto, String picturesJson);
+
 }

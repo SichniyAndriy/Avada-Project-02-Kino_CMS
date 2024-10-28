@@ -4,6 +4,7 @@ import avada.spacelab.kino_cms.model.dto.PromotionDto;
 import java.util.List;
 
 public interface PromotionService {
+
     List<PromotionDto> getAllPromotions();
 
     PromotionDto getPromotionById(long id);
@@ -11,4 +12,5 @@ public interface PromotionService {
     void deleteById(long id);
 
     void save(PromotionDto promotionDto);
+
 }
