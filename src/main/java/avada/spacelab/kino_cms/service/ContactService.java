@@ -8,7 +8,5 @@ public interface ContactService {
 
     void save(ContactDto contactDto);
 
-    void saveAll(List<ContactDto> contactDtos);
-
     void saveList(List<ContactDto> contactDtos);
 }

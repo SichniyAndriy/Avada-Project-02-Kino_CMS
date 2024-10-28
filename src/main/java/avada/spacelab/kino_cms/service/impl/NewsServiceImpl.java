@@ -11,13 +11,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
 
-    public NewsServiceImpl(NewsRepository newsRepository) {
+    public NewsServiceImpl(
+            @Autowired NewsRepository newsRepository
+    ) {
         this.newsRepository = newsRepository;
     }
 

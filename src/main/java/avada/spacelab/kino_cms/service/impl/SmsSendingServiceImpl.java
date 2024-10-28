@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
@@ -19,7 +20,9 @@ public class SmsSendingServiceImpl implements SmsSendingService {
     private final UserRepository userRepository;
     private final Logger logger = LogManager.getLogger(SmsSendingServiceImpl.class);
 
-    public SmsSendingServiceImpl(UserRepository userRepository) {
+    public SmsSendingServiceImpl(
+            @Autowired UserRepository userRepository
+    ) {
         this.userRepository = userRepository;
     }
 

@@ -1,8 +1,8 @@
 package avada.spacelab.kino_cms.service.impl;
 
 import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
-import avada.spacelab.kino_cms.model.entity.MainPageBanners;
-import avada.spacelab.kino_cms.model.entity.MainPageBanners.Replacement;
+import avada.spacelab.kino_cms.model.entity.MainPageBanner;
+import avada.spacelab.kino_cms.model.entity.MainPageBanner.Replacement;
 import avada.spacelab.kino_cms.model.entity.MainPageInfo;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.MainPageInfoMapper;
@@ -11,6 +11,7 @@ import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
 import avada.spacelab.kino_cms.service.MainPageService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,26 +20,26 @@ public class MainPageServiceImpl implements MainPageService {
     private final MainPageInfoRepository mainPageInfoRepository;
 
     public MainPageServiceImpl(
-            MainPageBannersRepository mainPageBannersRepository,
-            MainPageInfoRepository mainPageInfoRepository
+            @Autowired MainPageBannersRepository mainPageBannersRepository,
+            @Autowired MainPageInfoRepository mainPageInfoRepository
     ) {
         this.mainPageBannersRepository = mainPageBannersRepository;
         this.mainPageInfoRepository = mainPageInfoRepository;
+    }
+
+    public List<MainPageBanner> getAllByReplacement(Replacement place) {
+        return mainPageBannersRepository.findAllByPlace(place);
     }
 
     public void deleteAllByReplacement(Replacement place) {
         mainPageBannersRepository.removeAllByPlaceEquals(place);
     }
 
-    public List<MainPageBanners> getAllByReplacement(Replacement place) {
-        return mainPageBannersRepository.findAllByPlace(place);
-    }
-
-    public MainPageBanners save(MainPageBanners page) {
+    public MainPageBanner save(MainPageBanner page) {
         return mainPageBannersRepository.save(page);
     }
 
-    public List<MainPageBanners> saveAll(List<MainPageBanners> mainPages) {
+    public List<MainPageBanner> saveAll(List<MainPageBanner> mainPages) {
         return mainPageBannersRepository.saveAllAndFlush(mainPages);
     }
 

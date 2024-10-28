@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Aspect @Component @Order(1)
 public class ServiceLogger {
+
     private final Logger logger = LoggerFactory.getLogger(ServiceLogger.class);
+
 
     @Pointcut("within(avada.spacelab.kino_cms.service.impl.*)")
     public void allServiceMethods() {}
@@ -35,4 +37,5 @@ public class ServiceLogger {
     public void afterThrowing(JoinPoint joinPoint) {
         logger.debug("Method {}() thrown", joinPoint.getSignature().getName());
     }
+
 }

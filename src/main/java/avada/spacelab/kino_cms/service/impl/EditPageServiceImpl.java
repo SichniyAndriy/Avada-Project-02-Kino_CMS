@@ -107,7 +107,7 @@ public class EditPageServiceImpl implements EditPageService {
 
     @Override
     public EditPageDto getChildRoom() {
-        Optional<EditPage> optionalChildRoom = editPageRepository.findByType(EditPageType.ADVERTISING);
+        Optional<EditPage> optionalChildRoom = editPageRepository.findByType(EditPageType.CHILD_ROOM);
         return optionalChildRoom
                 .map(EditPageMapper.INSTANCE::fromEntityToDto)
                 .orElse(EditPageDto.EMPTY());

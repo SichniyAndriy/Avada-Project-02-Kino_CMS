@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,8 +33,8 @@ public class MovieServiceImpl implements MovieService {
     private final ScheduleRepository scheduleRepository;
 
     public MovieServiceImpl(
-            MovieRepository movieRepository,
-            ScheduleRepository scheduleRepository
+            @Autowired MovieRepository movieRepository,
+            @Autowired ScheduleRepository scheduleRepository
     ) {
         this.movieRepository = movieRepository;
         this.scheduleRepository = scheduleRepository;
@@ -58,7 +60,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     public List<MovieDto> getAllMovies() {
-        return movieRepository.findAll().stream()
+        Stream<Movie> movies = Optional.ofNullable(movieRepository.findAll())
+                .map(m -> m.stream())
+                .orElse(Stream.empty());
+        return movies
                 .sorted(Comparator.comparingLong(Movie::getId))
                 .map(MovieMapper.INSTANCE::fromEntityToDto)
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -97,7 +102,7 @@ public class MovieServiceImpl implements MovieService {
         try {
             pictureDtos = new ObjectMapper()
                     .readValue(picturesJson, new TypeReference<>() {});
-        } catch (JsonProcessingException e) {
+        } catch (JsonProcessingException | IllegalArgumentException e) {
             throw new RuntimeException(e);
         }
         return pictureDtos.stream()

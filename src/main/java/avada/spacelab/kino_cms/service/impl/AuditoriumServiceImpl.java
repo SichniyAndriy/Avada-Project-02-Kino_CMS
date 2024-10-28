@@ -24,6 +24,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     private final AuditoriumRepository auditoriumRepository;
     private final TheaterRepository theaterRepository;
 
+
     public AuditoriumServiceImpl(
             @Autowired AuditoriumRepository auditoriumRepository,
             @Autowired TheaterRepository theaterRepository
@@ -38,7 +39,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         Optional<Auditorium> auditoriumOptional = auditoriumRepository.findById(id);
         if (auditoriumOptional.isPresent()) {
             Auditorium auditorium = auditoriumOptional.get();
-            if(auditorium.getSeoBlock() == null) {
+            if (auditorium.getSeoBlock() == null) {
                 auditorium.setSeoBlock(new SeoBlock());
             }
             return AuditoriumMapper.INSTANCE.fromEntityToDto(auditorium);
@@ -75,7 +76,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     private List<AuditoriumPicture> parseJsonToPicturesDto(String picturesJson) {
         List<AuditoriumPictureDto> pictureDtos;
         try {
-            pictureDtos =  new ObjectMapper().
+            pictureDtos = new ObjectMapper().
                     readValue(picturesJson, new TypeReference<>() {});
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
