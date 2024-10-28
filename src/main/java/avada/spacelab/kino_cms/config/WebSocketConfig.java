@@ -13,8 +13,10 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
+
     private final SmsSendingService smsSendingService;
     private final EmailSendingService emailSendingService;
+
 
     public WebSocketConfig(
             @Autowired SmsSendingService smsSendingService,

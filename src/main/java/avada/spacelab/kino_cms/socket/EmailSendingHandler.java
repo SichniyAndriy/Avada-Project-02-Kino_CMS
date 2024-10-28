@@ -35,7 +35,8 @@ public class EmailSendingHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(
-            @NonNull WebSocketSession session, TextMessage message
+            @NonNull WebSocketSession session,
+            TextMessage message
     ) throws Exception {
         EmailRequest emailRequest = new ObjectMapper()
                 .readValue(message.getPayload(), EmailRequest.class);
