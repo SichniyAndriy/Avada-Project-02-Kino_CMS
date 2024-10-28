@@ -257,10 +257,9 @@ class MainPageServiceTest {
         verify(mainPageBannersRepository).saveAllAndFlush(anyList());
     }
 
-    @ParameterizedTest
-    @EnumSource(Replacement.class)
+    @Test
     @DisplayName("Test saveAll() with empty list")
-    void test_saveAll_withEmptyList(Replacement type) {
+    void test_saveAll_withEmptyList() {
         List<MainPageBanner> emptyList = Collections.emptyList();
 
         when(mainPageBannersRepository.saveAllAndFlush(anyList())).thenReturn(emptyList);
