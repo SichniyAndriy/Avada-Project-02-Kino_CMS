@@ -8,6 +8,6 @@ public interface EmailSendingService {
 
     void sendEmail(
             List<Long> ids, String fileName, WebSocketSession session
-    ) throws IOException;
+    ) throws IOException, InterruptedException;
 
 }

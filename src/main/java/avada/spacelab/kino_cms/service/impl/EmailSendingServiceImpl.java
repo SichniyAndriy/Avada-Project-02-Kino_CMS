@@ -31,7 +31,22 @@ public class EmailSendingServiceImpl implements EmailSendingService {
             List<Long> ids,
             String fileName,
             WebSocketSession session
-    ) throws IOException {
+    ) throws IOException, InterruptedException {
+        List<String> emailList = createEmailList(ids);
+        String emailContent = getEmailContent(fileName);
+
+        int emailCount = emailList.size();
+        int sentEmails = 0;
+        for (String email : emailList) {
+            logger.info("Sending email to address: {} for session: {}", email, session.getId());
+            String res = String.valueOf(++sentEmails * 100 / emailCount);
+            session.sendMessage(new TextMessage(res));
+            Thread.sleep(50);
+        }
+        session.close(CloseStatus.NORMAL);
+    }
+
+    private List<String> createEmailList(List<Long> ids) {
         List<String> emailList;
         if (ids == null) {
             emailList = userRepository.findAllEmails();
@@ -42,31 +57,13 @@ public class EmailSendingServiceImpl implements EmailSendingService {
                 optionalEmail.ifPresent(emailList::add);
             }
         }
-        String emailContent = getEmailContent(fileName);
-        int emailCount = emailList.size();
-        int sentEmails = 0;
-        for (String email : emailList) {
-            logger.info("Sending email to address: {} for session: {}", email, session.getId());
-            String res = String.valueOf(++sentEmails * 100 / emailCount);
-            session.sendMessage(new TextMessage(res));
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        session.close(CloseStatus.NORMAL);
+        return emailList;
     }
 
-    private String getEmailContent(String fileName) {
-        try {
-            List<String> allLines = Files.readAllLines(
-                    Path.of(ControllerUtil.PATH_TO_SENT_EMAIL + "/" + fileName)
-            );
-            return String.join("\n", allLines);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+    private String getEmailContent(String fileName) throws IOException {
+        List<String> allLines = Files.readAllLines(
+                Path.of(ControllerUtil.PATH_TO_SENT_EMAIL + "/" + fileName)
+        );
+        return String.join("/n", allLines);
     }
 }

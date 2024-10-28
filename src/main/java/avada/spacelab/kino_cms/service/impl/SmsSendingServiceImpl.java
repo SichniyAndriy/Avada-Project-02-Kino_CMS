@@ -27,7 +27,8 @@ public class SmsSendingServiceImpl implements SmsSendingService {
     }
 
     @Async
-    public void sendSms(List<Long> ids, String message, WebSocketSession session) throws IOException {
+    public void sendSms(List<Long> ids, String message, WebSocketSession session)
+            throws IOException, InterruptedException {
         List<String> phoneList;
         if (ids == null) {
             phoneList = userRepository.findAllPhones();
@@ -44,11 +45,7 @@ public class SmsSendingServiceImpl implements SmsSendingService {
             logger.info("Sending SMS to phone number: {} for session: {}", phone, session.getId());
             String res = String.valueOf((++sentSms * 100) / amountUsers);
             session.sendMessage(new TextMessage(res));
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Thread.sleep(50);
         }
         session.close(CloseStatus.NORMAL);
     }
