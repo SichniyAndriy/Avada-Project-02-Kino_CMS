@@ -1,8 +1,8 @@
 package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
-import avada.spacelab.kino_cms.model.entity.MainPageBanners;
-import avada.spacelab.kino_cms.model.entity.MainPageBanners.Replacement;
+import avada.spacelab.kino_cms.model.entity.MainPageBanner;
+import avada.spacelab.kino_cms.model.entity.MainPageBanner.Replacement;
 import avada.spacelab.kino_cms.service.MainPageService;
 import java.io.IOException;
 import java.util.List;
@@ -33,12 +33,12 @@ public class MainPageController {
 
     @GetMapping(path = {"/", ""})
     public String banners(Model model) {
-        List<MainPageBanners> middle =
-                mainPageService.getAllByReplacement(MainPageBanners.Replacement.SLASH_BANNER);
+        List<MainPageBanner> middle =
+                mainPageService.getAllByReplacement(MainPageBanner.Replacement.SLASH_BANNER);
         String background = !middle.isEmpty() ? middle.getFirst().getPath() : null;
-        List<MainPageBanners> banners =
+        List<MainPageBanner> banners =
                 mainPageService.getAllByReplacement(Replacement.UP_BANNER);
-        List<MainPageBanners> promotions =
+        List<MainPageBanner> promotions =
                 mainPageService.getAllByReplacement(Replacement.BOTTOM_PROMOTION);
 
         model.addAttribute("banners", banners);
@@ -61,7 +61,7 @@ public class MainPageController {
 
     @PutMapping("/update/up-banners")
     public ResponseEntity<HttpStatus> updateBanners(
-            @RequestBody List<MainPageBanners> banners
+            @RequestBody List<MainPageBanner> banners
     ) {
         mainPageService.deleteAllByReplacement(Replacement.UP_BANNER);
         banners.forEach(item -> item.setPlace(Replacement.UP_BANNER));
@@ -71,7 +71,7 @@ public class MainPageController {
 
     @PutMapping("update/down-promotions")
     public ResponseEntity<HttpStatus> updatePromotions(
-            @RequestBody List<MainPageBanners> promotions
+            @RequestBody List<MainPageBanner> promotions
     ) {
         mainPageService.deleteAllByReplacement(Replacement.BOTTOM_PROMOTION);
         promotions.forEach(item -> item.setPlace(Replacement.BOTTOM_PROMOTION));
@@ -81,7 +81,7 @@ public class MainPageController {
 
     @PutMapping("update/background")
     public ResponseEntity<HttpStatus> updatePromotions(
-            @RequestBody MainPageBanners background
+            @RequestBody MainPageBanner background
     ) {
         mainPageService.deleteAllByReplacement(Replacement.SLASH_BANNER);
         background.setPlace(Replacement.SLASH_BANNER);
