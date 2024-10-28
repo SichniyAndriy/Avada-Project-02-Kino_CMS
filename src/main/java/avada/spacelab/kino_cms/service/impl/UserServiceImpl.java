@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
     public UserServiceImpl(
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+    @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .peek(item -> item.setPassHash(""))
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    @Override
     public PagedResponse<UserDto> getUserDtoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<User> userPage = userRepository.findAll(pageRequest);
@@ -53,6 +56,7 @@ public class UserServiceImpl implements UserService {
         );
     }
 
+    @Override
     public UserDto getUserById(long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
@@ -63,6 +67,7 @@ public class UserServiceImpl implements UserService {
         return UserDto.EMPTY();
     }
 
+    @Override
     public void save(UserDto userDto) {
         User user = UserMapper.INSTANCE.fromDtoToEntity(userDto);
         if (user.getRegistrationDate() == null) {
@@ -71,11 +76,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
     public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
 
+    @Override
     public long getAllUsersAmount() {
         return userRepository.count();
     }
+
 }
