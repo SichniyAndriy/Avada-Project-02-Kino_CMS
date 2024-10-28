@@ -10,19 +10,15 @@ import avada.spacelab.kino_cms.service.impl.EditPageServiceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -30,112 +26,73 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@TestInstance(Lifecycle.PER_CLASS)
 class EditPageServiceTest {
 
     @Mock
     private EditPageRepository editPageRepository;
     @InjectMocks
     private EditPageServiceImpl editPageService;
-    private AutoCloseable openedMocks;
 
-    private final EditPageType ABOUT_TYPE = EditPageType.ABOUT;
-    private final EditPageType CAFE_BAR_TYPE = EditPageType.CAFE_BAR;
-    private final EditPageType VIP_ROOM_TYPE = EditPageType.VIP_ROOM;
-    private final EditPageType ADVERTISING_TYPE = EditPageType.ADVERTISING;
-    private final EditPageType CHILD_ROOM_TYPE = EditPageType.CHILD_ROOM;
-
-    private final Long ID = 1l;
-
-    private EditPageDto aboutDto;
-    private EditPage aboutEntity;
-    private EditPageDto cafeBarDto;
-    private EditPage cafeBarEntity;
-    private EditPageDto vipRoomDto;
-    private EditPage vipRoomEntity;
-    private EditPageDto advertisingDto;
-    private EditPage advertisingEntity;
-    private EditPageDto childRoomDto;
-    private EditPage childRoomEntity;
-
-    @BeforeAll
-    void setUp() {
-        openedMocks = MockitoAnnotations.openMocks(this);
-        aboutDto = getEditPageDto(ABOUT_TYPE, ID);
-        aboutEntity = getEditPage(ABOUT_TYPE, ID);
-        cafeBarDto = getEditPageDto(CAFE_BAR_TYPE, ID);
-        cafeBarEntity = getEditPage(CAFE_BAR_TYPE, ID);
-        vipRoomDto = getEditPageDto(VIP_ROOM_TYPE, ID);
-        vipRoomEntity = getEditPage(VIP_ROOM_TYPE, ID);
-        advertisingDto = getEditPageDto(ADVERTISING_TYPE, ID);
-        advertisingEntity = getEditPage(ADVERTISING_TYPE, ID);
-        childRoomDto = getEditPageDto(CHILD_ROOM_TYPE, ID);
-        childRoomEntity = getEditPage(CHILD_ROOM_TYPE, ID);
-    }
-
-    @AfterAll
-    void tearDown() throws Exception {
-        openedMocks.close();
-    }
+    private final Long ID = 1L;
 
     //=====================================\ - About - /=====================================\\
 
     @Test
     @DisplayName("Test getAbout() when data exist")
-    void testGetAbout_WhenDataExists() {
-        when(editPageRepository.findByType(ABOUT_TYPE))
-                .thenReturn(Optional.of(aboutEntity));
+    void test_getAbout_whenDataExists() {
+        when(editPageRepository.findByType(any()))
+                .thenReturn(Optional.of(getEditPage(EditPageType.ABOUT, ID)));
 
         EditPageDto result = editPageService.getAbout();
-        assertEquals(aboutDto, result);
-        verify(editPageRepository).findByType(ABOUT_TYPE);
+        assertEquals(ID, result.id());
+        verify(editPageRepository).findByType(EditPageType.ABOUT);
     }
 
     @Test
     @DisplayName("Test getAbout() when data doesn't exist")
-    void testGetAbout_WhenDataDoesNotExist() {
-        when(editPageRepository.findByType(ABOUT_TYPE))
+    void test_getAbout_whenDataDoesNotExist() {
+        when(editPageRepository.findByType(EditPageType.ABOUT))
                 .thenReturn(Optional.empty());
 
         EditPageDto result = editPageService.getAbout();
-        assertEquals(EditPageDto.EMPTY(), result);
-        verify(editPageRepository).findByType(ABOUT_TYPE);
+        assertNull(result.id());
+        verify(editPageRepository).findByType(EditPageType.ABOUT);
     }
 
     @Test
     @DisplayName("Test saveAbout() with valid parameters")
-    void test_saveAboutWithValidParameters() {
+    void test_saveAbout_withValidParameters() {
         when(editPageRepository.save(any(EditPage.class)))
-                .thenReturn(aboutEntity);
+                .thenReturn(getEditPage(EditPageType.ABOUT, ID));
 
-        editPageService.saveAbout(aboutDto, "[]");
+        editPageService.saveAbout(getEditPageDto(EditPageType.ABOUT, ID), "[]");
 
         verify(editPageRepository).save(any(EditPage.class));
     }
 
     @Test
     @DisplayName("Test saveAbout() with empty String parameter. Throws RuntimeException")
-    void test_saveAboutWithEmptyString() {
+    void test_saveAbout_withEmptyString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveAbout(aboutDto, "")
+                () -> editPageService.saveAbout(getEditPageDto(EditPageType.ABOUT, ID), "")
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
 
     @Test
     @DisplayName("Test saveAbout() with null String parameter. Throws RuntimeException")
-    void test_saveAboutWithNullString() {
+    void test_saveAbout_withNullString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveAbout(aboutDto, null)
+                () -> editPageService.saveAbout(getEditPageDto(EditPageType.ABOUT, ID), null)
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
 
     @Test
     @DisplayName("Test saveAbout() with invalid parameters. Throws RuntimeException")
-    void test_saveAboutWithNullDtoParameter() {
+    void test_saveAbout_withNullDtoParameter() {
         assertThrows(
                 NullPointerException.class,
                 () -> editPageService.saveAbout(null, "[]")
@@ -147,58 +104,59 @@ class EditPageServiceTest {
 
     @Test
     @DisplayName("Test getCafeBar() when data exist")
-    void test_GetCafeBar_WhenDataExists() {
-        when(editPageRepository.findByType(CAFE_BAR_TYPE))
-                .thenReturn(Optional.of(cafeBarEntity));
+    void test_getCafeBar_WhenDataExists() {
+        when(editPageRepository.findByType(EditPageType.CAFE_BAR))
+                .thenReturn(Optional.of(getEditPage(EditPageType.CAFE_BAR, ID)));
 
         EditPageDto result = editPageService.getCafeBar();
-        assertEquals(cafeBarDto, result);
-        verify(editPageRepository).findByType(CAFE_BAR_TYPE);
+        assertEquals(getEditPageDto(EditPageType.CAFE_BAR, ID), result);
+        verify(editPageRepository).findByType(EditPageType.CAFE_BAR);
     }
 
     @Test
     @DisplayName("Test getCafeBar() when data doesn't exist")
-    void test_GetCafeBar_WhenDataDoesNotExist() {
-        when(editPageRepository.findByType(CAFE_BAR_TYPE)).thenReturn(Optional.empty());
+    void test_getCafeBar_whenDataDoesNotExist() {
+        when(editPageRepository.findByType(EditPageType.CAFE_BAR)).thenReturn(Optional.empty());
 
         EditPageDto result = editPageService.getCafeBar();
         assertEquals(EditPageDto.EMPTY(), result);
-        verify(editPageRepository).findByType(CAFE_BAR_TYPE);
+        verify(editPageRepository).findByType(EditPageType.CAFE_BAR);
     }
 
     @Test
     @DisplayName("Test saveCafeBar() with valid parameters")
-    void test_saveCafeBarWithValidParameters() {
-        when(editPageRepository.save(any(EditPage.class))).thenReturn(cafeBarEntity);
+    void test_saveCafeBar_withValidParameters() {
+        when(editPageRepository.save(any(EditPage.class)))
+                .thenReturn(getEditPage(EditPageType.CAFE_BAR, ID));
 
-        editPageService.saveCafeBar(cafeBarDto, "[]");
+        editPageService.saveCafeBar(getEditPageDto(EditPageType.CAFE_BAR, ID), "[]");
 
         verify(editPageRepository).save(any(EditPage.class));
     }
 
     @Test
     @DisplayName("Test saveCafeBar() with empty String parameter. Throws RuntimeException")
-    void test_saveCafeBarWithEmptyString() {
+    void test_saveCafeBar_withEmptyString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveCafeBar(cafeBarDto, "")
+                () -> editPageService.saveCafeBar(getEditPageDto(EditPageType.CAFE_BAR, ID), "")
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
 
     @Test
     @DisplayName("Test saveCafeBar() with null String parameter. Throws RuntimeException")
-    void test_saveCafeBarWithNullString() {
+    void test_saveCafeBar_withNullString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveCafeBar(cafeBarDto, null)
+                () -> editPageService.saveCafeBar(getEditPageDto(EditPageType.CAFE_BAR, ID), null)
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
 
     @Test
     @DisplayName("Test saveCafeBar() with invalid parameters. Throws RuntimeException")
-    void test_saveCafeBarWithNullDtoParameter() {
+    void test_saveCafeBar_withNullDtoParameter() {
         assertThrows(
                 NullPointerException.class,
                 () -> editPageService.saveCafeBar(null, "[]")
@@ -211,30 +169,30 @@ class EditPageServiceTest {
     @Test
     @DisplayName("Test getVipRoom() when data exist")
     void test_GetVipRoom_WhenDataExists() {
-        when(editPageRepository.findByType(VIP_ROOM_TYPE))
-                .thenReturn(Optional.of(vipRoomEntity));
+        when(editPageRepository.findByType(EditPageType.VIP_ROOM))
+                .thenReturn(Optional.of(getEditPage(EditPageType.VIP_ROOM, ID)));
 
         EditPageDto result = editPageService.getVipRoom();
-        assertEquals(vipRoomDto, result);
-        verify(editPageRepository).findByType(VIP_ROOM_TYPE);
+        assertEquals(ID, result.id());
+        verify(editPageRepository).findByType(EditPageType.VIP_ROOM);
     }
 
     @Test
     @DisplayName("Test getVipRoom() when data doesn't exist")
     void test_GetVipRoom_WhenDataDoesNotExist() {
-        when(editPageRepository.findByType(VIP_ROOM_TYPE)).thenReturn(Optional.empty());
+        when(editPageRepository.findByType(EditPageType.VIP_ROOM)).thenReturn(Optional.empty());
 
         EditPageDto result = editPageService.getVipRoom();
-        assertEquals(EditPageDto.EMPTY(), result);
-        verify(editPageRepository).findByType(VIP_ROOM_TYPE);
+        assertNull(result.id());
+        verify(editPageRepository).findByType(EditPageType.VIP_ROOM);
     }
 
     @Test
     @DisplayName("Test saveVipRoom() with valid parameters")
     void test_saveVipRoomWithValidParameters() {
-        when(editPageRepository.save(any(EditPage.class))).thenReturn(vipRoomEntity);
+        when(editPageRepository.save(any(EditPage.class))).thenReturn(getEditPage(EditPageType.VIP_ROOM, ID));
 
-        editPageService.saveVipRoom(vipRoomDto, "[]");
+        editPageService.saveVipRoom(getEditPageDto(EditPageType.VIP_ROOM, ID), "[]");
 
         verify(editPageRepository).save(any(EditPage.class));
     }
@@ -244,7 +202,7 @@ class EditPageServiceTest {
     void test_saveVipRoomWithEmptyString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveVipRoom(vipRoomDto, "")
+                () -> editPageService.saveVipRoom(getEditPageDto(EditPageType.VIP_ROOM, ID), "")
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
@@ -254,7 +212,7 @@ class EditPageServiceTest {
     void test_saveVipRoomWithNullString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveVipRoom(vipRoomDto, null)
+                () -> editPageService.saveVipRoom(getEditPageDto(EditPageType.VIP_ROOM, ID), null)
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
@@ -274,30 +232,31 @@ class EditPageServiceTest {
     @Test
     @DisplayName("Test getAdvertising() when data exist")
     void test_GetAdvertising_WhenDataExists() {
-        when(editPageRepository.findByType(ADVERTISING_TYPE))
-                .thenReturn(Optional.of(advertisingEntity));
+        when(editPageRepository.findByType(EditPageType.ADVERTISING))
+                .thenReturn(Optional.of(getEditPage(EditPageType.ADVERTISING, ID)));
 
         EditPageDto result = editPageService.getAdvertising();
-        assertEquals(advertisingDto, result);
-        verify(editPageRepository).findByType(ADVERTISING_TYPE);
+        assertEquals(getEditPageDto(EditPageType.ADVERTISING, ID), result);
+        verify(editPageRepository).findByType(EditPageType.ADVERTISING);
     }
 
     @Test
     @DisplayName("Test getAdvertising() when data doesn't exist")
     void test_GetAdvertising_WhenDataDoesNotExist() {
-        when(editPageRepository.findByType(ADVERTISING_TYPE)).thenReturn(Optional.empty());
+        when(editPageRepository.findByType(EditPageType.ADVERTISING)).thenReturn(Optional.empty());
 
         EditPageDto result = editPageService.getAdvertising();
         assertEquals(EditPageDto.EMPTY(), result);
-        verify(editPageRepository).findByType(ADVERTISING_TYPE);
+        verify(editPageRepository).findByType(EditPageType.ADVERTISING);
     }
 
     @Test
     @DisplayName("Test saveAdvertising() with valid parameters")
     void test_saveAdvertisingWithValidParameters() {
-        when(editPageRepository.save(any(EditPage.class))).thenReturn(advertisingEntity);
+        when(editPageRepository.save(any(EditPage.class)))
+                .thenReturn(getEditPage(EditPageType.ADVERTISING, ID));
 
-        editPageService.saveAdvertising(advertisingDto, "[]");
+        editPageService.saveAdvertising(getEditPageDto(EditPageType.ADVERTISING, ID), "[]");
 
         verify(editPageRepository).save(any(EditPage.class));
     }
@@ -307,7 +266,7 @@ class EditPageServiceTest {
     void test_saveAdvertisingWithEmptyString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveAdvertising(advertisingDto, "")
+                () -> editPageService.saveAdvertising(getEditPageDto(EditPageType.ADVERTISING, ID), "")
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
@@ -317,7 +276,7 @@ class EditPageServiceTest {
     void test_saveAdvertisingWithNullString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveAdvertising(advertisingDto, null)
+                () -> editPageService.saveAdvertising(getEditPageDto(EditPageType.ADVERTISING, ID), null)
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
@@ -337,30 +296,31 @@ class EditPageServiceTest {
     @Test
     @DisplayName("Test getChildRoom() when data exist")
     void test_GetChildRoom_WhenDataExists() {
-        when(editPageRepository.findByType(CHILD_ROOM_TYPE))
-                .thenReturn(Optional.of(childRoomEntity));
+        when(editPageRepository.findByType(EditPageType.CHILD_ROOM))
+                .thenReturn(Optional.of(getEditPage(EditPageType.CHILD_ROOM, ID)));
 
         EditPageDto result = editPageService.getChildRoom();
-        assertEquals(childRoomDto, result);
-        verify(editPageRepository).findByType(CHILD_ROOM_TYPE);
+        assertEquals(ID, result.id());
+        verify(editPageRepository).findByType(EditPageType.CHILD_ROOM);
     }
 
     @Test
     @DisplayName("Test getChildRoom() when data doesn't exist")
     void test_GetChildRoom_WhenDataDoesNotExist() {
-        when(editPageRepository.findByType(CHILD_ROOM_TYPE)).thenReturn(Optional.empty());
+        when(editPageRepository.findByType(EditPageType.CHILD_ROOM)).thenReturn(Optional.empty());
 
         EditPageDto result = editPageService.getChildRoom();
-        assertEquals(EditPageDto.EMPTY(), result);
-        verify(editPageRepository).findByType(CHILD_ROOM_TYPE);
+        assertNull(result.id());
+        verify(editPageRepository).findByType(EditPageType.CHILD_ROOM);
     }
 
     @Test
     @DisplayName("Test saveChildRoom() with valid parameters")
     void test_saveChildRoomWithValidParameters() {
-        when(editPageRepository.save(any(EditPage.class))).thenReturn(childRoomEntity);
+        when(editPageRepository.save(any(EditPage.class)))
+                .thenReturn(getEditPage(EditPageType.CHILD_ROOM, ID));
 
-        editPageService.saveChildRoom(childRoomDto, "[]");
+        editPageService.saveChildRoom(getEditPageDto(EditPageType.CHILD_ROOM, ID), "[]");
 
         verify(editPageRepository).save(any(EditPage.class));
     }
@@ -370,7 +330,7 @@ class EditPageServiceTest {
     void test_saveChildRoomWithEmptyString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveChildRoom(childRoomDto, "")
+                () -> editPageService.saveChildRoom(getEditPageDto(EditPageType.CHILD_ROOM, ID), "")
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
@@ -380,7 +340,7 @@ class EditPageServiceTest {
     void test_saveChildRoomWithNullString() {
         assertThrows(
                 RuntimeException.class,
-                () -> editPageService.saveChildRoom(childRoomDto, null)
+                () -> editPageService.saveChildRoom(getEditPageDto(EditPageType.CHILD_ROOM, ID), null)
         );
         verify(editPageRepository, never()).save(any(EditPage.class));
     }
