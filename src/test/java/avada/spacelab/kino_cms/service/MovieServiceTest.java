@@ -8,7 +8,6 @@ import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.model.entity.Schedule;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.repository.MovieRepository;
-import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.service.impl.MovieServiceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,17 +35,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class MovieServiceTest {
-
     private AutoCloseable openedMocks;
     @Mock
     private MovieRepository movieRepository;
-    @Mock
-    private ScheduleRepository scheduleRepository;
     @InjectMocks
     private MovieServiceImpl movieService;
 
     private final int MOVIES_AMOUNT = 8;
-    private final int SCHEDULES_IN_MOVIE = 4;
     private final int ZERO_SIZE = 0;
     private final long FIRST_ID = 1;
 
@@ -76,7 +71,6 @@ class MovieServiceTest {
     @Test
     @DisplayName("Test getPartitionedMovies() with with empty list")
     void test_getPartitionedMovies_withEmptyList() {
-        List<Movie> movies = getMovies();
         when(movieRepository.findAll()).thenReturn(Collections.emptyList());
         Map<Boolean, List<MoviesResponceDto>> partitionedMovies = movieService.getPartitionedMovies();
         assertEquals(2,partitionedMovies.size());
@@ -120,8 +114,11 @@ class MovieServiceTest {
     @DisplayName("Test getAllMovies() with null list")
     void test_getAllMovies_withNullList() {
         when(movieRepository.findAll()).thenReturn(null);
-        List<MovieDto> result = movieService.getAllMovies();
-        assertEquals(ZERO_SIZE,  result.size());
+
+        assertThrows(
+                NullPointerException.class,
+                () ->  movieService.getAllMovies()
+        );
         verify(movieRepository).findAll();
     }
 
@@ -144,7 +141,7 @@ class MovieServiceTest {
     void test_getMovieById_withValidMovieAndNullSeoBlock() {
         Movie movie = new Movie();
         movie.setId(FIRST_ID);
-        when(movieRepository.findById(anyLong())).thenReturn(Optional.ofNullable(movie));
+        when(movieRepository.findById(anyLong())).thenReturn(Optional.of(movie));
 
         MovieDto result = movieService.getMovieById(FIRST_ID);
 
@@ -232,6 +229,7 @@ class MovieServiceTest {
             movie.setId(i);
             List<Schedule> schedules = new ArrayList<>();
             LocalDate date = (i % 2 == 1) ? LocalDate.now() : LocalDate.now().plusDays(5);
+            int SCHEDULES_IN_MOVIE = 4;
             for (int j = 1; j <= SCHEDULES_IN_MOVIE; j++) {
                 schedules.add(new Schedule(null,null,date, null));
             }

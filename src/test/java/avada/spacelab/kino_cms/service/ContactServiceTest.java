@@ -39,13 +39,13 @@ class ContactServiceTest {
         when(contactRepository.findAll()).thenReturn(dtos);
         List<ContactDto> dtosDto = contactService.getAll();
         assertEquals(3, dtosDto.size());
-        assertEquals(dtos.get(0).getId(), dtosDto.get(0).id());
+        assertEquals(dtos.getFirst().getId(), dtosDto.getFirst().id());
     }
 
     @Test
     @DisplayName("Returns empty list of ContactDto")
     void testGetAllWithEmptyDtoList() {
-        when(contactRepository.findAll()).thenReturn(Collections.EMPTY_LIST);
+        when(contactRepository.findAll()).thenReturn(Collections.emptyList());
         List<ContactDto> dtosDto = contactService.getAll();
         assertEquals(0, dtosDto.size());
     }
@@ -88,7 +88,7 @@ class ContactServiceTest {
     @Test
     @DisplayName("Saves empty list of contacts")
     void testSaveListEmptyContacts() {
-        contactService.saveList(Collections.EMPTY_LIST);
+        contactService.saveList(Collections.emptyList());
         verify(contactRepository, times(0)).save(any(Contact.class));
     }
 

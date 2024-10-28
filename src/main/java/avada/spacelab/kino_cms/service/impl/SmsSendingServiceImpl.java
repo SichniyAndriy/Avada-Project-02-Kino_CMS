@@ -35,7 +35,7 @@ public class SmsSendingServiceImpl implements SmsSendingService {
             phoneList = new ArrayList<>();
             for (Long id : ids) {
                 Optional<String> optionalPhone = userRepository.findPhoneById(id);
-                optionalPhone.ifPresent(phone -> phoneList.add(phone));
+                optionalPhone.ifPresent(phoneList::add);
             }
         }
         int amountUsers = phoneList.size();

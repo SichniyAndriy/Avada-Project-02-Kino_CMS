@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("admin/banners")
 public class MainPageController {
     private final MainPageService mainPageService;
-    private final String MAIN_PAGE_BANNERS = "pictures/main-page";
 
     public MainPageController(
             @Autowired MainPageService mainPageService
@@ -53,6 +52,7 @@ public class MainPageController {
             @RequestParam String timestamp,
             @RequestParam String ext
     ) throws IOException {
+        String MAIN_PAGE_BANNERS = "pictures/main-page";
         String resName = ControllerUtil.savePictureOnServer(
                 MAIN_PAGE_BANNERS, file.getOriginalFilename(), timestamp, ext, file
         );

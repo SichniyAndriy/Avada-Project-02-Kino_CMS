@@ -387,14 +387,10 @@ class MainPageServiceTest {
     }
 
     private List<MainPageBanner> getMainPageBanners(Replacement replacement) {
-        return getMainPageBanners(replacement, false);
-    }
-
-    private List<MainPageBanner> getMainPageBanners(Replacement replacement, boolean isNullId) {
         return LongStream
                 .iterate(1, i -> ++i)
                 .limit(FULL_SIZE)
-                .mapToObj(i -> getMainPageBanner(replacement, isNullId ? null : i))
+                .mapToObj(i -> getMainPageBanner(replacement, i))
                 .toList();
     }
 

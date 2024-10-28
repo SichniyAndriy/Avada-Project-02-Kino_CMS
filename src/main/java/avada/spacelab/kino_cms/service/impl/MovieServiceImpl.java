@@ -10,7 +10,6 @@ import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.MovieMapper;
 import avada.spacelab.kino_cms.model.mapper.MoviePictureMapper;
 import avada.spacelab.kino_cms.repository.MovieRepository;
-import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.service.MovieService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,14 +29,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
-    private final ScheduleRepository scheduleRepository;
 
     public MovieServiceImpl(
-            @Autowired MovieRepository movieRepository,
-            @Autowired ScheduleRepository scheduleRepository
+            @Autowired MovieRepository movieRepository
     ) {
         this.movieRepository = movieRepository;
-        this.scheduleRepository = scheduleRepository;
     }
 
     /*------------------------------ Public part ------------------------------*/
@@ -60,9 +56,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     public List<MovieDto> getAllMovies() {
-        Stream<Movie> movies = Optional.ofNullable(movieRepository.findAll())
-                .map(m -> m.stream())
-                .orElse(Stream.empty());
+        Stream<Movie> movies = movieRepository.findAll().stream();
         return movies
                 .sorted(Comparator.comparingLong(Movie::getId))
                 .map(MovieMapper.INSTANCE::fromEntityToDto)
