@@ -77,7 +77,9 @@ public class MovieServiceImpl implements MovieService {
 
     public void save(MovieDto movieDto, String picturesJson) {
         Movie movie = MovieMapper.INSTANCE.fromDtoToEntity(movieDto);
-
+        if (movie.getId() != null && movie.getId() == 0) {
+            movie.setId(null);
+        }
         setPictures(movie, picturesJson);
 
         movieRepository.save(movie);

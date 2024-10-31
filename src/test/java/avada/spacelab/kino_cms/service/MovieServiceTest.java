@@ -170,9 +170,33 @@ class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("Test save() with valid movie and valid json")
-    void test_save_withValidMovieAndValidJson() {
-        MovieDto movieDto = getMovieDto();
+    @DisplayName("Test save() with valid movie with not null and not zero id and valid json")
+    void test_save_withValidMovieAndNotNullAndNotZeroIdAndValidJson() {
+        MovieDto movieDto = getMovieDto(FIRST_ID);
+        when(movieRepository.save(any(Movie.class)))
+                .thenReturn(new Movie());
+
+        movieService.save(movieDto, "[]");
+
+        verify(movieRepository).save(any(Movie.class));
+    }
+
+    @Test
+    @DisplayName("Test save() with valid movie with not null and zero id and valid json")
+    void test_save_withValidMovieAndNotNullAndZeroIdAndValidJson() {
+        MovieDto movieDto = getMovieDto(0);
+        when(movieRepository.save(any(Movie.class)))
+                .thenReturn(new Movie());
+
+        movieService.save(movieDto, "[]");
+
+        verify(movieRepository).save(any(Movie.class));
+    }
+
+    @Test
+    @DisplayName("Test save() with valid movie with null id and valid json")
+    void test_save_withValidMovieAndNullIdAndValidJson() {
+        MovieDto movieDto = MovieDto.EMPTY();
         when(movieRepository.save(any(Movie.class)))
                 .thenReturn(new Movie());
 
@@ -184,7 +208,7 @@ class MovieServiceTest {
     @Test
     @DisplayName("Test save() with valid movieDto and invalid json")
     void test_save_withValidMovieDtoAndInvalidJson() {
-        MovieDto movieDto = getMovieDto();
+        MovieDto movieDto = getMovieDto(FIRST_ID);
         when(movieRepository.save(any(Movie.class)))
                 .thenReturn(new Movie());
 
@@ -198,7 +222,7 @@ class MovieServiceTest {
     @Test
     @DisplayName("Test save() with valid movieDto and null json")
     void test_save_withValidMovieDtoAndNullJson() {
-        MovieDto movieDto = getMovieDto();
+        MovieDto movieDto = getMovieDto(FIRST_ID);
         when(movieRepository.save(any(Movie.class)))
                 .thenReturn(new Movie());
 
@@ -239,9 +263,9 @@ class MovieServiceTest {
         return movies;
     }
 
-    private MovieDto getMovieDto() {
+    private MovieDto getMovieDto(long id) {
         return new MovieDto(
-                FIRST_ID,
+                id,
                 null,
                 null,
                 null,
