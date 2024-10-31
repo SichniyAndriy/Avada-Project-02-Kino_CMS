@@ -172,6 +172,7 @@ class AuditoriumServiceTest {
                 "https://scheme.org",
                 "https://banner.org",
                 null,
+                null,
                 SeoBlockDto.EMPTY()
         );
     }

@@ -15,6 +15,7 @@ public record AuditoriumDto(
         LocalDate date,
         String schemeUrl,
         String bannerUrl,
+        Long theaterId,
         List<AuditoriumPictureDto> pictures,
         SeoBlockDto seoBlock
 ) implements Serializable {
@@ -27,7 +28,8 @@ public record AuditoriumDto(
                 null,
                 null,
                 null,
-                Collections.EMPTY_LIST,
+                null,
+                Collections.emptyList(),
                 SeoBlockDto.EMPTY()
         );
     }

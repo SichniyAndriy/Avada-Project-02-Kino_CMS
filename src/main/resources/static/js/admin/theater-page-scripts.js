@@ -33,8 +33,8 @@ function gotoTheaters(){
     location.href = THEATERS_PATH;
 }
 
-function showAuditorium(audId=0, thId) {
-    location.href = `${THEATERS_PATH}/show/auditorium/${audId}/${thId}`;
+function showAuditorium(audId=0, theaterId) {
+    location.href = `${THEATERS_PATH}/show/auditorium/${audId}/${theaterId}`;
 }
 
 function deleteAuditorium(audId) {

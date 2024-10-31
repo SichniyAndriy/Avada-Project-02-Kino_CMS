@@ -11,7 +11,7 @@ function showTheater(id = 0) {
 }
 
 function addNew() {
-    window.location.href = `${THEATER_PATH}/add-new`;
+    window.location.href = `${THEATER_PATH}/show/0`;
 }
 
 function deleteTheater(id) {

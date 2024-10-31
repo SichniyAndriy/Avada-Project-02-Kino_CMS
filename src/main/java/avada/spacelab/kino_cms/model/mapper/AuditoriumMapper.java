@@ -11,6 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface AuditoriumMapper {
     AuditoriumMapper INSTANCE = Mappers.getMapper(AuditoriumMapper.class);
 
+    @Mapping(target = "theaterId", source = "theater.id")
     AuditoriumDto fromEntityToDto(Auditorium auditorium);
 
     @Mapping(target = "theater", ignore = true)

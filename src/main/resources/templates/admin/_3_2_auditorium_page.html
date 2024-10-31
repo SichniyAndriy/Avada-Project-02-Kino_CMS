@@ -38,7 +38,7 @@
             <form action="#" method="post" enctype="multipart/form-data" id="auditorium__from">
                 <div class="d-flex flex-column text-dark pe-5" th:object="${auditorium}">
                     <input type="number" id="auditorium_id" th:field="*{id}" hidden>
-                    <input type="number" id="theater_id" th:value="${theaterId}" hidden>
+                    <input type="number" id="theater_id" name="theaterId" th:value="${theaterId}" hidden>
                     <input type="text" id="auditorium_date" th:field="*{date}" hidden>
                     <div class="row mt-5 align-items-baseline">
                         <span class="col-2">Номер зала</span>
