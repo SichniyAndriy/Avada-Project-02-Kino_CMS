@@ -38,13 +38,8 @@
           <input type="number" th:field="*{id}" hidden>
           <input type="text" th:field="*{registrationDate}" hidden>
           <input type="number" th:field="*{address.id}" hidden>
-          <input type="text" th:field="*{address.city}" hidden>
-          <input type="text" th:field="*{address.zipCode}" hidden>
-          <input type="text" th:field="*{address.street}" hidden>
-          <input type="text" th:field="*{address.houseNumber}" hidden>
-          <input type="text" th:field="*{address.flatNumber}" hidden>
-          <div class="container mt-5 text-dark">
-            <div class="row row-cols-2 g-3">
+          <div class="container mt-5">
+            <div class="row row-cols-2 g-3 text-dark">
               <div class="col-6 d-flex align-items-baseline">
                 <label class="col-form-label w-25" th:for="first_name__input">Ім'я</label>
                 <input class="form-control w-75" type="text" th:id="first_name__input" th:field="*{firstName}">
@@ -100,16 +95,33 @@
                 <input class="form-control w-75" type="date" id="birth_date__input" th:field="*{birthDate}">
               </div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="address__input">Адреса</label>
-                <input class="form-control w-75" type="text" id="address__input" th:value="*{address}">
+                <label class="form-label w-25" for="card_number__input">Номер картки</label>
+                <input class="form-control w-75" type="text" id="card_number__input" th:field="*{cardNumber}">
               </div>
               <div class="col-6 d-flex align-items-baseline">
                 <label class="form-label w-25" for="password__input">Пароль</label>
                 <input class="form-control w-75" type="password" id="password__input" th:field="*{passHash}">
               </div>
+              <div class="col-12">Адресса</div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="card_number__input">Номер картки</label>
-                <input class="form-control w-75" type="text" id="card_number__input" th:field="*{cardNumber}">
+                <label class="form-label w-25" for="nick_name__input">Місто</label>
+                <input class="form-control w-75" type="text" id="nick_name__input" th:field="*{address.city}">
+              </div>
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="phone__input">Номер будинку</label>
+                <input class="form-control w-75" type="text" id="phone__input" th:field="*{address.houseNumber}">
+              </div>
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="phone__input">Поштовий код</label>
+                <input class="form-control w-75" type="text" id="phone__input" th:field="*{address.zipCode}">
+              </div>
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="phone__input">Номер Квартири</label>
+                <input class="form-control w-75" type="num" id="phone__input" th:field="*{address.flatNumber}">
+              </div>
+              <div class="col-6 d-flex align-items-baseline">
+                <label class="form-label w-25" for="nick_name__input">Вулиця</label>
+                <input class="form-control w-75" type="text" id="nick_name__input" th:field="*{address.street}">
               </div>
               <div class="col-8 mt-5 mx-auto">
                 <div class="vstack gap-3">
