@@ -65,7 +65,6 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         auditoriumRepository.save(auditorium);
     }
 
-
     /*---------------------------- Private part ----------------------------*/
 
     private void setDate(Auditorium auditorium) {

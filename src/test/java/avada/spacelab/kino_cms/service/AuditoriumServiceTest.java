@@ -5,10 +5,13 @@ import avada.spacelab.kino_cms.model.dto.SeoBlockDto;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.entity.Theater;
+import avada.spacelab.kino_cms.model.mapper.AuditoriumMapper;
 import avada.spacelab.kino_cms.repository.AuditoriumRepository;
+import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.service.impl.AuditoriumServiceImpl;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -32,8 +36,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class AuditoriumServiceTest {
 
-    @Mock private AuditoriumRepository auditoriumRepository;
     @Mock private TheaterRepository theaterRepository;
+    @Mock private AuditoriumRepository auditoriumRepository;
+    @Mock private ScheduleRepository scheduleRepository;
     @InjectMocks private AuditoriumServiceImpl auditoriumService;
 
     final long ID = 1;
@@ -98,6 +103,7 @@ class AuditoriumServiceTest {
     void testDeleteAuditoriumByIdCallsRepository() {
         for (long i = 0; i < 4; ++i) {
             auditoriumService.deleteAuditoriumById(i);
+            verify(scheduleRepository).deleteAllByAuditoriumId(i);
             verify(auditoriumRepository).deleteById(i);
         }
     }
@@ -123,11 +129,45 @@ class AuditoriumServiceTest {
         Theater theater = new Theater();
         theater.setId(ID);
         theater.setTitle("Theater$Mock");
+        when(theaterRepository.findById(anyLong()))
+                .thenReturn(Optional.of(theater));
+        when(auditoriumRepository.save(any(Auditorium.class)))
+                .thenReturn(AuditoriumMapper.INSTANCE.fromDtoToEntity(auditoriumDto));
 
-        when(theaterRepository.findTheaterByIdAuditorium(ID)).thenReturn(theater);
         auditoriumService.save(auditoriumDto, "[]");
+
+        verify(theaterRepository).findById(anyLong());
         verify(auditoriumRepository).save(any(Auditorium.class));
     }
+
+    @Test
+    @DisplayName("Should save auditorium when save is called with valid parameters and null date")
+    void test_save_withValidParamsAndNullDate() {
+        AuditoriumDto auditoriumDto = new AuditoriumDto(
+                ID,
+                (int) ID,
+                "description",
+                null,
+                "https://scheme.org",
+                "https://banner.org",
+                ID,
+                Collections.emptyList(),
+                SeoBlockDto.EMPTY()
+        );
+        Theater theater = new Theater();
+        theater.setId(ID);
+        theater.setTitle("Theater$Mock");
+        when(theaterRepository.findById(anyLong()))
+                .thenReturn(Optional.of(theater));
+        when(auditoriumRepository.save(any(Auditorium.class)))
+                .thenReturn(AuditoriumMapper.INSTANCE.fromDtoToEntity(auditoriumDto));
+
+        auditoriumService.save(auditoriumDto, "[]");
+
+        verify(theaterRepository).findById(anyLong());
+        verify(auditoriumRepository).save(any(Auditorium.class));
+    }
+
 
     @Test
     @DisplayName("Should throw exception when save is called with null string")
@@ -171,8 +211,8 @@ class AuditoriumServiceTest {
                 LocalDate.now(),
                 "https://scheme.org",
                 "https://banner.org",
-                null,
-                null,
+                ID,
+                Collections.emptyList(),
                 SeoBlockDto.EMPTY()
         );
     }

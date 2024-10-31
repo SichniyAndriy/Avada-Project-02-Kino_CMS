@@ -3,8 +3,10 @@ package avada.spacelab.kino_cms.service;
 import avada.spacelab.kino_cms.model.dto.PromotionDto;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
+import avada.spacelab.kino_cms.model.mapper.PromotionMapper;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.service.impl.PromotionServiceImpl;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +29,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,6 +42,7 @@ class PromotionServiceTest {
     @InjectMocks
     private PromotionServiceImpl promotionService;
 
+    private final long ID = 1L;
 
     @TestFactory
     @DisplayName("Test getAllPromotions()")
@@ -49,8 +53,8 @@ class PromotionServiceTest {
                         () -> {
                             final int SIZE = 3;
                             List<Promotion> promotions = new ArrayList<>(SIZE);
-                            for (int i = 1; i <= SIZE; ++i) {
-                                promotions.add(getPromotion(i));
+                            for (long i = 1; i <= SIZE; ++i) {
+                                promotions.add(getPromotion(i, true));
                             }
 
                             when(promotionRepository.findAll()).thenReturn(promotions);
@@ -93,7 +97,7 @@ class PromotionServiceTest {
                         "With valid id and empty SeoBlock",
                         () -> {
                             when(promotionRepository.findById(anyLong()))
-                                    .thenReturn(Optional.of(getPromotion(1L)));
+                                    .thenReturn(Optional.of(getPromotion(1L, true)));
 
                             PromotionDto result = promotionService.getPromotionById(1L);
 
@@ -105,7 +109,7 @@ class PromotionServiceTest {
                 dynamicTest(
                         "With valid id and not empty SeoBlock",
                         () -> {
-                            Promotion promotion = getPromotion(1L);
+                            Promotion promotion = getPromotion(1L, true);
                             promotion.setSeoBlock(new SeoBlock());
                             when(promotionRepository.findById(anyLong()))
                                     .thenReturn(Optional.of(promotion));
@@ -145,35 +149,52 @@ class PromotionServiceTest {
     List<DynamicNode> test_save() {
         return List.of(
                 dynamicTest(
-                        "With valid parameter",
+                        "With valid parameters",
                         () -> {
                             when(promotionRepository.save(any(Promotion.class)))
-                                    .thenReturn(getPromotion(1));
+                                    .thenReturn(getPromotion(1, true));
 
-                            promotionService.save(PromotionDto.EMPTY());
+                            promotionService.save(getPromotionDto(ID, true));
 
                             verify(promotionRepository, times(1))
+                                    .save(any(Promotion.class));
+                        }
+                ),
+                 dynamicTest(
+                        "With valid parameters and null date",
+                        () -> {
+                            when(promotionRepository.save(any(Promotion.class)))
+                                    .thenReturn(getPromotion(1, false));
+
+                            promotionService.save(getPromotionDto(ID, false));
+
+                            verify(promotionRepository, times(2))
                                     .save(any(Promotion.class));
                         }
                 ),
                 dynamicTest(
                         "With null parameter",
                         () -> {
-                            when(promotionRepository.save(isNull())).thenReturn(null);
-
-                            promotionService.save(null);
-
-                            verify(promotionRepository, times(1))
+                            assertThrows(
+                                    NullPointerException.class,
+                                    () -> promotionService.save(null)
+                            );
+                            verify(promotionRepository, never())
                                     .save(isNull());
                         }
                 )
         );
     }
 
-    private Promotion getPromotion(long id) {
+    private Promotion getPromotion(long id, boolean withDate) {
         Promotion promotion = new Promotion();
         promotion.setId(id);
+        promotion.setDate(withDate ? LocalDate.now() : null);
         return promotion;
     }
 
+    private PromotionDto getPromotionDto(long id, boolean withDate) {
+        Promotion promotion = getPromotion(id, withDate);
+        return PromotionMapper.INSTANCE.fromEntityToDto(promotion);
+    }
 }

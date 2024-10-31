@@ -3,13 +3,17 @@ package avada.spacelab.kino_cms.service;
 import avada.spacelab.kino_cms.model.dto.NewsDto;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
+import avada.spacelab.kino_cms.model.mapper.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.service.impl.NewsServiceImpl;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,11 +22,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,12 +40,14 @@ class NewsServiceTest {
     @InjectMocks
     private NewsServiceImpl newsService;
 
+    private final long ID = 1L;
+
     @Test
     @DisplayName("Test getAllNews() with valid array")
     void test_getAllNews_WithValidArray() {
         List<News> newsList = new ArrayList<>();
-        for (int i = 1; i <= 3; ++i) {
-            newsList.add(getNews(i));
+        for (long i = 1; i <= 3; ++i) {
+            newsList.add(getNews(i, true));
         }
 
         when(newsRepository.findAll()).thenReturn(newsList);
@@ -69,14 +76,14 @@ class NewsServiceTest {
     @Test
     @DisplayName("Test getById() with not empty optional and not empty SeoBlock")
     void test_getById_WithNotEmptyOptionalAndNotEmptySeoBlock() {
-        News news = getNews(1);
+        News news = getNews(ID, true);
         news.setSeoBlock(new SeoBlock());
         when(newsRepository.findById(anyLong()))
                 .thenReturn(Optional.of(news));
 
         NewsDto result = newsService.getById(1);
 
-        assertEquals(getNews(1).getId(), result.id());
+        assertEquals(getNews(ID, true).getId(), result.id());
         verify(newsRepository).findById(anyLong());
     }
 
@@ -84,11 +91,11 @@ class NewsServiceTest {
     @DisplayName("Test getById() with not empty optional and empty SeoBlock")
     void test_getById_WithNotEmptyOptionalAndEmptySeoBlock() {
         when(newsRepository.findById(anyLong()))
-                .thenReturn(Optional.of(getNews(1)));
+                .thenReturn(Optional.of(getNews(1, true)));
 
         NewsDto result = newsService.getById(1);
 
-        assertEquals(getNews(1).getId(), result.id());
+        assertEquals(getNews(ID, true).getId(), result.id());
         assertNotNull(result.seoBlock());
         verify(newsRepository).findById(anyLong());
     }
@@ -117,36 +124,59 @@ class NewsServiceTest {
         verify(newsRepository, times(2)).deleteById(anyLong());
     }
 
-    @Test
-    @DisplayName("Test save() with valid parameter")
-    void test_save_withValidParameter() {
-        News news = getNews(1);
-        news.setSeoBlock(new SeoBlock());
+     @TestFactory
+    @DisplayName("Test save()")
+    List<DynamicNode> test_save() {
+        return List.of(
+                dynamicTest(
+                        "With valid parameters",
+                        () -> {
+                            when(newsRepository.save(any(News.class)))
+                                    .thenReturn(getNews(ID, true));
 
-        when(newsRepository.save(any(News.class))).thenReturn(news);
+                            newsService.save(getNewsDto(ID, true));
 
-        newsService.save(NewsDto.EMPTY());
+                            verify(newsRepository, times(1))
+                                    .save(any(News.class));
+                        }
+                ),
+                 dynamicTest(
+                        "With valid parameters and null date",
+                        () -> {
+                            when(newsRepository.save(any(News.class)))
+                                    .thenReturn(getNews(ID, false));
 
-        verify(newsRepository).save(any(News.class));
-    }
+                            newsService.save(getNewsDto(ID, false));
 
-    @Test
-    @DisplayName("Test save() with valid parameter")
-    void test_save_withInvalidParameter() {
-        doThrow(NullPointerException.class).when(newsRepository).save(isNull());
-
-        assertThrows(
-                NullPointerException.class,
-                () -> newsService.save(null)
+                            verify(newsRepository, times(2))
+                                    .save(any(News.class));
+                        }
+                ),
+                dynamicTest(
+                        "With null parameter",
+                        () -> {
+                            assertThrows(
+                                    NullPointerException.class,
+                                    () -> newsService.save(null)
+                            );
+                            verify(newsRepository, never())
+                                    .save(isNull());
+                        }
+                )
         );
-        verify(newsRepository).save(isNull());
     }
 
-    private News getNews(long id) {
+    private News getNews(long id, boolean withDate) {
         News news = new News();
         news.setId(id);
         news.setTitle("test " + id);
+        news.setDate(withDate ? LocalDate.now() : null);
         return news;
     }
 
+
+    private NewsDto getNewsDto(long id, boolean withDate) {
+        News news = getNews(id, withDate);
+        return NewsMapper.INSTANCE.fromEntityToDto(news);
+    }
 }
