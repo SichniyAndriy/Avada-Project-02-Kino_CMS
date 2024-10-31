@@ -13,10 +13,7 @@ $(() => {
         const $Switcher = $(event.target);
         const status = $Switcher.prop("checked");
         $Switcher.next().text( status ? "ON": "OFF");
-
-        const $Forms = $("form");
-        const $Elems = $Forms.find("input").add($Forms.find("textarea"));
-        $Elems.prop("disabled", !status);
+        $("form>input[type='checkbox']").val(status ? "ON": "OFF");
     }).trigger("change");
     $("#clear_picture__btn").on("click", evemt => {
         $("#news_picture").attr("src", "");
@@ -30,6 +27,10 @@ $("#news_status").on("change", (event) => {
 
 function triggerInputChange() {
     $("#picture__input").trigger("click");
+}
+
+function goToNews() {
+    location.href = "/admin/news";
 }
 
 function showPicture() {
@@ -56,9 +57,10 @@ async function saveNews(form) {
     } else {
         pictureUrl = $("#news_picture").attr("src");
     }
-
     formData.append("pictureUrl", pictureUrl ?? "");
-    formData.append("status", $("#news_status").val().toUpperCase());
+    const status = $("#news_status").val().toUpperCase();
+    formData.append("status", status);
+
     for (const pair of formData.entries()) {
         console.log(`${pair[0]}: ${pair[1]}`);
     }
@@ -68,7 +70,7 @@ async function saveNews(form) {
         body: formData
     }).then(responce => {
         if(responce.ok) {
-            alert("News saved");
+           goToNews();
         }
     })
 }

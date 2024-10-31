@@ -34,13 +34,14 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
             <div class="container text-end pe-5">
-                <div class="form-check form-switch fs-3 mb-4 d-flex justify-content-end">
-                    <input class="form-check-input" id="promotion_status" type="checkbox" role="switch">
-                    <label class="form-check-label ms-3" for="promotion_status">OFF</label>
+                <div class="form-check form-switch fs-3 my-4 d-flex justify-content-end">
+                    <input class="form-check-input" id="promotion_status" type="checkbox" role="switch"
+                        th:checked="${#strings.equals(promotion.status, 'ON')}">
+                    <label class="form-check-label ms-3" for="promotion_status"
+                        th:text="${promotion.status} ?: 'OFF'"></label>
                 </div>
                 <form action="#" id="promotion__form" method="post" enctype="multipart/form-data">
                     <div class="d-flex flex-column text-dark" th:object="${promotion}">
-                        
                         <input type="number" id="promotion_id" th:field="*{id}" hidden>
                         <input type="text" id="promotion_date" th:field="*{date}" hidden>
                         <div class="row mt-3 align-items-baseline">
@@ -120,7 +121,7 @@
                     </div>
                     <div class="mt-5 text-center">
                         <button type="submit" class="btn btn-success">Зберегти</button>
-                        <button type="reset" class="btn btn-outline-danger">Відміна</button>
+                        <button type="reset" class="btn btn-outline-danger" onclick="goToPomotions()">Відміна</button>
                     </div>
                 </form>
             </div>

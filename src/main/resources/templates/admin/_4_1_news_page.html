@@ -36,14 +36,15 @@
         <div id="placeholder__head__nav" th:replace="~{admin/index::head__nav}"></div>
         <section class="mb-5">
             <div class="container text-end pe-5">
-                <div class="form-check form-switch fs-3 mb-4 d-flex justify-content-end">
-                    <input class="form-check-input" id="news_status" type="checkbox" role="switch">
-                    <label class="form-check-label ms-3" for="news_status">OFF</label>
+                <div class="form-check form-switch fs-3 my-4 d-flex justify-content-end">
+                    <input class="form-check-input" id="news_status" type="checkbox" role="switch"
+                        th:checked="${#strings.equals(news.status, 'ON')}">
+                    <label class="form-check-label ms-3" for="news_status" 
+                        th:text="${news.status} ?: 'OFF'"></label>
                 </div>
                 <form action="#" id="news__form" th:object="${news}" enctype="multipart/form-data">
-
-                    <input type="text" id="news_id" hidden th:field="*{id}" >
-                    <input type="text" hidden th:field="*{date}">
+                    <input type="text" id="id" hidden th:field="*{id}" >
+                    <input type="text" id="date" hidden th:field="*{date}">
                     <div class="d-flex flex-column text-dark mt-4">
                         <div class="row mt-3 align-items-baseline">
                             <span class="col-2">Заголовок новини</span>
@@ -119,7 +120,7 @@
                     </div>
                     <div class="mt-5 text-center">
                         <button type="submit" class="btn btn-success">Зберегти</button>
-                        <button type="reset" class="btn btn-outline-danger">Відміна</button>
+                        <button type="reset" class="btn btn-outline-danger" onclick=" goToNews()">Відміна</button>
                     </div>
                 </form>
             </div>

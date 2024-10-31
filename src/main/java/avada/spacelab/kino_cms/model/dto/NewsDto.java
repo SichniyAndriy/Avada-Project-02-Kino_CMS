@@ -26,6 +26,7 @@ public record NewsDto(
                 null,
                 null,
                 SeoBlockDto.EMPTY(),
-                null);
+                null
+        );
     }
 }

@@ -6,6 +6,7 @@ import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.PromotionMapper;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.service.PromotionService;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +48,9 @@ public class PromotionServiceImpl implements PromotionService {
 
     public void save(PromotionDto promotionDto) {
         Promotion promotion = PromotionMapper.INSTANCE.fromDtoToEntity(promotionDto);
+        if(promotion.getDate() == null) {
+            promotion.setDate(LocalDate.now());
+        }
         promotionRepository.save(promotion);
     }
 }

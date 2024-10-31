@@ -6,6 +6,7 @@ import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.mapper.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.service.NewsService;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -48,6 +49,9 @@ public class NewsServiceImpl implements NewsService {
 
     public void save(NewsDto newsDto) {
         News news = NewsMapper.INSTANCE.fromDtoToEntity(newsDto);
+        if (news.getDate() == null) {
+            news.setDate(LocalDate.now());
+        }
         newsRepository.save(news);
     }
 

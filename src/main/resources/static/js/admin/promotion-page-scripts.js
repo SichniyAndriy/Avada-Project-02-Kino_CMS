@@ -20,16 +20,16 @@ $(() => {
         const $Switcher = $(event.target);
         const status = $Switcher.prop("checked");
         $Switcher.next().text( status ? "ON": "OFF");
-
-        const $Forms = $("form");
-        const $Elems = $Forms.find("input").add($Forms.find("textarea"));
-        $Elems.prop("disabled", !status);
     }).trigger("change");
     $("#clear_picture__btn").on("click", evemt => {
         $("#picture__img").attr("src", "");
         $("picture__input")[0].files[0] = null;
     })
 });
+
+function goToPomotions() {
+    location.href = "/admin/promotions";
+}
 
 function showPicture (elem) {
     const file = elem.files[0];
@@ -53,9 +53,8 @@ async function savePromotion(form) {
         await saveFileOnServer(file, id) : 
         $("#picture__img").attr( "src");
     formData.append("pictureUrl", pictureUrl);
-
-    const status = $("label[for='promotion__status']").text().toUpperCase();
-    formData.append("status", status);
+    const status = $("#promotion_status").val().toUpperCase();
+    formData.append("status",  status);
 
     for (const entry of formData.entries()) {
         console.log(entry);
@@ -66,7 +65,7 @@ async function savePromotion(form) {
         body: formData
     }).then(responce => {
         if (responce.ok) {
-            alert("Promotion saved");
+           goToPomotions();
         }
     })
 }
