@@ -9,9 +9,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +34,13 @@ class EmailSendingServiceTest {
     @Mock
     private UserRepository userRepository;
     @Mock
+    private JavaMailSender mailSender;
+    @Mock
     WebSocketSession session;
+    @Captor
+    private ArgumentCaptor<SimpleMailMessage> emailMessageCaptor;
+    @Captor
+    private ArgumentCaptor<TextMessage> textMessageCaptor;
     @InjectMocks
     private EmailSendingServiceImpl emailSendingService;
 
@@ -46,13 +57,15 @@ class EmailSendingServiceTest {
                         () -> {
                             when(userRepository.findAllEmails())
                                     .thenReturn(List.of("a@a.com", "b@b.com", "c@c.com"));
-                            doNothing().when(session).sendMessage(any());
+                            doNothing().when(mailSender).send(emailMessageCaptor.capture());
+                            doNothing().when(session).sendMessage(textMessageCaptor.capture());
                             doNothing().when(session).close(any());
 
                             emailSendingService.sendEmail(null, "greeting.html", session);
 
                             verify(userRepository, times(ONCE)).findAllEmails();
-                            verify(session, times(SIZE)).sendMessage(any());
+                            verify(mailSender, times(ONCE)).send(emailMessageCaptor.capture());
+                            verify(session, times(SIZE)).sendMessage(textMessageCaptor.capture());
                         }
                 ),
                 dynamicTest(
@@ -62,25 +75,29 @@ class EmailSendingServiceTest {
                                     .thenReturn(Optional.of("a@a.com"))
                                     .thenReturn(Optional.of("b@b.com"))
                                     .thenReturn(Optional.of("c@c.com"));
-                            doNothing().when(session).sendMessage(any());
+                            doNothing().when(mailSender).send(emailMessageCaptor.capture());
+                            doNothing().when(session).sendMessage(textMessageCaptor.capture());
                             doNothing().when(session).close(any());
 
                             emailSendingService.sendEmail(List.of(1L, 2L, 3L), "greeting.html", session);
 
                             verify(userRepository, times(SIZE)).findEmailById(anyLong());
-                            verify(session, times(SIZE * 2)).sendMessage(any());
+                            verify(mailSender, times(2)).send(emailMessageCaptor.capture());
+                            verify(session, times(SIZE * 2)).sendMessage(textMessageCaptor.capture());
                         }
                 ),
                 dynamicTest(
-                        "With exist ids and valid file",
+                        "With invalid file",
                         () -> {
                             assertThrows(
                                     IOException.class,
                                     () -> emailSendingService.sendEmail(null, "", session)
                             );
 
-                            verify(userRepository, times(3)).findEmailById(anyLong());
-                            verify(session, times(SIZE * 2)).sendMessage(any());
+                            verify(userRepository, times(ONCE)).findAllEmails();
+                            verify(userRepository, times(SIZE)).findEmailById(anyLong());
+                            verify(mailSender, times(2)).send(emailMessageCaptor.capture());
+                            verify(session, times(SIZE * 2)).sendMessage(textMessageCaptor.capture());
                         }
                 )
         );

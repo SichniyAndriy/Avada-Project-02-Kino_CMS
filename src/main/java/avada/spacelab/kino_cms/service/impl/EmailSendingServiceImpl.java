@@ -42,8 +42,8 @@ public class EmailSendingServiceImpl implements EmailSendingService {
             String fileName,
             WebSocketSession session
     ) throws IOException, InterruptedException {
-        List<String> emailList = createEmailList(ids);
         String emailContent = getEmailContent(fileName);
+        List<String> emailList = createEmailList(ids);
         sendToMe("freeas81@gmail.com", fileName, emailContent);
 
         int emailCount = emailList.size();
