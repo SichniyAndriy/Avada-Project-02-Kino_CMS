@@ -29,6 +29,7 @@ class ContactServiceTest {
     @InjectMocks
     private ContactServiceImpl contactService;
 
+
     @Test
     @DisplayName("Returns list of ContactDto")
     void testGetAll() {

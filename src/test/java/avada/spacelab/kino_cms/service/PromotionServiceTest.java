@@ -44,6 +44,7 @@ class PromotionServiceTest {
 
     private final long ID = 1L;
 
+
     @TestFactory
     @DisplayName("Test getAllPromotions()")
     List<DynamicNode> test_getAllPromotions() {
@@ -197,4 +198,5 @@ class PromotionServiceTest {
         Promotion promotion = getPromotion(id, withDate);
         return PromotionMapper.INSTANCE.fromEntityToDto(promotion);
     }
+
 }

@@ -42,6 +42,7 @@ class NewsServiceTest {
 
     private final long ID = 1L;
 
+
     @Test
     @DisplayName("Test getAllNews() with valid array")
     void test_getAllNews_WithValidArray() {
@@ -174,9 +175,9 @@ class NewsServiceTest {
         return news;
     }
 
-
     private NewsDto getNewsDto(long id, boolean withDate) {
         News news = getNews(id, withDate);
         return NewsMapper.INSTANCE.fromEntityToDto(news);
     }
+
 }

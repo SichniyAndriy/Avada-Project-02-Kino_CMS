@@ -168,7 +168,6 @@ class AuditoriumServiceTest {
         verify(auditoriumRepository).save(any(Auditorium.class));
     }
 
-
     @Test
     @DisplayName("Should throw exception when save is called with null string")
     void testSaveThrowsExceptionForNullParameterString() {

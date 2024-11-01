@@ -48,6 +48,7 @@ class UserServiceTest {
     private final int SIZE = 3;
     private final long ID = 1;
 
+
     @TestFactory
     @DisplayName("Test getAllUsers()")
     List<DynamicTest> test_getAllUsers() {
