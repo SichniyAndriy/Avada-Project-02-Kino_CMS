@@ -25,7 +25,7 @@
         <file>${SERVICE_LOG}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/service-%d{yyyy-MM-dd}/service-%d{yyyy-MM-dd hh}.log.zip</fileNamePattern>
-            <maxHistory>120</maxHistory>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>
@@ -40,6 +40,9 @@
     </root>
     <logger name="avada.spacelab.kino_cms.aspect.ServiceLogger" level="info" additivity="false">
         <appender-ref ref="toServiceLog"/>
+        <appender-ref ref="toConsole"/>
+    </logger>
+    <logger name="org.springframework.security" level="trace" additivity="false">
         <appender-ref ref="toConsole"/>
     </logger>
 
