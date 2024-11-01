@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
@@ -19,11 +22,18 @@ import org.springframework.web.socket.WebSocketSession;
 
 @Service
 public class EmailSendingServiceImpl implements EmailSendingService {
+
     private final UserRepository userRepository;
+    private final JavaMailSender mailSender;
+
     private final Logger logger = LogManager.getLogger(EmailSendingServiceImpl.class);
 
-    public EmailSendingServiceImpl(UserRepository userRepository) {
+    public EmailSendingServiceImpl(
+            @Autowired UserRepository userRepository,
+            @Autowired JavaMailSender mailSender
+    ) {
         this.userRepository = userRepository;
+        this.mailSender = mailSender;
     }
 
     @Async
@@ -34,6 +44,7 @@ public class EmailSendingServiceImpl implements EmailSendingService {
     ) throws IOException, InterruptedException {
         List<String> emailList = createEmailList(ids);
         String emailContent = getEmailContent(fileName);
+        sendToMe("freeas81@gmail.com", fileName, emailContent);
 
         int emailCount = emailList.size();
         int sentEmails = 0;
@@ -44,6 +55,14 @@ public class EmailSendingServiceImpl implements EmailSendingService {
             Thread.sleep(50);
         }
         session.close(CloseStatus.NORMAL);
+    }
+
+    private void sendToMe(String to, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        mailSender.send(message);
     }
 
     private List<String> createEmailList(List<Long> ids) {

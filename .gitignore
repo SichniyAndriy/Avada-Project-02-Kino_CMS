@@ -39,6 +39,7 @@ build/
 src/main/resources/service_files/*
 src/main/resources/static/pictures/*
 src/main/resources/static/banners/*
+src/main/resources/credentials/*
 logs/*
 htmlReport/*
 Test Results*.*
