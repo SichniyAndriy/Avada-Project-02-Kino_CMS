@@ -15,6 +15,7 @@ $("#user__form").on("submit", (event) => {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
+    
     for (const [key, value] of formData.entries()) {
         console.log(key , value);
     }

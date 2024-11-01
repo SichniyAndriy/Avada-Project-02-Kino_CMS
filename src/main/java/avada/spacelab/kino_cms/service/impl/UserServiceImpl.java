@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -73,6 +75,16 @@ public class UserServiceImpl implements UserService {
         if (user.getRegistrationDate() == null) {
             user.setRegistrationDate(LocalDate.now());
         }
+
+        String passHash;
+        if (user.getId() != null && ( user.getPassHash() == null || user.getPassHash().isEmpty() )) {
+            passHash = userRepository.findPassHashById(user.getId());
+        } else {
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
+            passHash = "{bcrypt}" + encoder.encode(user.getPassHash());
+        }
+        user.setPassHash(passHash);
+
         userRepository.save(user);
     }
 

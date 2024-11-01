@@ -14,6 +14,7 @@ import avada.spacelab.kino_cms.model.entity.Theater;
 import avada.spacelab.kino_cms.model.entity.User;
 import avada.spacelab.kino_cms.model.entity.User.Gender;
 import avada.spacelab.kino_cms.model.entity.User.Language;
+import avada.spacelab.kino_cms.model.entity.User.Role;
 import avada.spacelab.kino_cms.repository.AuditoriumRepository;
 import avada.spacelab.kino_cms.repository.ContactRepository;
 import avada.spacelab.kino_cms.repository.MovieRepository;
@@ -34,6 +35,8 @@ import java.util.concurrent.TimeUnit;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -179,6 +182,7 @@ public class AppUtil implements CommandLineRunner {
 
     private void initUsers(int n) {
         List<User> users = new ArrayList<>();
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
         for (int i = 0; i < n; i++) {
             User user = new User();
             user.setFirstName(localFaker.name().firstName());
@@ -204,6 +208,9 @@ public class AppUtil implements CommandLineRunner {
                     faker.random().nextBoolean() ? faker.random().nextInt(1, 100).toString() : null
             );
             user.setAddress(address);
+            String passHash = "{bcrypt}" + encoder.encode("123");
+            user.setPassHash(passHash);
+            user.setRole(Role.USER);
             users.add(user);
         }
         userRepository.saveAllAndFlush(users);

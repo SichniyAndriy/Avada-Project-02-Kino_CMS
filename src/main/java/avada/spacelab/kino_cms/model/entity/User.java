@@ -15,6 +15,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -50,7 +52,7 @@ public class User {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @Column(name = "pass_hash")
+    @Column(name = "pass_hash", nullable = false, unique = true)
     private String passHash;
 
     @Column(name = "card_number", nullable = false)
@@ -70,6 +72,10 @@ public class User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+
     public enum Language {
         UKRAINIAN,
         ENGLISH,
@@ -78,5 +84,48 @@ public class User {
     public enum Gender {
         MALE,
         FEMALE
+    }
+
+    public enum Role {
+        GUEST(Set.of(
+                Permission.READ_IN_PUBLIC_PART
+        )),
+        USER(Set.of(
+                Permission.READ_IN_PUBLIC_PART,
+                Permission.READ_IN_USER_PART,
+                Permission.WRITE_IN_USER_PART
+        )),
+        SERVANT(Set.of(
+                Permission.READ_IN_PUBLIC_PART,
+                Permission.READ_IN_USER_PART,
+                Permission.WRITE_IN_USER_PART,
+                Permission.READ_IN_ADMIN_PART
+        )),
+        ADMIN(Set.of(
+                Permission.READ_IN_PUBLIC_PART,
+                Permission.READ_IN_USER_PART,
+                Permission.WRITE_IN_USER_PART,
+                Permission.READ_IN_ADMIN_PART,
+                Permission.WRITE_IN_ADMIN_PART
+        ));
+
+        private final Set<Permission> permissions;
+
+        Role(Set<Permission> permissions) {
+            this.permissions = permissions;
+        }
+
+        public List<String> getPermissions(Role role) {
+            return role.permissions.stream()
+                    .map(permission -> permission.name()).toList();
+        }
+    }
+
+    public enum Permission {
+        READ_IN_PUBLIC_PART,
+        READ_IN_USER_PART,
+        WRITE_IN_USER_PART,
+        READ_IN_ADMIN_PART,
+        WRITE_IN_ADMIN_PART,
     }
 }

@@ -46,6 +46,7 @@ class UserServiceTest {
     private UserServiceImpl userService;
 
     private final int SIZE = 3;
+    private final long ID = 1;
 
     @TestFactory
     @DisplayName("Test getAllUsers()")
@@ -141,6 +142,8 @@ class UserServiceTest {
     @TestFactory
     @DisplayName("Test save()")
     List<DynamicTest> save() {
+        final String PASSWORD_HASH = "{bcrypt}2A";
+        final String PASSWORD = "password";
         return List.of(
                 dynamicTest(
                         "Valid parameter with date",
@@ -149,11 +152,12 @@ class UserServiceTest {
                             user.setId(1L);
                             user.setRegistrationDate(LocalDate.now());
                             UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
-
+                            when(userRepository.findPassHashById(anyLong())).thenReturn(PASSWORD_HASH);
                             when(userRepository.save(any(User.class))).thenReturn(user);
 
                             userService.save(userDto);
 
+                            verify(userRepository, times(1)).findPassHashById(anyLong());
                             verify(userRepository, times(1)).save(any(User.class));
                         }
                 ),
@@ -163,12 +167,86 @@ class UserServiceTest {
                             User user = new User();
                             user.setId(1L);
                             UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
-
+                            when(userRepository.findPassHashById(anyLong())).thenReturn(PASSWORD_HASH);
                             when(userRepository.save(any(User.class))).thenReturn(user);
 
                             userService.save(userDto);
 
+                            verify(userRepository, times(2)).findPassHashById(anyLong());
                             verify(userRepository, times(2)).save(any(User.class));
+                        }
+                ),
+                dynamicTest(
+                        "Valid parameter with null id and null passHash",
+                        () -> {
+                            User user = new User();
+                            UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
+
+                            assertThrows(
+                                    IllegalArgumentException.class,
+                                    () -> userService.save(userDto)
+                            );
+                            verify(userRepository, times(2)).findPassHashById(anyLong());
+                            verify(userRepository, times(2)).save(any(User.class));
+                        }
+                ),
+                dynamicTest(
+                        "Valid parameter with null id and empty passHash",
+                        () -> {
+                            User user = new User();
+                            user.setPassHash("");
+                            UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
+                            when(userRepository.save(any(User.class))).thenReturn(user);
+
+                            userService.save(userDto);
+
+                            verify(userRepository, times(2)).findPassHashById(anyLong());
+                            verify(userRepository, times(3)).save(any(User.class));
+                        }
+                ),
+                dynamicTest(
+                        "Valid parameter with null id and not empty passHash",
+                        () -> {
+                            User user = new User();
+                            user.setPassHash(PASSWORD_HASH);
+                            UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
+                            when(userRepository.save(any(User.class))).thenReturn(user);
+
+                            userService.save(userDto);
+
+                            verify(userRepository, times(2)).findPassHashById(anyLong());
+                            verify(userRepository, times(4)).save(any(User.class));
+                        }
+                ),
+                dynamicTest(
+                        "Valid parameter with not null id and empty passHash",
+                        () -> {
+                            User user = new User();
+                            user.setId(ID);
+                            user.setPassHash("");
+                            UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
+                            when(userRepository.findPassHashById(anyLong())).thenReturn(PASSWORD_HASH);
+                            when(userRepository.save(any(User.class))).thenReturn(user);
+
+                            userService.save(userDto);
+
+                            verify(userRepository, times(3)).findPassHashById(anyLong());
+                            verify(userRepository, times(5)).save(any(User.class));
+                        }
+                ),
+                dynamicTest(
+                        "Valid parameter with not null id and not empty passHash",
+                        () -> {
+                            User user = new User();
+                            user.setId(ID);
+                            user.setPassHash(PASSWORD);
+                            UserDto userDto = UserMapper.INSTANCE.fromEntityToDto(user);
+                            when(userRepository.save(any(User.class))).thenReturn(user);
+
+                            userService.save(userDto);
+
+                            verify(userRepository, times(3)).findPassHashById(anyLong());
+                            verify(userRepository, times(6)).save(any(User.class));
                         }
                 ),
                 dynamicTest(

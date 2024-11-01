@@ -73,21 +73,21 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider" th:with="users=${page.content}">
-                        <tr th:each="user : *{users}">
-                            <td th:text="${user.id}">111</td>
-                            <td th:text="${#temporals.format(user.registrationDate, 'dd.MM.yyyy')}">21.12.2112
+                        <tr th:each="user : *{users}" th:object="${user}">
+                            <td th:text="*{id}">111</td>
+                            <td th:text="*{#temporals.format(registrationDate, 'dd.MM.yyyy')}">21.12.2112
                             </td>
-                            <td th:text="${#temporals.format(user.birthDate, 'dd.MM.yyyy')}">21.12.2112</td>
-                            <td th:text="${user.email}">aaa@bbb.com</td>
-                            <td th:text="${user.phone}">aaa@bbb.com</td>
-                            <td th:text="|${user.firstName} ${user.lastName}|">aaasss bbb</td>
-                            <td th:text="${user.nickName}">aaasss bbb</td>
-                            <td th:text="${user.address.city}">aaasss bbb</td>
+                            <td th:text="*{#temporals.format(birthDate, 'dd.MM.yyyy')}">21.12.2112</td>
+                            <td th:text="*{email}">aaa@bbb.com</td>
+                            <td th:text="*{phone}">aaa@bbb.com</td>
+                            <td th:text="|*{firstName} *{lastName}|">aaasss bbb</td>
+                            <td th:text="*{nickName}">aaasss bbb</td>
+                            <td th:text="*{address.city}">aaasss bbb</td>
                             <td style="width: 10%;">
-                                <button type="button" class="btn btn-success" th:onclick="showUser([[${user.id}]])">
+                                <button type="button" class="btn btn-success" th:onclick="showUser([[*{id}]])">
                                     <i class="bi bi-pen-fill"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger" th:onclick="deleteUser([[${user.id}]])">
+                                <button type="button" class="btn btn-danger" th:onclick="deleteUser([[*{id}]])">
                                     <i class="bi bi-trash3-fill"></i>
                                 </button>
                             </td>

@@ -2,6 +2,7 @@ package avada.spacelab.kino_cms.model.dto;
 
 import avada.spacelab.kino_cms.model.entity.User.Gender;
 import avada.spacelab.kino_cms.model.entity.User.Language;
+import avada.spacelab.kino_cms.model.entity.User.Role;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +25,8 @@ public record UserDto(
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         LocalDate registrationDate,
         @DateTimeFormat(pattern = "yyyy-MM-dd")
-        LocalDate birthDate
+        LocalDate birthDate,
+        Role role
 ) implements Serializable {
 
     public static UserDto EMPTY() {
@@ -41,7 +43,8 @@ public record UserDto(
                 null,
                 null,
                 null,
-                null
+                null,
+                Role.USER
         );
     }
 }

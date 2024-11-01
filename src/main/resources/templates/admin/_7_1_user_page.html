@@ -34,10 +34,11 @@
     <div>
       <section class="container">
         <form action="/admin/users/save" method="post" enctype="multipart/form-data" id="user__form"
-          th:object="${user}">
+            th:object="${user}">
           <input type="number" th:field="*{id}" hidden>
           <input type="text" th:field="*{registrationDate}" hidden>
           <input type="number" th:field="*{address.id}" hidden>
+          <input type="text" th:field="*{role}" th:value="*{role} ?: 'USER'" hidden>
           <div class="container mt-5">
             <div class="row row-cols-2 g-3 text-dark">
               <div class="col-6 d-flex align-items-baseline">

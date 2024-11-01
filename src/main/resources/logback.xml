@@ -42,7 +42,7 @@
         <appender-ref ref="toServiceLog"/>
         <appender-ref ref="toConsole"/>
     </logger>
-    <logger name="org.springframework.security" level="trace" additivity="false">
+    <logger name="org.springframework.security" level="info" additivity="false">
         <appender-ref ref="toConsole"/>
     </logger>
 
