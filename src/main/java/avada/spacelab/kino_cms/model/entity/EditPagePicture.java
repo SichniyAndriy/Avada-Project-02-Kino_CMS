@@ -29,6 +29,6 @@ public class EditPagePicture {
     private String path;
 
     @ManyToOne(targetEntity = EditPage.class)
-    @JoinColumn(name = "edit_page", referencedColumnName = "id")
+    @JoinColumn(name = "edit_page_id", referencedColumnName = "id")
     private EditPage editPage;
 }
