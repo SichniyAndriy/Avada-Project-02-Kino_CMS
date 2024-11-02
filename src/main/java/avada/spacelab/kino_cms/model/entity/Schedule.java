@@ -21,6 +21,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "schedules")
 public class Schedule {
+
     @EmbeddedId
     private ScheduleCompositeKey key;
 
@@ -52,4 +53,5 @@ public class Schedule {
         @Column(name = "time", nullable = false)
         private LocalTime time;
     }
+
 }

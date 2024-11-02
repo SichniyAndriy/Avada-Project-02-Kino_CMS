@@ -26,6 +26,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
     @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
@@ -128,4 +129,5 @@ public class User {
         READ_IN_ADMIN_PART,
         WRITE_IN_ADMIN_PART,
     }
+
 }

@@ -25,6 +25,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "edit_pages")
 public class EditPage {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "edit_pages_gen")
     @SequenceGenerator(name = "edit_pages_gen", sequenceName = "edit_pages_seq", allocationSize = 1)
@@ -62,4 +63,5 @@ public class EditPage {
         ADVERTISING,
         CHILD_ROOM,
     }
+
 }

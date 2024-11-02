@@ -16,6 +16,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "contacts")
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contacts_gen")
     @SequenceGenerator(name = "contacts_gen", sequenceName = "contacts_seq", allocationSize = 1)

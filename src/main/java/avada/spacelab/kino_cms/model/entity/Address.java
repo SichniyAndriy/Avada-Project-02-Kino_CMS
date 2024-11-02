@@ -16,6 +16,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "addresses")
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_gen")
     @SequenceGenerator(name = "address_gen", sequenceName = "address_seq", allocationSize = 1)
@@ -37,4 +38,5 @@ public class Address {
 
     @Column(name = "flat_number")
     private String flatNumber;
+
 }

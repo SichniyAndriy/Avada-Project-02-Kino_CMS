@@ -18,6 +18,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "movie_pictures")
 public class MoviePicture {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_pictures_gen")
     @SequenceGenerator(name = "movie_pictures_gen", sequenceName = "movie_pictures_seq")
@@ -31,4 +32,5 @@ public class MoviePicture {
     @ManyToOne(targetEntity = Movie.class)
     @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
     private Movie movie;
+
 }

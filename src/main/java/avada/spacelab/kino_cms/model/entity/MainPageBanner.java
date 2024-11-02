@@ -16,9 +16,9 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
-@Entity
-@Table(name = "main_page_banners")
+@Entity @Table(name = "main_page_banners")
 public class MainPageBanner {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "main_page_gen")
     @SequenceGenerator(name = "main_page_gen", sequenceName = "main_page_seq", allocationSize = 1)
@@ -40,4 +40,5 @@ public class MainPageBanner {
         SLASH_BANNER,
         BOTTOM_PROMOTION
     }
+
 }

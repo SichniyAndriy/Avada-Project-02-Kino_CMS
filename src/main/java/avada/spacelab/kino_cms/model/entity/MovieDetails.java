@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Embeddable
 public class MovieDetails {
+
     private String year;
     private String country;
     private String actors;
@@ -19,7 +20,9 @@ public class MovieDetails {
     private String budget;
     private String time;
 
+
     public static MovieDetails EMPTY() {
         return new MovieDetails();
     }
+
 }

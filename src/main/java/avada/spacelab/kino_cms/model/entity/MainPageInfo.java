@@ -20,6 +20,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity @Table(name = "main_page_info")
 public class MainPageInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "main_page_info_gen")
     @SequenceGenerator(name = "main_page_info_gen", sequenceName = "main_page_info_seq", allocationSize = 1)
@@ -39,4 +40,5 @@ public class MainPageInfo {
     @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
     @JoinColumn(name = "seoblock_id", referencedColumnName = "id")
     private SeoBlock seoBlock;
+
 }

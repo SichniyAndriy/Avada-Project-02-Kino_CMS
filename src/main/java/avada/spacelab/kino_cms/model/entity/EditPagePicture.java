@@ -18,6 +18,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "edit_page_picture")
 public class EditPagePicture {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "edit_page_picture_gen")
     @SequenceGenerator(name = "edit_page_picture_gen", sequenceName = "edit_page_picture_seq", allocationSize = 1)
@@ -31,4 +32,5 @@ public class EditPagePicture {
     @ManyToOne(targetEntity = EditPage.class)
     @JoinColumn(name = "edit_page_id", referencedColumnName = "id")
     private EditPage editPage;
+
 }

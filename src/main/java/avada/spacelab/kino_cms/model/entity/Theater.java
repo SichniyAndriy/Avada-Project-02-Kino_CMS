@@ -22,6 +22,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "theaters")
 public class Theater {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "theater_gen")
     @SequenceGenerator(name = "theater_gen", sequenceName = "theater_seq", allocationSize = 1)
@@ -55,4 +56,5 @@ public class Theater {
     @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
     @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
     private SeoBlock seoBlock;
+
 }

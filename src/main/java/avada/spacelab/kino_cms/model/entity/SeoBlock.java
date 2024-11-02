@@ -16,6 +16,7 @@ import org.hibernate.type.SqlTypes;
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "seo_blocks")
 public class SeoBlock {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seo_blocks_gen")
     @SequenceGenerator(name = "seo_blocks_gen", sequenceName = "seo_blocks_seq", allocationSize = 1)
@@ -34,4 +35,5 @@ public class SeoBlock {
 
     @Column(name = "description", length = 2048)
     private String description;
+
 }
