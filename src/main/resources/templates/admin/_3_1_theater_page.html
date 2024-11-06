@@ -146,7 +146,8 @@
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary" th:onclick="showAuditorium(0, [[*{id} ?: 0]])">
+                                <button type="button" class="btn btn-primary"
+                                    th:onclick="showAuditorium(0, [[*{id} ?: 0]])">
                                     Додати новий зал
                                 </button>
                             </div>
@@ -189,7 +190,8 @@
                     </div>
                     <div class="d-flex gap-3 text-center w-25 mt-5 mx-auto">
                         <input type="submit" class="btn btn-success w-50" value="Зберегти">
-                        <input type="reset" class="btn btn-outline-danger w-50" value="Скасувати" onclick="gotoTheaters()">
+                        <input type="reset" class="btn btn-outline-danger w-50" value="Скасувати"
+                            onclick="gotoTheaters()">
                     </div>
                 </div>
             </form>

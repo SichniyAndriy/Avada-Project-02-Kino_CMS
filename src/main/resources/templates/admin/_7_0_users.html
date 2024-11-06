@@ -96,10 +96,15 @@
                 </table>
                 <nav aria-label="..." th:object="${page}">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item" th:if="*{hasPrevious}"
-                            th:onclick="goToUsers([[*{pageNumber} - 1]], [[*{pageSize}]])">
-                            <a class="page-link" href="#"> Previous </a>
-                        </li>
+                        <th:block th:switch="*{hasPrevious}">
+                            <li class="page-item" th:case="true"
+                                th:onclick="goToUsers([[*{pageNumber} - 1]], [[*{pageSize}]])">
+                                <a class="page-link" href="#"> Previous </a>
+                            </li>
+                            <li class="page-item" th:case="false">
+                                <a class="page-link" href="#" style="pointer-events: none;color:grey"> Previous </a>
+                            </li>
+                        </th:block>
                         <li class="page-item" th:each="i : *{#numbers.sequence(0, pageAmount - 1)}"
                             th:with="flag= ${i} == *{pageNumber}" th:switch="${flag}"
                             th:classappend="${flag} ? 'active'">
@@ -111,10 +116,15 @@
                                 [[${i} + 1]]
                             </a>
                         </li>
-                        <li class="page-item" th:if="*{hasNext}"
-                            th:onclick="goToUsers([[*{pageNumber} + 1]], [[*{pageSize}]])">
-                            <a class="page-link" href="#"> Next </a>
-                        </li>
+                        <th:block th:switch="*{hasNext}">
+                            <li class="page-item" th:case="true"
+                                    th:onclick="goToUsers([[*{pageNumber} + 1]], [[*{pageSize}]])">
+                                <a class="page-link" href="#"> Next </a>
+                            </li>
+                            <li class="page-item" th:case="false">
+                                <a class="page-link" style="pointer-events: none; color: grey;"> Next </a>
+                            </li>
+                        </th:block>
                     </ul>
                 </nav>
 

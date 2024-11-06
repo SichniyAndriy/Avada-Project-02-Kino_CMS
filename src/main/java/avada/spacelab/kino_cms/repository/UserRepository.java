@@ -1,6 +1,7 @@
 package avada.spacelab.kino_cms.repository;
 
 import avada.spacelab.kino_cms.model.entity.User;
+import avada.spacelab.kino_cms.model.entity.User.Gender;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -43,4 +44,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u.passHash FROM User AS u WHERE u.id=:id")
     String findPassHashById(Long id);
+
+    long countUserByGender(
+            @Param("gender") Gender gender
+    );
 }

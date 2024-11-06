@@ -82,7 +82,7 @@ public class AppUtil implements CommandLineRunner {
         initMovies(n * 15);
         initNews(n * 3);
         initPromotions(n * 3);
-        initUsers(n * 15);
+        initUsers(n * 50);
         initSchedules();
         initMainPageInfo();
         initContacts();
