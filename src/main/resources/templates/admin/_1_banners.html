@@ -9,20 +9,17 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{assets/css/core/libs.min.css}">
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css" th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
-        th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0" th:href="@{/assets/css/custom.min.css?v=4.0.0}">
-    <!-- Dark Css -->
-    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css" th:href="@{/assets/css/customizer.min.css}">
-    <!-- RTL Css -->
-    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -37,23 +34,22 @@
             <section id="main_top" class="col-11 border border-dark rounded-3 mx-auto">
                 <p class="ms-4 mt-4 text-dark">Відношення 16 х 9</p>
                 <div id="banners_cards" class="row row-cols-5 m-0 p-0 g-5 text-dark">
-                    <div class="col card py-4 mt-0" 
-                        th:each="banner : ${banners}" 
+                    <div class="col card py-4 mt-0" th:each="banner : ${banners}"
                         th:id="|banner_card_${bannerStat.count}|">
                         <div id="img_block" class="mb-2 position-relative" th:id="|img_block_${bannerStat.count}">
                             <img class="img-fluid" th:src="${banner.path}" alt="photo">
-                            <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle" 
+                            <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"
                                 th:onclick="deleteCard(this)"></i>
                         </div>
-                        <input type="file" accept="image/*" name="banner" id="banner__input" class="mb-2 form-control" 
+                        <input type="file" accept="image/*" name="banner" id="banner__input" class="mb-2 form-control"
                             th:name="|banner_${bannerStat.count}|" th:id="|banner__input_${bannerStat.count}|">
                         <label for="banner__text" th:for="|banner__text_${bannerStat.count}|">
                             Текст
                         </label>
-                        <input id="banner__text" type="text" class="form-control" 
+                        <input id="banner__text" type="text" class="form-control"
                             th:id="|banner__text_${bannerStat.count}|" th:value="${banner.text}">
                     </div>
-                    <div id="add_banner_card" class="card col py-4 mt-0 justify-content-center" 
+                    <div id="add_banner_card" class="card col py-4 mt-0 justify-content-center"
                         th:onclick="addBannerCard()">
                         <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                     </div>
@@ -74,7 +70,8 @@
                     <div class="col-12 col-sm-6 text-center align-content-center">
                         <div class="d-grid gap-4">
                             <button type="button" class="btn btn-primary" th:onclick="showBackground()">Вибрати</button>
-                            <button type="button" class="btn btn-success" th:onclick="saveBackground()">Зберегти</button>
+                            <button type="button" class="btn btn-success"
+                                th:onclick="saveBackground()">Зберегти</button>
                         </div>
                     </div>
                 </div>
@@ -84,20 +81,19 @@
             <section id="main_promotions" class="col-11 border border-dark rounded-1 mx-auto">
                 <p class="ms-4 mt-4 text-dark">Відношення 16 х 9</p>
                 <div id="promotions_cards" class="row row-cols-5 m-0 p-0 g-5 text-dark">
-                    <div class="card col py-4 mt-0" 
-                        th:each="promotion : ${promotions}"
+                    <div class="card col py-4 mt-0" th:each="promotion : ${promotions}"
                         th:id="|promotion_card_${promotionStat.count}|">
                         <div class="mb-2 position-relative">
                             <img class="img-fluid" th:src="${promotion.path}" alt="">
                             <i class="bi bi-x-circle-fill fs-3 position-absolute top-0 start-100 translate-middle"></i>
                         </div>
-                        <input type="file" class="form-control mb-2" name="" id="promotion_picture__input" 
+                        <input type="file" class="form-control mb-2" name="" id="promotion_picture__input"
                             th:id="|promotion_picture__input_${promotionStat.count}|">
                         <label for="promotion" th:for="|promotion_${promotionStat.count}|">Текст</label>
-                        <input id="promotion" type="text" class="form-control" 
+                        <input id="promotion" type="text" class="form-control"
                             th:id="|promotion_${promotionStat.count}|" th:value="${promotion.text}">
                     </div>
-                    <div id="add_promotion_card" class="card col py-4 mt-0 justify-content-center" 
+                    <div id="add_promotion_card" class="card col py-4 mt-0 justify-content-center"
                         th:onclick="addPromotionCard()">
                         <i class="bi bi-plus-circle-fill fs-1 text-dark align-self-center"></i>
                     </div>
@@ -117,7 +113,8 @@
     <!-- Widgetchart Script -->
     <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
     <!-- mapchart Script -->
-    <script src="../../static/assets/js/charts/vectore-chart.js" th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script src="../../static/assets/js/charts/vectore-chart.js"
+        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
     <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
     <!-- fslightbox Script -->
     <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>

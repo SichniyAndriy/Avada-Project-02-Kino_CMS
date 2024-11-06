@@ -11,25 +11,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "movies")
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movies_gen")
-    @SequenceGenerator(name = "movies_gen", sequenceName = "movies_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.BIGINT)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "native_title", nullable = false)
@@ -62,10 +56,12 @@ public class Movie {
     @Embedded
     private MovieDetails details;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = MoviePicture.class, orphanRemoval = true, mappedBy = "movie")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            targetEntity = MoviePicture.class, orphanRemoval = true, mappedBy = "movie")
     private List<MoviePicture> pictures = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Schedule.class, mappedBy = "key.movie")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            targetEntity = Schedule.class, mappedBy = "key.movie")
     private List<Schedule> schedules = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)

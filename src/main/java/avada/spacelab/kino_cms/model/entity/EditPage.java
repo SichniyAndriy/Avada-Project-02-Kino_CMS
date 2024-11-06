@@ -12,25 +12,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "edit_pages")
 public class EditPage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "edit_pages_gen")
-    @SequenceGenerator(name = "edit_pages_gen", sequenceName = "edit_pages_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.BIGINT)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "title")
@@ -42,8 +36,8 @@ public class EditPage {
     @Column(name = "banner_url", length = 512)
     private String bannerUrl;
 
-    @OneToMany(targetEntity = EditPagePicture.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER,
-            orphanRemoval = true, mappedBy = "editPage")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,
+            targetEntity = EditPagePicture.class, mappedBy = "editPage")
     private List<EditPagePicture> pictures = new ArrayList<>();
 
     @Column(name = "video_url", length = 512)

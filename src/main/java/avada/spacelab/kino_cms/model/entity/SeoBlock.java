@@ -5,23 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "seo_blocks")
 public class SeoBlock {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seo_blocks_gen")
-    @SequenceGenerator(name = "seo_blocks_gen", sequenceName = "seo_blocks_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.BIGINT)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "url", length = 1024)

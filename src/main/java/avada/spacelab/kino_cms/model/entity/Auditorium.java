@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.model.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -20,18 +20,13 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Getter @Setter @NoArgsConstructor
 @Entity @Table(name = "auditoriums")
 public class Auditorium {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "auditoriums_gen")
-    @SequenceGenerator(name = "auditoriums_gen", sequenceName = "auditoriums_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.BIGINT)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "number", nullable = false)
@@ -54,7 +49,7 @@ public class Auditorium {
     @JoinColumn(name = "theater_id", referencedColumnName = "id")
     private Theater theater;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,
             targetEntity = AuditoriumPicture.class, mappedBy = "auditorium")
     private List<AuditoriumPicture> pictures = new ArrayList<>();
 
