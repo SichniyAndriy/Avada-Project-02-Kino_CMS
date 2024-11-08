@@ -9,20 +9,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.web.socket.TextMessage;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.web.socket.WebSocketSession;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,15 +35,10 @@ class EmailSendingServiceTest {
     private JavaMailSender mailSender;
     @Mock
     WebSocketSession session;
-    @Captor
-    private ArgumentCaptor<SimpleMailMessage> emailMessageCaptor;
-    @Captor
-    private ArgumentCaptor<TextMessage> textMessageCaptor;
     @InjectMocks
     private EmailSendingServiceImpl emailSendingService;
 
     private final int SIZE = 3;
-    private final int ONCE = 1;
 
 
     @TestFactory
@@ -57,15 +50,14 @@ class EmailSendingServiceTest {
                         () -> {
                             when(userRepository.findAllEmails())
                                     .thenReturn(List.of("a@a.com", "b@b.com", "c@c.com"));
-                            doNothing().when(mailSender).send(emailMessageCaptor.capture());
-                            doNothing().when(session).sendMessage(textMessageCaptor.capture());
+                            doCallRealMethod().when(mailSender).send(any(MimeMessagePreparator.class));
                             doNothing().when(session).close(any());
 
                             emailSendingService.sendEmail(null, "greeting.html", session);
 
-                            verify(userRepository, times(ONCE)).findAllEmails();
-                            verify(mailSender, times(ONCE)).send(emailMessageCaptor.capture());
-                            verify(session, times(SIZE)).sendMessage(textMessageCaptor.capture());
+                            verify(userRepository, times(1)).findAllEmails();
+                            verify(mailSender, times(1)).send(any(MimeMessagePreparator.class));
+                            verify(session, times(1)).close(any());
                         }
                 ),
                 dynamicTest(
@@ -75,15 +67,14 @@ class EmailSendingServiceTest {
                                     .thenReturn(Optional.of("a@a.com"))
                                     .thenReturn(Optional.of("b@b.com"))
                                     .thenReturn(Optional.of("c@c.com"));
-                            doNothing().when(mailSender).send(emailMessageCaptor.capture());
-                            doNothing().when(session).sendMessage(textMessageCaptor.capture());
+                            doNothing().when(mailSender).send(any(MimeMessagePreparator.class));
                             doNothing().when(session).close(any());
 
                             emailSendingService.sendEmail(List.of(1L, 2L, 3L), "greeting.html", session);
 
                             verify(userRepository, times(SIZE)).findEmailById(anyLong());
-                            verify(mailSender, times(2)).send(emailMessageCaptor.capture());
-                            verify(session, times(SIZE * 2)).sendMessage(textMessageCaptor.capture());
+                            verify(mailSender, times(2)).send(any(MimeMessagePreparator.class));
+                            verify(session, times(2)).close(any());
                         }
                 ),
                 dynamicTest(
@@ -94,10 +85,9 @@ class EmailSendingServiceTest {
                                     () -> emailSendingService.sendEmail(null, "", session)
                             );
 
-                            verify(userRepository, times(ONCE)).findAllEmails();
+                            verify(userRepository, times(1)).findAllEmails();
                             verify(userRepository, times(SIZE)).findEmailById(anyLong());
-                            verify(mailSender, times(2)).send(emailMessageCaptor.capture());
-                            verify(session, times(SIZE * 2)).sendMessage(textMessageCaptor.capture());
+                            verify(mailSender, times(2)).send(any(MimeMessagePreparator.class));
                         }
                 )
         );

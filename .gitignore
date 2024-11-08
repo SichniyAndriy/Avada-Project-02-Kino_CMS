@@ -43,3 +43,4 @@ src/main/resources/credentials/*
 logs/*
 htmlReport/*
 Test Results*.*
+/src/main/resources/static.rar

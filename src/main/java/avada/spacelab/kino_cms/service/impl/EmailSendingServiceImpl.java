@@ -3,6 +3,9 @@ package avada.spacelab.kino_cms.service.impl;
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.repository.UserRepository;
 import avada.spacelab.kino_cms.service.EmailSendingService;
+import jakarta.mail.Address;
+import jakarta.mail.Message.RecipientType;
+import jakarta.mail.internet.InternetAddress;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +15,8 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
@@ -58,11 +61,14 @@ public class EmailSendingServiceImpl implements EmailSendingService {
     }
 
     private void sendToMe(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        mailSender.send(message);
+        MimeMessagePreparator preparator = mimeMessage -> {
+            mimeMessage.setRecipients(RecipientType.TO , to);
+            mimeMessage.setHeader("Content-Type", "text/html; charset=utf-8");
+            mimeMessage.setContent(text, "text/html; charset=utf-8");
+            mimeMessage.addFrom(new Address[] { new InternetAddress("sichniy.andriy@gmail.com") });
+            mimeMessage.setSubject(subject, "utf-8");
+        };
+        mailSender.send(preparator);
     }
 
     private List<String> createEmailList(List<Long> ids) {
