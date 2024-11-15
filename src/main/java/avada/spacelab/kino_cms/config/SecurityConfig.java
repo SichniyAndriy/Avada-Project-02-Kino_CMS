@@ -20,15 +20,13 @@ public class SecurityConfig {
     ) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize
-                            .requestMatchers("admin/index", "admin/", "admin")
-                            .hasAuthority(Permission.READ_IN_ADMIN_PART.name())
-                            .requestMatchers("admin/**")
-                            .hasAuthority(Permission.WRITE_IN_ADMIN_PART.name())
-                            .requestMatchers("/**")
-                            .permitAll();
-                })
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("admin/index", "admin/", "admin")
+                        .hasAuthority(Permission.READ_IN_ADMIN_PART.name())
+                        .requestMatchers("admin/**")
+                        .hasAuthority(Permission.WRITE_IN_ADMIN_PART.name())
+                        .requestMatchers("/**")
+                        .permitAll())
                 .formLogin(form -> form.loginPage("/login").permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll());
         return http.build();
