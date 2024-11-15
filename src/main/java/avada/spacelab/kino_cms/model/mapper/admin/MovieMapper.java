@@ -1,7 +1,7 @@
-package avada.spacelab.kino_cms.model.mapper;
+package avada.spacelab.kino_cms.model.mapper.admin;
 
-import avada.spacelab.kino_cms.model.dto.MovieDto;
-import avada.spacelab.kino_cms.model.dto.MoviesResponceDto;
+import avada.spacelab.kino_cms.model.dto.admin.MovieDto;
+import avada.spacelab.kino_cms.model.dto.admin.MoviesResponceDto;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.model.mapper;
+package avada.spacelab.kino_cms.model.mapper.admin;
 
-import avada.spacelab.kino_cms.model.dto.EditPageDto;
+import avada.spacelab.kino_cms.model.dto.admin.EditPageDto;
 import avada.spacelab.kino_cms.model.entity.EditPage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.model.mapper;
+package avada.spacelab.kino_cms.model.mapper.admin;
 
-import avada.spacelab.kino_cms.model.dto.ContactDto;
+import avada.spacelab.kino_cms.model.dto.admin.ContactDto;
 import avada.spacelab.kino_cms.model.entity.Contact;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants.ComponentModel;

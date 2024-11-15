@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.model.mapper;
+package avada.spacelab.kino_cms.model.mapper.admin;
 
-import avada.spacelab.kino_cms.model.dto.ScheduleDto;
+import avada.spacelab.kino_cms.model.dto.admin.ScheduleDto;
 import avada.spacelab.kino_cms.model.entity.Schedule;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
