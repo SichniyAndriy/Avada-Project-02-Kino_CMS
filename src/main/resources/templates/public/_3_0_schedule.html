@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ua" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Афіша</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body th:with="today=${#temporals.createToday()}">
+    <!--Nav Start-->
+    <nav class="navbar navbar-expand-md" th:replace="~{public/index :: navbar}"></nav>
+    <!--Nav End-->
+    <!-- Main Section Start -->
+    <main class="container-fluid" id="main-content"
+        th:with="year=${#temporals.year(today)}, month=${#temporals.month(today)}, day=${#temporals.day(today)}">
+        <section class="container mt-4" id="choices">
+            <div class="d-flex justify-items-beetwen align-items-center">
+                <div class="form-check text-bg-primary fs-5 p-2 rounded-2">
+                    <span class="pe-4">Показувати тільки</span>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="2D_check">
+                        <label for="2D_check" class="form-check-label">2D</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="3D_check">
+                        <label for="3D_check" class="form-check-label">3D</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="Imax_check">
+                        <label for="Imax_check" class="form-check-label">Imax</label>
+                    </div>
+                </div>
+                <div class="w-50 ms-auto d-flex gap-2 justify-content-between align-items-baseline">
+                    <select class="form-select form-select-sm" name="theater" id="theater__select"
+                        aria-label="Theaters select">
+                        <option selected>Кінотеатр</option>
+                        <option th:each="t : ${theaters}" th:value="${t}">
+                            [[${t}]]
+                        </option>
+                    </select>
+                    <select class="form-select form-select-sm" name="date" id="dates__select">
+                        <option selected>Дата</option>
+                        <option th:each="i : ${#numbers.sequence(0, 13)}" th:value="dates[__${i}__]">
+                            [[${#temporals.create(year, month, day + i)}]]
+                        </option>
+                    </select>
+                    <select class="form-select form-select-sm" name="movie" id="movie__select">
+                        <option selected>Фільми: всі</option>
+                        <option th:each="m : ${movies}" th:value="${m}">
+                            [[${m}]]
+                        </option>
+                    </select>
+                    <select class="form-select form-select-sm" name="auditorium" id="auditorium__select">
+                        <option selected>Зал</option>
+                        <option th:each="a : ${auditoriums}" th:value="${a}">
+                            [[${a}]]
+                        </option>
+                    </select>
+                </div>
+                <div class="ms-3">
+                    <button type="button" class="btn btn-outline-info"> Застосувати </button>
+                </div>
+            </div>
+        </section>
+        <section class="container mt-4" id="schedules__tables">
+            <table class="w-75 table table-sm table-hover table-bordered table-success caption-top table-responsive-md"
+                th:each="table : ${tables}">
+                <caption>
+                    <h5 th:with="temporal=${table.key}">
+                        [[ ${#temporals.day(temporal)} ]] [[ ${#temporals.monthName(temporal)} ]],
+                        [[ ${#temporals.dayOfWeekName(temporal)} ]]
+                    </h5>
+                </caption>
+                <thead class="text-center table-dark">
+                    <tr scope="row">
+                        <th scope="col">Час</th>
+                        <th scope="col">Фільм</th>
+                        <th scope="col">Кінотеатр</th>
+                        <th scope="col">Зал</th>
+                        <th scope="col">Ціна в грн.</th>
+                        <th scope="col" class="px-2">Бронювати</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" class="align-baseline lh-1" th:each="row : ${table.value}">
+                        <td class="align-middle text-center" th:text="${row.time}">
+                            Lorem ipsum dolor sit amet.
+                        </td>
+                        <td class="align-middle ps-4" th:text="${row.movie}">
+                            Quod expedita cum at laudantium.
+                        </td>
+                        <td class="align-middle ps-4" th:text="${row.theater}">
+                            Architecto provident nemo vero quibusdam.
+                        </td>
+                        <td class="align-middle text-center" th:text="${row.auditorium}">
+                            Possimus est provident corporis doloremque.
+                        </td>
+                        <td class="align-middle text-center" th:text="${row.price}">
+                            Minima dolor dolorem soluta aliquam.
+                        </td>
+                        <td class="text-center align-middle">
+                            <button type="button" class="btn border-0 p-0 text-success fs-4 lh-1 fw-bold">
+                                <i class="bi bi-plus-square-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <!-- Main Section End -->
+    <!-- Footer Section Start -->
+    <footer class="footer p-4 my-4" th:replace="~{public/index :: footer}"></footer>
+    <!-- Footer Section End -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+
+</body>
+
+</html>
