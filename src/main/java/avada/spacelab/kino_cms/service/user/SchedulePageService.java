@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -73,9 +72,7 @@ public class SchedulePageService {
                 ));
 
         collected.forEach((date, list) -> {
-           Collections.sort(
-                   list,
-                   Comparator.comparing(SchedulePageResponceDto::time)
+           list.sort(Comparator.comparing(SchedulePageResponceDto::time)
                            .thenComparing(SchedulePageResponceDto::theater)
                            .thenComparing(SchedulePageResponceDto::auditorium)
            );
