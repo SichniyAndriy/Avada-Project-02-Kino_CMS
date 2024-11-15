@@ -2,8 +2,8 @@ package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.paged.PagedResponse;
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
-import avada.spacelab.kino_cms.model.dto.UserDto;
-import avada.spacelab.kino_cms.service.UserService;
+import avada.spacelab.kino_cms.model.dto.admin.UserDto;
+import avada.spacelab.kino_cms.service.admin.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

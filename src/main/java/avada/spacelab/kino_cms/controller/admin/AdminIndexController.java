@@ -1,6 +1,6 @@
 package avada.spacelab.kino_cms.controller.admin;
 
-import avada.spacelab.kino_cms.service.impl.AdminIndexServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.AdminIndexServiceImpl;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

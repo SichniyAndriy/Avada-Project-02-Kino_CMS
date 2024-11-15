@@ -1,8 +1,8 @@
 package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
-import avada.spacelab.kino_cms.model.dto.NewsDto;
-import avada.spacelab.kino_cms.service.NewsService;
+import avada.spacelab.kino_cms.model.dto.admin.NewsDto;
+import avada.spacelab.kino_cms.service.admin.NewsService;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
-import avada.spacelab.kino_cms.model.dto.MovieDto;
-import avada.spacelab.kino_cms.model.dto.MoviesResponceDto;
-import avada.spacelab.kino_cms.service.MovieService;
+import avada.spacelab.kino_cms.model.dto.admin.MovieDto;
+import avada.spacelab.kino_cms.model.dto.admin.MoviesResponceDto;
+import avada.spacelab.kino_cms.service.admin.MovieService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;

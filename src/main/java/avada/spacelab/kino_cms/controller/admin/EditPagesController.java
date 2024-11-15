@@ -1,12 +1,12 @@
 package avada.spacelab.kino_cms.controller.admin;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
-import avada.spacelab.kino_cms.model.dto.ContactDto;
-import avada.spacelab.kino_cms.model.dto.EditPageDto;
-import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
-import avada.spacelab.kino_cms.service.ContactService;
-import avada.spacelab.kino_cms.service.EditPageService;
-import avada.spacelab.kino_cms.service.MainPageService;
+import avada.spacelab.kino_cms.model.dto.admin.ContactDto;
+import avada.spacelab.kino_cms.model.dto.admin.EditPageDto;
+import avada.spacelab.kino_cms.model.dto.admin.MainPageInfoDto;
+import avada.spacelab.kino_cms.service.admin.ContactService;
+import avada.spacelab.kino_cms.service.admin.EditPageService;
+import avada.spacelab.kino_cms.service.admin.MainPageService;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

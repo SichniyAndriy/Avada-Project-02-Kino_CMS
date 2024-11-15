@@ -3,7 +3,7 @@ package avada.spacelab.kino_cms.controller.admin;
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.model.entity.MainPageBanner;
 import avada.spacelab.kino_cms.model.entity.MainPageBanner.Replacement;
-import avada.spacelab.kino_cms.service.MainPageService;
+import avada.spacelab.kino_cms.service.admin.MainPageService;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
