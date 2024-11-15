@@ -1,5 +1,5 @@
 {
-  "devDependencies": {
-    "@types/jquery": "^3.5.31"
+  "dependencies": {
+    "jquery": "^3.7.1"
   }
 }
