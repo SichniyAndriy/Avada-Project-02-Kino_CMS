@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.service;
+package avada.spacelab.kino_cms.service.admin;
 
-import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
+import avada.spacelab.kino_cms.model.dto.admin.MainPageInfoDto;
 import avada.spacelab.kino_cms.model.entity.MainPageBanner;
 import avada.spacelab.kino_cms.model.entity.MainPageBanner.Replacement;
 import avada.spacelab.kino_cms.model.entity.MainPageInfo;

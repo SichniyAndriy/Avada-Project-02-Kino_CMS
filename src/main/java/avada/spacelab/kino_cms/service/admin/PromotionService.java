@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.service;
+package avada.spacelab.kino_cms.service.admin;
 
-import avada.spacelab.kino_cms.model.dto.PromotionDto;
+import avada.spacelab.kino_cms.model.dto.admin.PromotionDto;
 import java.util.List;
 
 public interface PromotionService {

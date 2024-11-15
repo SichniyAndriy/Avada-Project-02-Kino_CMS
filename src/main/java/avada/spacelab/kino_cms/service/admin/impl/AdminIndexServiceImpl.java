@@ -1,11 +1,11 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
 import avada.spacelab.kino_cms.model.entity.User.Gender;
 import avada.spacelab.kino_cms.repository.AuditoriumRepository;
 import avada.spacelab.kino_cms.repository.MovieRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.AdminIndexService;
+import avada.spacelab.kino_cms.service.admin.AdminIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

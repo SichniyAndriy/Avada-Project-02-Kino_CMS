@@ -1,16 +1,16 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
-import avada.spacelab.kino_cms.model.dto.MovieDto;
-import avada.spacelab.kino_cms.model.dto.MoviePictureDto;
-import avada.spacelab.kino_cms.model.dto.MoviesResponceDto;
+import avada.spacelab.kino_cms.model.dto.admin.MovieDto;
+import avada.spacelab.kino_cms.model.dto.admin.MoviePictureDto;
+import avada.spacelab.kino_cms.model.dto.admin.MoviesResponceDto;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MoviePicture;
 import avada.spacelab.kino_cms.model.entity.Schedule;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
-import avada.spacelab.kino_cms.model.mapper.MovieMapper;
-import avada.spacelab.kino_cms.model.mapper.MoviePictureMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.MovieMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.MoviePictureMapper;
 import avada.spacelab.kino_cms.repository.MovieRepository;
-import avada.spacelab.kino_cms.service.MovieService;
+import avada.spacelab.kino_cms.service.admin.MovieService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

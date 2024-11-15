@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.service;
+package avada.spacelab.kino_cms.service.admin;
 
-import avada.spacelab.kino_cms.model.dto.EditPageDto;
+import avada.spacelab.kino_cms.model.dto.admin.EditPageDto;
 
 public interface EditPageService {
 

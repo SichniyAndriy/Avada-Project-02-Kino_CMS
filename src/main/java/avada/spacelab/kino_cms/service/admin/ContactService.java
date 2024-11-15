@@ -1,6 +1,6 @@
-package avada.spacelab.kino_cms.service;
+package avada.spacelab.kino_cms.service.admin;
 
-import avada.spacelab.kino_cms.model.dto.ContactDto;
+import avada.spacelab.kino_cms.model.dto.admin.ContactDto;
 import java.util.List;
 
 public interface ContactService {

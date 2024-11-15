@@ -1,11 +1,11 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
 import avada.spacelab.kino_cms.controller.paged.PagedResponse;
-import avada.spacelab.kino_cms.model.dto.UserDto;
+import avada.spacelab.kino_cms.model.dto.admin.UserDto;
 import avada.spacelab.kino_cms.model.entity.User;
-import avada.spacelab.kino_cms.model.mapper.UserMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.UserMapper;
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.UserService;
+import avada.spacelab.kino_cms.service.admin.UserService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

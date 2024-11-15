@@ -1,4 +1,4 @@
-package avada.spacelab.kino_cms.service;
+package avada.spacelab.kino_cms.service.admin;
 
 import java.io.IOException;
 import java.util.List;

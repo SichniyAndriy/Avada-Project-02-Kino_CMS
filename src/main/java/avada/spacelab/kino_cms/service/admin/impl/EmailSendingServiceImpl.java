@@ -1,8 +1,8 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.EmailSendingService;
+import avada.spacelab.kino_cms.service.admin.EmailSendingService;
 import jakarta.mail.Address;
 import jakarta.mail.Message.RecipientType;
 import jakarta.mail.internet.InternetAddress;

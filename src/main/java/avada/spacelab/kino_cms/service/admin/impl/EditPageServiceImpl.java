@@ -1,14 +1,14 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
-import avada.spacelab.kino_cms.model.dto.EditPageDto;
-import avada.spacelab.kino_cms.model.dto.EditPagePictureDto;
+import avada.spacelab.kino_cms.model.dto.admin.EditPageDto;
+import avada.spacelab.kino_cms.model.dto.admin.EditPagePictureDto;
 import avada.spacelab.kino_cms.model.entity.EditPage;
 import avada.spacelab.kino_cms.model.entity.EditPage.EditPageType;
 import avada.spacelab.kino_cms.model.entity.EditPagePicture;
-import avada.spacelab.kino_cms.model.mapper.EditPageMapper;
-import avada.spacelab.kino_cms.model.mapper.EditPagePictureMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.EditPageMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.EditPagePictureMapper;
 import avada.spacelab.kino_cms.repository.EditPageRepository;
-import avada.spacelab.kino_cms.service.EditPageService;
+import avada.spacelab.kino_cms.service.admin.EditPageService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

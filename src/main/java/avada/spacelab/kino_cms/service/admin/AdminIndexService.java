@@ -1,4 +1,4 @@
-package avada.spacelab.kino_cms.service;
+package avada.spacelab.kino_cms.service.admin;
 
 public interface AdminIndexService {
 

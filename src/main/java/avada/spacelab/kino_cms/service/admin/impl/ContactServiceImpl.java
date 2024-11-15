@@ -1,10 +1,10 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
-import avada.spacelab.kino_cms.model.dto.ContactDto;
+import avada.spacelab.kino_cms.model.dto.admin.ContactDto;
 import avada.spacelab.kino_cms.model.entity.Contact;
-import avada.spacelab.kino_cms.model.mapper.ContactMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.ContactMapper;
 import avada.spacelab.kino_cms.repository.ContactRepository;
-import avada.spacelab.kino_cms.service.ContactService;
+import avada.spacelab.kino_cms.service.admin.ContactService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

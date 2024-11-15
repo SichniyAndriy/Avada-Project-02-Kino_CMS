@@ -1,17 +1,17 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
-import avada.spacelab.kino_cms.model.dto.AuditoriumDto;
-import avada.spacelab.kino_cms.model.dto.AuditoriumPictureDto;
+import avada.spacelab.kino_cms.model.dto.admin.AuditoriumDto;
+import avada.spacelab.kino_cms.model.dto.admin.AuditoriumPictureDto;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.AuditoriumPicture;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.entity.Theater;
-import avada.spacelab.kino_cms.model.mapper.AuditoriumMapper;
-import avada.spacelab.kino_cms.model.mapper.AuditoriumPictureMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.AuditoriumMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.AuditoriumPictureMapper;
 import avada.spacelab.kino_cms.repository.AuditoriumRepository;
 import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
-import avada.spacelab.kino_cms.service.AuditoriumService;
+import avada.spacelab.kino_cms.service.admin.AuditoriumService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +26,6 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     private final AuditoriumRepository auditoriumRepository;
     private final TheaterRepository theaterRepository;
     private final ScheduleRepository scheduleRepository;
-
 
     public AuditoriumServiceImpl(
             @Autowired AuditoriumRepository auditoriumRepository,
@@ -54,7 +53,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     public void deleteAuditoriumById(long audId) {
         scheduleRepository.deleteAllByAuditoriumId(audId);
-        auditoriumRepository.deleteById(audId);
+        auditoriumRepository.deleteAuditoriumById(audId);
     }
 
     public void save(AuditoriumDto auditoriumDto, String picturesJson) {

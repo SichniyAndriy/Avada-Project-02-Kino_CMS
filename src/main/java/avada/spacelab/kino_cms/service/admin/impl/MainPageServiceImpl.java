@@ -1,14 +1,14 @@
-package avada.spacelab.kino_cms.service.impl;
+package avada.spacelab.kino_cms.service.admin.impl;
 
-import avada.spacelab.kino_cms.model.dto.MainPageInfoDto;
+import avada.spacelab.kino_cms.model.dto.admin.MainPageInfoDto;
 import avada.spacelab.kino_cms.model.entity.MainPageBanner;
 import avada.spacelab.kino_cms.model.entity.MainPageBanner.Replacement;
 import avada.spacelab.kino_cms.model.entity.MainPageInfo;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
-import avada.spacelab.kino_cms.model.mapper.MainPageInfoMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.MainPageInfoMapper;
 import avada.spacelab.kino_cms.repository.MainPageBannersRepository;
 import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
-import avada.spacelab.kino_cms.service.MainPageService;
+import avada.spacelab.kino_cms.service.admin.MainPageService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
