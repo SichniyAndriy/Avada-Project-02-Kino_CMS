@@ -1,5 +1,6 @@
 package avada.spacelab.kino_cms.config;
 
+import avada.spacelab.kino_cms.model.entity.User.Permission;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,9 +20,17 @@ public class SecurityConfig {
     ) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+                .authorizeHttpRequests(authorize -> {
+                    authorize
+                            .requestMatchers("admin/index", "admin/", "admin")
+                            .hasAuthority(Permission.READ_IN_ADMIN_PART.name())
+                            .requestMatchers("admin/**")
+                            .hasAuthority(Permission.WRITE_IN_ADMIN_PART.name())
+                            .requestMatchers("/**")
+                            .permitAll();
+                })
                 .formLogin(form -> form.loginPage("/login").permitAll())
-                .logout(logout -> logout.logoutUrl("/logout").permitAll());
+                .logout(logout -> logout.logoutSuccessUrl("/").permitAll());
         return http.build();
     }
 
@@ -29,4 +38,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 }
