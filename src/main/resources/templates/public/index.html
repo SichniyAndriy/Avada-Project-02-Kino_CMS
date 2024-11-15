@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ua" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Kino</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="../../static/css/client/index-styles.css" th:href="@{/css/client/index-styles.css}">
+
+</head>
+
+<body>
+    <!--Nav Start-->
+    <nav class="navbar navbar-expand-md" th:fragment="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-baseline gap-3" th:href="@{/index}">
+                <!--Logo start-->
+                <svg class="icon-30 text-primary" width="30" viewBox="0 0 30 30" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"></rect>
+                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)"
+                        fill="currentColor"></rect>
+                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)"
+                        fill="currentColor"></rect>
+                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor"></rect>
+                </svg>
+                <!--logo End-->
+                <h4 class="logo-title">Kino CMS</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Horizontal Menu Start -->
+            <div class="collapse navbar-collapse ms-5" id="navbarNav">
+                <ul class="navbar-nav text-dark fs-4">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/billboard}"> Афіша </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " th:href="@{/schedule}"> Розклад </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " th:href="@{/soon}"><span class="item-name"> Скоро </span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#"> Кінотеатри </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#"> Акції </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Про кінотеатр
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#"> Новини </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"> Реклама </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"> Кафе-Бар </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"> Мобільні застосунки</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"> Контакти </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="ms-auto me-5"> Guest </div>
+        </div>
+    </nav>
+    <!--Nav End-->
+    <!-- Main Section Start -->
+    <main class="container-fluid" id="main-content">
+        <div class="container p-0">
+            <div id="banners__carousel" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#banners__carousel" aria-current="true"
+                        th:each="i : ${#numbers.sequence(0, 4)}" th:classappend="${i} == 0 ? 'active' : ''"
+                        th:data-bs-slide-to="${i}" th:aria-label="|Slide ${i + 1}|">
+                    </button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item" th:each="i : ${#numbers.sequence(0, 4)}"
+                        th:classappend="${i} == 0 ? 'active' : ''">
+                        <img class="img-fluid d-block" alt="banner"
+                            th:src="|https://picsum.photos/id/${ 500 + i * 100 }/1600/900|">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 class="font-ligth">First slide label</h3>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev text-bg-dark text-success" type="button"
+                    data-bs-target="#banners__carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon fs-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next text-bg-dark text-success" type="button"
+                    data-bs-target="#banners__carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon fs-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="container my-4" id="anounce">
+            <h3 class="text-bg-light text-info-emphasis text-center p-4 mt-4 rounded-2">Дивіться сьогодні</h3>
+            <div class="row row-cols-4 g-3">
+                <div class="col" th:each="i : ${#numbers.sequence(1, 10)}">
+                    <div class="card">
+                        <img class="card-img-top" th:src="|https://picsum.photos/id/${500 + i}/400/600|" alt="poster">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem, ipsum dolor.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-bg-light text-info-emphasis text-center p-4 mt-4 rounded-2">Дивіться скоро</h3>
+            <div class="row row-cols-4 g-3">
+                <div class="col" th:each="i : ${#numbers.sequence(1, 8)}">
+                    <div class="card">
+                        <img class="card-img-top" th:src="|https://picsum.photos/id/${1000 + i}/400/600|" alt="poster">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem, ipsum dolor.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h3 class="text-bg-light text-info-emphasis text-center p-4 mt-4 rounded-2">Новини та акції</h3>
+            <div class="carousel slide" id="news_and_promotions__carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#news_and_promotions__carousel" aria-current="true"
+                        th:each="i : ${#numbers.sequence(0, 9)}" th:classappend="${i} == 0 ? 'active': ''"
+                        th:data-bs-slide-to="${i}" th:aria-label="|Slide ${i + 1}|">
+                    </button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item" th:each="i : ${#numbers.sequence(0, 9)}"
+                        th:classappend="${i} == 0 ? 'active' : ''">
+                        <img class="d-block mx-auto" th:src="|https://picsum.photos/id/${600 + i * 10}/960/540|"
+                            alt="news and promotions">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Some representative placeholder content for the first slide.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#news_and_promotions__carousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#news_and_promotions__carousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </main>
+    <!-- Main Section End -->
+    <!-- Footer Section Start -->
+    <footer class="footer p-4 my-4" th:fragment="footer">
+        <div class="container d-flex align-items-center gap-5">
+            <div>
+                <ul class="list-inline ms-3 mb-0 p-0">
+                    <li class="list-inline-item"><a href="../dashboard/extra/privacy-policy.html">Privacy Policy</a>
+                    </li>
+                    <li class="list-inline-item"><a href="../dashboard/extra/terms-of-service.html">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex gap-4 align-items-baseline mx-auto">
+                <div>
+                    <ul class="list-group">
+                        <h5 class="text-bg-light">Афіша</h5>
+                        <li>
+                            <a href="">Розклад</a>
+                        </li>
+                        <li>
+                            <a href="">Скоро в прокаті</a>
+                        </li>
+                        <li>
+                            <a href="">Кінотеатри</a>
+                        </li>
+                        <li>
+                            <a href="">Акції</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="list-group">
+                        <h5 class="text-bg-light">Про кінотеатр</h5>
+                        <li>
+                            <a href="">Новини</a>
+                        </li>
+                        <li>
+                            <a href="">Реклама</a>
+                        </li>
+                        <li>
+                            <a href="">Кафе-Бар</a>
+                        </li>
+                        <li>
+                            <a href="">Контакти</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ms-auto me-3">
+                ©
+                <script>document.write( new Date().getFullYear() )</script> Hope UI, Made with
+                <span class="">
+                    <svg class="icon-15" width="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </span> by <a href="https://iqonic.design/">IQONIC Design</a>.
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+
+</body>
+
+</html>
