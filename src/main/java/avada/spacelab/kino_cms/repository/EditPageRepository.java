@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EditPageRepository extends JpaRepository<EditPage, Long> {
 
     Optional<EditPage> findByType(EditPageType editPageType);
+
 }

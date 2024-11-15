@@ -34,7 +34,7 @@
         </encoder>
     </appender>
 
-    <root level="warn">
+    <root level="info">
         <appender-ref ref="toAppLog"/>
         <appender-ref ref="toConsole"/>
     </root>

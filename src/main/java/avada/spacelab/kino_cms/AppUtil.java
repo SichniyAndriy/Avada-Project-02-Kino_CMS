@@ -308,4 +308,5 @@ public class AppUtil implements CommandLineRunner {
             schedules.add(new Schedule(auditorium, movie, date, time));
         }
     }
+
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public CustomUserDetailsService(
             @Autowired UserRepository userRepository
@@ -39,4 +39,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         throw new UsernameNotFoundException(username);
     }
+
 }

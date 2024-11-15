@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
 
 public interface AuditoriumRepository extends JpaRepository<Auditorium, Long> {
+
     @Override @NonNull
     List<Auditorium> findAll();
 
@@ -30,4 +31,5 @@ public interface AuditoriumRepository extends JpaRepository<Auditorium, Long> {
     @Modifying @Transactional
     @Query("DELETE FROM Auditorium a WHERE a.theater.id=:id")
     void deleteByTheaterId(@Param("id") long id);
+
 }

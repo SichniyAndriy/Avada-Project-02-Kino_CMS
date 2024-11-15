@@ -10,7 +10,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface ScheduleRepository
         extends JpaRepository<Schedule, ScheduleCompositeKey> {
+
     @Modifying @Transactional
     @Query("DELETE FROM Schedule s WHERE s.key.auditorium.id=:id")
     void deleteAllByAuditoriumId(@Param("id") Long id);
+
 }

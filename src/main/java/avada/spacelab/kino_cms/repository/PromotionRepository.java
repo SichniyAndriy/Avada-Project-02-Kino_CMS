@@ -3,9 +3,9 @@ package avada.spacelab.kino_cms.repository;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import java.util.List;
 import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Repository;
 
 public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 
@@ -13,8 +13,10 @@ public interface PromotionRepository extends JpaRepository<Promotion, Long> {
     List<Promotion> findAll();
 
     @Override
-    Optional<Promotion> findById(Long id);
+    @NotNull
+    Optional<Promotion> findById(@NotNull Long id);
 
     @Override
-    void deleteById(Long id);
+    void deleteById(@NotNull Long id);
+
 }
