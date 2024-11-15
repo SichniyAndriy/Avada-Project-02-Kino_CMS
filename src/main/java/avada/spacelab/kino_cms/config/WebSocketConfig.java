@@ -1,7 +1,7 @@
 package avada.spacelab.kino_cms.config;
 
-import avada.spacelab.kino_cms.service.EmailSendingService;
-import avada.spacelab.kino_cms.service.SmsSendingService;
+import avada.spacelab.kino_cms.service.admin.EmailSendingService;
+import avada.spacelab.kino_cms.service.admin.SmsSendingService;
 import avada.spacelab.kino_cms.socket.EmailSendingHandler;
 import avada.spacelab.kino_cms.socket.SmsSendingHandler;
 import org.springframework.beans.factory.annotation.Autowired;

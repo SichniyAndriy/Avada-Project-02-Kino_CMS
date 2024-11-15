@@ -1,6 +1,6 @@
 package avada.spacelab.kino_cms.socket;
 
-import avada.spacelab.kino_cms.service.EmailSendingService;
+import avada.spacelab.kino_cms.service.admin.EmailSendingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
