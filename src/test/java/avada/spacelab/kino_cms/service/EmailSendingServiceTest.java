@@ -1,7 +1,7 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.impl.EmailSendingServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.EmailSendingServiceImpl;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;

@@ -1,12 +1,12 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.dto.EditPageDto;
-import avada.spacelab.kino_cms.model.dto.SeoBlockDto;
+import avada.spacelab.kino_cms.model.dto.admin.EditPageDto;
+import avada.spacelab.kino_cms.model.dto.admin.SeoBlockDto;
 import avada.spacelab.kino_cms.model.entity.EditPage;
 import avada.spacelab.kino_cms.model.entity.EditPage.EditPageType;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.repository.EditPageRepository;
-import avada.spacelab.kino_cms.service.impl.EditPageServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.EditPageServiceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;

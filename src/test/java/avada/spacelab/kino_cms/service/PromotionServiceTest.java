@@ -1,11 +1,11 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.dto.PromotionDto;
+import avada.spacelab.kino_cms.model.dto.admin.PromotionDto;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
-import avada.spacelab.kino_cms.model.mapper.PromotionMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.PromotionMapper;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
-import avada.spacelab.kino_cms.service.impl.PromotionServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.PromotionServiceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

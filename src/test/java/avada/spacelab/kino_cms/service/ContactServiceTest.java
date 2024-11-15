@@ -1,9 +1,9 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.dto.ContactDto;
+import avada.spacelab.kino_cms.model.dto.admin.ContactDto;
 import avada.spacelab.kino_cms.model.entity.Contact;
 import avada.spacelab.kino_cms.repository.ContactRepository;
-import avada.spacelab.kino_cms.service.impl.ContactServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.ContactServiceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -1,15 +1,15 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.dto.AuditoriumDto;
-import avada.spacelab.kino_cms.model.dto.SeoBlockDto;
+import avada.spacelab.kino_cms.model.dto.admin.AuditoriumDto;
+import avada.spacelab.kino_cms.model.dto.admin.SeoBlockDto;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.entity.Theater;
-import avada.spacelab.kino_cms.model.mapper.AuditoriumMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.AuditoriumMapper;
 import avada.spacelab.kino_cms.repository.AuditoriumRepository;
 import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
-import avada.spacelab.kino_cms.service.impl.AuditoriumServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.AuditoriumServiceImpl;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;

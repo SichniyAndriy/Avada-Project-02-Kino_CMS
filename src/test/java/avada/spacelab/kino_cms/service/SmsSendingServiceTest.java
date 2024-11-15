@@ -1,7 +1,7 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.impl.SmsSendingServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.SmsSendingServiceImpl;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;

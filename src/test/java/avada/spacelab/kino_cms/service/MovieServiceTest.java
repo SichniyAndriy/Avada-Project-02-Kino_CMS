@@ -1,14 +1,14 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.dto.MovieDto;
-import avada.spacelab.kino_cms.model.dto.MoviesResponceDto;
-import avada.spacelab.kino_cms.model.dto.SeoBlockDto;
+import avada.spacelab.kino_cms.model.dto.admin.MovieDto;
+import avada.spacelab.kino_cms.model.dto.admin.MoviesResponceDto;
+import avada.spacelab.kino_cms.model.dto.admin.SeoBlockDto;
 import avada.spacelab.kino_cms.model.entity.Movie;
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import avada.spacelab.kino_cms.model.entity.Schedule;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.repository.MovieRepository;
-import avada.spacelab.kino_cms.service.impl.MovieServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.MovieServiceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,11 +1,11 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.model.dto.NewsDto;
+import avada.spacelab.kino_cms.model.dto.admin.NewsDto;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
-import avada.spacelab.kino_cms.model.mapper.NewsMapper;
+import avada.spacelab.kino_cms.model.mapper.admin.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
-import avada.spacelab.kino_cms.service.impl.NewsServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.NewsServiceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
