@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -45,11 +43,9 @@ public class Schedule {
         @JoinColumn(name = "movie_id")
         private Movie movie;
 
-        @Temporal(TemporalType.DATE)
         @Column(name = "date", nullable = false)
         private LocalDate date;
 
-        @Temporal(TemporalType.TIME)
         @Column(name = "time", nullable = false)
         private LocalTime time;
     }

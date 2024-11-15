@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "native_title", nullable = false)
@@ -56,8 +56,8 @@ public class Movie {
     @Embedded
     private MovieDetails details;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-            targetEntity = MoviePicture.class, orphanRemoval = true, mappedBy = "movie")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,
+            targetEntity = MoviePicture.class, mappedBy = "movie")
     private List<MoviePicture> pictures = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,

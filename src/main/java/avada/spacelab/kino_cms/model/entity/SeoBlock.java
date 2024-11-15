@@ -15,7 +15,7 @@ import lombok.Setter;
 public class SeoBlock {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "url", length = 1024)

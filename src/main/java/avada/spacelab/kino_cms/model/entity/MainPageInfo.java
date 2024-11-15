@@ -19,7 +19,7 @@ import lombok.Setter;
 public class MainPageInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "phone_number_1")
@@ -32,7 +32,7 @@ public class MainPageInfo {
     private String seoText;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
-    @JoinColumn(name = "seoblock_id", referencedColumnName = "id")
+    @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
     private SeoBlock seoBlock;
 
 }

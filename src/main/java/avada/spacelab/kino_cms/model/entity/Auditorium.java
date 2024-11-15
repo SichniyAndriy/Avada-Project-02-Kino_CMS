@@ -26,7 +26,7 @@ import lombok.Setter;
 public class Auditorium {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "number", nullable = false)
@@ -53,11 +53,11 @@ public class Auditorium {
             targetEntity = AuditoriumPicture.class, mappedBy = "auditorium")
     private List<AuditoriumPicture> pictures = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,
             targetEntity = Schedule.class, mappedBy = "key.auditorium")
     private List<Schedule> schedules = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = SeoBlock.class)
     @JoinColumn(name = "seo_block_id", referencedColumnName = "id")
     private SeoBlock seoBlock;
 
