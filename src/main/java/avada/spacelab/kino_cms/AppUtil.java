@@ -23,7 +23,7 @@ import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.repository.ScheduleRepository;
 import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.repository.UserRepository;
-import avada.spacelab.kino_cms.service.impl.MainPageServiceImpl;
+import avada.spacelab.kino_cms.service.admin.impl.MainPageServiceImpl;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -31,6 +31,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,7 @@ import org.springframework.stereotype.Component;
 public class AppUtil implements CommandLineRunner {
     private final Faker faker = new Faker();
     private final Faker localFaker = new Faker(Locale.getDefault());
+    private final String PREFIX = "{bcrypt}";
 
     private final TheaterRepository theaterRepository;
     private final AuditoriumRepository auditoriumRepository;
@@ -54,6 +57,8 @@ public class AppUtil implements CommandLineRunner {
     private final ContactRepository contactRepository;
     private final ScheduleRepository scheduleRepository;
 
+    private final Executor executor = Executors.newCachedThreadPool();
+
     public AppUtil(
             @Autowired TheaterRepository theaterRepository,
             @Autowired AuditoriumRepository auditoriumRepository,
@@ -63,7 +68,8 @@ public class AppUtil implements CommandLineRunner {
             @Autowired UserRepository userRepository,
             @Autowired MainPageServiceImpl mainPageService,
             @Autowired ContactRepository contactRepository,
-            @Autowired ScheduleRepository scheduleRepository) {
+            @Autowired ScheduleRepository scheduleRepository
+    ) {
         this.theaterRepository = theaterRepository;
         this.auditoriumRepository = auditoriumRepository;
         this.movieRepository = movieRepository;
@@ -78,24 +84,30 @@ public class AppUtil implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         int n = 5;
-        initTheatres(n);
-        initMovies(n * 15);
-        initNews(n * 3);
-        initPromotions(n * 3);
-        initUsers(n * 50);
-        initSchedules();
-        initMainPageInfo();
-        initContacts();
+        executor.execute(() -> {
+            initTheatres(n);
+            initMovies(n * 15);
+            initSchedules();
+        });
+        executor.execute(() -> {
+            initNews(n * 3);
+            initPromotions(n * 3);
+            initMainPageInfo();
+            initContacts();
+        });
+        executor.execute(() -> {
+            initUsers(n * 50);
+        });
     }
 
     private void initTheatres(int n) {
         List<Theater> theaters = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Theater theater = new Theater();
-            theater.setTitle(faker.book().title());
+            theater.setTitle(faker.restaurant().name());
             theater.setDescription(faker.lorem().paragraph(faker.random().nextInt(3, 5)));
             theater.setConditions(faker.lorem().paragraph(faker.random().nextInt(4, 8)));
-            int amount = faker.number().numberBetween(2, 8);
+            int amount = faker.number().numberBetween(4, 8);
             List<Auditorium> auditoriums = new ArrayList<>();
             for (int j = 0; j < amount; ++j) {
                 Auditorium auditorium = new Auditorium();
@@ -184,36 +196,52 @@ public class AppUtil implements CommandLineRunner {
         List<User> users = new ArrayList<>();
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         for (int i = 0; i < n; i++) {
-            User user = new User();
-            user.setFirstName(localFaker.name().firstName());
-            user.setLastName(localFaker.name().lastName());
-            user.setNickName(faker.internet().username());
-            user.setPhone(faker.phoneNumber().phoneNumber());
-            user.setEmail(faker.internet().emailAddress());
-            user.setCardNumber(faker.finance().creditCard());
-            user.setLanguage(Language.UKRAINIAN);
-            user.setGender(faker.random().nextBoolean() ? Gender.MALE : Gender.FEMALE);
-            user.setRegistrationDate(localFaker.timeAndDate()
-                    .past(1800, TimeUnit.DAYS)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate());
-            user.setBirthDate(localFaker.timeAndDate().birthday(15, 65));
-
-            Address address = new Address();
-            address.setCity(localFaker.address().city());
-            address.setZipCode(localFaker.address().zipCode());
-            address.setStreet(localFaker.address().streetName());
-            address.setHouseNumber(faker.address().buildingNumber());
-            address.setFlatNumber(
-                    faker.random().nextBoolean() ? faker.random().nextInt(1, 100).toString() : null
-            );
-            user.setAddress(address);
-            String passHash = "{bcrypt}" + encoder.encode("123");
-            user.setPassHash(passHash);
-            user.setRole(Role.USER);
+            User user = createNewUserWith(Role.USER, encoder);
             users.add(user);
         }
+
+        User admin = createNewUserWith(Role.ADMIN, encoder);
+        admin.setEmail("admin@email.com");
+        admin.setPassHash(PREFIX + encoder.encode("admin"));
+        users.add(admin);
+
+        User servant = createNewUserWith(Role.SERVANT, encoder);
+        servant.setEmail("servant@email.com");
+        servant.setPassHash(PREFIX + encoder.encode("servant"));
+        users.add(servant);
+
         userRepository.saveAllAndFlush(users);
+    }
+
+    private User createNewUserWith(Role role, PasswordEncoder encoder) {
+        User user = new User();
+        user.setFirstName(localFaker.name().firstName());
+        user.setLastName(localFaker.name().lastName());
+        user.setNickName(faker.internet().username());
+        user.setPhone(faker.phoneNumber().phoneNumber());
+        user.setEmail(faker.internet().emailAddress());
+        user.setCardNumber(faker.finance().creditCard());
+        user.setLanguage(Language.UKRAINIAN);
+        user.setGender(faker.random().nextBoolean() ? Gender.MALE : Gender.FEMALE);
+        user.setRegistrationDate(localFaker.timeAndDate()
+                .past(1800, TimeUnit.DAYS)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
+        user.setBirthDate(localFaker.timeAndDate().birthday(15, 65));
+
+        Address address = new Address();
+        address.setCity(localFaker.address().city());
+        address.setZipCode(localFaker.address().zipCode());
+        address.setStreet(localFaker.address().streetName());
+        address.setHouseNumber(faker.address().buildingNumber());
+        address.setFlatNumber(
+                faker.random().nextBoolean() ? faker.random().nextInt(1, 100).toString() : null
+        );
+        user.setAddress(address);
+        String passHash = PREFIX + encoder.encode("123");
+        user.setPassHash(passHash);
+        user.setRole(role);
+        return user;
     }
 
     private void initSchedules() {
