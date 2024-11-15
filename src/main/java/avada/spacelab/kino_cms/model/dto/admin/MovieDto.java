@@ -1,4 +1,4 @@
-package avada.spacelab.kino_cms.model.dto;
+package avada.spacelab.kino_cms.model.dto.admin;
 
 import avada.spacelab.kino_cms.model.entity.MovieDetails;
 import java.io.Serializable;

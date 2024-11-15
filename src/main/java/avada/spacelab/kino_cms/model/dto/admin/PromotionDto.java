@@ -1,13 +1,13 @@
-package avada.spacelab.kino_cms.model.dto;
+package avada.spacelab.kino_cms.model.dto.admin;
 
 import avada.spacelab.kino_cms.model.entity.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * DTO for {@link avada.spacelab.kino_cms.model.entity.News}
+ * DTO for {@link avada.spacelab.kino_cms.model.entity.Promotion}
  */
-public record NewsDto(
+public record PromotionDto(
         Long id,
         String title,
         String content,
@@ -17,9 +17,9 @@ public record NewsDto(
         SeoBlockDto seoBlock,
         Status status
 ) implements Serializable {
-
-    public static NewsDto EMPTY() {
-        return new NewsDto(null,
+    public static PromotionDto EMPTY() {
+        return new PromotionDto(
+                null,
                 null,
                 null,
                 null,
@@ -27,6 +27,6 @@ public record NewsDto(
                 null,
                 SeoBlockDto.EMPTY(),
                 null
-        );
+                );
     }
 }
