@@ -7,6 +7,7 @@ import java.time.LocalTime;
 public record SchedulePageResponceDto(
         LocalDate date,
         LocalTime time,
+        Long movieId,
         String movie,
         String theater,
         Integer auditorium,

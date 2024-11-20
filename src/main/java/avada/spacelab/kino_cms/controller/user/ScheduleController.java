@@ -4,17 +4,15 @@ import avada.spacelab.kino_cms.model.dto.user.SchedulePageResponceDto;
 import avada.spacelab.kino_cms.service.user.SchedulePageService;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/schedule")
@@ -29,35 +27,39 @@ public class ScheduleController {
 
     @GetMapping
     public String showSchedule(Model model) throws ExecutionException, InterruptedException {
-        ExecutorService executor = Executors.newCachedThreadPool();
+        ConcurrentMap<LocalDate, List<SchedulePageResponceDto>> tables =
+                schedulePageService.getTableEntries();
+        formModel(model);
+        model.addAttribute("tables", tables);
+        return "public/_3_0_schedule";
+    }
 
-        Callable<ConcurrentMap<LocalDate, List<SchedulePageResponceDto>>> entriesCallable =
-                schedulePageService::getTableEntries;
-        Future<ConcurrentMap<LocalDate, List<SchedulePageResponceDto>>> entriesFuture =
-                executor.submit(entriesCallable);
+    @PostMapping("/choice")
+    public String showScheduleChoice(
+            Model model,
+            @RequestParam boolean is2D,
+            @RequestParam boolean is3D,
+            @RequestParam boolean isImax,
+            @RequestParam String theater,
+            @RequestParam String date,
+            @RequestParam String movie,
+            @RequestParam String auditorium
+    ) {
+        ConcurrentMap<LocalDate, List<SchedulePageResponceDto>> choice =
+                schedulePageService.getChoiceResponce(is2D, is3D, isImax, theater, date, movie, auditorium);
+        model.addAttribute("tables", choice);
+        return "public/_3_0_schedule :: scheduleTables";
+    }
 
-        Callable<List<String>> moviesCallable = schedulePageService::movies;
-        Future<List<String>> moviesfuture = executor.submit(moviesCallable);
-
-        Callable<List<String>> theatersCallable = schedulePageService::theaters;
-        Future<List<String>> theatersfuture = executor.submit(theatersCallable);
-
-        Callable<List<String>> auditoriumsCallable = schedulePageService::auditoriums;
-        Future<List<String>> auditoriumsfuture = executor.submit(auditoriumsCallable);
-
-        List<String> movies = moviesfuture.get();
-        List<String> theaters = theatersfuture.get();
-        List<String> auditoriums = auditoriumsfuture.get();
-        ConcurrentMap<LocalDate, List<SchedulePageResponceDto>> tables = entriesFuture.get();
-
-        executor.shutdown();
+    private void formModel(Model model) {
+        List<String> movies = schedulePageService.movies();
+        List<String> theaters = schedulePageService.theaters();
+        List<String> auditoriums = schedulePageService.auditoriums();
+        List<String> dates = schedulePageService.dates();
 
         model.addAttribute("movies", movies);
         model.addAttribute("theaters", theaters);
         model.addAttribute("auditoriums", auditoriums);
-        model.addAttribute("tables", tables);
-
-        return "public/_3_0_schedule";
+        model.addAttribute("dates", dates);
     }
-
 }

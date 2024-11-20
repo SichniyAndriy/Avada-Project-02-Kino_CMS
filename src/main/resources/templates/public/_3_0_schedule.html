@@ -23,15 +23,15 @@
                 <div class="form-check text-bg-primary fs-5 p-2 rounded-2">
                     <span class="pe-4">Показувати тільки</span>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" class="form-check-input" id="2D_check">
+                        <input type="checkbox" class="form-check-input" id="2D_check" checked>
                         <label for="2D_check" class="form-check-label">2D</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" class="form-check-input" id="3D_check">
+                        <input type="checkbox" class="form-check-input" id="3D_check" checked>
                         <label for="3D_check" class="form-check-label">3D</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" class="form-check-input" id="Imax_check">
+                        <input type="checkbox" class="form-check-input" id="Imax_check" checked>
                         <label for="Imax_check" class="form-check-label">Imax</label>
                     </div>
                 </div>
@@ -45,12 +45,12 @@
                     </select>
                     <select class="form-select form-select-sm" name="date" id="dates__select">
                         <option selected>Дата</option>
-                        <option th:each="i : ${#numbers.sequence(0, 13)}" th:value="dates[__${i}__]">
-                            [[${#temporals.create(year, month, day + i)}]]
+                        <option th:each="d : ${dates}" th:value="${d}">
+                            [[${d}]]
                         </option>
                     </select>
                     <select class="form-select form-select-sm" name="movie" id="movie__select">
-                        <option selected>Фільми: всі</option>
+                        <option selected>Фільм</option>
                         <option th:each="m : ${movies}" th:value="${m}">
                             [[${m}]]
                         </option>
@@ -62,55 +62,60 @@
                         </option>
                     </select>
                 </div>
-                <div class="ms-3">
-                    <button type="button" class="btn btn-outline-info"> Застосувати </button>
-                </div>
             </div>
         </section>
-        <section class="container mt-4" id="schedules__tables">
-            <table class="w-75 table table-sm table-hover table-bordered table-success caption-top table-responsive-md"
-                th:each="table : ${tables}">
-                <caption>
-                    <h5 th:with="temporal=${table.key}">
-                        [[ ${#temporals.day(temporal)} ]] [[ ${#temporals.monthName(temporal)} ]],
-                        [[ ${#temporals.dayOfWeekName(temporal)} ]]
-                    </h5>
-                </caption>
-                <thead class="text-center table-dark">
-                    <tr scope="row">
-                        <th scope="col">Час</th>
-                        <th scope="col">Фільм</th>
-                        <th scope="col">Кінотеатр</th>
-                        <th scope="col">Зал</th>
-                        <th scope="col">Ціна в грн.</th>
-                        <th scope="col" class="px-2">Бронювати</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr scope="row" class="align-baseline lh-1" th:each="row : ${table.value}">
-                        <td class="align-middle text-center" th:text="${row.time}">
-                            Lorem ipsum dolor sit amet.
-                        </td>
-                        <td class="align-middle ps-4" th:text="${row.movie}">
-                            Quod expedita cum at laudantium.
-                        </td>
-                        <td class="align-middle ps-4" th:text="${row.theater}">
-                            Architecto provident nemo vero quibusdam.
-                        </td>
-                        <td class="align-middle text-center" th:text="${row.auditorium}">
-                            Possimus est provident corporis doloremque.
-                        </td>
-                        <td class="align-middle text-center" th:text="${row.price}">
-                            Minima dolor dolorem soluta aliquam.
-                        </td>
-                        <td class="text-center align-middle">
-                            <button type="button" class="btn border-0 p-0 text-success fs-4 lh-1 fw-bold">
-                                <i class="bi bi-plus-square-fill"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <section class="container mt-4" id="schedules__tables" th:fragment="scheduleTables">
+            <div th:each="table : ${tables}">
+                <h5 th:with="temporal=${table.key}">
+                    [[ ${#temporals.day(temporal)} ]] [[ ${#temporals.monthName(temporal)} ]],
+                    [[ ${#temporals.dayOfWeekName(temporal)} ]]
+                </h5>
+                <div class="d-flex">
+                    <div class="w-75 border border-3 border-warning rounded rounded-1">
+                        <table class="table table-sm table-hover table-borderless table-responsive-md">
+                            <thead class="text-center table-dark position-sticky top-0">
+                                <tr scope="row">
+                                    <th scope="col">Час</th>
+                                    <th scope="col">Фільм</th>
+                                    <th scope="col">Кінотеатр</th>
+                                    <th scope="col">Зал</th>
+                                    <th scope="col">Ціна в грн.</th>
+                                    <th scope="col" class="px-1">Бронювати</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr scope="row" class="align-baseline fs-6" th:each="row : ${table.value}">
+                                    <td class="align-middle text-center py-1" th:text="${row.time}">
+                                        Lorem ipsum dolor sit amet.
+                                    </td>
+                                    <td class="align-middle ps-4 py-1" th:text="${row.movie}">
+                                        Quod expedita cum at laudantium.
+                                    </td>
+                                    <td class="align-middle ps-4 py-1" th:text="${row.theater}">
+                                        Architecto provident nemo vero quibusdam.
+                                    </td>
+                                    <td class="align-middle text-center py-1" th:text="${row.auditorium}">
+                                        Possimus est provident corporis doloremque.
+                                    </td>
+                                    <td class="align-middle text-center py-1" th:text="${row.price}">
+                                        Minima dolor dolorem soluta aliquam.
+                                    </td>
+                                    <td class="text-center align-middle py-1">
+                                        <button type="button" class="btn border-0 p-0 text-success fs-4 lh-1 fw-bold">
+                                            <i class="bi bi-plus-square-fill"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="w-25 mb-3">
+                        <div class="ms-4 w-100 h-100 border border-1 border-black rounded rounded-2 text-center">
+                            <p>ТУТ МОГЛА БУТИ ВАША РЕКЛАМА</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     <!-- Main Section End -->
@@ -118,9 +123,14 @@
     <footer class="footer p-4 my-4" th:replace="~{public/index :: footer}"></footer>
     <!-- Footer Section End -->
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
+    <script th:src="@{/js/public/schedule_page_scripts.js}"></script>
 
 </body>
 

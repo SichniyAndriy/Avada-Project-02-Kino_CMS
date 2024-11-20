@@ -17,10 +17,10 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @NotNull
     Optional<Movie> findById(@NotNull Long id);
 
-    @Query("SELECT count(m) FROM Movie m")
-    long countById();
-
     @Query("SELECT m.uaTitle FROM Movie AS m")
     List<String> findAllTitles();
+
+    @Query("SELECT CONCAT(m.has2D, ';', m.has3D, ';', m.hasImax) FROM Movie AS m WHERE m.id=:id AND m.uaTitle=:title")
+    String getMovieTypes(Long id, String title);
 
 }

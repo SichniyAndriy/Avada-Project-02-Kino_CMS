@@ -131,8 +131,10 @@ public class AppUtil implements CommandLineRunner {
         List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Movie movie = new Movie();
-            movie.setUaTitle(faker.oscarMovie().movieName());
-            movie.setNativeTitle(localFaker.oscarMovie().movieName());
+            String uaTitle  = localFaker.lorem().sentence(faker.random().nextInt(1, 3), 0);
+            movie.setUaTitle(uaTitle);
+            String nativeTitle = faker.lorem().sentence(faker.random().nextInt(1, 3), 0);
+            movie.setNativeTitle(nativeTitle);
             movie.setDescription(localFaker.lorem().paragraph(localFaker.random().nextInt(4, 8)));
             movie.setHas2D(localFaker.random().nextBoolean());
             movie.setHas3D(localFaker.random().nextBoolean());
@@ -303,7 +305,7 @@ public class AppUtil implements CommandLineRunner {
             Movie movie,
             List<Schedule> schedules
     ) {
-        for (int hours = 8; hours < 20; hours += 2) {
+        for (int hours = 8; hours < 22; hours += 2) {
             LocalTime time = LocalTime.of(hours, 0);
             schedules.add(new Schedule(auditorium, movie, date, time));
         }
