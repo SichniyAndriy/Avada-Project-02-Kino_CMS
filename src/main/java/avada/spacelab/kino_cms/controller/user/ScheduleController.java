@@ -5,7 +5,6 @@ import avada.spacelab.kino_cms.service.user.SchedulePageService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,7 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public String showSchedule(Model model) throws ExecutionException, InterruptedException {
+    public String showSchedule(Model model) {
         ConcurrentMap<LocalDate, List<SchedulePageResponceDto>> tables =
                 schedulePageService.getTableEntries();
         formModel(model);
