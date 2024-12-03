@@ -3,11 +3,13 @@ package avada.spacelab.kino_cms.service.admin.impl;
 import avada.spacelab.kino_cms.model.dto.admin.PromotionDto;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
+import avada.spacelab.kino_cms.model.entity.Status;
 import avada.spacelab.kino_cms.model.mapper.admin.PromotionMapper;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.service.admin.PromotionService;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +29,15 @@ public class PromotionServiceImpl implements PromotionService {
     public List<PromotionDto> getAllPromotions() {
         return promotionRepository.findAll().stream()
                 .map(PromotionMapper.INSTANCE::fromEntityToDto)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public List<PromotionDto> getActivePromotions() {
+        return promotionRepository.findAll().stream()
+                .filter(promotion ->  promotion.getStatus().equals(Status.ON))
+                .map(PromotionMapper.INSTANCE::fromEntityToDto)
+                .sorted(Comparator.comparing(PromotionDto::date))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

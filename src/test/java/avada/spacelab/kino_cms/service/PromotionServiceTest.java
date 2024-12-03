@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.service;
 import avada.spacelab.kino_cms.model.dto.admin.PromotionDto;
 import avada.spacelab.kino_cms.model.entity.Promotion;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
+import avada.spacelab.kino_cms.model.entity.Status;
 import avada.spacelab.kino_cms.model.mapper.admin.PromotionMapper;
 import avada.spacelab.kino_cms.repository.PromotionRepository;
 import avada.spacelab.kino_cms.service.admin.impl.PromotionServiceImpl;
@@ -185,6 +186,30 @@ class PromotionServiceTest {
                         }
                 )
         );
+    }
+
+     @Test
+    @DisplayName("test getActiveNews")
+    void test_getActiveNews() {
+        Promotion promotion1 = getPromotion(1L, true);
+        promotion1.setStatus(Status.ON);
+        Promotion promotion2 = getPromotion(2L, true);
+        promotion2.setStatus(Status.ON);
+        Promotion promotion3 = getPromotion(3L, true);
+        promotion3.setStatus(Status.ON);
+        Promotion promotion4 = getPromotion(4L, true);
+        promotion4.setStatus(Status.OFF);
+        Promotion promotion5 = getPromotion(5L, true);
+        promotion5.setStatus(Status.OFF);
+
+        when(promotionRepository.findAll())
+                .thenReturn(List.of(promotion1, promotion2, promotion3, promotion4, promotion5));
+
+        List<PromotionDto> result = promotionService.getActivePromotions();
+
+        assertEquals(3, result.size());
+        assertEquals(promotion1.getId(), result.getFirst().id());
+        verify(promotionRepository).findAll();
     }
 
     private Promotion getPromotion(long id, boolean withDate) {

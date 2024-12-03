@@ -7,6 +7,8 @@ public interface PromotionService {
 
     List<PromotionDto> getAllPromotions();
 
+    List<PromotionDto> getActivePromotions();
+
     PromotionDto getPromotionById(long id);
 
     void deleteById(long id);
