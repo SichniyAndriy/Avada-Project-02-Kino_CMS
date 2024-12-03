@@ -28,16 +28,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "second_name", nullable = false)
+    @Column(name = "second_name")
     private String lastName;
 
-    @Column(name = "nick_name", unique = true, nullable = false)
+    @Column(name = "nick_name", unique = true)
     private String nickName;
 
-    @Column(name = "phone",nullable = false)
+    @Column(name = "phone")
     private String phone;
 
     @Column(name="email", nullable = false)
@@ -50,7 +50,7 @@ public class User {
     @Column(name = "pass_hash", nullable = false, unique = true)
     private String passHash;
 
-    @Column(name = "card_number", nullable = false)
+    @Column(name = "card_number")
     private String cardNumber;
 
     @Enumerated(EnumType.STRING)
@@ -87,19 +87,16 @@ public class User {
         )),
         USER(Set.of(
                 Permission.READ_IN_PUBLIC_PART,
-                Permission.READ_IN_USER_PART,
-                Permission.WRITE_IN_USER_PART
+                Permission.WRITE_IN_PUBLIC_PART
         )),
         SERVANT(Set.of(
                 Permission.READ_IN_PUBLIC_PART,
-                Permission.READ_IN_USER_PART,
-                Permission.WRITE_IN_USER_PART,
+                Permission.WRITE_IN_PUBLIC_PART,
                 Permission.READ_IN_ADMIN_PART
         )),
         ADMIN(Set.of(
                 Permission.READ_IN_PUBLIC_PART,
-                Permission.READ_IN_USER_PART,
-                Permission.WRITE_IN_USER_PART,
+                Permission.WRITE_IN_PUBLIC_PART,
                 Permission.READ_IN_ADMIN_PART,
                 Permission.WRITE_IN_ADMIN_PART
         ));
@@ -114,12 +111,12 @@ public class User {
             return role.permissions.stream()
                     .map(Enum::name).toList();
         }
+
     }
 
     public enum Permission {
         READ_IN_PUBLIC_PART,
-        READ_IN_USER_PART,
-        WRITE_IN_USER_PART,
+        WRITE_IN_PUBLIC_PART,
         READ_IN_ADMIN_PART,
         WRITE_IN_ADMIN_PART,
     }

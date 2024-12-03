@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.service;
 import avada.spacelab.kino_cms.model.dto.admin.NewsDto;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
+import avada.spacelab.kino_cms.model.entity.Status;
 import avada.spacelab.kino_cms.model.mapper.admin.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.service.admin.impl.NewsServiceImpl;
@@ -125,7 +126,7 @@ class NewsServiceTest {
         verify(newsRepository, times(2)).deleteById(anyLong());
     }
 
-     @TestFactory
+    @TestFactory
     @DisplayName("Test save()")
     List<DynamicNode> test_save() {
         return List.of(
@@ -165,6 +166,28 @@ class NewsServiceTest {
                         }
                 )
         );
+    }
+
+    @Test
+    @DisplayName("test getActiveNews")
+    void test_getActiveNews() {
+        News news1 = getNews(1L, true);
+        news1.setStatus(Status.ON);
+        News news2 = getNews(2L, true);
+        news2.setStatus(Status.ON);
+        News news3 = getNews(3L, true);
+        news3.setStatus(Status.ON);
+        News news4 = getNews(4L, true);
+        news4.setStatus(Status.OFF);
+        News news5 = getNews(5L, true);
+        news5.setStatus(Status.OFF);
+        when(newsRepository.findAll()).thenReturn(List.of(news1, news2, news3, news4, news5));
+
+        List<NewsDto> result = newsService.getActiveNews();
+
+        assertEquals(3, result.size());
+        assertEquals(news1.getId(), result.getFirst().id());
+        verify(newsRepository).findAll();
     }
 
     private News getNews(long id, boolean withDate) {

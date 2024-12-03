@@ -1,12 +1,18 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.admin.ContactDto;
+import avada.spacelab.kino_cms.model.dto.user.ContactResponceDto;
 import avada.spacelab.kino_cms.model.entity.Contact;
+import avada.spacelab.kino_cms.model.entity.MainPageInfo;
+import avada.spacelab.kino_cms.model.entity.Theater;
 import avada.spacelab.kino_cms.repository.ContactRepository;
+import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
+import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.service.admin.impl.ContactServiceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,10 +30,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ContactServiceTest {
 
-    @Mock
-    private ContactRepository contactRepository;
-    @InjectMocks
-    private ContactServiceImpl contactService;
+    @Mock private ContactRepository contactRepository;
+    @Mock private TheaterRepository theaterRepository;
+    @Mock private MainPageInfoRepository mainPageInfoRepository;
+    @InjectMocks private ContactServiceImpl contactService;
 
 
     @Test
@@ -109,6 +115,29 @@ class ContactServiceTest {
         }
         contactService.saveList(dtos);
         verify(contactRepository, times(3)).save(any(Contact.class));
+    }
+
+    @Test
+    @DisplayName("test getAllWithTheater")
+    void testGetAllWithTheater() {
+        Contact contact1 = getContact(1L);
+        Contact contact2 = getContact(2L);
+        contact1.setTitle("aaa");
+        contact2.setTitle("bbb");
+        Theater theater = new Theater();
+        theater.setTitle("aaa");
+
+        when(contactRepository.findAll()).thenReturn(List.of(contact1, contact2));
+        when(theaterRepository.findAll()).thenReturn(List.of(theater));
+        when(mainPageInfoRepository.findById(1L)).thenReturn(Optional.of(new MainPageInfo()));
+
+        List<ContactResponceDto> allWithTheater = contactService.getAllWithTheater();
+
+        assertEquals(1, allWithTheater.size());
+
+        verify(contactRepository, times(1)).findAll();
+        verify(theaterRepository, times(1)).findAll();
+        verify(mainPageInfoRepository, times(1)).findById(1L);
     }
 
     private ContactDto getContactDto(Long id) {

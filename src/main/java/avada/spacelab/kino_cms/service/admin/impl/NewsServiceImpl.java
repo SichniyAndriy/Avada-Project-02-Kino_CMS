@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.service.admin.impl;
 import avada.spacelab.kino_cms.model.dto.admin.NewsDto;
 import avada.spacelab.kino_cms.model.entity.News;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
+import avada.spacelab.kino_cms.model.entity.Status;
 import avada.spacelab.kino_cms.model.mapper.admin.NewsMapper;
 import avada.spacelab.kino_cms.repository.NewsRepository;
 import avada.spacelab.kino_cms.service.admin.NewsService;
@@ -53,6 +54,16 @@ public class NewsServiceImpl implements NewsService {
             news.setDate(LocalDate.now());
         }
         newsRepository.save(news);
+    }
+
+    @Override
+    public List<NewsDto> getActiveNews() {
+        ArrayList<NewsDto> result = newsRepository.findAll().stream()
+                .filter(news -> news.getStatus().equals(Status.ON))
+                .sorted(Comparator.comparingLong(News::getId))
+                .map(NewsMapper.INSTANCE::fromEntityToDto)
+                .collect(Collectors.toCollection(ArrayList::new));
+        return result;
     }
 
 }
