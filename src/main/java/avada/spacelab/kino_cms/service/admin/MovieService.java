@@ -11,6 +11,8 @@ public interface MovieService {
 
     List<MovieDto> getAllMovies();
 
+    List<MovieDto> getMoviesDyIdResponceList(List<MoviesResponceDto> list);
+
     MovieDto getMovieById(long id);
 
     void save(MovieDto movieDto, String picturesJson);

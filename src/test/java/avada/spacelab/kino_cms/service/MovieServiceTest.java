@@ -31,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -244,6 +245,30 @@ class MovieServiceTest {
                 () -> movieService.save(null, "[]")
             );
         verify(movieRepository, never()).save(any(Movie.class));
+    }
+
+    @Test
+    @DisplayName("test getMoviesDyIdResponceList")
+    void test_getMoviesDyIdResponceList() {
+        MoviesResponceDto responceDto1 = new MoviesResponceDto(1L, null, null);
+        MoviesResponceDto responceDto2 = new MoviesResponceDto(2L, null, null);
+        MoviesResponceDto responceDto3 = new MoviesResponceDto(3L, null, null);
+        Movie movie1 =  new Movie();
+        movie1.setId(1L);
+        Movie movie2 =  new Movie();
+        movie2.setId(2L);
+        Movie movie3 =  new Movie();
+        movie3.setId(3L);
+
+        when(movieRepository.findById(anyLong())).thenReturn(
+                Optional.of(movie1), Optional.of(movie2), Optional.of(movie3)
+        );
+
+        List<MovieDto> result = movieService.getMoviesDyIdResponceList(List.of(responceDto1, responceDto2, responceDto3));
+
+        assertEquals(3, result.size());
+
+        verify(movieRepository, times(3)).findById(anyLong());
     }
 
     private List<Movie> getMovies() {
