@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Kino</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -39,49 +58,125 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Horizontal Menu Start -->
-            <div class="collapse navbar-collapse ms-5" id="navbarNav">
+            <div class="ms-auto collapse navbar-collapse ms-5" id="navbarNav">
                 <ul class="navbar-nav text-dark fs-4">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/billboard}"> Афіша </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " th:href="@{/schedule}"> Розклад </a>
+                        <a class="nav-link" th:href="@{/schedule}"> Розклад </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " th:href="@{/soon}"><span class="item-name"> Скоро </span></a>
+                        <a class="nav-link" th:href="@{/soon}"><span class="item-name"> Скоро </span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#"> Кінотеатри </a>
+                        <a class="nav-link" th:href="@{/theaters}"> Кінотеатри </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#"> Акції </a>
+                        <a class="nav-link" th:href="@{/promotions}"> Акції </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown me-4">
+                        <a class="nav-link dropdown-toggle" th:href="@{/about}" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Про кінотеатр
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="#"> Новини </a>
+                                <a class="dropdown-item" th:href="@{/news}"> Новини </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"> Реклама </a>
+                                <a class="dropdown-item" th:href="@{/advert}"> Реклама </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"> Кафе-Бар </a>
+                                <a class="dropdown-item" th:href="@{/cafe-bar}"> Кафе-Бар </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"> Мобільні застосунки</a>
+                                <a class="dropdown-item" th:href="@{/vip-room}"> Vip кімната </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"> Контакти </a>
+                                <a class="dropdown-item" th:href="@{/child-room}"> Дитяча кімната </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/mob-apps}"> Мобільні застосунки </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/contacts}"> Контакти </a>
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item"
+                        sec:authorization="hasAuthority('WRITE_IN_PUBLIC_PART') and not hasAuthority('READ_IN_ADMIN_PART')">
+                        <a class="nav-link" th:href="@{/cabinet}"> Кабінет клієнта </a>
+                    </li>
                 </ul>
+
+                <div class="nav-item ms-auto me-4" sec:authorize="isAnonymous()">
+                    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img alt="User-Profile"
+                            class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded"
+                            th:src="@{/assets/images/avatars/avatar_01.png}">
+                        <div class="caption ms-3 d-none d-md-block ">
+                            <h5 class="mb-0 caption-title">Guest</h5>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/login}">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-item ms-auto me-4" sec:authorize="hasAuthority('WRITE_IN_PUBLIC_PART')
+                        and not hasAuthority('READ_IN_ADMIN_PART') and not hasAuthority('WRITE_IN_ADMIN_PART')">
+                    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img alt="User-Profile"
+                            class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded"
+                            th:src="@{/assets/images/avatars/avatar_02.png}">
+                        <div class="caption ms-3 d-none d-md-block ">
+                            <h5 class="mb-0 caption-title"><span sec:authentication="name"></span></h5>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-item ms-auto me-4"
+                    sec:authorize="hasAuthority('READ_IN_ADMIN_PART') and not hasAuthority('WRITE_IN_ADMIN_PART')">
+                    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img alt="User-Profile"
+                            class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded"
+                            th:src="@{/assets/images/avatars/avatar_03.png}">
+                        <div class="caption ms-3 d-none d-md-block ">
+                            <h5 class="mb-0 caption-title" sec:authenticate="name"> Servant </h5>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}"> Logout </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-item ms-auto me-4" sec:authorize="hasAuthority('WRITE_IN_ADMIN_PART')">
+                    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img alt="User-Profile"
+                            class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded"
+                            th:src="@{/assets/images/avatars/avatar_04.png}">
+                        <div class="caption ms-3 d-none d-md-block ">
+                            <h5 class="mb-0 caption-title" sec:authenticate="name"> Admin </h5>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}"> Logout </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="ms-auto me-5"> Guest </div>
         </div>
     </nav>
     <!--Nav End-->
@@ -91,17 +186,16 @@
             <div id="banners__carousel" class="carousel slide">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#banners__carousel" aria-current="true"
-                        th:each="i : ${#numbers.sequence(0, 4)}" th:classappend="${i} == 0 ? 'active' : ''"
-                        th:data-bs-slide-to="${i}" th:aria-label="|Slide ${i + 1}|">
+                        th:each="b, stat : ${banners}" th:classappend="${stat.index} == 0 ? 'active' : ''"
+                        th:data-bs-slide-to="${stat.index}" th:aria-label="|Slide ${stat.count}|">
                     </button>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item" th:each="i : ${#numbers.sequence(0, 4)}"
-                        th:classappend="${i} == 0 ? 'active' : ''">
-                        <img class="img-fluid d-block" alt="banner"
-                            th:src="|https://picsum.photos/id/${ 500 + i * 100 }/1600/900|">
+                    <div class="carousel-item" th:each="b, stat : ${banners}"
+                        th:classappend="${stat.index} == 0 ? 'active' : ''">
+                        <img class="img-fluid d-block mx-auto" alt="banner" th:src="${b.path}">
                         <div class="carousel-caption d-none d-md-block">
-                            <h3 class="font-ligth">First slide label</h3>
+                            <h3 class="font-ligth" th:text="${b.text}">First slide label</h3>
                         </div>
                     </div>
                 </div>
@@ -119,24 +213,30 @@
         </div>
         <div class="container my-4" id="anounce">
             <h3 class="text-bg-light text-info-emphasis text-center p-4 mt-4 rounded-2">Дивіться сьогодні</h3>
-            <div class="row row-cols-4 g-3">
-                <div class="col" th:each="i : ${#numbers.sequence(1, 10)}">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2">
+                <div class="col" th:each="m : ${today}">
                     <div class="card">
-                        <img class="card-img-top" th:src="|https://picsum.photos/id/${500 + i}/400/600|" alt="poster">
+                        <img class="card-img-top" th:src="${m.posterUrl} ?: @{/pictures/poster_stumb.webp}"
+                            alt="poster">
                         <div class="card-body">
-                            <h5 class="card-title">Lorem, ipsum dolor.</h5>
+                            <h5 class="card-title" th:text="${m.uaTitle}">Lorem, ipsum dolor.</h5>
                         </div>
+                        <button type="button" class="btn btn-success d-block mx-auto mb-3"
+                            th:onclick="goToMovieCard([[${m.id}]])">
+                            Купити квиток
+                        </button>
                     </div>
                 </div>
             </div>
 
             <h3 class="text-bg-light text-info-emphasis text-center p-4 mt-4 rounded-2">Дивіться скоро</h3>
-            <div class="row row-cols-4 g-3">
-                <div class="col" th:each="i : ${#numbers.sequence(1, 8)}">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2">
+                <div class="col" th:each="m : ${soon}">
                     <div class="card">
-                        <img class="card-img-top" th:src="|https://picsum.photos/id/${1000 + i}/400/600|" alt="poster">
+                        <img class="card-img-top" th:src="${m.posterUrl} ?: @{/pictures/poster_stumb.webp}"
+                            alt="poster">
                         <div class="card-body">
-                            <h5 class="card-title">Lorem, ipsum dolor.</h5>
+                            <h5 class="card-title" th:text="${m.uaTitle}">Lorem, ipsum dolor.</h5>
                         </div>
                     </div>
                 </div>
@@ -147,18 +247,16 @@
             <div class="carousel slide" id="news_and_promotions__carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#news_and_promotions__carousel" aria-current="true"
-                        th:each="i : ${#numbers.sequence(0, 9)}" th:classappend="${i} == 0 ? 'active': ''"
-                        th:data-bs-slide-to="${i}" th:aria-label="|Slide ${i + 1}|">
+                        th:each="p, stat : ${promotions}" th:classappend="${stat.index} == 0 ? 'active': ''"
+                        th:data-bs-slide-to="${stat.index}" th:aria-label="|Slide ${stat.count}|">
                     </button>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item" th:each="i : ${#numbers.sequence(0, 9)}"
-                        th:classappend="${i} == 0 ? 'active' : ''">
-                        <img class="d-block mx-auto" th:src="|https://picsum.photos/id/${600 + i * 10}/960/540|"
-                            alt="news and promotions">
+                    <div class="carousel-item" th:each="p, stat : ${promotions}"
+                        th:classappend="${stat.index} == 0 ? 'active' : ''">
+                        <img class="d-block mx-auto" th:src="${p.path}" alt="news and promotions">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
+                            <h5 th:text="${p.text}">First slide label</h5>
                         </div>
                     </div>
                 </div>
@@ -190,15 +288,19 @@
             <div class="d-flex gap-4 align-items-baseline mx-auto">
                 <div>
                     <ul class="list-group">
-                        <h5 class="text-bg-light">Афіша</h5>
                         <li>
-                            <a href="">Розклад</a>
+                            <a th:href="@{/billboard}">
+                                <h5 class="text-bg-light">Афіша</h5>
+                            </a>
                         </li>
                         <li>
-                            <a href="">Скоро в прокаті</a>
+                            <a th:href="@{/schedule}">Розклад</a>
                         </li>
                         <li>
-                            <a href="">Кінотеатри</a>
+                            <a th:href="@{/soon}">Скоро в прокаті</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/theaters}">Кінотеатри</a>
                         </li>
                         <li>
                             <a href="">Акції</a>
@@ -241,6 +343,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
+
+    <script th:src="@{/js/public/common_scripts.js}"></script>
+    <script th:inline="javascript">
+        var path = /*[[ ${middle} ?: '/pictures/mid_banner.jpg' ]]*/ "";
+        path.replace( "\/", "/" );
+        if ( path ) {
+            document.getElementById( "main-content" ).style.backgroundImage = `url( ${ path } )`;
+        }
+    </script>
 
 </body>
 

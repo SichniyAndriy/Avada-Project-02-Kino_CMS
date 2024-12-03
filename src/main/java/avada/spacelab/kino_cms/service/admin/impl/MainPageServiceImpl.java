@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MainPageServiceImpl implements MainPageService {
+
     private final MainPageBannersRepository  mainPageBannersRepository;
     private final MainPageInfoRepository mainPageInfoRepository;
 
