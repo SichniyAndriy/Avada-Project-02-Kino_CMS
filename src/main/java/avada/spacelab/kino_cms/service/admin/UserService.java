@@ -12,10 +12,13 @@ public interface UserService {
 
     UserDto getUserById(long id);
 
+    UserDto getUserByEmail(String email) throws IllegalArgumentException;
+
     void save(UserDto userDto);
 
     void deleteUser(long id);
 
     long getAllUsersAmount();
 
+    void saveNewUser(String email, String password);
 }

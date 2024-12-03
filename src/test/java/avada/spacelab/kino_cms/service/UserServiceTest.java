@@ -282,6 +282,51 @@ class UserServiceTest {
         verify(userRepository, times(1)).count();
     }
 
+    @Test
+    @DisplayName("test getUserByEmail with correct email")
+    void test_getUserByEmail_withCorrectEmail() {
+        final String EMAIL = "test@test.com";
+        User user = new User();
+        user.setEmail(EMAIL);
+        user.setId(1L);
+        when(userRepository.findByEmail(EMAIL)).thenReturn(Optional.of(user));
+
+        userService.getUserByEmail(EMAIL);
+
+        assertEquals(EMAIL, user.getEmail());
+        assertEquals(1L, user.getId());
+        verify(userRepository, times(1)).findByEmail(EMAIL);
+    }
+
+    @Test
+    @DisplayName("test getUserByEmail with wrong email")
+    void test_getUserByEmail_withWrongEmail() {
+        final String EMAIL = "";
+        when(userRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> userService.getUserByEmail(EMAIL)
+        );
+        verify(userRepository, times(1)).findByEmail(EMAIL);
+    }
+
+    @Test
+    @DisplayName("test saveNewUser")
+    void test_saveNewUser() {
+        final String EMAIL = "test@test.com";
+        User user = new User();
+        user.setId(1L);
+        user.setEmail(EMAIL);
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
+        userService.saveNewUser(EMAIL, "pass");
+
+        assertEquals(EMAIL, user.getEmail());
+        assertEquals(1L, user.getId());
+        verify(userRepository, times(1)).save(any(User.class));
+    }
+
     private User getUser(long id) {
         User user = new User();
         user.setId(id);

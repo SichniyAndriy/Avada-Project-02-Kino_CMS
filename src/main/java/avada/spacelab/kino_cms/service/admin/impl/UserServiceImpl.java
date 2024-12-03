@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.service.admin.impl;
 import avada.spacelab.kino_cms.controller.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
 import avada.spacelab.kino_cms.model.entity.User;
+import avada.spacelab.kino_cms.model.entity.User.Role;
 import avada.spacelab.kino_cms.model.mapper.admin.UserMapper;
 import avada.spacelab.kino_cms.repository.UserRepository;
 import avada.spacelab.kino_cms.service.admin.UserService;
@@ -70,10 +71,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getUserByEmail(String email) throws IllegalArgumentException {
+        Optional<User> byEmail = userRepository.findByEmail(email);
+        if (byEmail.isPresent()) {
+            User user = byEmail.get();
+            user.setPassHash("");
+            return UserMapper.INSTANCE.fromEntityToDto(user);
+        }
+        throw new IllegalArgumentException(email);
+    }
+
+
+    @Override
     public void save(UserDto userDto) {
         User user = UserMapper.INSTANCE.fromDtoToEntity(userDto);
         if (user.getRegistrationDate() == null) {
             user.setRegistrationDate(LocalDate.now());
+        }
+        if (user.getRole() == null) {
+            user.setRole(Role.USER);
         }
 
         String passHash;
@@ -85,6 +101,17 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassHash(passHash);
 
+        userRepository.save(user);
+    }
+
+    @Override
+    public void saveNewUser(String email, String password) {
+        User user = new User();
+        user.setEmail(email);
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassHash(encoder.encode(password));
+        user.setRegistrationDate(LocalDate.now());
+        user.setRole(Role.USER);
         userRepository.save(user);
     }
 
