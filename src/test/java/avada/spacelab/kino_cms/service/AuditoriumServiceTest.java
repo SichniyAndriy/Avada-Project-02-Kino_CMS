@@ -12,6 +12,7 @@ import avada.spacelab.kino_cms.repository.TheaterRepository;
 import avada.spacelab.kino_cms.service.admin.impl.AuditoriumServiceImpl;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -81,6 +82,29 @@ class AuditoriumServiceTest {
     }
 
     @Test
+    @DisplayName("test deleteAuditoriumById with wrong id")
+    void test_deleteAuditoriumById_withWrightId() {
+        doNothing().when(scheduleRepository).deleteAllByAuditoriumId(anyLong());
+        doNothing().when(auditoriumRepository).deleteAuditoriumById(anyLong());
+
+        auditoriumService.deleteAuditoriumById(1L);
+
+        verify(scheduleRepository).deleteAllByAuditoriumId(anyLong());
+        verify(auditoriumRepository).deleteAuditoriumById(anyLong());
+    }
+
+    @Test
+    @DisplayName("test deleteAuditoriumById with wrong id")
+    void test_deleteAuditoriumById_withWrongId() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> auditoriumService.deleteAuditoriumById(-1L)
+        );
+
+        verify(auditoriumRepository, never()).deleteById(anyLong());
+    }
+
+    @Test
     @DisplayName("Should return null when getById is called with an invalid ID")
     void test_getById_ReturnsNullForInvalidId() {
         when(auditoriumRepository.findById(0L))
@@ -96,30 +120,6 @@ class AuditoriumServiceTest {
         when(auditoriumRepository.findById(1L))
                 .thenReturn(Optional.of(auditorium));
         assertNotNull(auditoriumService.getById(1L).seoBlock());
-    }
-
-    @Test
-    @DisplayName("Should call deleteAuditoriumById on the repository")
-    void testDeleteAuditoriumByIdCallsRepository() {
-        for (long i = 0; i < 4; ++i) {
-            auditoriumService.deleteAuditoriumById(i);
-            verify(scheduleRepository).deleteAllByAuditoriumId(i);
-            verify(auditoriumRepository).deleteById(i);
-        }
-    }
-
-    @Test
-    @DisplayName("Calls deleteAuditoriumById with negative number. Not Ok")
-    void testDeleteAuditoriumByIdWithNegative() {
-        doThrow(new IllegalArgumentException("Negative number"))
-                .when(auditoriumRepository)
-                .deleteById(-1L);
-
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> auditoriumService.deleteAuditoriumById(-1)
-        );
-        verify(auditoriumRepository).deleteById(-1L);
     }
 
     @Test
@@ -198,6 +198,31 @@ class AuditoriumServiceTest {
                 () -> auditoriumService.save(getAuditoriumDto(), "")
         );
         verify(auditoriumRepository, never()).save(any(Auditorium.class));
+    }
+
+    @Test
+    @DisplayName("test getByTheaterAndNumber")
+    void test_getByTheaterAndNumber() {
+        when(auditoriumRepository.findAuditoriumByTheaterNameAndNumber("...", 1)).thenReturn(new Auditorium());
+
+        AuditoriumDto theaterAndNumber = auditoriumService.getByTheaterAndNumber("...", 1);
+        assertNotNull(theaterAndNumber);
+        assertNull(theaterAndNumber.theaterId());
+
+        verify(auditoriumRepository).findAuditoriumByTheaterNameAndNumber("...", 1);
+    }
+
+    @Test
+    @DisplayName("test getAuditoriumsByTheaterId")
+    void test_getAuditoriumsByTheaterId() {
+        when(auditoriumRepository.findAuditoriumsByTheaterId(1L)).thenReturn(List.of(new Auditorium()));
+
+        List<AuditoriumDto> auditoriumsByTheaterId = auditoriumService.getAuditoriumsByTheaterId(1L);
+        assertNotNull(auditoriumsByTheaterId);
+        assertEquals(1, auditoriumsByTheaterId.size());
+        assertNull(auditoriumsByTheaterId.getFirst().theaterId());
+
+        verify(auditoriumRepository).findAuditoriumsByTheaterId(1L);
     }
 
     @org.jetbrains.annotations.NotNull

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,10 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         return AuditoriumDto.EMPTY();
     }
 
-    public void deleteAuditoriumById(long audId) {
+    public void deleteAuditoriumById(long audId) throws IllegalArgumentException {
+        if (audId <= 0) {
+            throw new IllegalArgumentException("Illegal argument");
+        }
         scheduleRepository.deleteAllByAuditoriumId(audId);
         auditoriumRepository.deleteAuditoriumById(audId);
     }
@@ -62,6 +66,19 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         setTheater(auditorium, auditoriumDto.theaterId());
         setDate(auditorium);
         auditoriumRepository.save(auditorium);
+    }
+
+    public AuditoriumDto getByTheaterAndNumber(String theater, int number) {
+        Auditorium auditorium = auditoriumRepository.findAuditoriumByTheaterNameAndNumber(theater, number);
+        return AuditoriumMapper.INSTANCE.fromEntityToDto(auditorium);
+    }
+
+    public List<AuditoriumDto> getAuditoriumsByTheaterId(long id) {
+        List<Auditorium> auditoriums = auditoriumRepository.findAuditoriumsByTheaterId(id);
+        return auditoriums.stream()
+                .map(AuditoriumMapper.INSTANCE::fromEntityToDto)
+                .sorted(Comparator.comparing(AuditoriumDto::id))
+                .toList();
     }
 
     /*---------------------------- Private part ----------------------------*/

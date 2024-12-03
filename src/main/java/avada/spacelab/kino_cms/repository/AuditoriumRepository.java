@@ -28,8 +28,9 @@ public interface AuditoriumRepository extends JpaRepository<Auditorium, Long> {
     @Query("DELETE FROM Auditorium AS a WHERE a.id=:id")
     void deleteAuditoriumById(@NonNull Long id);
 
-    @Modifying @Transactional
-    @Query("DELETE FROM Auditorium a WHERE a.theater.id=:id")
-    void deleteByTheaterId(@Param("id") long id);
+    @Query("SELECT a FROM Auditorium AS a " +
+            "JOIN FETCH  Theater AS t ON a.theater.id=t.id " +
+            "WHERE t.title=:theater AND a.number=:number")
+    Auditorium findAuditoriumByTheaterNameAndNumber(String theater, int number);
 
 }
