@@ -63,6 +63,12 @@ public class MovieServiceImpl implements MovieService {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public List<MovieDto> getMoviesDyIdResponceList(List<MoviesResponceDto> list) {
+        return list.stream()
+                .map(mrt -> getMovieById(mrt.id()))
+                .toList();
+    }
+
     public MovieDto getMovieById(long id) {
         Optional<Movie> optionalMovie = movieRepository.findById(id);
         if (optionalMovie.isPresent()) {
