@@ -39,3 +39,7 @@ function chooseEntries() {
         } )
         .catch( error => console.error( error ) );
 }
+
+function goToBooking( date, time, movieId, theater, auditorium, price ) {
+    location.href = `/schedule/booking/${ date }/${ time }/${ movieId }/${ theater }/${ auditorium }/${ price }`;
+}
