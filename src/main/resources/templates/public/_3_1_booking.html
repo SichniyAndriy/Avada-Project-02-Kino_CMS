@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ua" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Замовлення</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <!--Nav Start-->
+    <nav class="navbar navbar-expand-md" th:replace="~{public/index :: navbar}"></nav>
+    <!--Nav End-->
+    <!-- Main Section Start -->
+    <main class="container-fluid" id="main-content">
+        <div class="container py-4" id="booking">
+            <section class="mt-4 position-relative mx-auto" style="width: 100%; padding-top: 40%; overflow: hidden;">
+                <img class="position-absolute top-0 start-0 w-100 h-100 border-0"
+                    th:src="${auditorium.bannerUrl} ?: @{/pictures/banner_stumb.jpg}">
+                </img>
+            </section>
+            <section class="mt-4">
+                <div class="row row-cols-2">
+                    <div class="col-3">
+                        <img class="img-fluid img-thumbnail" alt="poster"
+                            th:src="${movie.posterUrl} ?: @{/pictures/poster_stumb.webp}">
+                        <div class="mx-auto mt-4 w-75 border border-1 border-black" style="height: 320px;"></div>
+                    </div>
+                    <div class="col-9 d-flex flex-column gap-3">
+                        <h4 class="d-inline-block mt-1 px-2 text-warning bg-dark" th:text="${movie.uaTitle}"></h4>
+                        <p class="fs-5" th:text="|${#temporals.day(date)} ${#temporals.monthName(date)}, ${#temporals.dayOfWeekName(date)},
+                            ${time}, Зал № ${auditorium.number}|"></p>
+                        <div class="d-flex">
+                            <div class="fs-6">
+                                <p>Ціна в грн. <span class="alert alert-warning fw-bold px-2">[[${price}]].00</span></p>
+                            </div>
+                            <div class="ms-4 fs-6">
+                                <span>Заброньовано</span>
+                                <span id="books_already" class="ms-1 alert alert-secondary fw-bold">26</span>
+                            </div>
+                            <div class="ms-auto d-flex align-items-center fs-6">
+                                <span>Ваше замовлення</span>
+                                <span class="border border-3 border-warning ms-1 px-2">
+                                    <span id="amount_tickets">Квитків:</span>
+                                    <span class="ms-1">2</span>
+                                    <span class="ms-3">Сумма:</span>
+                                    <span class="ms-1" id="total_sum">200</span>
+                                    <span class="ms-1">грн.</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="my-4">
+                            <img class="img-fluid img-thumbnail d-block mx-auto" alt="scheme"
+                                th:src="${auditorium.schemeUrl} ?: @{/pictures/scheme_stumb.jpg}">
+                        </div>
+                        <p>Вартість послуги бронювання - 3 000 000 грн. за кожне місце</p>
+                        <p class="text-uppercase">
+                            Заброньовані квитки треба викупити в касі за 30 хв.до початку сеанса
+                        </p>
+
+                        <div class="d-flex justify-content-center" sec:authorize="hasAuthority('WRITE_IN_PUBLIC_PART')">
+                            <button type="button" class="d-block mx-auto btn btn-lg btn-outline-success"
+                                data-bs-toggle="modal" data-bs-target="#booking__modal">
+                                Забронювати
+                            </button>
+                            <button type="button" class="d-block mx-auto btn btn-lg btn-success ms-3"
+                                data-bs-toggle="modal" data-bs-target="#buy_ticket__modal">
+                                Купити квиток
+                            </button>
+                            <div class="modal fade" id="booking__modal" tabindex="-1" aria-labelledby="booking__modal"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Бронювання квитків</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Квитки заброньовано
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="buy_ticket__modal" tabindex="-1"
+                                aria-labelledby="buy_ticket__modal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Купівля квитків</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Квитки куплено
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div sec:authorize="isAnonymous()">
+                            <p class="text-uppercase">
+                                Для оперіцій треба ввійти в систему
+                            </p>
+                            <a th:href="@{/login}" role="button" class="btn btn-outline-info"> LOGIN </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main>
+    <!-- Main Section End -->
+    <!-- Footer Section Start -->
+    <footer class="footer p-4 my-4" th:replace="~{public/index :: footer}"></footer>
+    <!-- Footer Section End -->
+
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+
+</body>
+
+</html>
