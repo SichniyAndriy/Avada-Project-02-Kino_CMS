@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ua" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Кабінет </title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" th:href="@{/assets/css/rtl.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <!--Nav Start-->
+    <nav class="navbar navbar-expand-md" th:replace="~{public/index :: navbar}"></nav>
+    <!--Nav End-->
+    <!-- Main Section Start -->
+    <main class="container-fluid" id="main-content">
+        <h3 class="text-center mt-4"> Кабінет клієнта </h3>
+        <div class="container" id="cabinet">
+            <section class="mt-4">
+                <form id="user__from" th:action="@{/cabinet}" method="post" enctype="application/x-www-form-urlencoded"
+                    th:object="${user}">
+                    <input type="text" th:field="*{id}" hidden>
+                    <div class="row g-5 justify-content-center">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="first-name" class="form-label">Ім'я</label>
+                                <input type="text" class="form-control" id="first_name" th:field="*{firstName}"
+                                    placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="second_name" class="form-label">Прізвище</label>
+                                <input type="text" class="form-control" id="second_name" th:field="*{lastName}"
+                                    placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="nick_name" class="form-label">Nickname</label>
+                                <input type="text" class="form-control" id="nick_name" th:field="*{nickName}"
+                                    placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" th:field="*{email}" placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" th:field="*{phone}" placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Адреса</label>
+                                <input type="text" th:field="*{address.id}" hidden>
+                                <div class="d-flex flex-column border border-1 border-dark rounded-1 p-2 gap-2">
+                                    <div class="d-flex align-items-center">
+                                        <label class="w-25" for="city">Місто</label>
+                                        <input type="text" class="form-control" th:field="*{address.city}"
+                                            placeholder=" ">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <label class="w-25" for="zipCode">Zip code</label>
+                                        <input type="text" class="form-control" th:field="*{address.zipCode}"
+                                            placeholder=" ">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <label class="w-25" for="street">Вулиця</label>
+                                        <input type="text" class="form-control" th:field="*{address.street}"
+                                            placeholder=" ">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <label class="w-25" for="houseNumber">Номер будинку</label>
+                                        <input type="text" class="form-control" th:field="*{address.houseNumber}"
+                                            placeholder=" ">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <label class="w-25" for="flatNumber">Номер квартири</label>
+                                        <input type="text" class="form-control" th:field="*{address.flatNumber}"
+                                            placeholder=" ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <p class="form-check-label">Мова</p>
+                                <div class="d-flex" id="lang_radio">
+                                    <div class="w-50 form-check">
+                                        <input class="form-check-input" type="radio" id="ukr" value="UKRAINIAN"
+                                            th:field="*{language}">
+                                        <label class="form-check-label" for="ukr">Українська</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="eng" value="ENGLISH"
+                                            th:field="*{language}">
+                                        <label class="form-check-label" for="eng">Англійська</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="form-check-label">Стать</p>
+                                <div class="d-flex" id="gander_radio">
+                                    <div class="w-50 form-check">
+                                        <input class="form-check-input" type="radio" id="male" value="MALE"
+                                            th:field="*{gender}">
+                                        <label class="form-check-label" for="male">Чоловік</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="female" value="FEMALE"
+                                            th:field="*{gender}">
+                                        <label class="form-check-label" for="female">Жінка</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <label for="registration_date" class="form-label">Дата реєстрації</label>
+                                <input type="date" class="form-control" id="registration_date"
+                                    th:field="*{registrationDate}" placeholder=" " readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="birth_date" class="form-label">Дата народження</label>
+                                <input type="date" class="form-control" id="birth_date" th:field="*{birthDate}"
+                                    placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="card_number" class="form-label">Номер карти</label>
+                                <input type="text" class="form-control" id="card_number" th:field="*{cardNumber}"
+                                    placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" th:field="*{passHash}"
+                                    placeholder=" ">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm_password" class="form-label">Підвердження пароля</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirmPassword"
+                                    placeholder=" ">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary"> Update </button>
+                    </div>
+                </form>
+            </section>
+    </main>
+    <!-- Main Section End -->
+    <!-- Footer Section Start -->
+    <footer class="footer p-4 my-4" th:replace="~{public/index :: footer}"></footer>
+    <!-- Footer Section End -->
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer>
+        </script>
+
+    <script th:src="@{/js/public/cabinet_script.js}"></script>
+
+</body>
+
+</html>
