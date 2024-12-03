@@ -3,6 +3,7 @@ package avada.spacelab.kino_cms.config;
 import avada.spacelab.kino_cms.model.entity.User.Permission;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,6 +27,8 @@ public class SecurityConfig {
                         .requestMatchers("admin/**")
                         .hasAuthority(Permission.WRITE_IN_ADMIN_PART.name())
                         .requestMatchers("/**")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register")
                         .permitAll())
                 .formLogin(form -> form.loginPage("/login").permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll());
