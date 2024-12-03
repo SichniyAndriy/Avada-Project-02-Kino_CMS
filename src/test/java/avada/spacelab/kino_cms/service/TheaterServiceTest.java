@@ -1,6 +1,7 @@
 package avada.spacelab.kino_cms.service;
 
 import avada.spacelab.kino_cms.model.dto.admin.TheaterDto;
+import avada.spacelab.kino_cms.model.dto.user.TheaterResponceDto;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.entity.Theater;
@@ -259,6 +260,18 @@ class TheaterServiceTest {
         inOrder.verify(auditoriumRepository, times(1)).findAuditoriumsByTheaterId(anyLong());
         inOrder.verify(scheduleRepository, times(1)).deleteAllByAuditoriumId(anyLong());
         inOrder.verify(theaterRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    @DisplayName("test getAllTheaterResponceDtos")
+    void getAllTheaterResponceDtos() {
+        when(theaterRepository.findTheaterResponceDtos())
+                .thenReturn(List.of("1;aaa;bbb","2;empty;ccc","3;empty;empty"));
+
+        List<TheaterResponceDto> result = theaterService.getAllTheaterResponceDtos();
+
+        assertEquals(3, result.size());
+        verify(theaterRepository, times(1)).findTheaterResponceDtos();
     }
 
     private TheaterDto getTheaterDto(boolean isSeoBlock) {

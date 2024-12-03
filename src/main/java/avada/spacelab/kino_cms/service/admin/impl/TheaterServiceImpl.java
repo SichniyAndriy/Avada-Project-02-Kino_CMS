@@ -2,6 +2,7 @@ package avada.spacelab.kino_cms.service.admin.impl;
 
 import avada.spacelab.kino_cms.model.dto.admin.TheaterDto;
 import avada.spacelab.kino_cms.model.dto.admin.TheaterPictureDto;
+import avada.spacelab.kino_cms.model.dto.user.TheaterResponceDto;
 import avada.spacelab.kino_cms.model.entity.Auditorium;
 import avada.spacelab.kino_cms.model.entity.SeoBlock;
 import avada.spacelab.kino_cms.model.entity.Theater;
@@ -38,6 +39,7 @@ public class TheaterServiceImpl implements TheaterService {
         this.auditoriumRepository = auditoriumRepository;
         this.scheduleRepository = scheduleRepository;
     }
+
     /*----------------------------- PUBLIC PART -----------------------------*/
 
     public List<TheaterDto> getAllTheaters() {
@@ -45,6 +47,19 @@ public class TheaterServiceImpl implements TheaterService {
                 .sorted(Comparator.comparingLong(Theater::getId))
                 .map(TheaterMapper.INSTANCE::fromEntityToDto)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<TheaterResponceDto> getAllTheaterResponceDtos() {
+        List<String> strings = theaterRepository.findTheaterResponceDtos();
+        return strings.stream().map(s -> {
+            String[] row = s.split(";");
+            Long id = Long.parseLong(row[0]);
+            String title = !row[1].equals("empty") ? row[1] : null;
+            String logoUrl = !row[2].equals("empty") ? row[2] : null;
+            return new TheaterResponceDto(id, title, logoUrl);
+        })
+                .sorted(Comparator.comparing(TheaterResponceDto::id))
+                .toList();
     }
 
     public TheaterDto getById(long id) {

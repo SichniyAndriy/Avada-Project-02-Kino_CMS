@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ua" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Картка аудиторії</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
+        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
+        th:href="@{/assets/css/customizer.min.css}">
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <!--Nav Start-->
+    <nav class="navbar navbar-expand-md" th:replace="~{public/index :: navbar}"></nav>
+    <!--Nav End-->
+    <!-- Main Section Start -->
+    <main class="container-fluid" id="main-content">
+        <section class="container mt-4" id="theater">
+            <div class="mt-4 position-relative mx-auto" style="width: 100%; padding-top: 40%; overflow: hidden;">
+                <img class="position-absolute top-0 start-0 w-100 h-100 border-0" alt="theater logo"
+                    th:src="${auditorium.bannerUrl} ?: @{/pictures/banner_stumb.jpg}">
+            </div>
+            <div class="mt-4 row row-cols-2">
+                <div class="col-3 d-flex flex-column row-gap-4">
+                    <div class="w-100 border border-1 border-black" style="height: 320px;"></div>
+                    <div>
+                        <h5>Дивіться сьогодні</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action"></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-success btn-lg+">Розклад всіх сеансів</button>
+                </div>
+                <div class="col-9 ms-auto">
+                    <h4 class="text-center">Зал [[${ auditorium.number} ]] </h4>
+                    <p th:text="${auditorium.description}"></p>
+                    <div class="mt-4">
+                        <img class="img-fluid img-thumbnail d-block mx-auto" alt="scheme"
+                            th:src="${auditorium.schemeUrl} ?: @{/pictures/scheme_stumb.jpg}">
+                    </div>
+                    <div id="picture__carousel" class="carousel slide my-4">
+                        <div class="carousel-inner">
+                            <div class="carousel-item" th:each="p, stat : ${auditorium.pictures}"
+                                th:classappend="${stat.index} == 0 ? 'active' : ''">
+                                <img th:src="${p.path}" class="d-block w-100" alt="theater pictures">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#picture__carousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#picture__carousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Main Section End -->
+    <!-- Footer Section Start -->
+    <footer class="footer p-4 my-4" th:replace="~{public/index :: footer}"></footer>
+    <!-- Footer Section End -->
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+</body>
+
+</html>
