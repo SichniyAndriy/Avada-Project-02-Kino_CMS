@@ -27,7 +27,6 @@ import avada.spacelab.kino_cms.service.admin.impl.MainPageServiceImpl;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -151,7 +150,7 @@ public class AppUtil implements CommandLineRunner {
             movieDetails.setProducers(faker.name().firstName() + " " + faker.name().lastName());
             movieDetails.setGenres(faker.book().genre());
             movieDetails.setBudget("$ " + faker.random().nextInt(1_000_000, 250_000_000));
-            movieDetails.setTime(faker.time().past(7200, ChronoUnit.SECONDS, "HH:mm:ss"));
+            movieDetails.setTime(faker.random().nextInt(80, 200).toString());
             movie.setDetails(movieDetails);
             movies.add(movie);
         }
@@ -292,7 +291,7 @@ public class AppUtil implements CommandLineRunner {
             contact.setTitle(theater.getTitle());
             contact.setAddress(localFaker.address().fullAddress());
             contact.setCoordinates(
-                    localFaker.address().longitude() + " ; " + localFaker.address().latitude()
+                    localFaker.address().latitude() + " ; " + localFaker.address().longitude()
             );
             contacts.add(contact);
         }

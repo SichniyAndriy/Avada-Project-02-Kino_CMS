@@ -16,6 +16,7 @@ public class EmailSendingHandler extends TextWebSocketHandler {
     private final EmailSendingService emailSendingService;
     private final Logger logger = LogManager.getLogger(EmailSendingHandler.class);
 
+
     public EmailSendingHandler(EmailSendingService emailSendingService) {
         this.emailSendingService = emailSendingService;
     }
@@ -51,4 +52,5 @@ public class EmailSendingHandler extends TextWebSocketHandler {
         public String fileName;
         public List<Long> ids;
     }
+
 }

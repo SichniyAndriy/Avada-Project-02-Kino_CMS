@@ -17,6 +17,7 @@ public class SmsSendingHandler extends TextWebSocketHandler {
     private final SmsSendingService smsSendingService;
     private final Logger logger = LogManager.getLogger(SmsSendingHandler.class);
 
+
     public SmsSendingHandler(SmsSendingService smsSendingService) {
         this.smsSendingService = smsSendingService;
     }
@@ -52,4 +53,5 @@ public class SmsSendingHandler extends TextWebSocketHandler {
         public String message;
         public List<Long> ids;
     }
+
 }
