@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EditPageServiceImpl implements EditPageService {
+
     private final EditPageRepository editPageRepository;
+
 
     public EditPageServiceImpl(
         @Autowired EditPageRepository editPageRepository
@@ -143,4 +145,5 @@ public class EditPageServiceImpl implements EditPageService {
                 .map(EditPagePictureMapper.INSTANCE::fromDtoToEntity)
                 .toList();
     }
+
 }

@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+
     public UserServiceImpl(
             @Autowired UserRepository userRepository
     ) {
@@ -80,7 +81,6 @@ public class UserServiceImpl implements UserService {
         }
         throw new IllegalArgumentException(email);
     }
-
 
     @Override
     public void save(UserDto userDto) {

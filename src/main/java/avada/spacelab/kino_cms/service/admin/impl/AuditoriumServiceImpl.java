@@ -24,9 +24,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuditoriumServiceImpl implements AuditoriumService {
+
     private final AuditoriumRepository auditoriumRepository;
     private final TheaterRepository theaterRepository;
     private final ScheduleRepository scheduleRepository;
+
 
     public AuditoriumServiceImpl(
             @Autowired AuditoriumRepository auditoriumRepository,
@@ -112,4 +114,5 @@ public class AuditoriumServiceImpl implements AuditoriumService {
                 .map(AuditoriumPictureMapper.INSTANCE::fromDtoToEntity)
                 .toList();
     }
+
 }

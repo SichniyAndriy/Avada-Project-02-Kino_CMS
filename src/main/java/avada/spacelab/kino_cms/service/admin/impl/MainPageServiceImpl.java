@@ -20,6 +20,7 @@ public class MainPageServiceImpl implements MainPageService {
     private final MainPageBannersRepository  mainPageBannersRepository;
     private final MainPageInfoRepository mainPageInfoRepository;
 
+
     public MainPageServiceImpl(
             @Autowired MainPageBannersRepository mainPageBannersRepository,
             @Autowired MainPageInfoRepository mainPageInfoRepository
@@ -68,4 +69,5 @@ public class MainPageServiceImpl implements MainPageService {
                 .map(MainPageInfoMapper.INSTANCE::fromEntityToDto)
                 .orElse(MainPageInfoDto.EMPTY());
     }
+
 }

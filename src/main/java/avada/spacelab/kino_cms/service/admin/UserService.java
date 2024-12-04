@@ -21,4 +21,5 @@ public interface UserService {
     long getAllUsersAmount();
 
     void saveNewUser(String email, String password);
+
 }

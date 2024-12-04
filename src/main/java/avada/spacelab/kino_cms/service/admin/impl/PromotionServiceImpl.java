@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PromotionServiceImpl implements PromotionService {
+
     private final PromotionRepository promotionRepository;
 
     public PromotionServiceImpl(
@@ -64,4 +65,5 @@ public class PromotionServiceImpl implements PromotionService {
         }
         promotionRepository.save(promotion);
     }
+
 }

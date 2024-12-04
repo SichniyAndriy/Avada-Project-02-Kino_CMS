@@ -28,7 +28,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieServiceImpl implements MovieService {
+
     private final MovieRepository movieRepository;
+
 
     public MovieServiceImpl(
             @Autowired MovieRepository movieRepository
@@ -111,4 +113,5 @@ public class MovieServiceImpl implements MovieService {
                 .map(MoviePictureMapper.INSTANCE::fromDtoToEntity)
                 .toList();
     }
+
 }

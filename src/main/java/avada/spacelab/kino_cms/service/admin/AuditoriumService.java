@@ -14,4 +14,5 @@ public interface AuditoriumService {
     AuditoriumDto getByTheaterAndNumber(String theater, int number);
 
     List<AuditoriumDto> getAuditoriumsByTheaterId(long id);
+
 }

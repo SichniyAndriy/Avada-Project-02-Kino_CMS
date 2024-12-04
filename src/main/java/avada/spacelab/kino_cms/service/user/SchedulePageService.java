@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentNavigableMap;
 import org.jetbrains.annotations.NotNull;
 
 public interface SchedulePageService {
+
     @NotNull ConcurrentNavigableMap<LocalDate, List<SchedulePageResponceDto>> getTableEntries();
 
     List<String> movies();
@@ -27,4 +28,5 @@ public interface SchedulePageService {
             String movie,
             String auditorium
     );
+
 }

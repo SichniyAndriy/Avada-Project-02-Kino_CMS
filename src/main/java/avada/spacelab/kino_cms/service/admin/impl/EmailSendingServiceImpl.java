@@ -31,6 +31,7 @@ public class EmailSendingServiceImpl implements EmailSendingService {
 
     private final Logger logger = LogManager.getLogger(EmailSendingServiceImpl.class);
 
+
     public EmailSendingServiceImpl(
             @Autowired UserRepository userRepository,
             @Autowired JavaMailSender mailSender
@@ -91,4 +92,5 @@ public class EmailSendingServiceImpl implements EmailSendingService {
         );
         return String.join("/n", allLines);
     }
+
 }

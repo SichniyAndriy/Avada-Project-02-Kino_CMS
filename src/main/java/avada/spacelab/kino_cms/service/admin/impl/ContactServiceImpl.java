@@ -75,4 +75,5 @@ public class ContactServiceImpl implements ContactService {
                 .map(ContactMapper.INSTANCE::fromDtoToEntity)
                 .forEach(contactRepository::save);
     }
+
 }

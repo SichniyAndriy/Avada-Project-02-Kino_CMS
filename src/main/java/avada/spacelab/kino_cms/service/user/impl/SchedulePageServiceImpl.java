@@ -27,10 +27,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SchedulePageServiceImpl implements SchedulePageService {
+
     private final TheaterRepository theaterRepository;
     private final ScheduleRepository scheduleRepository;
     private final MovieRepository movieRepository;
     private final AuditoriumRepository auditoriumRepository;
+
 
     public SchedulePageServiceImpl(
             @Autowired TheaterRepository theaterRepository,

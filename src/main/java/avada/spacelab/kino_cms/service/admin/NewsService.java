@@ -14,4 +14,5 @@ public interface NewsService {
     void save(NewsDto newsDto);
 
     List<NewsDto> getActiveNews();
+
 }

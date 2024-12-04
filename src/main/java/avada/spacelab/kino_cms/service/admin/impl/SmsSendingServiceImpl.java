@@ -17,8 +17,10 @@ import org.springframework.web.socket.WebSocketSession;
 
 @Service
 public class SmsSendingServiceImpl implements SmsSendingService {
+
     private final UserRepository userRepository;
     private final Logger logger = LogManager.getLogger(SmsSendingServiceImpl.class);
+
 
     public SmsSendingServiceImpl(
             @Autowired UserRepository userRepository
@@ -49,4 +51,5 @@ public class SmsSendingServiceImpl implements SmsSendingService {
         }
         session.close(CloseStatus.NORMAL);
     }
+
 }
