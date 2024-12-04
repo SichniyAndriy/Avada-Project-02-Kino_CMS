@@ -10,7 +10,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface MovieMapper {
+
     MovieMapper INSTANCE = Mappers.getMapper(MovieMapper.class);
+
 
     MovieDto fromEntityToDto(Movie movie);
 
@@ -19,4 +21,5 @@ public interface MovieMapper {
     Movie fromDtoToEntity(MovieDto movieDto);
 
     MoviesResponceDto fromEntityToResponceDto(Movie movie);
+
 }

@@ -8,8 +8,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface NewsMapper {
+
     NewsMapper INSTANCE = Mappers.getMapper(NewsMapper.class);
 
+
     NewsDto fromEntityToDto(News entity);
+
     News fromDtoToEntity(NewsDto dto);
+
 }

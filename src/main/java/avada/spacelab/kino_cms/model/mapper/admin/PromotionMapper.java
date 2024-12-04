@@ -8,8 +8,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface PromotionMapper {
+
     PromotionMapper INSTANCE = Mappers.getMapper(PromotionMapper.class);
 
     PromotionDto fromEntityToDto(Promotion promotions);
+
     Promotion fromDtoToEntity(PromotionDto promotionsDto);
+
 }

@@ -8,8 +8,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface MainPageInfoMapper {
+
     MainPageInfoMapper INSTANCE = Mappers.getMapper(MainPageInfoMapper.class);
 
+
     MainPageInfo fromDtoToEntity(MainPageInfoDto mainPageInfoDto);
+
     MainPageInfoDto fromEntityToDto(MainPageInfo mainPageInfo);
 }

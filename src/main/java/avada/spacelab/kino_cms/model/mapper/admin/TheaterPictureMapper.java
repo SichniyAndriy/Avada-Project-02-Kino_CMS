@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface TheaterPictureMapper {
+
     TheaterPictureMapper INSTANCE = Mappers.getMapper(TheaterPictureMapper.class);
 
 
@@ -16,4 +17,5 @@ public interface TheaterPictureMapper {
 
     @Mapping(target = "theater", ignore = true)
     TheaterPicture fromDtoToEntity(TheaterPictureDto theaterPictureDto);
+
 }

@@ -8,8 +8,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface ContactMapper {
+
     ContactMapper INSTANCE = Mappers.getMapper(ContactMapper.class);
 
+
     Contact fromDtoToEntity(ContactDto contactDto);
+
     ContactDto fromEntityToDto(Contact contact);
 }

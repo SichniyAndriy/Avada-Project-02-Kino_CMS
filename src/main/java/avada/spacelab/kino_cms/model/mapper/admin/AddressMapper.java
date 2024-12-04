@@ -8,8 +8,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface AddressMapper {
+
     AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 
+
     AddressDto fromEntityToDto(Address address);
+
     Address fromDtoToEntity(AddressDto addressDto);
+
 }

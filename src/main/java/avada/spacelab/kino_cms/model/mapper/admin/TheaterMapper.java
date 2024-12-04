@@ -9,11 +9,14 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface TheaterMapper {
+
     TheaterMapper INSTANCE = Mappers.getMapper(TheaterMapper.class);
+
 
     TheaterDto fromEntityToDto(Theater theater);
 
     @Mapping(target = "pictures", ignore = true)
     @Mapping(target = "auditoriums", ignore = true)
     Theater fromDtoToEntity(TheaterDto theaterDto);
+
 }

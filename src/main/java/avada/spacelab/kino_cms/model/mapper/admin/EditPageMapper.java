@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface EditPageMapper {
+
     EditPageMapper INSTANCE = Mappers.getMapper(EditPageMapper.class);
 
 
@@ -16,4 +17,5 @@ public interface EditPageMapper {
 
     @Mapping(target = "pictures",ignore = true)
     EditPage fromDtoToEntity(EditPageDto editPageDto);
+
 }

@@ -9,10 +9,13 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface AuditoriumPictureMapper {
+
     AuditoriumPictureMapper INSTANCE = Mappers.getMapper(AuditoriumPictureMapper.class);
+
 
     AuditoriumPictureDto fromEntityToDto(AuditoriumPicture auditoriumPicture);
 
     @Mapping(target = "auditorium", ignore = true)
     AuditoriumPicture fromDtoToEntity(AuditoriumPictureDto auditoriumPictureDto);
+
 }

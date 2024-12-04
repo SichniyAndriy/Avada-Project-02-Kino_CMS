@@ -9,7 +9,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface AuditoriumMapper {
+
     AuditoriumMapper INSTANCE = Mappers.getMapper(AuditoriumMapper.class);
+
 
     @Mapping(target = "theaterId", source = "theater.id")
     AuditoriumDto fromEntityToDto(Auditorium auditorium);
@@ -18,4 +20,5 @@ public interface AuditoriumMapper {
     @Mapping(target = "pictures", ignore = true)
     @Mapping(target = "schedules", ignore = true)
     Auditorium fromDtoToEntity(AuditoriumDto auditoriumDto);
+
 }

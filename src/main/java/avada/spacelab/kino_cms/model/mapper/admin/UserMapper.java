@@ -8,8 +8,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface UserMapper {
+
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
+
     UserDto fromEntityToDto(User user);
+
     User fromDtoToEntity(UserDto dto);
+
 }
