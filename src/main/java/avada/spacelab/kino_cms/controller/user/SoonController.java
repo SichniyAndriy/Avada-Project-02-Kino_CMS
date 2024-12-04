@@ -29,4 +29,5 @@ public class SoonController {
         model.addAttribute("movies", dtoList);
         return "public/_2_0_soon";
     }
+
 }

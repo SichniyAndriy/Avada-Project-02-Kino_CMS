@@ -25,11 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("admin/edit")
 public class EditPagesController {
+
     private final String PATH_TO_EDIT = "pictures/edit-page";
 
     private final MainPageService mainPageService;
     private final ContactService contactService;
     private final EditPageService editPageService;
+
 
     public EditPagesController(
             @Autowired MainPageService mainPageService,

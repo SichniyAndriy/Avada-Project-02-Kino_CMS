@@ -24,9 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("admin/theaters")
 public class TheaterController {
+
     private final TheaterService theaterService;
     private final AuditoriumService auditoriumService;
     private final String PATH_TO_THEATERS = "pictures/theaters";
+
 
     public TheaterController(
             @Autowired TheaterService theaterService,
@@ -112,4 +114,5 @@ public class TheaterController {
         );
         return ResponseEntity.ok(res);
     }
+
 }

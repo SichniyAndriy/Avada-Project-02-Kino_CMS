@@ -23,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("admin/movies")
 public class MovieController {
+
     private final MovieService movieService;
+
 
     public MovieController(
             @Autowired MovieService movieService
@@ -70,4 +72,5 @@ public class MovieController {
         );
         return ResponseEntity.ok(fileName);
     }
+
 }

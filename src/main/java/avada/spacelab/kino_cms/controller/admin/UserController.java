@@ -1,6 +1,6 @@
 package avada.spacelab.kino_cms.controller.admin;
 
-import avada.spacelab.kino_cms.controller.paged.PagedResponse;
+import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
 import avada.spacelab.kino_cms.service.admin.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("admin/users")
 public class UserController {
+
     private final UserService userService;
+
 
     public UserController(
             @Autowired UserService userService) {
@@ -67,4 +69,5 @@ public class UserController {
         userService.save(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
 }

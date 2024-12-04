@@ -54,4 +54,5 @@ public class CabinetController {
         userService.save(userDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
 }

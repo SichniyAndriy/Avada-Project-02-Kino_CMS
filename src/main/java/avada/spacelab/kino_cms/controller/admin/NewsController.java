@@ -22,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("admin/news")
 public class NewsController {
+
     private final NewsService newsService;
     private final String NEWS_PATH = "pictures/news";
+
 
     public NewsController(
             @Autowired NewsService newsService
@@ -75,4 +77,5 @@ public class NewsController {
         newsService.save(news);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
 }

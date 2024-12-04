@@ -1,6 +1,6 @@
 package avada.spacelab.kino_cms.controller.admin;
 
-import avada.spacelab.kino_cms.controller.paged.PagedResponse;
+import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
 import avada.spacelab.kino_cms.service.admin.UserService;
@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("admin/sending")
 public class SendingController {
+
     private final UserService userService;
     private final Logger logger = LogManager.getLogger(SendingController.class);
+
 
     public SendingController(
             @Autowired UserService userService
@@ -74,4 +76,5 @@ public class SendingController {
         logger.info("save email on server");
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(path);
     }
+
 }

@@ -38,4 +38,5 @@ public class RegistrationController {
         userService.saveNewUser(email, password);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
+
 }

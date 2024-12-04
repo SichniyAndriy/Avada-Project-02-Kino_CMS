@@ -17,4 +17,5 @@ public class ErrorHandler implements ErrorController {
                 .ifPresent(stringBuilder::append);
         return stringBuilder.toString();
     }
+
 }

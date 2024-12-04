@@ -77,4 +77,5 @@ public class AboutController {
         model.addAttribute("contacts", contactDtos);
         return "/public/_6_7_contacts";
     }
+
 }

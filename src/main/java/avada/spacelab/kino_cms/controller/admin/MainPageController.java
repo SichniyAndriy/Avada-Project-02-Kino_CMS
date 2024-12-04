@@ -22,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("admin/banners")
 public class MainPageController {
+
     private final MainPageService mainPageService;
+
 
     public MainPageController(
             @Autowired MainPageService mainPageService
@@ -88,6 +90,7 @@ public class MainPageController {
         mainPageService.save(background);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
 }
 
 

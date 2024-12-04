@@ -21,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("admin/promotions")
 public class PromotionController {
+
     private final PromotionService promotionService;
     private final String PATH_TO_PROMOTIONS = "pictures/promotions";
+
 
     public PromotionController(
             @Autowired PromotionService promotionService
@@ -75,4 +77,5 @@ public class PromotionController {
         promotionService.save(promotion);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
 }
