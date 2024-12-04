@@ -1,6 +1,6 @@
 package avada.spacelab.kino_cms.service;
 
-import avada.spacelab.kino_cms.controller.paged.PagedResponse;
+import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
 import avada.spacelab.kino_cms.model.entity.User;
 import avada.spacelab.kino_cms.model.mapper.admin.UserMapper;

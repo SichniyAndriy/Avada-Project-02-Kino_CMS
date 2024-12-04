@@ -1,4 +1,4 @@
-package avada.spacelab.kino_cms.controller.paged;
+package avada.spacelab.kino_cms.model.paged;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ public record PagedResponse<T>(
         boolean isFirst,
         boolean isLast
 ) {
+
     public static <T> PagedResponse<T> Of(
             List<T> content,
             int pageSize,
@@ -36,4 +37,5 @@ public record PagedResponse<T>(
                 isLast
         );
     }
+
 }
