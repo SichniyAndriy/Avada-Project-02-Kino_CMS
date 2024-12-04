@@ -42,6 +42,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AppUtil implements CommandLineRunner {
+
     private final Faker faker = new Faker();
     private final Faker localFaker = new Faker(Locale.getDefault());
     private final String PREFIX = "{bcrypt}";

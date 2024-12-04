@@ -14,6 +14,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
 public class SmsSendingHandler extends TextWebSocketHandler {
+
     private final SmsSendingService smsSendingService;
     private final Logger logger = LogManager.getLogger(SmsSendingHandler.class);
 
