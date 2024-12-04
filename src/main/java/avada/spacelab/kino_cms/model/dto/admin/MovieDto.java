@@ -41,4 +41,5 @@ public record MovieDto(
                 Collections.emptyList()
         );
     }
+
 }

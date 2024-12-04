@@ -47,4 +47,5 @@ public record UserDto(
                 Role.USER
         );
     }
+
 }

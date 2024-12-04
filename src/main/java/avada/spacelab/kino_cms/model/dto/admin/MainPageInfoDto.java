@@ -12,6 +12,7 @@ public record MainPageInfoDto(
         String seoText,
         SeoBlockDto seoBlock
 ) implements Serializable {
+
     public static MainPageInfoDto EMPTY() {
         return new MainPageInfoDto(
                 null,
@@ -21,4 +22,5 @@ public record MainPageInfoDto(
                 SeoBlockDto.EMPTY()
         );
     }
+
 }

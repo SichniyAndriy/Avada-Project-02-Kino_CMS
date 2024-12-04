@@ -16,4 +16,5 @@ public record SeoBlockDto(
     public static SeoBlockDto EMPTY() {
         return new SeoBlockDto(null, null, null, null, null);
     }
+
 }

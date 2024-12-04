@@ -17,6 +17,7 @@ public record PromotionDto(
         SeoBlockDto seoBlock,
         Status status
 ) implements Serializable {
+
     public static PromotionDto EMPTY() {
         return new PromotionDto(
                 null,
@@ -29,4 +30,5 @@ public record PromotionDto(
                 null
                 );
     }
+
 }

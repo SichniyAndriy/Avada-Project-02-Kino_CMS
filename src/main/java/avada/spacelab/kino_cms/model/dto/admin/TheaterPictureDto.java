@@ -8,5 +8,4 @@ import java.io.Serializable;
 public record TheaterPictureDto(
         Long id,
         String path
-) implements Serializable {
-}
+) implements Serializable {}

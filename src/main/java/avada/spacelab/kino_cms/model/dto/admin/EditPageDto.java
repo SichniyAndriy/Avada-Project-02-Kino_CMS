@@ -18,6 +18,7 @@ public record EditPageDto(
         SeoBlockDto seoBlock,
         List<EditPagePictureDto> pictures
 ) implements Serializable {
+
     public static EditPageDto EMPTY() {
         return new EditPageDto(
                 null,
@@ -30,4 +31,5 @@ public record EditPageDto(
                 Collections.EMPTY_LIST
         );
     }
+
 }

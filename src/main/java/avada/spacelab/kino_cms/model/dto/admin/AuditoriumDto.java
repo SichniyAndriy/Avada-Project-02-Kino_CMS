@@ -33,4 +33,5 @@ public record AuditoriumDto(
                 SeoBlockDto.EMPTY()
         );
     }
+
 }

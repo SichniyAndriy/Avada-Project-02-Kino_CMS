@@ -31,4 +31,5 @@ public record TheaterDto(
                 Collections.emptyList(),
                 SeoBlockDto.EMPTY());
     }
+
 }
