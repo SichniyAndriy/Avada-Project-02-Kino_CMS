@@ -63,7 +63,7 @@ public class EmailSendingServiceImpl implements EmailSendingService {
 
     private void sendToMe(String to, String subject, String text) {
         MimeMessagePreparator preparator = mimeMessage -> {
-            mimeMessage.setRecipients(RecipientType.TO , to);
+            mimeMessage.setRecipients(RecipientType.TO, to);
             mimeMessage.setHeader("Content-Type", "text/html; charset=utf-8");
             mimeMessage.setContent(text, "text/html; charset=utf-8");
             mimeMessage.addFrom(new Address[] { new InternetAddress("sichniy.andriy@gmail.com") });

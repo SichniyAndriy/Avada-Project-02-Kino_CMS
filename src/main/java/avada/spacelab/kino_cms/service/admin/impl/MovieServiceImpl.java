@@ -46,7 +46,7 @@ public class MovieServiceImpl implements MovieService {
         Predicate<Schedule> predicate = item -> item.getKey().getDate().isEqual(LocalDate.now());
         Map<Boolean, List<MoviesResponceDto>> partitioned = movies.stream()
                 .collect(Collectors.partitioningBy(
-                        movie ->  movie.getSchedules().stream().anyMatch(predicate),
+                        movie -> movie.getSchedules().stream().anyMatch(predicate),
                         Collectors.mapping(
                                 MovieMapper.INSTANCE::fromEntityToResponceDto,
                                 Collectors.toList()
@@ -105,7 +105,8 @@ public class MovieServiceImpl implements MovieService {
         List<MoviePictureDto> pictureDtos;
         try {
             pictureDtos = new ObjectMapper()
-                    .readValue(picturesJson, new TypeReference<>() {});
+                    .readValue(picturesJson, new TypeReference<>() {
+                    });
         } catch (JsonProcessingException | IllegalArgumentException e) {
             throw new RuntimeException(e);
         }

@@ -38,8 +38,8 @@ public class SmsSendingHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(
-             @NonNull WebSocketSession session,
-             TextMessage message
+            @NonNull WebSocketSession session,
+            TextMessage message
     ) throws Exception {
         SmsRequest smsRequest = new ObjectMapper()
                 .readValue(message.getPayload(), SmsRequest.class);

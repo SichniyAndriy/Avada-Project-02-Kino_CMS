@@ -12,10 +12,12 @@ import org.springframework.lang.NonNull;
 
 public interface AuditoriumRepository extends JpaRepository<Auditorium, Long> {
 
-    @Override @NonNull
+    @Override
+    @NonNull
     List<Auditorium> findAll();
 
-    @Override @NonNull
+    @Override
+    @NonNull
     Optional<Auditorium> findById(@NonNull Long id);
 
     @Query("SELECT a FROM Auditorium a JOIN FETCH Theater t on a.theater=t WHERE t.id=:id")
@@ -24,7 +26,8 @@ public interface AuditoriumRepository extends JpaRepository<Auditorium, Long> {
     @Query("SELECT CONCAT(t.title, ' ', a.number) FROM Auditorium AS a JOIN FETCH Theater AS t ON a.theater.id=t.id")
     List<String> findAuditoriumTitles();
 
-    @Modifying @Transactional
+    @Modifying
+    @Transactional
     @Query("DELETE FROM Auditorium AS a WHERE a.id=:id")
     void deleteAuditoriumById(@NonNull Long id);
 

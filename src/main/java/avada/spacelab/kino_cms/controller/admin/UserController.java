@@ -1,7 +1,7 @@
 package avada.spacelab.kino_cms.controller.admin;
 
-import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
+import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.service.admin.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = {"", "/"})
+    @GetMapping(path = { "", "/" })
     public String getUserPage(
             @RequestParam(required = false) Integer number,
             @RequestParam(required = false) Integer size,

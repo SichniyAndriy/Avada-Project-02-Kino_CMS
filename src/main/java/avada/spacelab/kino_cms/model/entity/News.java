@@ -18,8 +18,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "news")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "news")
 public class News {
 
     @Id

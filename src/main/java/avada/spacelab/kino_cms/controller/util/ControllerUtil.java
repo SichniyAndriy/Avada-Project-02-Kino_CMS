@@ -10,8 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ControllerUtil {
     private final static String PATH_TO_RESOURCES = "src/main/resources";
-    private final static String PATH_TO_OUT = "..";
     public final static String PATH_TO_SENT_EMAIL = PATH_TO_RESOURCES + "/" + "service_files/sent_emails";
+    private final static String PATH_TO_OUT = "..";
 
     public static String savePictureOnServer(
             String path,
@@ -29,7 +29,7 @@ public class ControllerUtil {
                 fileEntry.delete();
             }
         }
-        String filePath ="/" + path + "/" + fileName + "-" + timestamp + "." + ext;
+        String filePath = "/" + path + "/" + fileName + "-" + timestamp + "." + ext;
         file.transferTo(Path.of(PATH_TO_OUT + filePath));
         return filePath;
     }

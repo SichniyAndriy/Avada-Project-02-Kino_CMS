@@ -12,4 +12,5 @@ public record SchedulePageResponceDto(
         String theater,
         Integer auditorium,
         BigDecimal price
-) {}
+) {
+}

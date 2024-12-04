@@ -12,8 +12,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "movie_pictures")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "movie_pictures")
 public class MoviePicture {
 
     @Id

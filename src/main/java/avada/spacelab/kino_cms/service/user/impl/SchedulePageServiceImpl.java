@@ -82,11 +82,11 @@ public class SchedulePageServiceImpl implements SchedulePageService {
                 ));
 
         collected.forEach((date, list) -> {
-           list.sort(Comparator.comparing(SchedulePageResponceDto::time)
-                           .thenComparing(SchedulePageResponceDto::theater)
-                           .thenComparing(SchedulePageResponceDto::auditorium)
-           );
-           result.put(date, list);
+            list.sort(Comparator.comparing(SchedulePageResponceDto::time)
+                    .thenComparing(SchedulePageResponceDto::theater)
+                    .thenComparing(SchedulePageResponceDto::auditorium)
+            );
+            result.put(date, list);
         });
 
         return result;
@@ -185,7 +185,7 @@ public class SchedulePageServiceImpl implements SchedulePageService {
             boolean is3D,
             boolean isImax
     ) {
-        for(var entry : entries.entrySet()) {
+        for (var entry : entries.entrySet()) {
             entry.getValue().removeIf(dto -> {
                 String line = movieRepository.getMovieTypes(dto.movieId(), dto.movie());
                 String[] strings = line.split(";");
@@ -208,10 +208,10 @@ public class SchedulePageServiceImpl implements SchedulePageService {
         }
     }
 
-     private void filterOnMovie(
-             ConcurrentMap<LocalDate, List<SchedulePageResponceDto>> entries,
-             String movieString
-     ) {
+    private void filterOnMovie(
+            ConcurrentMap<LocalDate, List<SchedulePageResponceDto>> entries,
+            String movieString
+    ) {
         for (var entry : entries.entrySet()) {
             entry.getValue().removeIf(
                     dto -> !dto.movie().equals(movieString)
@@ -225,7 +225,7 @@ public class SchedulePageServiceImpl implements SchedulePageService {
     ) {
         for (var entry : entries.entrySet()) {
             entry.getValue().removeIf(dto -> {
-                String line =  dto.theater() + " " + dto.auditorium();
+                String line = dto.theater() + " " + dto.auditorium();
                 return !line.equals(auditoriumString);
             });
         }

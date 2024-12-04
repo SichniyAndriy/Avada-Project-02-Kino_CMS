@@ -16,8 +16,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "schedules")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "schedules")
 public class Schedule {
 
     @EmbeddedId
@@ -32,7 +35,9 @@ public class Schedule {
         this.key = new ScheduleCompositeKey(auditorium, movie, date, time);
     }
 
-    @Data @NoArgsConstructor @AllArgsConstructor
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Embeddable
     public static class ScheduleCompositeKey implements Serializable {
         @ManyToOne(targetEntity = Auditorium.class)

@@ -32,7 +32,7 @@ public class MainPageController {
         this.mainPageService = mainPageService;
     }
 
-    @GetMapping(path = {"/", ""})
+    @GetMapping(path = { "/", "" })
     public String banners(Model model) {
         List<MainPageBanner> middle =
                 mainPageService.getAllByReplacement(MainPageBanner.Replacement.SLASH_BANNER);

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = {"", "/", "/index"})
+@RequestMapping(path = { "", "/", "/index" })
 public class ClientIndexController {
 
     private final MovieService movieService;
@@ -41,7 +41,7 @@ public class ClientIndexController {
         model.addAttribute("banners", banners);
         model.addAttribute("middle", middle);
         model.addAttribute("promotions", promotions);
-        
+
         return "public/index";
     }
 

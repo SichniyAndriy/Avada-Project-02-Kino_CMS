@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MainPageServiceImpl implements MainPageService {
 
-    private final MainPageBannersRepository  mainPageBannersRepository;
+    private final MainPageBannersRepository mainPageBannersRepository;
     private final MainPageInfoRepository mainPageInfoRepository;
 
 
@@ -61,7 +61,7 @@ public class MainPageServiceImpl implements MainPageService {
     public MainPageInfoDto getInfo() {
         Optional<MainPageInfo> infoOptional = mainPageInfoRepository.findById(1L);
         infoOptional.ifPresent(mainPageInfo -> {
-            if(mainPageInfo.getSeoBlock() == null) {
+            if (mainPageInfo.getSeoBlock() == null) {
                 mainPageInfo.setSeoBlock(new SeoBlock());
             }
         });

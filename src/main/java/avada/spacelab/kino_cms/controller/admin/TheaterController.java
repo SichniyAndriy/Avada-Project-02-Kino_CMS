@@ -38,7 +38,7 @@ public class TheaterController {
         this.auditoriumService = auditoriumService;
     }
 
-    @GetMapping(path = {"", "/"})
+    @GetMapping(path = { "", "/" })
     public String theaters(Model model) {
         List<TheaterDto> theaters = theaterService.getAllTheaters();
         model.addAttribute("theaters", theaters);
@@ -73,7 +73,7 @@ public class TheaterController {
         return "redirect:/admin/theaters";
     }
 
-    @GetMapping(path = { "/show/auditorium/{id}/{theaterId}"})
+    @GetMapping(path = { "/show/auditorium/{id}/{theaterId}" })
     public String showAuditorium(
             @PathVariable long id,
             @PathVariable long theaterId,
@@ -103,7 +103,7 @@ public class TheaterController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping(path ={"/save/file", "/save/auditorium/file"})
+    @PostMapping(path = { "/save/file", "/save/auditorium/file" })
     public ResponseEntity<String> saveAuditorium(
             @RequestParam MultipartFile file,
             @RequestParam String timestamp,

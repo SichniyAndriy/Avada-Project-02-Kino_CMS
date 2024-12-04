@@ -40,7 +40,7 @@ public class UserTheaterController {
     public String showTheater(
             Model model,
             @PathVariable long id
-            ) {
+    ) {
         TheaterDto theaterDto = theaterService.getById(id);
         List<AuditoriumDto> auditoriumDtos = auditoriumService.getAuditoriumsByTheaterId(id);
         model.addAttribute("theater", theaterDto);

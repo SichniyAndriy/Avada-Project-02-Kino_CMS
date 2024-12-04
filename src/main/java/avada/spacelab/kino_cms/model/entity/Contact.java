@@ -10,21 +10,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "contacts")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "contacts")
 public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="title", length = 100)
+    @Column(name = "title", length = 100)
     private String title;
 
-    @Column(name="address", length = 100)
+    @Column(name = "address", length = 100)
     private String address;
 
-    @Column(name="coordinates", length = 100)
+    @Column(name = "coordinates", length = 100)
     private String coordinates;
 
 }

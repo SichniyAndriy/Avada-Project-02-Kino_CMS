@@ -28,7 +28,7 @@ public record PromotionDto(
                 null,
                 SeoBlockDto.EMPTY(),
                 null
-                );
+        );
     }
 
 }

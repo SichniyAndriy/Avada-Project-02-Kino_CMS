@@ -80,7 +80,7 @@ public class AppUtil implements CommandLineRunner {
         this.contactRepository = contactRepository;
         this.scheduleRepository = scheduleRepository;
     }
-    
+
     @Override
     public void run(String... args) throws Exception {
         int n = 5;
@@ -131,7 +131,7 @@ public class AppUtil implements CommandLineRunner {
         List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Movie movie = new Movie();
-            String uaTitle  = localFaker.lorem().sentence(faker.random().nextInt(1, 3), 0);
+            String uaTitle = localFaker.lorem().sentence(faker.random().nextInt(1, 3), 0);
             movie.setUaTitle(uaTitle);
             String nativeTitle = faker.lorem().sentence(faker.random().nextInt(1, 3), 0);
             movie.setNativeTitle(nativeTitle);
@@ -251,10 +251,10 @@ public class AppUtil implements CommandLineRunner {
         int moviesAmount = movies.size();
         int n;
 
-        for(Auditorium auditorium : auditoriums) {
+        for (Auditorium auditorium : auditoriums) {
             n = faker.random().nextInt(0, --moviesAmount);
             Movie movie = movies.get(n);
-            for (int day = 3; day > 0 ; --day) {
+            for (int day = 3; day > 0; --day) {
                 LocalDate date = LocalDate.now().minusDays(day);
                 place(date, auditorium, movie, schedules);
             }

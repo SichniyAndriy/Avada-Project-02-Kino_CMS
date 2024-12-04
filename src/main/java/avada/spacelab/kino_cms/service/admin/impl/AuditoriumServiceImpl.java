@@ -106,7 +106,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         List<AuditoriumPictureDto> pictureDtos;
         try {
             pictureDtos = new ObjectMapper().
-                    readValue(picturesJson, new TypeReference<>() {});
+                    readValue(picturesJson, new TypeReference<>() {
+                    });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

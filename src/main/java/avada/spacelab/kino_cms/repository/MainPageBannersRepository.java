@@ -11,7 +11,8 @@ public interface MainPageBannersRepository extends JpaRepository<MainPageBanner,
 
     List<MainPageBanner> findAllByPlace(Replacement place);
 
-    @Modifying @Transactional
+    @Modifying
+    @Transactional
     void removeAllByPlaceEquals(Replacement place);
 
 }

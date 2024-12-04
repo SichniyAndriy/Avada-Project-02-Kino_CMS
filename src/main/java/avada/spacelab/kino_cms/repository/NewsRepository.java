@@ -9,14 +9,15 @@ import org.springframework.lang.NonNull;
 
 public interface NewsRepository extends JpaRepository<News, Long> {
 
-   @Override @NonNull
-   List<News> findAll();
+    @Override
+    @NonNull
+    List<News> findAll();
 
-   @Override
-   @NotNull
-   Optional<News> findById(@NotNull Long id);
+    @Override
+    @NotNull
+    Optional<News> findById(@NotNull Long id);
 
-   @Override
-   void deleteById(@NotNull Long id);
+    @Override
+    void deleteById(@NotNull Long id);
 
 }

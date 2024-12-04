@@ -34,7 +34,9 @@ public class RegistrationController {
             @RequestParam String password,
             @RequestParam String confirmedPassword
     ) {
-        if (!password.equals(confirmedPassword)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (!password.equals(confirmedPassword)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         userService.saveNewUser(email, password);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }

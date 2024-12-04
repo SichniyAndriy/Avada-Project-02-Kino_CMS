@@ -11,7 +11,8 @@ import org.springframework.lang.NonNull;
 
 public interface TheaterRepository extends JpaRepository<Theater, Long> {
 
-    @Override @NonNull
+    @Override
+    @NonNull
     List<Theater> findAll();
 
     @Query("SELECT CONCAT(t.id, ';', IFNULL(t.title, 'empty'), ';', IFNULL(t.logoUrl, 'empty')) FROM Theater AS t")

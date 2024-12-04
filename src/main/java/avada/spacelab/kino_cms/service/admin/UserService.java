@@ -1,7 +1,7 @@
 package avada.spacelab.kino_cms.service.admin;
 
-import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
+import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import java.util.List;
 
 public interface UserService {

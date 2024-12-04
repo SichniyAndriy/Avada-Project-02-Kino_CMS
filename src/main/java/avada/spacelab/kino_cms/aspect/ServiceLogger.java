@@ -11,14 +11,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Aspect @Component @Order(1)
+@Aspect
+@Component
+@Order(1)
 public class ServiceLogger {
 
     private final Logger logger = LoggerFactory.getLogger(ServiceLogger.class);
 
 
     @Pointcut("within(avada.spacelab.kino_cms.service.impl.*)")
-    public void allServiceMethods() {}
+    public void allServiceMethods() {
+    }
 
     @Before("allServiceMethods()")
     public void before(JoinPoint joinPoint) {

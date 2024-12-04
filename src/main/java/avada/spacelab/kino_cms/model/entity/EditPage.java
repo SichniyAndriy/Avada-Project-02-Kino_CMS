@@ -19,8 +19,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "edit_pages")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "edit_pages")
 public class EditPage {
 
     @Id

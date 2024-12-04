@@ -12,8 +12,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "main_page_banners")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "main_page_banners")
 public class MainPageBanner {
 
     @Id

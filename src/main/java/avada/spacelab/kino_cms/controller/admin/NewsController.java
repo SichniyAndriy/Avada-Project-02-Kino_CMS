@@ -33,7 +33,7 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping(path = {"", "/"})
+    @GetMapping(path = { "", "/" })
     public String getNews(Model model) {
         List<NewsDto> newsList = newsService.getAllNews();
         model.addAttribute("newsList", newsList);

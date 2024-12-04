@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 public class KinoCmsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KinoCmsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(KinoCmsApplication.class, args);
+    }
 
 }

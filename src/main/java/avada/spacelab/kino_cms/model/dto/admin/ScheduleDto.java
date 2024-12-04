@@ -12,4 +12,5 @@ public record ScheduleDto(
         Long movieId,
         LocalDate date,
         LocalTime time
-) implements Serializable {}
+) implements Serializable {
+}

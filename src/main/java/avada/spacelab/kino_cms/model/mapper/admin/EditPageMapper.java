@@ -15,7 +15,7 @@ public interface EditPageMapper {
 
     EditPageDto fromEntityToDto(EditPage editPage);
 
-    @Mapping(target = "pictures",ignore = true)
+    @Mapping(target = "pictures", ignore = true)
     EditPage fromDtoToEntity(EditPageDto editPageDto);
 
 }

@@ -21,8 +21,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "auditoriums")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "auditoriums")
 public class Auditorium {
 
     @Id
@@ -39,7 +42,7 @@ public class Auditorium {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "scheme_url",length = 512)
+    @Column(name = "scheme_url", length = 512)
     private String schemeUrl;
 
     @Column(name = "banner_url", length = 512)

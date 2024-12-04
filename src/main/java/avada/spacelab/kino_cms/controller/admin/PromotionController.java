@@ -32,7 +32,7 @@ public class PromotionController {
         this.promotionService = promotionService;
     }
 
-    @GetMapping(path = {"", "/"})
+    @GetMapping(path = { "", "/" })
     public String promotions(Model model) {
         List<PromotionDto> promotions = promotionService.getAllPromotions();
         model.addAttribute("promotions", promotions);

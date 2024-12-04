@@ -1,10 +1,10 @@
 package avada.spacelab.kino_cms.service.admin.impl;
 
-import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
 import avada.spacelab.kino_cms.model.entity.User;
 import avada.spacelab.kino_cms.model.entity.User.Role;
 import avada.spacelab.kino_cms.model.mapper.admin.UserMapper;
+import avada.spacelab.kino_cms.model.paged.PagedResponse;
 import avada.spacelab.kino_cms.repository.UserRepository;
 import avada.spacelab.kino_cms.service.admin.UserService;
 import java.time.LocalDate;
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         ArrayList<UserDto> collect = userPage.getContent().stream()
                 .map(UserMapper.INSTANCE::fromEntityToDto)
                 .collect(Collectors.toCollection(ArrayList::new));
-       return PagedResponse.Of(
+        return PagedResponse.Of(
                 collect,
                 userPage.getSize(),
                 userPage.getNumber(),
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
         }
 
         String passHash;
-        if (user.getId() != null && ( user.getPassHash() == null || user.getPassHash().isEmpty() )) {
+        if (user.getId() != null && (user.getPassHash() == null || user.getPassHash().isEmpty())) {
             passHash = userRepository.findPassHashById(user.getId());
         } else {
             PasswordEncoder encoder = new BCryptPasswordEncoder();

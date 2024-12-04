@@ -17,8 +17,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "theaters")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "theaters")
 public class Theater {
 
     @Id
@@ -37,7 +40,7 @@ public class Theater {
     @Column(name = "logo_url", length = 512)
     private String logoUrl;
 
-    @Column(name= "banner_url", length = 512)
+    @Column(name = "banner_url", length = 512)
     private String bannerUrl;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = TheaterPicture.class,

@@ -12,8 +12,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "edit_page_picture")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "edit_page_picture")
 public class EditPagePicture {
 
     @Id

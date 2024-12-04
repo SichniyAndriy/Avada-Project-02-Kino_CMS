@@ -12,7 +12,7 @@ public class ErrorHandler implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest req) {
-        StringBuilder stringBuilder  =  new StringBuilder("error");
+        StringBuilder stringBuilder = new StringBuilder("error");
         Optional.ofNullable(req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE))
                 .ifPresent(stringBuilder::append);
         return stringBuilder.toString();

@@ -33,7 +33,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping(path = {"","/"})
+    @GetMapping(path = { "", "/" })
     public String films(Model model) {
         Map<Boolean, List<MoviesResponceDto>> partitioned = movieService.getPartitionedMovies();
         model.addAttribute("currentMovies", partitioned.get(true));
@@ -62,9 +62,9 @@ public class MovieController {
 
     @PostMapping("/save/file")
     public ResponseEntity<String> saveFile(
-        @RequestParam MultipartFile file,
-        @RequestParam String timestamp,
-        @RequestParam String ext
+            @RequestParam MultipartFile file,
+            @RequestParam String timestamp,
+            @RequestParam String ext
     ) throws IOException {
         final String PATH_TO_MOVIES = "pictures/movies";
         final String fileName = ControllerUtil.savePictureOnServer(

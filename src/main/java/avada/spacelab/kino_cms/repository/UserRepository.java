@@ -13,25 +13,29 @@ import org.springframework.lang.NonNull;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Override @NonNull
+    @Override
+    @NonNull
     List<User> findAll();
 
-    @Override @NonNull
+    @Override
+    @NonNull
     Page<User> findAll(@NonNull Pageable pageable);
 
-    @Override @NonNull
+    @Override
+    @NonNull
     Optional<User> findById(@NonNull Long id);
 
     Optional<User> findByEmail(@NonNull String email);
 
-    @Override @NonNull
+    @Override
+    @NonNull
     User save(@NonNull User user);
 
     @Override
     void deleteById(@NonNull Long id);
 
     @Query("SELECT u.phone FROM User u")
-    List<String>findAllPhones();
+    List<String> findAllPhones();
 
     @Query("SELECT u.phone FROM User u WHERE u.id = :id")
     Optional<String> findPhoneById(@Param("id") Long id);

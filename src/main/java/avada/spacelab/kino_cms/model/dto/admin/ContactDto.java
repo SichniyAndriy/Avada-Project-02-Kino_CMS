@@ -10,4 +10,5 @@ public record ContactDto(
         String title,
         String address,
         String coordinates
-) implements Serializable {}
+) implements Serializable {
+}

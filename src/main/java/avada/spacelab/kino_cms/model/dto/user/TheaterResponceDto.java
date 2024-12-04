@@ -4,4 +4,5 @@ public record TheaterResponceDto(
         Long id,
         String title,
         String logoUrl
-) {}
+) {
+}

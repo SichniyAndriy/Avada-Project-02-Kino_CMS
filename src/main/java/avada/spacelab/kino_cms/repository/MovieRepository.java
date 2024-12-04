@@ -10,7 +10,8 @@ import org.springframework.lang.NonNull;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    @Override @NonNull
+    @Override
+    @NonNull
     List<Movie> findAll();
 
     @Override

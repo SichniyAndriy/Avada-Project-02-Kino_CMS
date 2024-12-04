@@ -20,8 +20,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -40,7 +43,7 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name="email", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = Address.class, orphanRemoval = true)

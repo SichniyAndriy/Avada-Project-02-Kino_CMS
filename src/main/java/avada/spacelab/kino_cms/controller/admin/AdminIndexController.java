@@ -21,7 +21,7 @@ public class AdminIndexController {
         this.adminIndexService = adminIndexService;
     }
 
-    @GetMapping(path = {"/index", "/", ""})
+    @GetMapping(path = { "/index", "/", "" })
     public String index(Model model) {
         final Faker faker = new Faker();
         long amountMovies = adminIndexService.countMovies();

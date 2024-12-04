@@ -36,7 +36,7 @@ public class PromotionServiceImpl implements PromotionService {
     @Override
     public List<PromotionDto> getActivePromotions() {
         return promotionRepository.findAll().stream()
-                .filter(promotion ->  promotion.getStatus().equals(Status.ON))
+                .filter(promotion -> promotion.getStatus().equals(Status.ON))
                 .map(PromotionMapper.INSTANCE::fromEntityToDto)
                 .sorted(Comparator.comparing(PromotionDto::date))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -45,7 +45,7 @@ public class PromotionServiceImpl implements PromotionService {
     public PromotionDto getPromotionById(long id) {
         Optional<Promotion> promotionOptional = promotionRepository.findById(id);
         promotionOptional.ifPresent(promotion -> {
-            if(promotion.getSeoBlock() == null) {
+            if (promotion.getSeoBlock() == null) {
                 promotion.setSeoBlock(new SeoBlock());
             }
         });
@@ -60,7 +60,7 @@ public class PromotionServiceImpl implements PromotionService {
 
     public void save(PromotionDto promotionDto) {
         Promotion promotion = PromotionMapper.INSTANCE.fromDtoToEntity(promotionDto);
-        if(promotion.getDate() == null) {
+        if (promotion.getDate() == null) {
             promotion.setDate(LocalDate.now());
         }
         promotionRepository.save(promotion);

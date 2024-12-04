@@ -15,7 +15,7 @@ public interface MoviePictureMapper {
 
     MoviePictureDto fromEntityToDto(MoviePicture moviePicture);
 
-    @Mapping(target = "movie" ,ignore = true)
+    @Mapping(target = "movie", ignore = true)
     MoviePicture fromDtoToEntity(MoviePictureDto moviePictureDto);
 
 }

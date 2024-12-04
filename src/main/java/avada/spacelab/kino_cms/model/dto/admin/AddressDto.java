@@ -27,7 +27,7 @@ public record AddressDto(
 
     @Override
     public String toString() {
-        return  city + ", " + street + ", " + houseNumber +
+        return city + ", " + street + ", " + houseNumber +
                 (flatNumber != null ? ", " + flatNumber : "");
     }
 

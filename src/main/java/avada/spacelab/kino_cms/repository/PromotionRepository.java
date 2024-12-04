@@ -9,7 +9,8 @@ import org.springframework.lang.NonNull;
 
 public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 
-    @Override @NonNull
+    @Override
+    @NonNull
     List<Promotion> findAll();
 
     @Override

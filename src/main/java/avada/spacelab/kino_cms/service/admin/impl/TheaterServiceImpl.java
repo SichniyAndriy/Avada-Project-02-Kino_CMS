@@ -54,12 +54,12 @@ public class TheaterServiceImpl implements TheaterService {
     public List<TheaterResponceDto> getAllTheaterResponceDtos() {
         List<String> strings = theaterRepository.findTheaterResponceDtos();
         return strings.stream().map(s -> {
-            String[] row = s.split(";");
-            Long id = Long.parseLong(row[0]);
-            String title = !row[1].equals("empty") ? row[1] : null;
-            String logoUrl = !row[2].equals("empty") ? row[2] : null;
-            return new TheaterResponceDto(id, title, logoUrl);
-        })
+                    String[] row = s.split(";");
+                    Long id = Long.parseLong(row[0]);
+                    String title = !row[1].equals("empty") ? row[1] : null;
+                    String logoUrl = !row[2].equals("empty") ? row[2] : null;
+                    return new TheaterResponceDto(id, title, logoUrl);
+                })
                 .sorted(Comparator.comparing(TheaterResponceDto::id))
                 .toList();
     }
@@ -116,7 +116,8 @@ public class TheaterServiceImpl implements TheaterService {
         List<TheaterPictureDto> theaterPictureDtos;
         try {
             theaterPictureDtos = new ObjectMapper()
-                    .readValue(picturesJson, new TypeReference<>() {});
+                    .readValue(picturesJson, new TypeReference<>() {
+                    });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

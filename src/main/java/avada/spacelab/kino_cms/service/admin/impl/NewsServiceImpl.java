@@ -40,7 +40,8 @@ public class NewsServiceImpl implements NewsService {
         newsOptional.ifPresent(news -> {
             if (news.getSeoBlock() == null) {
                 news.setSeoBlock(new SeoBlock());
-            }});
+            }
+        });
         return newsOptional.map(NewsMapper.INSTANCE::fromEntityToDto).orElse(NewsDto.EMPTY());
     }
 

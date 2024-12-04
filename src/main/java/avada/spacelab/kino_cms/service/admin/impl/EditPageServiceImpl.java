@@ -24,7 +24,7 @@ public class EditPageServiceImpl implements EditPageService {
 
 
     public EditPageServiceImpl(
-        @Autowired EditPageRepository editPageRepository
+            @Autowired EditPageRepository editPageRepository
     ) {
         this.editPageRepository = editPageRepository;
     }
@@ -136,7 +136,8 @@ public class EditPageServiceImpl implements EditPageService {
         try {
             pictureDtos = new ObjectMapper().readValue(
                     picturesJson,
-                    new TypeReference<>() {}
+                    new TypeReference<>() {
+                    }
             );
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

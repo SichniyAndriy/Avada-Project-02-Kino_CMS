@@ -10,8 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "seo_blocks")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "seo_blocks")
 public class SeoBlock {
 
     @Id

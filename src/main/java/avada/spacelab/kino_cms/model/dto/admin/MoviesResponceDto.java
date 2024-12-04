@@ -9,4 +9,5 @@ public record MoviesResponceDto(
         Long id,
         String uaTitle,
         String posterUrl
-) implements Serializable {}
+) implements Serializable {
+}

@@ -48,7 +48,7 @@ public class CabinetController {
             @ModelAttribute UserDto userDto,
             @RequestParam String confirmPassword
     ) {
-        if(!userDto.passHash().equals(confirmPassword)) {
+        if (!userDto.passHash().equals(confirmPassword)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         userService.save(userDto);

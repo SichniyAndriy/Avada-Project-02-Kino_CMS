@@ -12,15 +12,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-@Entity @Table(name = "auditorium_pictures")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "auditorium_pictures")
 public class AuditoriumPicture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "path",length = 512, nullable = false)
+    @Column(name = "path", length = 512, nullable = false)
     private String path;
 
     @ManyToOne(targetEntity = Auditorium.class)
