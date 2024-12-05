@@ -7,25 +7,21 @@
     <title>Сторінка фільма</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/core/libs.min.css}">
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
-        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/aos/dist/aos.css}">
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
-        th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
+    <link rel="stylesheet" th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
-        th:href="@{/assets/css/custom.min.css?v=4.0.0}">
+    <link rel="stylesheet" th:href="@{/assets/css/custom.min.css}">
     <!-- Dark Css -->
-    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/dark.min.css}">
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
-        th:href="@{/assets/css/customizer.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/customizer.min.css}">
     <!-- RTL Css -->
-    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/rtl.min.css}">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -39,11 +35,10 @@
                 <div class="form-check form-switch fs-3 my-4 d-flex justify-content-end">
                     <input class="form-check-input" id="news_status" type="checkbox" role="switch"
                         th:checked="${#strings.equals(news.status, 'ON')}">
-                    <label class="form-check-label ms-3" for="news_status" 
-                        th:text="${news.status} ?: 'OFF'"></label>
+                    <label class="form-check-label ms-3" for="news_status" th:text="${news.status} ?: 'OFF'"></label>
                 </div>
                 <form action="#" id="news__form" th:object="${news}" enctype="multipart/form-data">
-                    <input type="text" id="id" hidden th:field="*{id}" >
+                    <input type="text" id="id" hidden th:field="*{id}">
                     <input type="text" id="date" hidden th:field="*{date}">
                     <div class="d-flex flex-column text-dark mt-4">
                         <div class="row mt-3 align-items-baseline">
@@ -62,7 +57,8 @@
                             <span class="col-2">Головна картинка</span>
                             <div class="col-10 row">
                                 <div class="col-9 text-start">
-                                    <img class="text-bg-info" id="news_picture" th:src="*{pictureUrl}" alt="Picture" style="width: 640px; height: 360px;">
+                                    <img class="text-bg-info" id="news_picture" th:src="*{pictureUrl}" alt="Picture"
+                                        style="width: 640px; height: 360px;">
                                 </div>
                                 <input type="file" id="picture__input" hidden>
                                 <div class="col-3 text-center align-content-center">
@@ -130,32 +126,31 @@
     </main>
 
     <!-- Library Bundle Script -->
-    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+    <script th:src="@{/assets/js/core/libs.min.js}"></script>
     <!-- External Library Bundle Script -->
-    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+    <script th:src="@{/assets/js/core/external.min.js}"></script>
     <!-- Widgetchart Script -->
-    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+    <script th:src="@{/assets/js/charts/widgetcharts.js}"></script>
     <!-- Mapchart Script -->
-    <script src="../../static/assets/js/charts/vectore-chart.js"
-        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
-    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+    <script th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script th:src="@{/assets/js/charts/dashboard.js}"></script>
     <!-- fslightbox Script -->
-    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+    <script th:src="@{/assets/js/plugins/fslightbox.js}"></script>
     <!-- Settings Script -->
-    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+    <script th:src="@{/assets/js/plugins/setting.js}"></script>
     <!-- Slider-tab Script -->
-    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+    <script th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
     <!-- Form Wizard Script -->
-    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+    <script th:src="@{/assets/js/plugins/form-wizard.js}"></script>
     <!-- AOS Animation Plugin-->
-    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+    <script th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
     <!-- App Script -->
-    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+    <script th:src="@{/assets/js/hope-ui.js}" defer></script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- News Page Scripts -->
-    <script src="../../static/js/admin/news-page-scripts.js" th:src="@{/js/admin/news-page-scripts.js}" defer></script>
+    <script th:src="@{/js/admin/news-page-scripts.js}" defer></script>
 </body>
 
 </html>

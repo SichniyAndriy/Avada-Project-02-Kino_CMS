@@ -7,25 +7,21 @@
     <title>Користувачі</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/core/libs.min.css}">
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
-        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/aos/dist/aos.css}">
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css?v=4.0.0"
-        th:href="@{/assets/css/hope-ui.min.css?v=4.0.0}">
+    <link rel="stylesheet" th:href="@{/assets/css/hope-ui.min.css}">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css?v=4.0.0"
-        th:href="@{/assets/css/custom.min.css?v=4.0.0}">
+    <link rel="stylesheet" th:href="@{/assets/css/custom.min.css}">
     <!-- Dark Css -->
-    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/dark.min.css}">
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
-        th:href="@{/assets/css/customizer.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/customizer.min.css}">
     <!-- RTL Css -->
-    <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/rtl.min.css}">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -45,13 +41,13 @@
                         <span class="fs-5 me-auto">Обрати користувачів</span>
                         <div class="form-check">
                             <label for="sms_to_all_users" class="form-check-label">Всі користувачі</label>
-                            <input type="radio" id="sms_to_all_users" class="form-check-input" checked
-                                name="sms_radio" value="sms_to_all_users">
+                            <input type="radio" id="sms_to_all_users" class="form-check-input" checked name="sms_radio"
+                                value="sms_to_all_users">
                         </div>
                         <div class="form-check">
                             <label for="sms_to_custom_users" class="form-check-label">Обрані користувачі</label>
-                            <input type="radio" id="sms_to_custom_users" class="form-check-input"
-                                name="sms_radio" value="sms_to_custom_users">
+                            <input type="radio" id="sms_to_custom_users" class="form-check-input" name="sms_radio"
+                                value="sms_to_custom_users">
                         </div>
                         <div>
                             <button id="pick_users_sms__btn" type="button" class="btn btn-soft-primary" disabled
@@ -92,8 +88,8 @@
                         </div>
                         <div class="form-check">
                             <label for="email_to_custom_users" class="form-check-label">Обрані користувачі</label>
-                            <input type="radio" id="email_to_custom_users"class="form-check-input"
-                                name="email_radio" value="email_to_custom_users">
+                            <input type="radio" id="email_to_custom_users" class="form-check-input" name="email_radio"
+                                value="email_to_custom_users">
                         </div>
                         <div>
                             <button id="pick_users_email__btn" type="button" class="btn btn-soft-primary" disabled
@@ -107,8 +103,8 @@
                             <div class="d-flex flex-column gap-3 text-info">
                                 <div class="d-flex justify-content-between">
                                     <p>Завантажити новий HTML-лист</p>
-                                    <button id="upload_html__btn" type="button"
-                                        class="btn btn-soft-primary" th:onclick="uploadHtmlFile()">
+                                    <button id="upload_html__btn" type="button" class="btn btn-soft-primary"
+                                        th:onclick="uploadHtmlFile()">
                                         Завантажити
                                     </button>
                                     <input type="file" id="email_file__input" accept="text/html, text/plain" hidden>
@@ -157,33 +153,31 @@
     </main>
 
     <!-- Library Bundle Script -->
-    <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+    <script th:src="@{/assets/js/core/libs.min.js}"></script>
     <!-- External Library Bundle Script -->
-    <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+    <script th:src="@{/assets/js/core/external.min.js}"></script>
     <!-- Widgetchart Script -->
-    <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+    <script th:src="@{/assets/js/charts/widgetcharts.js}"></script>
     <!-- Mapchart Script -->
-    <script src="../../static/assets/js/charts/vectore-chart.js"
-        th:src="@{/assets/js/charts/vectore-chart.js}"></script>
-    <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+    <script th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+    <script th:src="@{/assets/js/charts/dashboard.js}"></script>
     <!-- fslightbox Script -->
-    <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+    <script th:src="@{/assets/js/plugins/fslightbox.js}"></script>
     <!-- Settings Script -->
-    <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+    <script th:src="@{/assets/js/plugins/setting.js}"></script>
     <!-- Slider-tab Script -->
-    <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+    <script th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
     <!-- Form Wizard Script -->
-    <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+    <script th:src="@{/assets/js/plugins/form-wizard.js}"></script>
     <!-- AOS Animation Plugin-->
-    <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+    <script th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
     <!-- App Script -->
-    <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+    <script th:src="@{/assets/js/hope-ui.js}" defer></script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Users Scripts -->
-    <script src="../../static/js/admin/sending-scripts.js" th:src="@{/js/admin/sending-scripts.js}"
-        defer></script>
+    <script th:src="@{/js/admin/sending-scripts.js}" defer></script>
 
 </body>
 

@@ -41,5 +41,5 @@ function chooseEntries() {
 }
 
 function goToBooking( date, time, movieId, theater, auditorium, price ) {
-    location.href = `/schedule/booking/${ date }/${ time }/${ movieId }/${ theater }/${ auditorium }/${ price }`;
+    location.href = `/kino-cms/schedule/booking/${ date }/${ time }/${ movieId }/${ theater }/${ auditorium }/${ price }`;
 }

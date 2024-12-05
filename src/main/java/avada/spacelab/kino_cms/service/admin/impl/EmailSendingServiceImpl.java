@@ -3,9 +3,6 @@ package avada.spacelab.kino_cms.service.admin.impl;
 import avada.spacelab.kino_cms.controller.util.ControllerUtil;
 import avada.spacelab.kino_cms.repository.UserRepository;
 import avada.spacelab.kino_cms.service.admin.EmailSendingService;
-import jakarta.mail.Address;
-import jakarta.mail.Message.RecipientType;
-import jakarta.mail.internet.InternetAddress;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,8 +12,6 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
@@ -27,17 +22,14 @@ import org.springframework.web.socket.WebSocketSession;
 public class EmailSendingServiceImpl implements EmailSendingService {
 
     private final UserRepository userRepository;
-    private final JavaMailSender mailSender;
 
     private final Logger logger = LogManager.getLogger(EmailSendingServiceImpl.class);
 
 
     public EmailSendingServiceImpl(
-            @Autowired UserRepository userRepository,
-            @Autowired JavaMailSender mailSender
+            @Autowired UserRepository userRepository
     ) {
         this.userRepository = userRepository;
-        this.mailSender = mailSender;
     }
 
     @Async
@@ -48,7 +40,6 @@ public class EmailSendingServiceImpl implements EmailSendingService {
     ) throws IOException, InterruptedException {
         String emailContent = getEmailContent(fileName);
         List<String> emailList = createEmailList(ids);
-        sendToMe("freeas81@gmail.com", fileName, emailContent);
 
         int emailCount = emailList.size();
         int sentEmails = 0;
@@ -59,17 +50,6 @@ public class EmailSendingServiceImpl implements EmailSendingService {
             Thread.sleep(50);
         }
         session.close(CloseStatus.NORMAL);
-    }
-
-    private void sendToMe(String to, String subject, String text) {
-        MimeMessagePreparator preparator = mimeMessage -> {
-            mimeMessage.setRecipients(RecipientType.TO, to);
-            mimeMessage.setHeader("Content-Type", "text/html; charset=utf-8");
-            mimeMessage.setContent(text, "text/html; charset=utf-8");
-            mimeMessage.addFrom(new Address[] { new InternetAddress("sichniy.andriy@gmail.com") });
-            mimeMessage.setSubject(subject, "utf-8");
-        };
-        mailSender.send(preparator);
     }
 
     private List<String> createEmailList(List<Long> ids) {

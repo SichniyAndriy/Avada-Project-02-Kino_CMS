@@ -7,21 +7,19 @@
     <title>Картка кінотеатра</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/core/libs.min.css}">
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
-        th:href="@{/assets/vendor/aos/dist/aos.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/aos/dist/aos.css}">
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/hope-ui.min.css}">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/custom.min.css}">
     <!-- Dark Css -->
-    <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/dark.min.css}">
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../../static/assets/css/customizer.min.css"
-        th:href="@{/assets/css/customizer.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/customizer.min.css}">
     <!-- RTL Css -->
     <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -47,7 +45,7 @@
                         <h5>Кількість залів: [[ ${#lists.size(auditoriums)} ]]</h5>
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-action" th:each="a : ${auditoriums}"
-                                th:onclick="showAuitorium([[ ${a.id} ]])">
+                                th:onclick="showAuitorium([[ @{/theaters/show/aud/__${a.id}__} ]])">
                                 Зал [[ ${a.number} ]]
                             </li>
                         </ul>

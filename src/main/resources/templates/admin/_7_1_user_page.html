@@ -7,22 +7,21 @@
   <title>Сторінка користувача</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../../static/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}">
+  <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
   <!-- Library / Plugin Css Build -->
-  <link rel="stylesheet" href="../../static/assets/css/core/libs.min.css" th:href="@{/assets/css/core/libs.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/core/libs.min.css}">
   <!-- Aos Animation Css -->
-  <link rel="stylesheet" href="../../static/assets/vendor/aos/dist/aos.css"
-    th:href="@{/assets/vendor/aos/dist/aos.css}">
+  <link rel="stylesheet" th:href="@{/assets/vendor/aos/dist/aos.css}">
   <!-- Hope Ui Design System Css -->
-  <link rel="stylesheet" href="../../static/assets/css/hope-ui.min.css" th:href="@{/assets/css/hope-ui.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/hope-ui.min.css}">
   <!-- Custom Css -->
-  <link rel="stylesheet" href="../../static/assets/css/custom.min.css" th:href="@{/assets/css/custom.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/custom.min.css}">
   <!-- Dark Css -->
-  <link rel="stylesheet" href="../../static/assets/css/dark.min.css" th:href="@{/assets/css/dark.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/dark.min.css}">
   <!-- Customizer Css -->
-  <link rel="stylesheet" href="../../static/assets/css/customizer.min.css" th:href="@{/assets/css/customizer.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/customizer.min.css}">
   <!-- RTL Css -->
-  <link rel="stylesheet" href="../../static/assets/css/rtl.min.css" th:href="@{/assets/css/rtl.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/rtl.min.css}">
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -34,7 +33,7 @@
     <div>
       <section class="container">
         <form action="/admin/users/save" method="post" enctype="multipart/form-data" id="user__form"
-            th:object="${user}">
+          th:object="${user}">
           <input type="number" th:field="*{id}" hidden>
           <input type="text" th:field="*{registrationDate}" hidden>
           <input type="number" th:field="*{address.id}" hidden>
@@ -141,31 +140,31 @@
   </main>
 
   <!-- Library Bundle Script -->
-  <script src="../../static/assets/js/core/libs.min.js" th:src="@{/assets/js/core/libs.min.js}"></script>
+  <script th:src="@{/assets/js/core/libs.min.js}"></script>
   <!-- External Library Bundle Script -->
-  <script src="../../static/assets/js/core/external.min.js" th:src="@{/assets/js/core/external.min.js}"></script>
+  <script th:src="@{/assets/js/core/external.min.js}"></script>
   <!-- Widgetchart Script -->
-  <script src="../../static/assets/js/charts/widgetcharts.js" th:src="@{/assets/js/charts/widgetcharts.js}"></script>
+  <script th:src="@{/assets/js/charts/widgetcharts.js}"></script>
   <!-- Mapchart Script -->
-  <script src="../../static/assets/js/charts/vectore-chart.js" th:src="@{/assets/js/charts/vectore-chart.js}"></script>
-  <script src="../../static/assets/js/charts/dashboard.js" th:src="@{/assets/js/charts/dashboard.js}"></script>
+  <script th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+  <script th:src="@{/assets/js/charts/dashboard.js}"></script>
   <!-- fslightbox Script -->
-  <script src="../../static/assets/js/plugins/fslightbox.js" th:src="@{/assets/js/plugins/fslightbox.js}"></script>
+  <script th:src="@{/assets/js/plugins/fslightbox.js}"></script>
   <!-- Settings Script -->
-  <script src="../../static/assets/js/plugins/setting.js" th:src="@{/assets/js/plugins/setting.js}"></script>
+  <script th:src="@{/assets/js/plugins/setting.js}"></script>
   <!-- Slider-tab Script -->
-  <script src="../../static/assets/js/plugins/slider-tabs.js" th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
+  <script th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
   <!-- Form Wizard Script -->
-  <script src="../../static/assets/js/plugins/form-wizard.js" th:src="@{/assets/js/plugins/form-wizard.js}"></script>
+  <script th:src="@{/assets/js/plugins/form-wizard.js}"></script>
   <!-- AOS Animation Plugin-->
-  <script src="../../static/assets/vendor/aos/dist/aos.js" th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+  <script th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
   <!-- App Script -->
-  <script src="../../static/assets/js/hope-ui.js" th:src="@{/assets/js/hope-ui.js}" defer></script>
+  <script th:src="@{/assets/js/hope-ui.js}" defer></script>
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <!-- User Page Scripts -->
-  <script src="../../static/js/admin/user-page-scripts.js" th:src="@{/js/admin/user-page-scripts.js}" defer></script>
+  <script th:src="@{/js/admin/user-page-scripts.js}" defer></script>
 
 </body>
 

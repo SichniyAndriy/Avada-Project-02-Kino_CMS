@@ -1,3 +1,3 @@
-function goToMovieCard( id ) {
-    location.href = `/movie-card/${ id }`;
+function goToMovieCard( path ) {
+    location.href = path;
 }

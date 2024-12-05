@@ -13,14 +13,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.web.socket.WebSocketSession;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -50,13 +48,11 @@ class EmailSendingServiceTest {
                         () -> {
                             when(userRepository.findAllEmails())
                                     .thenReturn(List.of("a@a.com", "b@b.com", "c@c.com"));
-                            doCallRealMethod().when(mailSender).send(any(MimeMessagePreparator.class));
                             doNothing().when(session).close(any());
 
                             emailSendingService.sendEmail(null, "greeting.html", session);
 
                             verify(userRepository, times(1)).findAllEmails();
-                            verify(mailSender, times(1)).send(any(MimeMessagePreparator.class));
                             verify(session, times(1)).close(any());
                         }
                 ),
@@ -67,13 +63,11 @@ class EmailSendingServiceTest {
                                     .thenReturn(Optional.of("a@a.com"))
                                     .thenReturn(Optional.of("b@b.com"))
                                     .thenReturn(Optional.of("c@c.com"));
-                            doNothing().when(mailSender).send(any(MimeMessagePreparator.class));
                             doNothing().when(session).close(any());
 
                             emailSendingService.sendEmail(List.of(1L, 2L, 3L), "greeting.html", session);
 
                             verify(userRepository, times(SIZE)).findEmailById(anyLong());
-                            verify(mailSender, times(2)).send(any(MimeMessagePreparator.class));
                             verify(session, times(2)).close(any());
                         }
                 ),
@@ -87,7 +81,6 @@ class EmailSendingServiceTest {
 
                             verify(userRepository, times(1)).findAllEmails();
                             verify(userRepository, times(SIZE)).findEmailById(anyLong());
-                            verify(mailSender, times(2)).send(any(MimeMessagePreparator.class));
                         }
                 )
         );

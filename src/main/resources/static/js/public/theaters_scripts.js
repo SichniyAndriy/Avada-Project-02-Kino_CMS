@@ -1,7 +1,7 @@
-function showTheater( id ) {
-    location.href = `/theaters/show/${ id }`;
+function showTheater( path ) {
+    location.href = path;
 }
 
-function showAuitorium( id ) {
-    location.href = `/theaters/show/aud/${ id }`;
+function showAuitorium( path ) {
+    location.href = path;
 }
