@@ -10,9 +10,10 @@
 
 	<groupId>avada.spacelab</groupId>
 	<artifactId>Project-02-Kino_CMS</artifactId>
-	<version>0.58.1</version>
+	<version>0.8.1</version>
 	<name>kino-cms</name>
 	<description>Pet project for Spring Boot</description>
+	<packaging>war</packaging>
 
 	<properties>
 		<java.version>21</java.version>
@@ -40,6 +41,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
