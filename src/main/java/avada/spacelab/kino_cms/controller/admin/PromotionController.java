@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PromotionController {
 
     private final PromotionService promotionService;
-    private final String PATH_TO_PROMOTIONS = "pictures/promotions";
+    private final String PATH_TO_PROMOTIONS = "kino-cms/pictures/promotions";
 
 
     public PromotionController(

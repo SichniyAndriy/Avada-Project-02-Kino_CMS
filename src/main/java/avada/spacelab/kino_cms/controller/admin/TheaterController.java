@@ -27,7 +27,7 @@ public class TheaterController {
 
     private final TheaterService theaterService;
     private final AuditoriumService auditoriumService;
-    private final String PATH_TO_THEATERS = "pictures/theaters";
+    private final String PATH_TO_THEATERS = "kino-cms/pictures/theaters";
 
 
     public TheaterController(

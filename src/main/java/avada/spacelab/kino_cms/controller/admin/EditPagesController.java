@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("admin/edit")
 public class EditPagesController {
 
-    private final String PATH_TO_EDIT = "pictures/edit-page";
+    private final String PATH_TO_EDIT = "kino-cms/pictures/edit-page";
 
     private final MainPageService mainPageService;
     private final ContactService contactService;

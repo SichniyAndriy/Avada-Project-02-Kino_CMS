@@ -39,7 +39,8 @@
                     <div class="col-10 row row-cols-1 row-cols-lg-2 g-0 gap-0">
                         <div class="col p-3" th:each="t : ${theaters}">
                             <div class="card" th:onclick="showTheater([[ @{/theaters/show/__${t.id}__} ]])">
-                                <img th:src="${t.logoUrl} ?: @{/pictures/banner_stumb.jpg}" alt="Theater logo">
+                                <img th:src="${t.logoUrl} ?: '/resources/kino-cms/pictures/photo_theater.webp'"
+                                    alt="Theater logo">
                                 <div class="card-body">
                                     <h4 class="text-center" th:text="${t.title}"></h4>
                                 </div>

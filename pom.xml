@@ -9,19 +9,18 @@
 	</parent>
 
 	<groupId>avada.spacelab</groupId>
-	<artifactId>Project-02-Kino_CMS</artifactId>
+	<artifactId>KinoCMS-SichniyA</artifactId>
 	<version>0.8.1</version>
 	<name>kino-cms</name>
 	<description>Pet project for Spring Boot</description>
 	<packaging>war</packaging>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<lombok.version>1.18.34</lombok.version>
 		<datafaker.version>2.3.1</datafaker.version>
 		<mcp.version>3.13.0</mcp.version>
-		<postgresql.version></postgresql.version>
 		<argLine>-XX:+EnableDynamicAgentLoading</argLine>
 	</properties>
 
@@ -41,11 +40,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -88,9 +82,9 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.7.4</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
 		</dependency>
 		<dependency>
 			<groupId>net.datafaker</groupId>
@@ -151,8 +145,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${mcp.version}</version>
 				<configuration>
-					<source>21</source>
-					<target>21</target>
+					<source>17</source>
+					<target>17</target>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>

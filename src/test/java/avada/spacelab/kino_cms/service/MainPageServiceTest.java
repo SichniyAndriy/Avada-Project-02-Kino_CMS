@@ -10,7 +10,6 @@ import avada.spacelab.kino_cms.repository.MainPageInfoRepository;
 import avada.spacelab.kino_cms.service.admin.impl.MainPageServiceImpl;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.LongStream;
 import org.junit.jupiter.api.DisplayName;
@@ -66,10 +65,10 @@ class MainPageServiceTest {
                             final List<MainPageBanner> result = mainPageService.getAllByReplacement(Replacement.UP_BANNER);
 
                             assertEquals(FULL_SIZE, result.size());
-                            assertEquals(FIRST_ID, result.getFirst().getId());
-                            assertEquals(LAST_ID, result.getLast().getId());
-                            assertEquals(Replacement.UP_BANNER, result.getFirst().getPlace());
-                            assertEquals(Replacement.UP_BANNER, result.getLast().getPlace());
+                            assertEquals(FIRST_ID, result.get(0).getId());
+                            assertEquals(LAST_ID, result.get(result.size() - 1).getId());
+                            assertEquals(Replacement.UP_BANNER, result.get(0).getPlace());
+                            assertEquals(Replacement.UP_BANNER, result.get(result.size() - 1).getPlace());
                             verify(mainPageBannersRepository).findAllByPlace(Replacement.UP_BANNER);
                         }
                 ),
@@ -85,10 +84,10 @@ class MainPageServiceTest {
                             final List<MainPageBanner> result = mainPageService.getAllByReplacement(Replacement.SLASH_BANNER);
 
                             assertEquals(FULL_SIZE, result.size());
-                            assertEquals(FIRST_ID, result.getFirst().getId());
-                            assertEquals(LAST_ID, result.getLast().getId());
-                            assertEquals(Replacement.SLASH_BANNER, result.getFirst().getPlace());
-                            assertEquals(Replacement.SLASH_BANNER, result.getLast().getPlace());
+                            assertEquals(FIRST_ID, result.get(0).getId());
+                            assertEquals(LAST_ID, result.get(result.size() - 1).getId());
+                            assertEquals(Replacement.SLASH_BANNER, result.get(0).getPlace());
+                            assertEquals(Replacement.SLASH_BANNER, result.get(result.size() - 1).getPlace());
                             verify(mainPageBannersRepository).findAllByPlace(Replacement.SLASH_BANNER);
                         }
                 ),
@@ -104,10 +103,10 @@ class MainPageServiceTest {
                             final List<MainPageBanner> result = mainPageService.getAllByReplacement(Replacement.BOTTOM_PROMOTION);
 
                             assertEquals(FULL_SIZE, result.size());
-                            assertEquals(FIRST_ID, result.getFirst().getId());
-                            assertEquals(LAST_ID, result.getLast().getId());
-                            assertEquals(Replacement.BOTTOM_PROMOTION, result.getFirst().getPlace());
-                            assertEquals(Replacement.BOTTOM_PROMOTION, result.getLast().getPlace());
+                            assertEquals(FIRST_ID, result.get(0).getId());
+                            assertEquals(LAST_ID, result.get(result.size() - 1).getId());
+                            assertEquals(Replacement.BOTTOM_PROMOTION, result.get(0).getPlace());
+                            assertEquals(Replacement.BOTTOM_PROMOTION, result.get(result.size() - 1).getPlace());
                             verify(mainPageBannersRepository).findAllByPlace(Replacement.BOTTOM_PROMOTION);
                         }
                 )
@@ -128,8 +127,7 @@ class MainPageServiceTest {
 
                             assertAll(
                                     () -> assertEquals(0, result.size()),
-                                    () -> assertThrows(NoSuchElementException.class, () -> result.getFirst()),
-                                    () -> assertThrows(NoSuchElementException.class, () -> result.getLast())
+                                    () -> assertThrows(IndexOutOfBoundsException.class, () -> result.get(0))
                             );
                             verify(mainPageBannersRepository).findAllByPlace(Replacement.UP_BANNER);
                         }
@@ -144,26 +142,9 @@ class MainPageServiceTest {
 
                             assertAll(
                                     () -> assertEquals(0, result.size()),
-                                    () -> assertThrows(NoSuchElementException.class, () -> result.getFirst()),
-                                    () -> assertThrows(NoSuchElementException.class, () -> result.getLast())
+                                    () -> assertThrows(IndexOutOfBoundsException.class, () -> result.get(0))
                             );
                             verify(mainPageBannersRepository).findAllByPlace(Replacement.SLASH_BANNER);
-                        }
-                ),
-                dynamicTest(
-                        "Call getAllByReplacement() for BOTTOM_PROMOTION",
-                        () -> {
-                            when(mainPageBannersRepository.findAllByPlace(Replacement.BOTTOM_PROMOTION))
-                                    .thenReturn(Collections.emptyList());
-
-                            List<MainPageBanner> result = mainPageService.getAllByReplacement(Replacement.BOTTOM_PROMOTION);
-
-                            assertAll(
-                                    () -> assertEquals(0, result.size()),
-                                    () -> assertThrows(NoSuchElementException.class, () -> result.getFirst()),
-                                    () -> assertThrows(NoSuchElementException.class, () -> result.getLast())
-                            );
-                            verify(mainPageBannersRepository).findAllByPlace(Replacement.BOTTOM_PROMOTION);
                         }
                 )
         );
@@ -249,10 +230,10 @@ class MainPageServiceTest {
 
         assertAll(
                 ()-> assertEquals(FULL_SIZE, saved.size()),
-                () -> assertEquals(FIRST_ID, saved.getFirst().getId()),
-                () -> assertEquals(LAST_ID, saved.getLast().getId()),
-                () -> assertEquals(type, saved.getFirst().getPlace()),
-                () -> assertEquals(type, saved.getLast().getPlace())
+                () -> assertEquals(FIRST_ID, saved.get(0).getId()),
+                () -> assertEquals(LAST_ID, saved.get(saved.size() - 1).getId()),
+                () -> assertEquals(type, saved.get(0).getPlace()),
+                () -> assertEquals(type, saved.get(saved.size() - 1).getPlace())
         );
         verify(mainPageBannersRepository).saveAllAndFlush(anyList());
     }

@@ -46,7 +46,7 @@ class ContactServiceTest {
         when(contactRepository.findAll()).thenReturn(dtos);
         List<ContactDto> dtosDto = contactService.getAll();
         assertEquals(3, dtosDto.size());
-        assertEquals(dtos.getFirst().getId(), dtosDto.getFirst().id());
+        assertEquals(dtos.get(0).getId(), dtosDto.get(0).id());
     }
 
     @Test

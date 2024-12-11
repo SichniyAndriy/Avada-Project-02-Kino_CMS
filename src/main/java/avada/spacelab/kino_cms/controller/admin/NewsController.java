@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class NewsController {
 
     private final NewsService newsService;
-    private final String NEWS_PATH = "pictures/news";
+    private final String NEWS_PATH = "kino-cms/pictures/news";
 
 
     public NewsController(

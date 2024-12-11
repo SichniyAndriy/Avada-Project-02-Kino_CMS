@@ -216,8 +216,8 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2">
                 <div class="col" th:each="m : ${today}">
                     <div class="card">
-                        <img class="card-img-top" th:src="${m.posterUrl} ?: @{/pictures/poster_stumb.webp}"
-                            alt="poster">
+                        <img class="card-img-top"
+                            th:src="${m.posterUrl} ?: '/resources/kino-cms/pictures/poster_stumb.webp'" alt="poster">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${m.uaTitle}">Lorem, ipsum dolor.</h5>
                         </div>
@@ -233,8 +233,8 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2">
                 <div class="col" th:each="m : ${soon}">
                     <div class="card">
-                        <img class="card-img-top" th:src="${m.posterUrl} ?: @{/pictures/poster_stumb.webp}"
-                            alt="poster">
+                        <img class="card-img-top"
+                            th:src="${m.posterUrl} ?: '/resources/kino-cms/pictures/poster_stumb.webp'" alt="poster">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${m.uaTitle}">Lorem, ipsum dolor.</h5>
                         </div>

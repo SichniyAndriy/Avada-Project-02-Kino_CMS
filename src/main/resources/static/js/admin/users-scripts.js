@@ -1,35 +1,36 @@
-const USERS_PATH = "/admin/users"
+
+const PATH_TO_USERS = "/KinoCMS-SichniyA/admin/users";
 
 $( () => {
-    $("#header__title").text("Список користувачів");
-    $("#sidebar-menu .nav-link.active").removeClass("active");
-    $("#users__link").addClass("active");
-    $("#page__size").on("change", (event) => {
+    $( "#header__title" ).text( "Список користувачів" );
+    $( "#sidebar-menu .nav-link.active" ).removeClass( "active" );
+    $( "#users__link" ).addClass( "active" );
+    $( "#page__size" ).on( "change", ( event ) => {
         // @ts-ignore
-        pageSize = parseInt(event.target.value);
+        pageSize = parseInt( event.target.value );
         // @ts-ignore
-        goToUsers(pageNumber, pageSize);
-    });
-});
+        goToUsers( pageNumber, pageSize );
+    } );
+} );
 
-function showUser(id=0) {
-    location.href = `${USERS_PATH}/show/${id}`;
+function showUser( id = 0 ) {
+    location.href = `${ PATH_TO_USERS }/show/${ id }`;
 }
 
-function deleteUser(id) {
-    fetch(`${USERS_PATH}/delete/${id}`, {
+function deleteUser( id ) {
+    fetch( `${ PATH_TO_USERS }/delete/${ id }`, {
         method: "DELETE"
-    }).then(responce => {
-        if(responce.ok) {
+    } ).then( responce => {
+        if ( responce.ok ) {
             // @ts-ignore
-            goToUsers(pageNumber, pageSize);
+            goToUsers( pageNumber, pageSize );
         } else {
-            alert("Помилка видалення");
+            alert( "Помилка видалення" );
         }
-    })
+    } );
 }
 
 // @ts-ignore
-function goToUsers(number = pageNumber, size = pageSize) {
-    location.href = `${USERS_PATH}?number=${number}&size=${size}`;
+function goToUsers( number = pageNumber, size = pageSize ) {
+    location.href = `${ PATH_TO_USERS }?number=${ number }&size=${ size }`;
 }

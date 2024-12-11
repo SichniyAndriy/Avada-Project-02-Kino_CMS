@@ -71,8 +71,8 @@ class TheaterServiceTest {
 
                             assertAll(
                                     () -> assertEquals(SIZE, result.size()),
-                                    () -> assertEquals(theaters.getFirst().getId(), result.getFirst().id()),
-                                    () -> assertEquals(theaters.getLast().getId(), result.getLast().id())
+                                    () -> assertEquals(theaters.get(0).getId(), result.get(0).id()),
+                                    () -> assertEquals(theaters.get(result.size() - 1).getId(), result.get(result.size() - 1).id())
                             );
                             verify(theaterRepository, times(1)).findAll();
 

@@ -20,6 +20,7 @@ public class ClientIndexController {
     private final MovieService movieService;
     private final MainPageService mainPageService;
 
+
     public ClientIndexController(
             @Autowired MovieService movieService,
             @Autowired MainPageService mainPageService
@@ -32,7 +33,7 @@ public class ClientIndexController {
     public String index(Model model) {
         Map<Boolean, List<MoviesResponceDto>> partitionedMovies = movieService.getPartitionedMovies();
         List<MainPageBanner> middleList = mainPageService.getAllByReplacement(Replacement.SLASH_BANNER);
-        String middle = !middleList.isEmpty() ? middleList.getFirst().getPath() : null;
+        String middle = !middleList.isEmpty() ? middleList.get(0).getPath() : null;
         List<MainPageBanner> banners = mainPageService.getAllByReplacement(Replacement.UP_BANNER);
         List<MainPageBanner> promotions = mainPageService.getAllByReplacement(Replacement.BOTTOM_PROMOTION);
 

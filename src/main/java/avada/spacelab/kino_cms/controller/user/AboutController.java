@@ -34,7 +34,7 @@ public class AboutController {
 
     @GetMapping("/about")
     public String about(Model model) {
-        TheaterDto first = theaterService.getAllTheaters().getFirst();
+        TheaterDto first = theaterService.getAllTheaters().get(0);
         model.addAttribute("theater", first);
         return "/public/_6_0_about";
     }

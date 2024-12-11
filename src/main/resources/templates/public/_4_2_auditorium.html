@@ -38,7 +38,7 @@
         <section class="container mt-4" id="theater">
             <div class="mt-4 position-relative mx-auto" style="width: 100%; padding-top: 40%; overflow: hidden;">
                 <img class="position-absolute top-0 start-0 w-100 h-100 border-0" alt="theater logo"
-                    th:src="${auditorium.bannerUrl} ?: @{/pictures/banner_stumb.jpg}">
+                    th:src="${auditorium.bannerUrl} ?: '/resources/kino-cms/pictures/banner_stumb.jpg'">
             </div>
             <div class="mt-4 row row-cols-2">
                 <div class="col-3 d-flex flex-column row-gap-4">
@@ -56,7 +56,7 @@
                     <p th:text="${auditorium.description}"></p>
                     <div class="mt-4">
                         <img class="img-fluid img-thumbnail d-block mx-auto" alt="scheme"
-                            th:src="${auditorium.schemeUrl} ?: @{/pictures/scheme_stumb.jpg}">
+                            th:src="${auditorium.schemeUrl} ?: '/resources/kino-cms/pictures/scheme_stumb.jpg'">
                     </div>
                     <div id="picture__carousel" class="carousel slide my-4">
                         <div class="carousel-inner">

@@ -39,8 +39,8 @@
                 <div class="col" th:each="m : ${movies}">
                     <div class="card position-relative">
                         <h6 class="ps-2">Зараз в кіно</h6>
-                        <img class="card-img-top" th:src="${m.posterUrl} ?: @{/pictures/poster_stumb.webp}"
-                            alt="poster">
+                        <img class="card-img-top"
+                            th:src="${m.posterUrl} ?: '/resources/kino-cms/pictures/poster_stumb.webp'" alt="poster">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${m.uaTitle}">Lorem, ipsum dolor.</h5>
                         </div>

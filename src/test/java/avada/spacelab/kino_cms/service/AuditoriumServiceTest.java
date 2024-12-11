@@ -220,7 +220,7 @@ class AuditoriumServiceTest {
         List<AuditoriumDto> auditoriumsByTheaterId = auditoriumService.getAuditoriumsByTheaterId(1L);
         assertNotNull(auditoriumsByTheaterId);
         assertEquals(1, auditoriumsByTheaterId.size());
-        assertNull(auditoriumsByTheaterId.getFirst().theaterId());
+        assertNull(auditoriumsByTheaterId.get(0).theaterId());
 
         verify(auditoriumRepository).findAuditoriumsByTheaterId(1L);
     }

@@ -95,7 +95,7 @@ public class AppUtil implements CommandLineRunner {
             initMainPageInfo();
             initContacts();
         });
-        executor.execute(() -> initUsers(n * 50));
+        executor.execute(() -> initUsers(n * 15));
     }
 
     private void initTheatres(int n) {

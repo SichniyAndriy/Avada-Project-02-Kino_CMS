@@ -37,7 +37,8 @@
     <main class="container-fluid" id="main-content">
         <div class="container" id="advertising">
             <section class="position-relative" style="width: 100%; padding-top: 40%; overflow: hidden;">
-                <img class=" w-100 h-100 position-absolute top-0 start-0 border-0" th:src="@{/pictures/vip.png}" alt="">
+                <img class=" w-100 h-100 position-absolute top-0 start-0 border-0"
+                    th:src="/resources/kino-cms/pictures/vip.png" alt="">
             </section>
             <div class="row g-0 gap-0">
                 <div class="col-10 p-4">
@@ -112,21 +113,27 @@
                             </p>
                         </div>
                         <div class="row row-cols-3">
-                            <img class="img-fluid img-thumbnail" th:src="@{/pictures/photo4.jpg}" alt="">
-                            <img class="img-fluid img-thumbnail" th:src="@{/pictures/photo5.jpg}" alt="">
-                            <img class="img-fluid img-thumbnail" th:src="@{/pictures/photo6.jpg}" alt="">
+                            <img class="img-fluid img-thumbnail" th:src="/resources/kino-cms/pictures/photo4.jpg"
+                                alt="">
+                            <img class="img-fluid img-thumbnail" th:src="/resources/kino-cms/pictures/photo5.jpg"
+                                alt="">
+                            <img class="img-fluid img-thumbnail" th:src="/resources/kino-cms/pictures/photo6.jpg"
+                                alt="">
                         </div>
                         <h4 class="text-center mt-4"> Фотогалерея </h4>
                         <div id="advert__carousel" class="carousel slide">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img th:src="@{pictures/photo_1.avif}" class="d-block w-100" alt="...">
+                                    <img src="/resources/kino-cms/pictures/photo_1.avif" class="d-block w-100"
+                                        alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img th:src="@{pictures/photo_3.avif}" class="d-block w-100" alt="...">
+                                    <img src="/resources/kino-cms/pictures/photo_3.avif" class="d-block w-100"
+                                        alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img th:src="@{pictures/photo_3.avif}" class="d-block w-100" alt="...">
+                                    <img src="/resources/kino-cms/pictures/photo_3.avif" class="d-block w-100"
+                                        alt="...">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#advert__carousel"

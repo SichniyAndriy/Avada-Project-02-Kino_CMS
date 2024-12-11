@@ -186,7 +186,7 @@ class NewsServiceTest {
         List<NewsDto> result = newsService.getActiveNews();
 
         assertEquals(3, result.size());
-        assertEquals(news1.getId(), result.getFirst().id());
+        assertEquals(news1.getId(), result.get(0).id());
         verify(newsRepository).findAll();
     }
 

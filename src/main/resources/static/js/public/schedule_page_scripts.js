@@ -1,3 +1,5 @@
+const PATH_TO_SCHEDULE = '/KinoCMS-SichniyA/schedule';
+
 $( () => {
     $( "#2D_check" )
         .add( "#3D_check" )
@@ -27,7 +29,7 @@ function chooseEntries() {
     formData.append( "movie", movie );
     formData.append( "auditorium", auditorium );
 
-    fetch( "/schedule/choice", {
+    fetch( `${ PATH_TO_SCHEDULE }/choice`, {
         method: "POST",
         body: formData
     } )
@@ -41,5 +43,5 @@ function chooseEntries() {
 }
 
 function goToBooking( date, time, movieId, theater, auditorium, price ) {
-    location.href = `/kino-cms/schedule/booking/${ date }/${ time }/${ movieId }/${ theater }/${ auditorium }/${ price }`;
+    location.href = `${ PATH_TO_SCHEDULE }/booking/${ date }/${ time }/${ movieId }/${ theater }/${ auditorium }/${ price }`;
 }

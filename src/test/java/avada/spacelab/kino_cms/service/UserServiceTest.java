@@ -66,8 +66,8 @@ class UserServiceTest {
 
                             Assertions.assertAll(
                                     () -> assertEquals(SIZE, result.size()),
-                                    () -> assertEquals(1L, result.getFirst().id()),
-                                    () -> assertEquals(3, result.getLast().id())
+                                    () -> assertEquals(1L, result.get(0).id()),
+                                    () -> assertEquals(3, result.get(result.size() - 1).id())
                             );
                             verify(userRepository, times(1)).findAll();
                         }

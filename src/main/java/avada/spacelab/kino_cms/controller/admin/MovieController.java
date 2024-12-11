@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MovieController {
 
     private final MovieService movieService;
+    private final String PATH_TO_MOVIES = "kino-cms/pictures/movies";
 
 
     public MovieController(
@@ -66,7 +67,6 @@ public class MovieController {
             @RequestParam String timestamp,
             @RequestParam String ext
     ) throws IOException {
-        final String PATH_TO_MOVIES = "pictures/movies";
         final String fileName = ControllerUtil.savePictureOnServer(
                 PATH_TO_MOVIES, file.getOriginalFilename(), timestamp, ext, file
         );

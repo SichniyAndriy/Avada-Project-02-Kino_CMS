@@ -4,14 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Objects;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ControllerUtil {
-    private final static String PATH_TO_RESOURCES = "src/main/resources";
-    public final static String PATH_TO_SENT_EMAIL = PATH_TO_RESOURCES + "/" + "service_files/sent_emails";
-    private final static String PATH_TO_OUT = "..";
+
+    private final static String PATH_TO_RESOURCES = "/home/slj/web/slj.demodev.cc/public_html/resources";
+    public final static String PATH_TO_SENT_EMAIL =
+            PATH_TO_RESOURCES + File.separator + "kino-cms/service_files/sent_emails";
+
 
     public static String savePictureOnServer(
             String path,
@@ -20,7 +23,9 @@ public class ControllerUtil {
             String ext,
             MultipartFile file
     ) throws IOException {
-        File dir = new File(PATH_TO_OUT + "/" + path);
+        System.out.println(path);
+        File dir = new File(PATH_TO_RESOURCES + File.separator + path);
+        System.out.println(dir.getAbsolutePath());
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -29,9 +34,11 @@ public class ControllerUtil {
                 fileEntry.delete();
             }
         }
-        String filePath = "/" + path + "/" + fileName + "-" + timestamp + "." + ext;
-        file.transferTo(Path.of(PATH_TO_OUT + filePath));
-        return filePath;
+        Path filePath = Paths.get(PATH_TO_RESOURCES, path, fileName + "-" + timestamp + "." + ext);
+        file.transferTo(filePath);
+        System.out.println(filePath.toAbsolutePath());
+        System.out.println("/" + path + "/" + fileName + "-" + timestamp + "." + ext);
+        return "/resources" + "/" + path + "/" + fileName + "-" + timestamp + "." + ext;
     }
 
     public static String saveEmailOnServer(

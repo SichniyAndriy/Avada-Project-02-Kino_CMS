@@ -208,7 +208,7 @@ class PromotionServiceTest {
         List<PromotionDto> result = promotionService.getActivePromotions();
 
         assertEquals(3, result.size());
-        assertEquals(promotion1.getId(), result.getFirst().id());
+        assertEquals(promotion1.getId(), result.get(0).id());
         verify(promotionRepository).findAll();
     }
 

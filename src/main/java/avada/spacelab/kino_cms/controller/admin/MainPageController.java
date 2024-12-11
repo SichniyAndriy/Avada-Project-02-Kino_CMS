@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MainPageController {
 
     private final MainPageService mainPageService;
+    private final String MAIN_PAGE_BANNERS = "kino-cms/pictures/main-page";
 
 
     public MainPageController(
@@ -36,7 +37,7 @@ public class MainPageController {
     public String banners(Model model) {
         List<MainPageBanner> middle =
                 mainPageService.getAllByReplacement(MainPageBanner.Replacement.SLASH_BANNER);
-        String background = !middle.isEmpty() ? middle.getFirst().getPath() : null;
+        String background = !middle.isEmpty() ? middle.get(0).getPath() : null;
         List<MainPageBanner> banners =
                 mainPageService.getAllByReplacement(Replacement.UP_BANNER);
         List<MainPageBanner> promotions =
@@ -54,7 +55,7 @@ public class MainPageController {
             @RequestParam String timestamp,
             @RequestParam String ext
     ) throws IOException {
-        String MAIN_PAGE_BANNERS = "pictures/main-page";
+
         String resName = ControllerUtil.savePictureOnServer(
                 MAIN_PAGE_BANNERS, file.getOriginalFilename(), timestamp, ext, file
         );
