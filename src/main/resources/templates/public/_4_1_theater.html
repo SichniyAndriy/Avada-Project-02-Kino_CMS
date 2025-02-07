@@ -36,7 +36,7 @@
         <section class="container mt-4" id="theater">
             <div class="mt-4 position-relative mx-auto" style="width: 100%; padding-top: 40%; overflow: hidden;">
                 <img class="position-absolute top-0 start-0 w-100 h-100 border-0" alt="theater logo"
-                    th:src="${theater.logoUrl} ?: @{/pictures/banner_stumb.jpg}">
+                    th:src="${theater.logoUrl} ?: '/resources/kino-cms/pictures/banner_stumb.jpg'">
             </div>
             <div class="mt-4 row row-cols-2">
                 <div class="col-3 d-flex flex-column row-gap-4">

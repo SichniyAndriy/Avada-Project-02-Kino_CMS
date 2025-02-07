@@ -114,9 +114,9 @@ function updateSymbolCounter() {
     $( "#sms_symbols_counter" ).text( len );
 }
 
-/*------------------------- SMS SOCCKET -------------------------*/
+/*------------------------- SMS SOCKET -------------------------*/
 function sendSms() {
-    const socket = new WebSocket( "ws://localhost:8080/KinoCMS-SichniyA/admin/sending/sms" );
+    const socket = new WebSocket( "ws://slj.demodev.cc:8880/KinoCMS-SichniyA/admin/sending/sms" );
 
     socket.onopen = ( event ) => {
         const message = $( "#sms_text" ).val();
@@ -155,9 +155,9 @@ function sendSms() {
     sessionStorage.clear();
 
 }
-/*------------------------- EMAIL SOCCKET -------------------------*/
+/*------------------------- EMAIL SOCKET -------------------------*/
 function sendEmail() {
-    const socket = new WebSocket( "ws://localhost:8080/KinoCMS-SichniyA/admin/sending/email" );
+    const socket = new WebSocket( "ws://slj.demodev.cc:8880/KinoCMS-SichniyA/admin/sending/email" );
 
     socket.onopen = () => {
         const fileName = $( "#email_file_name" ).text();

@@ -19,7 +19,7 @@ public class ServiceLogger {
     private final Logger logger = LoggerFactory.getLogger(ServiceLogger.class);
 
 
-    @Pointcut("within(avada.spacelab.kino_cms.service.impl.*)")
+    @Pointcut("within(avada.spacelab.kino_cms.service.*)")
     public void allServiceMethods() {
     }
 

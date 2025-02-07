@@ -12,8 +12,10 @@ public class KinoCmsApplication extends SpringBootServletInitializer {
         SpringApplication.run(KinoCmsApplication.class, args);
     }
 
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(KinoCmsApplication.class);
     }
+
 }

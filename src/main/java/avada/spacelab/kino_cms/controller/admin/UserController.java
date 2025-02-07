@@ -40,7 +40,11 @@ public class UserController {
         if (size == null) {
             size = 10;
         }
-        PagedResponse<UserDto> page = userService.getUserDtoPage(number, size);
+        long allUsersAmount = userService.getAllUsersAmount();
+        long pages = allUsersAmount / size;
+        PagedResponse<UserDto> page = userService.getUserDtoPage(
+                        (pages < number ? (int) pages : number), size
+        );
         model.addAttribute("page", page);
         return "admin/_7_0_users";
     }

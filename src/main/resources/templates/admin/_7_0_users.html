@@ -78,7 +78,7 @@
                             <td th:text="*{phone}">aaa@bbb.com</td>
                             <td th:text="|*{firstName} *{lastName}|">aaasss bbb</td>
                             <td th:text="*{nickName}">aaasss bbb</td>
-                            <td th:text="*{address.city}">aaasss bbb</td>
+                            <td th:text="*{address} ? *{address.city} : ''">aaasss bbb</td>
                             <td style="width: 10%;">
                                 <button type="button" class="btn btn-success" th:onclick="showUser([[*{id}]])">
                                     <i class="bi bi-pen-fill"></i>

@@ -16,5 +16,6 @@ async function deleteNews( id, elem ) {
     if ( responce.ok ) {
         const $row = $( elem ).closest( "tr" );
         $row.fadeOut( "fast" );
+        alert( "Новина видалена" );
     }
 }

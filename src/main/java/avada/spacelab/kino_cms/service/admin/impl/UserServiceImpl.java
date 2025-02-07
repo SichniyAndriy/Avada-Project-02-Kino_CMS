@@ -1,6 +1,7 @@
 package avada.spacelab.kino_cms.service.admin.impl;
 
 import avada.spacelab.kino_cms.model.dto.admin.UserDto;
+import avada.spacelab.kino_cms.model.entity.Address;
 import avada.spacelab.kino_cms.model.entity.User;
 import avada.spacelab.kino_cms.model.entity.User.Role;
 import avada.spacelab.kino_cms.model.mapper.admin.UserMapper;
@@ -66,6 +67,9 @@ public class UserServiceImpl implements UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setPassHash("");
+            if (user.getAddress() == null) {
+                user.setAddress(new Address());
+            }
             return UserMapper.INSTANCE.fromEntityToDto(user);
         }
         return UserDto.EMPTY();

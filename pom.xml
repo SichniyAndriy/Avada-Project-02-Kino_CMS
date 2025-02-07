@@ -10,7 +10,6 @@
 
 	<groupId>avada.spacelab</groupId>
 	<artifactId>KinoCMS-SichniyA</artifactId>
-	<version>0.8.1</version>
 	<name>kino-cms</name>
 	<description>Pet project for Spring Boot</description>
 	<packaging>war</packaging>
@@ -40,6 +39,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -138,6 +141,8 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<finalName>KinoCMS-SichniyA</finalName>
+                    <mainClass>com.avada.spacelab.KinoCmsApplication</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -171,12 +176,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>maven_central</id>
-			<name>Maven Central</name>
-			<url>https://repo.maven.apache.org/maven2/</url>
-		</repository>
-	</repositories>
 
 </project>

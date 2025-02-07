@@ -11,10 +11,11 @@ function showPromotion( id = 0 ) {
 }
 
 function deletePromotion( id, elem ) {
-    fetch( `${ PROMOTIONS_PATH }/${ id }` ).then( responce => {
+    fetch( `${ PROMOTIONS_PATH }/delete/${ id }` ).then( responce => {
         if ( responce.ok ) {
             const $row = $( elem ).closest( "tr" );
             $row.fadeOut( "fast" );
+            alert( "Акцію видалено" );
         }
     } );
 }

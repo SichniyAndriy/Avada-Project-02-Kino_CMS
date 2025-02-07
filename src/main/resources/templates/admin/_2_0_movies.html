@@ -39,7 +39,7 @@
                         th:onclick="showMovie([[${currentMovie.id}]])">
                         <div class="card">
                             <img class="card-img-top lazy"
-                                th:data-src="${currentMovie.posterUrl} ?: '/pictures/movies/blank.jpg'"
+                                th:data-src="${currentMovie.posterUrl} ?: '/resources/kino-cms/pictures/movie_stumb.jpg'"
                                 alt="Current film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${currentMovie.uaTitle}">Some quick example text...</p>
@@ -55,7 +55,7 @@
                         th:onclick="showMovie([[${futureMovie.id}]])">
                         <div class="card">
                             <img class="card-img-top lazy"
-                                th:data-src="${futureMovie.posterUrl} ?: '/pictures/movies/blank.jpg'"
+                                th:data-src="${futureMovie.posterUrl} ?: '/resources/kino-cms/pictures/movie_stumb.jpg'"
                                 alt="Future film picture">
                             <div class="card-body">
                                 <p class="card-text" th:text="${futureMovie.uaTitle}">Some quick example text...</p>

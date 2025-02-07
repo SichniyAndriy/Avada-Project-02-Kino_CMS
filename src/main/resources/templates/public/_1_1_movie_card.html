@@ -45,7 +45,7 @@
             <section class="mt-4 row row-cols-2" style="height: 640px;">
                 <div class="col-4">
                     <img class="img-fluid img-thumbnail" alt="poster"
-                        th:src="*{posterUrl} ?: @{/resources/kino-cms/pictures/poster_stumb.webp}">
+                        th:src="*{posterUrl} ?: '/resources/kino-cms/pictures/poster_stumb.webp'">
                 </div>
                 <div class="col-8 d-flex flex-column gap-3">
                     <div sec:authorize="isAnonymous()">

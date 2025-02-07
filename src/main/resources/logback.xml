@@ -1,8 +1,8 @@
 <configuration>
 
     <property name="status" value="warn"/>
-    <property name="SERVICE_LOG" value="/home/slj/web/slj.demodev.cc/public_html/resources/kino-cms/logs/services"/>
-    <property name="APP_LOG" value="/home/slj/web/slj.demodev.cc/public_html/resources/kino-cms/logs/app"/>
+    <property name="SERVICE_LOG" value="/resources/kino-cms/logs/services"/>
+    <property name="APP_LOG" value="/resources/kino-cms/logs/app"/>
 
     <appender name="toConsole" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

@@ -36,7 +36,7 @@
           th:object="${user}">
           <input type="number" th:field="*{id}" hidden>
           <input type="text" th:field="*{registrationDate}" hidden>
-          <input type="number" th:field="*{address.id}" hidden>
+          <input type="number" th:field="*{address}" hidden>
           <input type="text" th:field="*{role}" th:value="*{role} ?: 'USER'" hidden>
           <div class="container mt-5">
             <div class="row row-cols-2 g-3 text-dark">
@@ -104,24 +104,24 @@
               </div>
               <div class="col-12">Адресса</div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="nick_name__input">Місто</label>
-                <input class="form-control w-75" type="text" id="nick_name__input" th:field="*{address.city}">
+                <label class="form-label w-25" for="city__input">Місто</label>
+                <input class="form-control w-75" type="text" id="city__input" th:field="*{address.city}">
               </div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="phone__input">Номер будинку</label>
-                <input class="form-control w-75" type="text" id="phone__input" th:field="*{address.houseNumber}">
+                <label class="form-label w-25" for="house__input">Номер будинку</label>
+                <input class="form-control w-75" type="text" id="house__input" th:field="*{address.houseNumber}">
               </div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="phone__input">Поштовий код</label>
-                <input class="form-control w-75" type="text" id="phone__input" th:field="*{address.zipCode}">
+                <label class="form-label w-25" for="post__input">Поштовий код</label>
+                <input class="form-control w-75" type="text" id="post__input" th:field="*{address.zipCode}">
               </div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="phone__input">Номер Квартири</label>
-                <input class="form-control w-75" type="num" id="phone__input" th:field="*{address.flatNumber}">
+                <label class="form-label w-25" for="flat__input">Номер Квартири</label>
+                <input class="form-control w-75" type="num" id="flat__input" th:field="*{address.flatNumber}">
               </div>
               <div class="col-6 d-flex align-items-baseline">
-                <label class="form-label w-25" for="nick_name__input">Вулиця</label>
-                <input class="form-control w-75" type="text" id="nick_name__input" th:field="*{address.street}">
+                <label class="form-label w-25" for="street__input">Вулиця</label>
+                <input class="form-control w-75" type="text" id="street__input" th:field="*{address.street}">
               </div>
               <div class="col-8 mt-5 mx-auto">
                 <div class="vstack gap-3">

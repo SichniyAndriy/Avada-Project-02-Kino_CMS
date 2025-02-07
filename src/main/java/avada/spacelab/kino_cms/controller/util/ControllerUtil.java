@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ControllerUtil {
 
-    private final static String PATH_TO_RESOURCES = "/home/slj/web/slj.demodev.cc/public_html/resources";
+    private final static String PATH_TO_RESOURCES = "/usr/local/tomcat/webapps/resources";
     public final static String PATH_TO_SENT_EMAIL =
             PATH_TO_RESOURCES + File.separator + "kino-cms/service_files/sent_emails";
 
